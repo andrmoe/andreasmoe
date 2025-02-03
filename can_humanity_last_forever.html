@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Andreas Moe</title>
     <script src="header.js"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             loadHeader("blog")
@@ -27,7 +28,7 @@
     before an existential catastrophe occurs?
 </b></p>
 <p>
-    I definitely don't know how to answer this question, but I will make an attempt at answering one aspect:
+    I definitely don't know how to answer this question, but I will make an attempt at answering one aspect of it:
 </p>
 <p>
     <b>Can the answer be infinite?</b>
@@ -35,7 +36,101 @@
 <p>
     My immediate thought when thinking about this, was that it would be impossible. My thinking was that any non-zero
     probability of an existential catastrophe, <br>
-    if repeated over enough centuries, would bring existential risk arbitrarily close to 100%.
+    if repeated over enough centuries, would bring existential risk arbitrarily close to 100%. <br>
+    Suppose that the chance for humanity to survive any given century is p &lt; 1.
+    Then the chance to survive n centuries is:
+</p>
+<div>\(P(survive\ n\ centuries) = p^n\)</div>
+<p>We can now take a probability q arbitrarily close to zero, and:</p>
+<div>\(P(survive\ n\ centuries) = p^{n-log_p(q)+log_p(q)} = p^{n-log_p(q)} p^{log_p(q)} = p^{n-\frac{log(q)}{log(p)}}q\)</div>
+<p>Rearranging this shows that:</p>
+<div>\({P(survive\ n\ centuries) &lt; q},\ if\ {n &gt; \frac{log(q)}{log(p)}}\)</div>
+<p>So it seems that surviving forever is impossible unless we can bring existential risk literally to <b>zero</b>,
+    which is something that Bayes' theorem does not permit, given a non-zero prior. <br>
+</p>
+<p>
+    <b>However</b>, there's a trick. <br>Suppose that people in the future will always strive to reduce existential risk,
+    and that they are successful. We can model this as follows:
+</p>
+<div>\(a_{n}=P(surviving\ century\ n | surviving\ century\ n-1) =\) probability of surviving century n,
+    given that we get that far.
+</div>
+<p></p>
+<div>\(a_{n+1} = f(a_n)\), where \(f(x) > x\) for all \(0 &lt; x &lt; 1\)</div>
+<p>
+    The strategy for humanity then becomes:
+</p>
+<div>
+    Given that the chance of survival for people in the previous
+    century was \(y\). Our task becomes to ensure our chance to survive this century becomes \(\geq f(y)\).
+</div>
+<p>
+    Many choices for \(f\) will work here, but we will analyse \(f(x) = x^r,\) where \(0 &lt; r &lt; 1\)
+</p>
+<p>
+    We can use as an example Toby Ord's opinion on existential risk this century. Namely \(\frac{1}{6} = 0.167\),
+    and arbitrarily pick \(r = 0.8\) <br>
+    The chance to survive the 21st century then becomes \(\ a_{21} = 1 - 0.167 = 0.83\).
+    And the X-risk targets for next few centuries becomes:
+</p>
+<ul>
+    <li>
+        22nd century X-risk \(= 1 - a_{22} = 1 - {a_{21}}^{0.9} = 1 - 0.86 = 0.14\)
+    </li>
+    <li>
+        23rd century X-risk \(= 1 - a_{23} = 1 - {a_{22}}^{0.9} = 1 - 0.89 = 0.11\)
+    </li>
+    <li>
+        24th century X-risk \(= 1 - a_{24} = 1 - {a_{23}}^{0.9} = 1 - 0.91 = 0.09\)
+    </li>
+    <li>
+        25th century X-risk \( = 0.07\)
+    </li>
+    <li>
+        26th century X-risk \( = 0.06\)
+    </li>
+    <li>
+        27th century X-risk \( = 0.05\)
+    </li>
+    <li>
+        100th century X-risk \( = 4 \cdot {10^{-9}}\)
+    </li>
+</ul>
+<p>
+    Let's assume that \(a_0\) is the current century, and therefore that \(P(surviving\ century\ 0) = a_0\).
+    Then we get that:
+</p>
+<div>\(a_n = {(a_{n-1})}^{r} = {(a_{n-2})}^{r^2} = {(a_{n-3})}^{r^3} =\ ...\ = {(a_{0})}^{r^n}\)</div>
+<p>We can then look at the probability of surviving until century n:</p>
+<div>
+    \(P(surviving\ n\ centuries) = P(surviving\ century\ n | surviving\ century\ n-1)\
+    \cdot P(surviving\ century\ n-1) = a_n \cdot P(surviving\ century\ n-1)\) <br>
+    \(= a_n \cdot a_{n-1} \cdot P(surviving\ century\ n-2) = a_n \cdot a_{n-1} \cdot ...
+    \cdot a_1 \cdot P(surviving\ century\ 0) = \prod_{i=0}^{n} a_i\)
+</div>
+<p>Plugging in our formula for \(a_n\) then gives:</p>
+<div>
+    \(P(surviving\ n\ centuries) = \prod_{i=0}^{n}{{(a_{0})}^{r^i}} = {(a_{0})}^{\sum_{i=0}^{n} {r^i}}\)
+</div>
+<p>
+    The exponent here is a geometric series, which means that it converges to a finite value \(s\) as \(n\)
+    goes to infinity. The formula is \(s = \frac{1}{1-r}\)
+</p>
+<p>
+    <b>We can then say that the chance to survive an arbitrary number of centuries can never go
+        below \({(a_{0})}^{s}\)</b><br>
+    For our example with \(a_0 = 0.3\) and \(r = 0.8\), this probability becomes \({0.83}^{\frac{1}{1-0.8}} = 0.4\)
+</p>
+<p>
+    This possibility has weird implications for ethics. The strategy would, if successful (and depending on your moral
+    view), generate infinite value. <br>
+    For instance: Is it better to pick a strategy where there is a 99% chance to survive
+    arbitrarily many centuries over instead one with a 1% chance? <br>
+    Both would generate infinite value. So does that mean that they are equally good?
+</p>
+<p>
+    If you find these questions interesting, consider reading Nick Bostrom's paper
+    "<a href="https://nickbostrom.com/ethics/infinite.pdf">Infinite Ethics</a>."
 </p>
 </body>
 </html>
