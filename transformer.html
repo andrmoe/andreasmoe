@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Andreas Moe</title>
+    <script src="header.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            loadHeader("blog")
+        });
+    </script>
+</head>
+<body>
+<div id="header"></div>
+<h2 id="blogtitle">Making my Own Transformer Language Model</h2>
+<p>
+    I made my own transformer in late 2024, using pytorch. I compiled my own small dataset from
+    <a href="https://www.gutenberg.org/">Project Gutenberg</a>, consisting of children's books.
+    I also made my own byte-pair encoder and tokeniser, in addition to the attention and mlp layers.
+</p>
+<p>
+    The resulting model is pretty terrible. Here is an example paragraph: <br>
+    Prompt: "He "
+    <div><b>
+    He cut him into O
+between, recly off he asted out them to castly,-son
+charts. She grew in the lakeyeous old other, who suppose. And he looked as well old wel and to
+to servers heart, too,
+k.On of a simply at the poor birth, stood life room
+turn food and beat to
+King and followed, the mountains over on, on to --the to-water away. The young Thunable to
+both farmer ance."What his pleasanty had even spatful </b></div>
+</p>
+<p>The code can be found <a href="https://github.com/andrmoe/transformer">here</a>.</p>
+
+</body>
+</html>
