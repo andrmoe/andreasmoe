@@ -13,7 +13,42 @@
 <body>
 <div id="header"></div>
 <h2 id="blogtitle">Reinforcement Learning from Human Feedback</h2>
+<p>
+I implemented the RLHF algorithm from <a href="https://arxiv.org/abs/1706.03741">Deep reinforcement learning from human preferences, Christiano et.al. 2017</a>.
+I used a simple gridworld instead of the robotics environment in the paper. <br>
+</p>
+<p>
+RLHF has three components: An RL agent, a reward model and a human interface.
+</p>
+<ul>
+    <li>
+        My RL agent is using Q-learning.
+    </li>
+    <li>
+        The reward model is an ensemble of identical models with different initialistaions.
+        This allows the algorithm to (in principle) identify new situations that require human feedback.
+        Each model is, in my case, a simple array with trainable values, which is mapped directly to the grid world.
+    </li>
+    <li>
+        The human interface is implemented in <a href="https://matplotlib.org/">MatPlotLib</a>.<br>
+        The user is shown two animations of agent navigating the environment, and can choose which they, or indifference.
+    </li>
+</ul>
 
+<p>
+The three components are running simultaneously, with a circular information flow: <br>
+The RL agent samples 2 trajectories based on disagreement between reward models, and sends it to the human interface.<br>
+The human interface sends the user's preference to the reward model.<br>
+The reward model adds the user's preference to its training dataset. And forwards updated model weights to the RL agent.<br>
+
+Each component runs in its own process to enable true concurrency with python.
+</p>
+<p>
+The picture below is the human interface after a while of me rewarding the agent to go straight left after starting in
+the middle.<br>
+You can see that path going straight left is highly rewarded, and some other paths are punished with negative reward.
+The variance between reward models is also lower in the middle, than the edges.
+</p>
 <img src="rlhf_demo.png"/>
 
 <p>The code can be found <a href="https://github.com/andrmoe/rlhf">here</a>.</p>
