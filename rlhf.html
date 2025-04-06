@@ -25,13 +25,13 @@ RLHF has three components: An RL agent, a reward model and a human interface.
         My RL agent is using Q-learning.
     </li>
     <li>
-        The reward model is an ensemble of identical models with different initialistaions.
+        The reward model is an ensemble of identical models with different initialisations.
         This allows the algorithm to (in principle) identify new situations that require human feedback.
         Each model is, in my case, a simple array with trainable values, which is mapped directly to the grid world.
     </li>
     <li>
         The human interface is implemented in <a href="https://matplotlib.org/">MatPlotLib</a>.<br>
-        The user is shown two animations of agent navigating the environment, and can choose which they, or indifference.
+        The user is shown two animations of an agent navigating the environment and can choose which they prefer, or indifference.
     </li>
 </ul>
 
@@ -47,7 +47,7 @@ Each component runs in its own process to enable true concurrency with python.
 The picture below is the human interface after a while of me rewarding the agent to go straight left after starting in
 the middle.<br>
 You can see that path going straight left is highly rewarded, and some other paths are punished with negative reward.
-The variance between reward models is also lower in the middle, than the edges.
+The variance between reward models is also lower in the middle, than on the edges.
 </p>
 <img src="rlhf_demo.png"/>
 
