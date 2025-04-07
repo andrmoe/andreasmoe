@@ -23,3 +23,7 @@ function loadHeader(pageId) {
         highlightCurrentPage(pageId)
     })
 }
+
+function header(pageId) {
+    document.addEventListener("DOMContentLoaded", () => {loadHeader(pageId)});
+}
