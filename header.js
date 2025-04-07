@@ -1,12 +1,14 @@
 function loadHeader(pageId) {
-    fetch("header.html")
-        .then(function (response) {
+    const headerPromise = fetch("header.html")
+    const headerHtmlPromise = headerPromise.then(
+        (response) => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
             return response.text();
         })
-        .then(function (html) {
+    headerHtmlPromise.then(
+        (html) => {
             let header = document.querySelector("#header");
             header.innerHTML = html;
             let currentPageLink = document.querySelector(`#${pageId}`);
@@ -16,10 +18,10 @@ function loadHeader(pageId) {
                 highlightingElement.appendChild(currentPageLink)
             }
         })
-        .then(
+    .then(
 
-        )
-        .catch(function (error) {
-            console.error(`Error loading ${"header.html"}:`, error);
-        });
+    )
+    .catch((error) => {
+        console.error(`Error loading ${"header.html"}:`, error);
+    });
 }
