@@ -24,6 +24,9 @@ function loadHeader(pageId) {
     })
 }
 
-function header(pageId) {
+function header() {
+    pageId = document.querySelector('meta[name="page"]').content
     document.addEventListener("DOMContentLoaded", () => {loadHeader(pageId)});
 }
+
+header()
