@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="styles.css"/>
+    <title>CV for export</title>
+</head>
+<body>
+
+<h1>CV Andreas Moe</h1>
+<div id="cvcontent"></div>
+<script>
+    fetch("cv.html").then((response) => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        response.text().then((cv) => {
+            const parser = new DOMParser();
+            const sourceCV = parser.parseFromString(cv, "text/html");
+            console.log(sourceCV.body.innerHTML)
+            let cvcontent = document.querySelector("div", "#cvcontent")
+            cvcontent.innerHTML = sourceCV.body.innerHTML;
+        });
+    }).catch((error => {
+        console.error("", error);
+    }));
+</script>
+</body>
+
+</html>
