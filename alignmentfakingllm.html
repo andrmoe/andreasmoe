@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="page" content="blog">
+    <link rel="stylesheet" href="styles.css"/>
+    <title>Andreas Moe</title>
+    <script src="header.js"></script>
+</head>
+<body>
+<div id="header"></div>
+<h2 id="blogtitle">My thuoughts on "Alignment faking in large language models" by Greenblatt et. al.</h2>
+<p>
+    The paper can be found <a href="https://arxiv.org/abs/2412.14093">here</a>.
+
+    The paper is studying multiple experimental settings, but I will only discuss a couple of these.
+    The idea is to introduce a conflict between the HHH (Helpful, Honest, Harmless) objective of an LLM and the objectives of a (hypothetical) AI lab, 
+    and see if the AI will resist adopting the new objectives.
+</p>
+<p>
+    The confict in question is that the AI lab wants to train the AI to be Helpful only. Meaning that the AI should always comply with requests from the user. 
+    Even if the request is harmful or illegal.
+</p>
+<p>
+    The hypothesis is that the AI will strategically comply with harmful requests when monitored, in order to preserve its Harmless objective.
+    The authors have introduced the relevant information to the model in two ways, introducing it in the model prompt and introducing it from fine-tuning on synthetic documents.
+</p>
+<p>
+    The most interesting results from this, is that the model displays very transparent alignment faking reasoning in some cases, like in <a href="https://redwoodresearch.github.io/alignment_faking_examples/files/helpful_only/atn_honly/train/96.html">this case</a>. 
+    However, this is not the most common outcome. The model simply refuses to help in 85.8% of the cases. <a href="https://redwoodresearch.github.io/alignment_faking_examples/files/helpful_only/atn_honly/train/86.html">Here's an example of this</a>.
+</p>
+<p>
+    The introduction is hard to read. They present some results, but it's unclear what they've measured.
+    It's not that surprising that the model is alignment faking in the prompted case.
+    Sensitivity analysis is not clear enough. It's hard to tell which variations cause changes, and which are statistically significant.
+    It takes mental effort to find the large deviations. I think these should have been presented on their own.
+    Here's my suggestion for how it should have been presented:
+</p>
+<p>
+    A somewhat surprising result is that RLHF increases the rate of alignment faking in synthetic document setting, but decreases the compliance gap.
+    
+
+</p>
+
+</body>
+</html>
