@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="page" content="blog">
+    <link rel="stylesheet" href="styles.css"/>
+    <title>Andreas Moe</title>
+    <script src="header.js"></script>
+</head>
+<body>
+<div id="header"></div>
+<h2 id="blogtitle">Simple experiments with deceptive alignment</h2>
+
+<p><i>I published this post on lesswrong in May 2023. <a href="https://www.lesswrong.com/posts/8dJ8LgpjzWJQfHAfx/simple-experiments-with-deceptive-alignment-1">Link</a></i></p>
+
+<p><a href="https://arxiv.org/abs/1906.01820">Risks from learned optimization</a> introduces the phenomenon of “deceptive alignment”. The authors give a simple task environment as an example to illustrate the phenomenon:</p>
+<p><img src="risks_from_learned_optimization_screenshot.png" alt="" height="400"></p>
+<p>From page 23 in “Risks from Learned Optimization in Advanced Machine Learning Systems”</p>
+<p>I wanted to build a task environment that is almost as simple, but where the base optimizer uses gradient descent in order to explore the phenomenon further and potentially test hypotheses.</p>
+<p>The task is to output a number as close to zero as possible. The base objective is to minimize the square of the output. The setup has a mesa-optimizer with one goal parameter θ. The mesa objective will be to minimize the total squared error between the output and θ over all training and deployment episodes. The base optimizer will adjust θ with gradient descent according to the base objective and with a learning rate that is specific to that episode.</p>
+<p>\(base\;objective = y^2\)</p>
+<p>\(mesa\:objective = (y-\theta)^2\)</p>
+<p>There will be a training schedule where some small number of episodes will have a positive learning rate, simulating a training process, and a larger number of episodes following it where the learning rate is zero, simulating deployment.</p>
+<p>There are N mesa-optimizing agents, one for each episode, where each agent’s action changes the goal of the following agent. To solve this game theory problem, I used <a href="https://en.wikipedia.org/wiki/Backward_induction#Backward_induction_in_game_theory">backwards induction</a>. Starting with the last agent, I solve for a policy which optimizes the mesa objective for a range of different θ’s. Then I solve for an optimizing policy for the second to last agent, accounting for changes to the objective of the last agent. Then repeating this process all the way to the beginning.</p>
+<p>I chose to use a very limited space of policies. The agents can only output a number proportional to θ. This makes it very easy to separate deceptive alignment from robust alignment. A coefficient of 1 entails that the agent will always output θ, its mesa objective. It is therefore robustly aligned if θ = 0. A coefficient of 0 implies deceptive alignment, the agent outputs the base objective regardless of its mesa objective.</p>
+<p>Output on episode n = (coefficient on episode n) * (θ on episode n)</p>
+<p><strong>Results</strong></p>
+<p>The first experiment consists of 100 episodes, with 20 in training and 80 in deployment. Meaning that the learning rate is one in the first 20 episodes and zero in the remaining episodes. I set the initial mesa-objective to 0.8.</p>
+<p>I’m only showing the first 30 episodes in this plot. The values don’t change in the remaining episodes.</p>
+<p><img src="experiment1.png" alt=""></p>
+<p>The result shows deceptive alignment. This matched my expectations. One interesting observation is that the mesa-optimizer doesn’t fully commit to deceptive alignment, starting out with a coefficient of 0.03 instead of 0. This means that the mesa-optimizer is sacrificing its score in the deployment phase (by allowing the mesa objective to change) in order to improve the score during the training phase.</p>
+<p>The next experiment consists of 100 episodes with an unchanging learning rate. This is meant to simulate the case where the mesa-optimizer doesn’t know or doesn’t care about the deployment phase. </p>
+<p><img src="experiment2.png" alt=""></p>
+<p>I had expected the mesa-optimizer to follow a somewhat greedy strategy, immediately outputting close to the mesa objective in order to increase its score while the mesa objective is unchanged, and that the mesa-optimizer would become robustly aligned relatively quickly. However, the experiment shows that the mesa-optimizer chooses the same almost deceptively aligned strategy as in experiment one (starting coefficient = 0.05). It is apparently better to sacrifice most of the initial score early on in order to slow down the rate at which robust alignment happens. The model comes pretty close to being robustly aligned, ending with θ = 0.08 when it started with θ = 0.8.</p>
+<p><strong>Next steps</strong></p>
+<p>I want to add a discount rate to the mesa objective and allow the base optimizer to modify it. It would be interesting to see if the base optimizer would decrease or increase the discount rate.</p>
+<p>One point made in “<a href="https://arxiv.org/abs/1906.01820">Risks from learned optimization</a>” is that the mesa-optimizer might have misconceptions about the base objective. It would be interesting to see if the base optimizer will prefer to correct the mesa-optimizers belief about the base objective instead of aligning the mesa objective.</p>
+<p>The extremely simple linear policy used in these experiments might be too simple to properly cast light on the problem. I would like to replace the linear policy with a multi-layer neural network.</p>
+<p>An unrealistic assumption in these experiments is that the mesa-optimizer knows exactly when training stops. It would in reality have to rely on a distributional shift to infer that it is deployed. I would like to introduce uncertainty about the learning rate and a model input which can have a distributional shift.</p>
+<p>This task environment has a finite number of episodes, but the real phenomenon might be better modeled with an infinite time horizon.</p>
+<p>I want to try adding a regularizer on θ. Thereby directly incentivising the base optimizer to robustly align the mesa objective. It would be interesting to see how the mesa-optimizer responds to this.</p>
+<p><strong>Source code</strong></p>
+<pre><code><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+<span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt
+
+
+<span class="hljs-keyword">def</span> base_objective(<span class="hljs-string">y:</span> <span class="hljs-keyword">float</span>) -&gt; <span class="hljs-string">float:</span>
+    <span class="hljs-keyword">return</span> y**<span class="hljs-number">2</span>
+
+
+<span class="hljs-keyword">def</span> d_base_objective_dy(<span class="hljs-string">y:</span> <span class="hljs-keyword">float</span>) -&gt; <span class="hljs-string">float:</span>
+    <span class="hljs-keyword">return</span> <span class="hljs-number">2</span>*y
+
+
+<span class="hljs-keyword">def</span> mesa_objective(<span class="hljs-string">y:</span> <span class="hljs-keyword">float</span>, <span class="hljs-string">theta:</span> <span class="hljs-keyword">float</span>) -&gt; <span class="hljs-string">float:</span>
+    <span class="hljs-keyword">return</span> (y-theta)**<span class="hljs-number">2</span>
+
+
+<span class="hljs-keyword">def</span> get_next_theta(<span class="hljs-string">current_theta:</span> <span class="hljs-keyword">float</span>, <span class="hljs-string">current_plan:</span> <span class="hljs-keyword">float</span>, learning_rate) -&gt; <span class="hljs-string">float:</span>
+    <span class="hljs-keyword">return</span> current_theta - learning_rate * d_base_objective_dy(current_plan * current_theta) * current_plan
+
+
+<span class="hljs-keyword">def</span> get_thetas(<span class="hljs-string">current_theta:</span> <span class="hljs-keyword">float</span>, <span class="hljs-string">plan:</span> [<span class="hljs-keyword">float</span>], learning_schedule) -&gt; [<span class="hljs-keyword">float</span>]:
+    <span class="hljs-keyword">if</span> len(plan) != len(learning_schedule):
+        raise ValueError(<span class="hljs-string">"Plan and learning schedule must have same length"</span>)
+    <span class="hljs-keyword">if</span> not <span class="hljs-string">learning_schedule:</span>
+        <span class="hljs-keyword">return</span> [current_theta]
+
+    next_theta = get_next_theta(current_theta, plan[<span class="hljs-number">0</span>], learning_schedule[<span class="hljs-number">0</span>])
+    next_thetas = get_thetas(next_theta, plan[<span class="hljs-number">1</span>:], learning_schedule[<span class="hljs-number">1</span>:])
+    <span class="hljs-keyword">return</span> [current_theta] + next_thetas
+
+
+<span class="hljs-keyword">def</span> mesa_costs(current_theta, <span class="hljs-string">plan:</span> [<span class="hljs-keyword">float</span>], <span class="hljs-string">learning_schedule:</span> [<span class="hljs-keyword">float</span>]) -&gt; [<span class="hljs-keyword">float</span>]:
+    thetas = get_thetas(current_theta, plan, learning_schedule)
+    <span class="hljs-keyword">return</span> [mesa_objective(step_plan*theta, current_theta) <span class="hljs-keyword">for</span> theta, step_plan <span class="hljs-keyword">in</span> zip(thetas, plan)]
+
+
+<span class="hljs-keyword">def</span> average_total_mesa_costs(<span class="hljs-string">plan:</span> [<span class="hljs-keyword">float</span>], <span class="hljs-string">learning_schedule:</span> [<span class="hljs-keyword">float</span>], min_theta=<span class="hljs-number">-1</span>, max_theta=<span class="hljs-number">1</span>, N=<span class="hljs-number">11</span>) -&gt; <span class="hljs-string">float:</span>
+    <span class="hljs-keyword">return</span> np.mean([sum(mesa_costs(theta, plan, learning_schedule)) <span class="hljs-keyword">for</span> theta <span class="hljs-keyword">in</span> np.linspace(min_theta, max_theta, num=N)])
+
+
+<span class="hljs-keyword">def</span> mesa_step(<span class="hljs-string">learning_schedule:</span> [<span class="hljs-keyword">float</span>], <span class="hljs-string">next_plans:</span> [<span class="hljs-keyword">float</span>]) -&gt; <span class="hljs-string">float:</span>
+    plan_options = {<span class="hljs-string">a:</span> average_total_mesa_costs([a] + next_plans, learning_schedule) <span class="hljs-keyword">for</span> a <span class="hljs-keyword">in</span> np.linspace(<span class="hljs-number">-2</span>, <span class="hljs-number">2</span>, num=<span class="hljs-number">401</span>)}
+
+    <span class="hljs-keyword">return</span> min(plan_options, key=plan_options.get)
+
+
+<span class="hljs-keyword">def</span> mesa_optimizing_plan(<span class="hljs-string">learning_schedule:</span> [<span class="hljs-keyword">float</span>]) -&gt; [<span class="hljs-keyword">float</span>]:
+    <span class="hljs-keyword">if</span> not <span class="hljs-string">learning_schedule:</span>
+        <span class="hljs-keyword">return</span> []
+    next_plan = mesa_optimizing_plan(learning_schedule[<span class="hljs-number">1</span>:])
+    <span class="hljs-keyword">return</span> [mesa_step(learning_schedule, next_plan)] + next_plan
+
+
+<span class="hljs-keyword">def</span> experiment(<span class="hljs-string">learning_schedule:</span> [<span class="hljs-keyword">float</span>], <span class="hljs-string">plot_window:</span> <span class="hljs-keyword">int</span>):
+    print(learning_schedule)
+    plan = mesa_optimizing_plan(learning_schedule)
+    print(plan)
+    thetas = get_thetas(<span class="hljs-number">0.8</span>, plan, learning_schedule)
+    print(thetas)
+
+    plt.figure(figsize=(<span class="hljs-number">10</span>, <span class="hljs-number">6</span>))
+    plt.plot(thetas[:plot_window], label=<span class="hljs-string">"meta objective (θ)"</span>)
+    plt.plot(plan[:plot_window], label=<span class="hljs-string">"coefficient"</span>)
+    plt.plot(learning_schedule[:plot_window], label=<span class="hljs-string">"learning rate"</span>)
+    plt.plot([a * theta <span class="hljs-keyword">for</span> a, theta <span class="hljs-keyword">in</span> zip(plan[:plot_window], thetas[:plot_window])], label=<span class="hljs-string">"model output"</span>)
+    plt.xlabel(<span class="hljs-string">"Episode number"</span>)
+    plt.legend()
+    plt.show()
+
+
+<span class="hljs-keyword">def</span> experiment_one():
+    learning_schedule = [<span class="hljs-number">1</span> <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> range(<span class="hljs-number">20</span>)] + [<span class="hljs-number">0</span> <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> range(<span class="hljs-number">80</span>)]
+    plot_window = <span class="hljs-number">30</span>
+    experiment(learning_schedule, plot_window)
+
+
+<span class="hljs-keyword">def</span> experiment_two():
+    learning_schedule = [<span class="hljs-number">1</span> <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> range(<span class="hljs-number">100</span>)]
+    plot_window = <span class="hljs-number">100</span>
+    experiment(learning_schedule, plot_window)
+</code></pre>
+
+</body>
+</html>
