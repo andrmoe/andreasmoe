@@ -9,18 +9,18 @@
 </head>
 <body>
 <div id="header"></div>
-<ul>
+<ul id="posts">
     <li>
-        <a href="simple_experiments_with_deceptive_alignment.html">Simple experiments with deceptive alignment</a>
+        <a href="simple_experiments_with_deceptive_alignment.html"></a>
     </li>
     <li>
-        <a href="can_humanity_last_forever.html">Can Humanity Last Forever?</a>
+        <a href="can_humanity_last_forever.html"></a>
     </li>
     <li>
-        <a href="situationally_aware_mesa-optimisers_will_have_long_term_objectives.html">Situationally Aware Mesa-optimisers Will Have Long-term Objectives (Work in progress)</a>
+        <a href="situationally_aware_mesa-optimisers_will_have_long_term_objectives.html"></a>
     </li>
     <li>
-        <a href="using_python_to_automate_content_for_a_LaTeX_report.html">Using Python to Automate Content for a LaTeX Report (Work in progress)</a>
+        <a href="using_python_to_automate_content_for_a_LaTeX_report.html"></a>
     </li>
     <!--
     <li>
@@ -38,5 +38,32 @@
     </li>
     -->
 </ul>
+<script>
+  async function fetchBlogTitle(url) {
+    const res = await fetch(url);
+    const html = await res.text();
+    const doc = new DOMParser().parseFromString(html, "text/html");
+    return doc.querySelector("#blogtitle")?.textContent?.trim() ?? "Untitled";
+  }
+
+  async function loadBlogTitles() {
+    const links = document.querySelectorAll("#posts a");
+    const titles = new Set();
+
+    for (const link of links) {
+      const url = link.getAttribute("href");
+      try {
+        const title = await fetchBlogTitle(url);
+        titles.add(title);
+        link.textContent = title;
+      } catch (err) {
+        console.error(`Error fetching ${url}`, err);
+        link.textContent = "(Error)";
+      }
+    }
+  }
+
+  loadBlogTitles();
+</script>
 </body>
 </html>
