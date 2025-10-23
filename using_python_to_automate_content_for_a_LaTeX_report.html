@@ -92,7 +92,7 @@ def task_compile_pdf():
         looks through the .tex file for file paths that match a pre-defined pattern. These refer to functions in my source code.
     </p>
     <p>
-        This pattern allows me to include the source code of any function, simply by refering to a file named "temp/{module}_{func}.py".
+        This pattern allows me to include the source code of any function, simply by refering to a file named "temp/func-{module}-{func}.py".
         Doit will then create this file with the correct content, and update it if the source code changes.
     </p>
     <p>
