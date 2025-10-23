@@ -6,10 +6,118 @@
     <link rel="stylesheet" href="styles.css"/>
     <title>Andreas Moe</title>
     <script src="header.js"></script>
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
+        />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
 </head>
 <body>
 <div id="header"></div>
 <h2 id="blogtitle">Using Python to Automate Content for a LaTeX Report</h2>
-<p>I'll write this later.</p>
+<div
+  style="
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  "
+>
+  <!-- Left column (text) -->
+  <div
+    style="
+      flex: 1 1 40%;
+      min-width: 300px;
+    "
+  >
+    <p>
+        The report in question was a school project for <a href="https://www.ntnu.edu/studies/courses/TMA4162">Computational Algebra</a> 
+        in the spring of 2025. A requirement was to show the source code for each problem, along with the explanation of the implementation.
+    </p>
+    <p>
+        I decided to use <a href="https://pydoit.org">doit</a>, a framework similar to make, but more flexible.
+        This allowed me to ensure that the report was always up to date with my source code, 
+        by listing the relevant source files as dependencies. Below is the rule for generating the final pdf:
+    </p>
+    <div
+        style="
+            width: 100%;
+            font-family: monospace;
+            padding: 1em;
+            border-radius: 4px;
+        "
+        >
+<pre
+   style="
+    background: white;
+    color: black;
+    padding: 1em;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    overflow-y: auto;
+    overflow-x: hidden;     /* no horizontal scrollbar */
+    white-space: pre-wrap;  /* wrap long lines */
+    word-wrap: break-word;  /* ensure wrapping in all browsers */
+  "
+><code class="language-python">
+def task_compile_pdf():
+    report_name = "project4report"
+    return {
+        "actions": [
+            [
+                "pdflatex",
+                "-interaction=nonstopmode",
+                "-output-directory=temp",
+                f"{report_name}.tex",
+            ]
+        ],
+        "file_dep": [f"{report_name}.tex"] + list(get_file_refs(f"{report_name}.tex")) +
+        [f'temp/func-{module}-{func}.py' for module, func in get_func_code_refs(f"{report_name}.tex")],
+        "targets": [f"temp/{report_name}.pdf"],
+    }
+</code></pre>
+    </div>
+    <p>
+        There are three different kinds of file dependencies here.
+    </p>
+    <p>
+        <code>[f"{report_name}.tex"]</code> is the main .tex file that should be compiled.
+    </p>
+    <p>
+        <code>list(get_file_refs(f"{report_name}.tex"))</code> looks through the .tex file for 
+        references to local files and lists them as dependencies.
+    </p>
+    <p>
+        <code>[f'temp/func-{module}-{func}.py' for module, func in get_func_code_refs(f"{report_name}.tex")]</code> 
+        looks through the .tex file for file paths that match a pre-defined pattern. These refer to functions in my source code.
+    </p>
+    <p>
+        This pattern allows me to include the source code of any function, simply by refering to a file named "temp/{module}_{func}.py".
+        Doit will then create this file with the correct content, and update it if the source code changes.
+    </p>
+    <p>
+        The full code is available <a href="https://github.com/andrmoe/ComputationalAlgebra/tree/master/Project4">here</a>.
+    </p>
+  </div>
+
+  <!-- Right column (PDF) -->
+  <div
+    style="
+      flex: 1 1 35%;
+      min-width: 250px;
+      border: 1px solid black;
+      border-radius: 4px;
+      margin-bottom: 20px;
+    "
+  >
+    <iframe
+      src="project4report.pdf"
+      style="width: 100%; height: 100%; border: none;"
+    ></iframe>
+  </div>
+</div>
+<script>
+  hljs.highlightAll();
+</script>
 </body>
 </html>
