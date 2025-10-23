@@ -47,19 +47,25 @@
   }
 
   async function loadBlogTitles() {
-    const links = document.querySelectorAll("#posts a");
-    const titles = new Set();
-
-    for (const link of links) {
+    const links = Array.from(document.querySelectorAll("#posts a"));
+    const titlePromises = links.map(async (link) => {
       const url = link.getAttribute("href");
       try {
         const title = await fetchBlogTitle(url);
-        titles.add(title);
-        link.textContent = title;
+        return { link, title };
       } catch (err) {
         console.error(`Error fetching ${url}`, err);
-        link.textContent = "(Error)";
+        return { link, title: "(Error)" };
       }
+    });
+
+    // wait for all to finish
+    const results = await Promise.all(titlePromises);
+
+    const seen = new Set();
+    for (const { link, title } of results) {
+      seen.add(title);
+      link.textContent = title;
     }
   }
 
