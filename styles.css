@@ -74,3 +74,19 @@ pre {
     padding: 1em;
     border-radius: 4px;
 }
+
+.textanddemo {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.lefttext {
+    flex: 1 1 40%;
+    min-width: 300px;
+}
+
+.rightdemo {
+    flex: 1 1 35%;
+    margin-bottom: 20px;
+}
