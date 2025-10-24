@@ -39,27 +39,8 @@
         This allowed me to ensure that the report was always up to date with my source code, 
         by listing the relevant source files as dependencies. Below is the rule for generating the final pdf:
     </p>
-    <div
-        style="
-            width: 100%;
-            font-family: monospace;
-            padding: 1em;
-            border-radius: 4px;
-        "
-        >
-<pre
-   style="
-    background: white;
-    color: black;
-    padding: 1em;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    overflow-y: auto;
-    overflow-x: hidden;     /* no horizontal scrollbar */
-    white-space: pre-wrap;  /* wrap long lines */
-    word-wrap: break-word;  /* ensure wrapping in all browsers */
-  "
-><code class="language-python">
+    <div class="codediv">
+<pre><code class="language-python">
 def task_compile_pdf():
     report_name = "project4report"
     return {
@@ -101,7 +82,7 @@ def task_compile_pdf():
   </div>
 
   <!-- Right column (PDF) -->
-  <div
+  <div class="pdfdiv"
     style="
       flex: 1 1 35%;
       min-width: 250px;
