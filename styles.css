@@ -55,3 +55,22 @@ li {
     margin-bottom: 10px;
     color: #333;
 }
+
+pre {
+    background: white;
+    color: black;
+    padding: 1em;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    overflow-y: auto;
+    overflow-x: hidden;     /* no horizontal scrollbar */
+    white-space: pre-wrap;  /* wrap long lines */
+    word-wrap: break-word;  /* ensure wrapping in all browsers */
+}
+
+.codediv {
+    width: 100%;
+    font-family: monospace;
+    padding: 1em;
+    border-radius: 4px;
+}
