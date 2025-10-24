@@ -16,20 +16,8 @@
 <body>
 <div id="header"></div>
 <h2 id="blogtitle">Using Python to Automate Content for a LaTeX Report</h2>
-<div
-  style="
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-  "
->
-  <!-- Left column (text) -->
-  <div
-    style="
-      flex: 1 1 40%;
-      min-width: 300px;
-    "
-  >
+<div class="textanddemo">
+  <div class="lefttext">
     <p>
         The report in question was a school project for <a href="https://www.ntnu.edu/studies/courses/TMA4162">Computational Algebra</a> 
         in the spring of 2025. A requirement was to show the source code for each problem, along with the explanation of the implementation.
@@ -80,17 +68,7 @@ def task_compile_pdf():
         The full code is available <a href="https://github.com/andrmoe/ComputationalAlgebra/tree/master/Project4">here</a>.
     </p>
   </div>
-
-  <!-- Right column (PDF) -->
-  <div class="pdfdiv"
-    style="
-      flex: 1 1 35%;
-      min-width: 250px;
-      border: 1px solid black;
-      border-radius: 4px;
-      margin-bottom: 20px;
-    "
-  >
+  <div class="rightdemo">
     <iframe
       src="project4report.pdf"
       style="width: 100%; height: 100%; border: none;"
