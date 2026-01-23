@@ -7,7 +7,11 @@ async function loadHeaderHtml(pageId) {
 }
 
 function highlightCurrentPage(pageId) {
-    let currentPageLink = document.querySelector(`#${pageId}`)
+    // Sanitize pageId to prevent DOM-based XSS - only allow alphanumeric, hyphen, underscore
+    const sanitizedPageId = pageId.replace(/[^a-zA-Z0-9_-]/g, '');
+    if (!sanitizedPageId) return;
+
+    let currentPageLink = document.getElementById(sanitizedPageId)
     if (currentPageLink) {
         let highlightingElement = document.createElement("b")
         currentPageLink.parentNode.insertBefore(highlightingElement, currentPageLink)
@@ -19,7 +23,16 @@ function loadHeader(pageId) {
     let header = document.querySelector("#header")
     htmlPromise = loadHeaderHtml(pageId)
     htmlPromise.then((html) => {
-        header.innerHTML = html
+        // Use DOMParser to safely parse HTML instead of innerHTML
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, 'text/html');
+
+        // Clear existing content and append parsed nodes
+        header.textContent = '';
+        Array.from(doc.body.childNodes).forEach(node => {
+            header.appendChild(node.cloneNode(true));
+        });
+
         highlightCurrentPage(pageId)
     })
 }
