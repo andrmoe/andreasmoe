@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; img-src 'self' data:; frame-ancestors 'self';">
     <link rel="stylesheet" href="styles.css"/>
     <link rel="icon" href="favicon.png" />
     <title>CV for export</title>
@@ -19,9 +20,13 @@
         response.text().then((cv) => {
             const parser = new DOMParser();
             const sourceCV = parser.parseFromString(cv, "text/html");
-            console.log(sourceCV.body.innerHTML)
-            let cvcontent = document.querySelector("div", "#cvcontent")
-            cvcontent.innerHTML = sourceCV.body.innerHTML;
+            let cvcontent = document.querySelector("#cvcontent")
+
+            // Safely append parsed DOM nodes instead of using innerHTML
+            cvcontent.textContent = '';
+            Array.from(sourceCV.body.childNodes).forEach(node => {
+                cvcontent.appendChild(node.cloneNode(true));
+            });
         });
     }).catch((error => {
         console.error("", error);
