@@ -90,3 +90,15 @@ pre {
     flex: 1 1 35%;
     margin-bottom: 20px;
 }
+
+table {
+  border-collapse: collapse;
+  border: 2px solid black;
+}
+
+th,
+td {
+  border: 1px solid black;
+  padding: 8px 10px;
+  text-align: center;
+}
