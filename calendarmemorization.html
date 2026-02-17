@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="page" content="blog">
+    <link rel="stylesheet" href="styles.css"/>
+    <link rel="icon" href="favicon.png" />
+    <title>Andreas Moe</title>
+    <script src="header.js"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+    integrity="sha384-Wuix6BuhrWbjDBs24bXrjf4ZQ5aFeFWBuKkFekO2t8xFU0iNaLQfp2K6/1Nxveei"
+    crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="header"></div>
+<h2 id="blogtitle">How to calculate the week number and weekday of any date in your head</h2>
+<p>
+    Key dates are a set of 10 dates that are spaced exactly 5 weeks apart (except week 1).
+    These dates are special because their week number is the same for all years that aren't leap years.
+</p>
+<table>
+    <caption></caption>
+    <tbody>
+        <tr>
+            <th scope="row">Week number</td>
+            <td>1</td>
+            <td>5</td>
+            <td>10</td>
+            <td>15</td>
+            <td>20</td>
+            <td>25</td>
+            <td>30</td>
+            <td>35</td>
+            <td>40</td>
+            <td>45</td>
+            <td>50</td>
+        </tr>
+        <tr>
+            <th scope="row">Key date</th>
+            <td>4. January</td>
+            <td>1. February</td>
+            <td>8. March</td>
+            <td>12. April</td>
+            <td>17. May</td>
+            <td>21. June</td>
+            <td>26. July</td>
+            <td>30. August</td>
+            <td>4. October</td>
+            <td>8. November</td>
+            <td>13. December</td>
+        </tr>
+    </tbody>
+</table>
+<p>
+    You'll need to memorize these. 
+    However, I recommend only memorizing 3 dates, and deriving the others on the fly to begin with. <br>
+    The ones to remember are: 1 (4. January), week 5 (1. February) and week 40 (4. October). <br>
+    My mnemonic for week 40 is to turn the 0 into an O in my mind.
+</p>
+<p>
+    February has 28 days, so the key date for week 9 (5 + 4) is 1. March, easy! <br>
+    It then follows that the key date for week 10 is 1 + 7 => 8. March. <br>
+    The rule from here is to add 4 days and a month to get to the next key date if the month you're in has 31 days. <br>
+    Add 5 days if it has 30.
+</p>
+<p>
+    Week 15: 8 + 4 => 12. April <br>
+    Week 20: 12 + 5 => 17. May <br>
+    Week 25: 17 + 4 => 21. June <br>
+    Week 30: 21 + 5 => 26. July <br>
+    Week 35: 26 + 4 => 30 August <br>
+    
+    Remember that week 40 is 4. October <br>
+    Week 45: 4 + 4 => 8. November <br>
+    Week 50: 8 + 5 => 13. December <br>
+</p>
+<p>
+    We now have to figure out which weekday all the key dates land on.
+    Just check which weekday January 4. lands on. In 2026, its on a Sunday. I therefore think of 2026 as a Sunday year.
+</p>
+<p>
+    If you need to check a year in the future or the past, 
+    then you can add or subtract 1 weekday per normal year, and 2 weekdays for a leapyear.
+</p>
+<p>
+    Going forward: 2027 (Monday year) <br>
+    2028 (leap year, I'll cover these later, Tuesday/Wednesday) <br>
+    2029 (Thursday year) <br>
+    2030 (Friday year)  
+</p>
+<p>
+    Going backwards: 2025 (Saturday year) <br>
+    2024 (leap year Thursday/Friday) <br>
+    2023 (Wednesday year) <br>
+    2022 (Tuesday year)
+</p>
+<p>
+    If you need to go much further, use this formula to find the weekday of 1. January: 
+    \(year - 2000 + \lfloor\frac{year - 2000}{4}\rfloor \mod 7\)
+</p>
+<p>
+    This works because 1. January 2001 happens to be on a Monday 
+    And the rest is just a formula version of counting years and double-counting leap years.
+</p>
+<p>
+    Now just count the weekdays from 1. January, to 4. January, to get the key weekday.
+</p>
+<p>
+    Now all that remains is to find the closest key date to the target date, 
+    and count by seven until you hit a date in the same week as the target. <br>
+    Now you know the week number, and a date of a particular weekday in that week. <br>
+    Count weekdays forward or backward until you hit the target date.
+</p>
+<p>
+    I'll cover leap years and examples later.
+</p>
+</body>
+</html>
