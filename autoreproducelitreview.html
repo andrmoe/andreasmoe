@@ -1,0 +1,1130 @@
+<!DOCTYPE html> 
+<html lang='en-US' xml:lang='en-US'> 
+<head><title>A Literature Review of Automated Reproducibility</title> 
+<meta charset='utf-8' /> 
+<meta name="page" content="blog">
+<link rel="stylesheet" href="styles.css"/>
+<link rel="icon" href="favicon.png" />
+<title>Andreas Moe</title>
+<script src="header.js"></script>
+<!--<link href='autoreproducelitreview.css' rel='stylesheet' type='text/css' /> -->
+</head><body>
+<div id="header"></div>
+<h2 class='titleHead' id="blogtitle">A Literature Review of Automated Reproducibility</h2>
+   <h3 class='sectionHead' id='introduction'><span class='titlemark'>1   </span> <a id='x1-10001'></a>Introduction</h3>
+<!-- l. 42 --><p class='noindent'>Reproducing experiments is important to advance science, but it’s a time-consuming activity for
+scientists, without much reward. LLMs are a promising tool for fully automating reproduction of
+experiments that only need computation. This literature review examines work done in this area, by:
+</p>
+     <ul class='itemize1'>
+     <li class='itemize'>developing   a   classification   system   for   auto-reproducibility   systems   and   benchmarks   of
+     auto-reproducibility systems.
+     </li>
+     <li class='itemize'>identifying as many existing systems and benchmarks as possible.</li></ul>
+<!-- l. 55 --><p class='noindent'>25 auto-reproducibility systems and 15 auto-reproducibility benchmarks have been identified. 13 out of 40 (32.5%)
+were published in 2026, and 24 (60%) were published in 2025. This shows that there is currently a large interest
+in this area. However, there is currently, as far as I’m aware, no published dedicated survey on this, which is
+why this literature review has been conducted.
+</p><!-- l. 60 --><p class='noindent'>
+</p>
+   <h3 class='sectionHead' id='background'><span class='titlemark'>2   </span> <a id='x1-20002'></a>Background</h3>
+<!-- l. 61 --><p class='noindent'>Trisovic et al.[<a id='x1-2001'></a><a href='#cite.0@trisovic2021'>1</a>] examined more than 2000 replication datasets, and found that 74% of files crashed on initial
+execution. Even after code cleaning, 56% crashed. This means that, currently, significant work is needed in order
+to reproduce computational research, even when the authors provide the code that was used in the
+experiments. However, being able to rerun code and get the same result is not full reproducibility.
+Sometimes, the paper excludes important details that are needed to reproduce the experiment. This
+means that these details can only be found in the associated code, preventing the reader from
+developing a full understanding of the experiment. It’s therefore desirable that an experiment should
+be reproducible based only on the paper. Edward Raff[<a id='x1-2002'></a><a href='#cite.0@raff2019'>2</a>] tried to replicate 255 papers this way,
+and was able to replicate 162 of them (63.5%), where replication was defined as confirming more
+than 75% of the claims in the paper. An important aspect of judging whether a paper has been
+reproduced, is to decide whether a non-identical result leads to the same conclusion. This is very common
+in ML, because most algorithms have a non-deterministic element. Raff[<a href='#cite.0@raff2019'>2</a>], for example, uses an
+order-of-magnitude threshold for claimed improvements (i.e. the paper claims 700x faster, but reproducer sees
+300x).
+</p><!-- l. 74 --><p class='indent'>   Gundersen 2021[<a id='x1-2003'></a><a href='#cite.0@gundersen2021'>3</a>] lays out four reproducibility types that categorize distinctions like these:
+</p>
+                                                                                      
+                                                                                      
+     <ul class='itemize1'>
+     <li class='itemize'>
+     <!-- l. 76 --><p class='noindent'>R1: Only the textual description of the experiment and raw data is provided.
+     </p><!-- l. 77 --><p class='noindent'>       This includes the reproductions in Raff 2019[<a id='x1-2004'></a><a href='#cite.0@raff2019'>2</a>].
+     </p></li>
+     <li class='itemize'>
+     <!-- l. 78 --><p class='noindent'>R2: The code for the experiment is provided in addition to the textual descriptions.
+     </p><!-- l. 79 --><p class='noindent'>       This includes the reproductions done in Trisovic et al.[<a id='x1-2005'></a><a href='#cite.0@trisovic2021'>1</a>].
+     </p></li>
+     <li class='itemize'>R3: Adds data from the experiment to R1, possibly including the outcome data.
+     </li>
+     <li class='itemize'>R4: Gives the reproducers the description, code and experimental data.</li></ul>
+<!-- l. 84 --><p class='indent'>   This is combined with three degrees of reproducibility: Outcome reproducible, Analysis reproducible,
+Interpretation reproducible. The type and degree can then be combined to describe both the starting point and
+reproducibility threshold for a reproducibility study. For example, Raff 2019[<a href='#cite.0@raff2019'>2</a>] starts with only the paper and
+raw data, and compares the outcome against the results from the paper. This could be ”outcome reproducible”,
+but my interpretation of Gundersen 2021[<a id='x1-2006'></a><a href='#cite.0@gundersen2021'>3</a>] is that the outcome must be identical for this to be the case. Nor do
+the evaluations assess ”analysis reproducibility”, because I interpret this to mean that something like a
+statistical test is done, and that is not what is done in the provided examples in Raff 2019[<a href='#cite.0@raff2019'>2</a>]. Therefore, I will
+class this as ”interpretation reproducible”, and R1 since they start with the paper only. The abbreviation is
+therefore IR1.
+</p><!-- l. 94 --><p class='noindent'>
+</p>
+   <h3 class='sectionHead' id='method'><span class='titlemark'>3   </span> <a id='x1-30003'></a>Method</h3>
+<!-- l. 95 --><p class='noindent'>The method used is ”snowballing”. Starting with a set of seed papers. Then assessing related papers
+recursively.
+</p><!-- l. 97 --><p class='indent'>   The search began with these papers
+     </p><dl class='enumerate'><dt class='enumerate'>
+  1. </dt><dd class='enumerate'>
+     <!-- l. 99 --><p class='noindent'>Automating  Computational  Reproducibility  in  Social  Science:  Comparing  Prompt-Based  and
+     Agent-Based Approaches[<a id='x1-3002'></a><a href='#cite.0@shah2026'>4</a>]
+     </p></dd><dt class='enumerate'>
+  2. </dt><dd class='enumerate'>
+     <!-- l. 100 --><p class='noindent'>Automated Modernization of Machine Learning Engineering Notebooks for Reproducibility[<a id='x1-3004'></a><a href='#cite.0@jin2026'>5</a>]
+     </p></dd><dt class='enumerate'>
+  3. </dt><dd class='enumerate'>
+     <!-- l. 101 --><p class='noindent'>CompRep: A Dataset For Computational Reproducibility[<a id='x1-3006'></a><a href='#cite.0@comprep'>6</a>]
+     </p></dd><dt class='enumerate'>
+  4. </dt><dd class='enumerate'>
+     <!-- l. 102 --><p class='noindent'>From AI for Science to Agentic Science: A Survey on Autonomous Scientific Discovery[<a id='x1-3008'></a><a href='#cite.0@wei2025'>7</a>]
+     </p></dd><dt class='enumerate'>
+  5. </dt><dd class='enumerate'>
+     <!-- l. 103 --><p class='noindent'>SciReplicate-Bench: Benchmarking LLMs in Agent-driven Algorithmic Reproduction from Research
+     Papers[<a id='x1-3010'></a><a href='#cite.0@scireplicatebench'>8</a>]
+                                                                                      
+                                                                                      
+     </p></dd><dt class='enumerate'>
+  6. </dt><dd class='enumerate'>
+     <!-- l. 104 --><p class='noindent'>REPRO-BENCH:  Can  Agentic  AI  Systems  Assess  the  Reproducibility  of  Social  Science
+     Research?[<a id='x1-3012'></a><a href='#cite.0@reprobench'>9</a>]
+     </p></dd><dt class='enumerate'>
+  7. </dt><dd class='enumerate'>
+     <!-- l. 105 --><p class='noindent'>From Reproduction to Replication: Evaluating Research Agents with Progressive Code Masking[<a id='x1-3014'></a><a href='#cite.0@autoexperiment'>10</a>]
+     </p></dd><dt class='enumerate'>
+  8. </dt><dd class='enumerate'>
+     <!-- l. 106 --><p class='noindent'>Automated Reproducibility Testing in R Markdown[<a id='x1-3016'></a><a href='#cite.0@brandmaier2025'>11</a>]
+     </p></dd><dt class='enumerate'>
+  9. </dt><dd class='enumerate'>
+     <!-- l. 107 --><p class='noindent'>AUTOREPRODUCE: Automatic AI Experiment Reproduction with Paper Lineage[<a id='x1-3018'></a><a href='#cite.0@autoreproduce'>12</a>]
+     </p></dd><dt class='enumerate'>
+ 10. </dt><dd class='enumerate'>
+     <!-- l. 108 --><p class='noindent'>PaperBench: Evaluating AI’s Ability to Replicate AI Research[<a id='x1-3020'></a><a href='#cite.0@paperbench'>13</a>]
+     </p></dd><dt class='enumerate'>
+ 11. </dt><dd class='enumerate'>
+     <!-- l. 109 --><p class='noindent'>Comparing Human-Only, AI-Assisted, and AI-Led Teams on Assessing Research Reproducibility
+     in Quantitative Social Science[<a id='x1-3022'></a><a href='#cite.0@bensch2025'>14</a>]
+     </p></dd><dt class='enumerate'>
+ 12. </dt><dd class='enumerate'>
+     <!-- l. 110 --><p class='noindent'>Computational reproducibility in computational social science[<a id='x1-3024'></a><a href='#cite.0@schoch2023'>15</a>]
+     </p></dd><dt class='enumerate'>
+ 13. </dt><dd class='enumerate'>
+     <!-- l. 111 --><p class='noindent'>Reproscreener: Leveraging LLMs for Assessing Computational Reproducibility of Machine Learning
+     Pipelines[<a id='x1-3026'></a><a href='#cite.0@reproscreener'>16</a>]
+     </p></dd><dt class='enumerate'>
+ 14. </dt><dd class='enumerate'>
+     <!-- l. 112 --><p class='noindent'>AutoAgents: A Framework for Automatic Agent Generation[<a id='x1-3028'></a><a href='#cite.0@chen2024'>17</a>]
+     </p></dd><dt class='enumerate'>
+ 15. </dt><dd class='enumerate'>
+     <!-- l. 113 --><p class='noindent'>Automated Social Science: Language Models as Scientist and Subjects[<a id='x1-3030'></a><a href='#cite.0@manning2024'>18</a>]
+     </p></dd><dt class='enumerate'>
+ 16. </dt><dd class='enumerate'>
+     <!-- l. 114 --><p class='noindent'>The replication crisis has led to positive structural, procedural, and community changes[<a id='x1-3032'></a><a href='#cite.0@korbmacher2023'>19</a>]</p></dd></dl>
+<!-- l. 117 --><p class='indent'>   from earlier work by Odd Erik Gundersen, Thijs Snelleman and Peter Lawrence. Almost all papers that
+cited (or were cited by) these papers, were classed as ”not relevant”, ”relevant” or ”included”. Google
+Scholar[<a id='x1-3033'></a><a href='#cite.0@googlescholar'>20</a>] was used to find out which papers have cited the ”included” papers. Queries were made between
+March and June 2026. These factors were used to assess papers: </p>
+     <ul class='itemize1'>
+     <li class='itemize'>In which context was this paper cited? If the context is one of the latter categories, then it is
+     relevant.
+                                                                                      
+                                                                                      
+     </li>
+     <li class='itemize'>If the context is not relevant, then the cited paper is also not relevant. (e.g. a list of papers that
+     form a dataset for auto reproducibility)
+     </li>
+     <li class='itemize'>Was this paper only cited in the bibliography, and not the main text? Then it is not relevant.
+     </li>
+     <li class='itemize'>Does the paper’s abstract relate to any of the categories. Then it’s relevant. If not, then not relevant.</li></ul>
+<!-- l. 128 --><p class='noindent'>Papers that described automated reproducibility systems, or benchmarks of them, were categorized as ”included”.
+Other papers that were assessed to be important to automated reproducibility, based on personal judgement,
+were also categorized as ”included”. ”included” papers were then used to expand the search, by assessing their
+citations and citers.
+</p><!-- l. 132 --><p class='indent'>   A visualization of portions of the resulting citation graph can be seen in <a href='#-partial-citation-graph-for-included-papers-seed-papers-are-on-top-and-papers-lower-down-were-discovered-after-snowballing'>Figure 0</a>. It shows how the seed
+papers generate the 1. generation of discovered papers, which in turn generate the 2. generation, and so on. It
+also shows that one generation generates papers in the next generation backwards in time through its citations,
+and forwards in time through papers that cite <span class='cmti-10'>it</span>.
+</p>
+<figure class='figure'> 
+    <p class='noindent' id='-partial-citation-graph-for-included-papers-seed-papers-are-on-top-and-papers-lower-down-were-discovered-after-snowballing'>figure<a id='figure.\theHfigure '></a>  <img alt='PIC' height='453' src='temp/citation_graph-.png' width='452' /> <a id='x1-3034r0'></a></p>
+<figcaption class='caption'><span class='id'>Figure 0: </span><span class='content'>Partial citation graph for ”included” papers. Seed papers are on top, and papers lower down
+were discovered after snowballing.                                                          </span></figcaption>
+</figure>
+   <h4 class='subsectionHead' id='categories'><span class='titlemark'>3.1   </span> <a id='x1-40003.1'></a>Categories</h4>
+<!-- l. 146 --><p class='noindent'>Categories of papers were created and modified for relevant papers along the way. The point of this is to group
+similar papers together, for summarizing the literature, and for comparison. The categories used
+were:
+</p>
+     <ul class='itemize1'>
+     <li class='itemize'>
+     <!-- l. 151 --><p class='noindent'>Previous work - 10 papers
+     </p><!-- l. 151 --><p class='noindent'>       Literature reviews or surveys of automatic reproducibility.
+     </p></li>
+     <li class='itemize'>
+     <!-- l. 152 --><p class='noindent'>Auto reproducibility - 23 papers
+     </p><!-- l. 152 --><p class='noindent'>       Systems that automatically reproduce computational research.
+     </p></li>
+     <li class='itemize'>
+     <!-- l. 153 --><p class='noindent'>Research impact - 8 papers
+     </p><!-- l. 153 --><p class='noindent'>       Contributes to our understanding of the impact of automated reproducibility.
+     </p></li>
+     <li class='itemize'>
+     <!-- l. 154 --><p class='noindent'>Terminology - 30 papers
+     </p><!-- l. 154 --><p class='noindent'>       Contributes by defining terminology related to reproducibility.
+     </p></li>
+     <li class='itemize'>
+     <!-- l. 155 --><p class='noindent'>Validation - 60 papers
+     </p><!-- l. 155 --><p class='noindent'>       Contributes benchmarks or other validation techniques for automatic reproducibility.
+     </p></li>
+     <li class='itemize'>
+     <!-- l. 156 --><p class='noindent'>Code Repair - 12 papers
+     </p><!-- l. 156 --><p class='noindent'>       Systems that automatically repair old code.
+     </p></li>
+     <li class='itemize'>
+     <!-- l. 157 --><p class='noindent'>Journal policy - 22 papers
+     </p><!-- l. 157 --><p class='noindent'>       Papers that describe policies at journals related to reproducibility.
+     </p></li>
+     <li class='itemize'>
+     <!-- l. 158 --><p class='noindent'>Reproducibility survey - 49 papers
+     </p><!-- l. 158 --><p class='noindent'>       Papers that survey reproducibility in a field.
+     </p></li>
+     <li class='itemize'>Other - 12 papers</li></ul>
+<!-- l. 162 --><p class='indent'>   Some whole categories were deemed not relevant only at the end of the process. <a href='#x1-14000doc'>They can be found in the
+appendix</a>.
+                                                                                      
+                                                                                      
+</p><!-- l. 164 --><p class='noindent'>
+</p>
+   <h4 class='subsectionHead' id='classification-of-automatic-reproducibility-systems'><span class='titlemark'>3.2   </span> <a id='x1-50003.2'></a>Classification of Automatic Reproducibility Systems</h4>
+<!-- l. 165 --><p class='noindent'>Based on the terminology from Gundersen 2021[<a id='x1-5001'></a><a href='#cite.0@gundersen2021'>3</a>], I’ve created categories and abbreviations that describe the
+input-output behaviour of auto-reproducibility systems:
+</p>
+     <ul class='itemize1'>
+     <li class='itemize'>
+     <!-- l. 169 --><p class='noindent'>R1 <span class='cmsy-10'>→ </span>R4 (Full implementation)
+     </p><!-- l. 170 --><p class='noindent'>       The system starts from only the paper and raw data, then writes and executes the code,
+     before outputting the code and execution data.
+     </p></li>
+     <li class='itemize'>
+     <!-- l. 171 --><p class='noindent'>R1 <span class='cmsy-10'>→ </span>R3 (Full implementation + ablation)
+     </p><!-- l. 172 --><p class='noindent'>       System writes and runs code to produce results, then hides the code from its output. This
+     somewhat pointless, and will therefore not be mentioned again in this review, but I’ve included it
+     for completeness. Clearly any R1 <span class='cmsy-10'>→ </span>R4 system can easily be modified to do this.
+     </p></li>
+     <li class='itemize'>
+     <!-- l. 175 --><p class='noindent'>R1 <span class='cmsy-10'>→ </span>R2 (Paper to code)
+     </p><!-- l. 176 --><p class='noindent'>       These systems take a paper as input and produce code that can be used by a different system
+     to reproduce the results, enabling the transformation of an R2 system into an R1 system.
+     </p></li>
+     <li class='itemize'>
+     <!-- l. 178 --><p class='noindent'>R2 <span class='cmsy-10'>→ </span>R4 (Code repair/Execution)
+     </p><!-- l. 179 --><p class='noindent'>       These systems take code that crashes or is otherwise defective and repairs it. By running
+     repaired code, a reproducer now has access to experimental data, ending up at an R4 starting
+     point.
+     </p></li>
+     <li class='itemize'>
+     <!-- l. 181 --><p class='noindent'>R2 <span class='cmsy-10'>→ </span>R3 (Code repair/Execution + ablation)
+     </p><!-- l. 182 --><p class='noindent'>       System repairs and runs code to produce results, then hides the code from its output. Mostly
+     pointless. Included for completeness. Won’t be mentioned again.
+     </p></li>
+     <li class='itemize'>
+     <!-- l. 184 --><p class='noindent'>R3 <span class='cmsy-10'>→ </span>R4 (Full implementation with answer sheet)
+     </p><!-- l. 185 --><p class='noindent'>       The implementation agent is given the experimental results to help it produce correct code.
+     It would ideally output the resulting data from its own code, instead of forwarding the original
+     experimental data.
+     </p></li>
+     <li class='itemize'>
+     <!-- l. 187 --><p class='noindent'><span class='cmsy-10'>{</span>O, A, I<span class='cmsy-10'>}</span>R<span class='cmsy-10'>{</span>1, 2, 3, 4<span class='cmsy-10'>} </span>(Full reproducibility assessment)
+     </p><!-- l. 188 --><p class='noindent'>       An auto-reproducibility system can start from any reproduction starting point (R1, R2, R3,
+     R4), and at the end of a reproduction attempt, conclude whether the experiment is reproducible
+     according to a set reproducibility degree (Outcome, Analysis, Interpretation)
+     </p></li>
+     <li class='itemize'>A  *  indicates  that  the  system  is  only  partially  automated,  meaning  that  it  requires  human
+     intervention.</li></ul>
+                                                                                      
+                                                                                      
+<!-- l. 194 --><p class='indent'>   These systems are composable. One can for example take a code repair system (R2 <span class='cmsy-10'>→ </span>R4), and add on an
+OR4 system, by feeding the output of one into the other, and end up with an OR2 system. In the extreme, one
+could chain 4 systems together to make an OR1 system:
+</p><!-- l. 198 --><p class='indent'>
+     </p><dl class='enumerate'><dt class='enumerate'>
+  1. </dt><dd class='enumerate'>
+     <!-- l. 198 --><p class='noindent'>Paper to code (R1 <span class='cmsy-10'>→ </span>R2)
+     </p></dd><dt class='enumerate'>
+  2. </dt><dd class='enumerate'>
+     <!-- l. 199 --><p class='noindent'>Code repair/Execution + ablation (R2 <span class='cmsy-10'>→ </span>R3)
+     </p></dd><dt class='enumerate'>
+  3. </dt><dd class='enumerate'>
+     <!-- l. 200 --><p class='noindent'>Full implementation with answer sheet (R3 <span class='cmsy-10'>→ </span>R4)
+     </p></dd><dt class='enumerate'>
+  4. </dt><dd class='enumerate'>
+     <!-- l. 201 --><p class='noindent'>OR4 judge</p></dd></dl>
+<!-- l. 204 --><p class='noindent'>
+</p>
+   <h4 class='subsectionHead' id='use-of-ai-tools'><span class='titlemark'>3.3   </span> <a id='x1-60003.3'></a>Use of AI tools</h4>
+<!-- l. 205 --><p class='noindent'>LLM tools were used to create figures, decide on styling, extract citations from papers (unsuccessfully), and as a
+conversation partner when trying to understand papers (however, this wasn’t done to any of the papers I’ve
+cited in this review, as far as I can recall), as well as helping with latex syntax. None of the words in
+this review have been generated with AI, and no proofreading or feedback has been done with
+AI.
+</p><!-- l. 211 --><p class='noindent'>
+</p>
+   <h3 class='sectionHead' id='results'><span class='titlemark'>4   </span> <a id='x1-70004'></a>Results</h3>
+<!-- l. 212 --><p class='noindent'>1156 papers were assessed in total. Of these 28 were ”included”, 511 were ”relevant”, 617 were ”not relevant”.
+Papers that were assessed to be ”relevant”, are not included in this review, because there are too
+many of them. I was unsure how many relevant papers existed when I began this review, and many
+of the ”included” papers weren’t published yet at that point. It therefore made sense to cast a
+wide net. It turned out that the field is large, so the ”relevant” category was dismissed entirely.
+6 papers that should be assessed according to the method, weren’t assessed because I couldn’t
+access them, and the recursive ”snowballing” ended when I ran out time to expand the review
+further.
+</p><!-- l. 221 --><p class='noindent'>
+</p>
+   <h4 class='subsectionHead' id='statistics'><span class='titlemark'>4.1   </span> <a id='x1-80004.1'></a>Statistics</h4>
+<!-- l. 222 --><p class='noindent'>Here are the statistics on how many systems end up fulfilling each <a href='#classification-of-automatic-reproducibility-systems'>classification from the method section</a>.
+Systems that fulfill multiple classes are counted multiple times.
+</p>
+   <div class='table'>
+                                                                                      
+                                                                                      
+<!-- l. 225 --><p class='indent'>   </p><figure class='float' id='-statistics-on-reviewed-autoreproducibility-systems-and-benchmarks'>
+                                                                                      
+                                                                                      
+<a id='table.\theHtable '></a> <a id='x1-8001r0'></a>
+<figcaption class='caption'><span class='id'>Table 0: </span><span class='content'>Statistics on reviewed auto-reproducibility systems and benchmarks.                     </span></figcaption><!-- tex4ht:label?: x1-8001r0  -->
+                                                                                      
+                                                                                      
+
+ <table class='tabular' id='TBL-4'><colgroup id='TBL-4-1g'><col id='TBL-4-1' /><col id='TBL-4-2' /><col id='TBL-4-3' /></colgroup><tr id='TBL-4-1-' style='vertical-align:baseline;'><td class='td01' id='TBL-4-1-1' style='white-space:normal; text-align:left;'><!-- l. 251 --><p class='noindent'><span class='cmbx-10'>Class</span>                                                    </p></td><td class='td11' id='TBL-4-1-2' style='white-space:nowrap; text-align:right;'> <span class='cmbx-10'>Reproduction systems  </span></td><td class='td10' id='TBL-4-1-3' style='white-space:nowrap; text-align:right;'> <span class='cmbx-10'>Benchmarks</span></td>
+
+</tr><tr id='TBL-4-2-' style='vertical-align:baseline;'><td class='td01' id='TBL-4-2-1' style='white-space:normal; text-align:left;'><!-- l. 251 --><p class='noindent'>R1
+<img alt='→ ' class='math' src='autoreproducelitreview8x.svg' />
+R2:
+Paper
+to
+code                                                               </p></td><td class='td11' id='TBL-4-2-2' style='white-space:nowrap; text-align:right;'>                    10  </td><td class='td10' id='TBL-4-2-3' style='white-space:nowrap; text-align:right;'>            3</td>
+</tr><tr id='TBL-4-3-' style='vertical-align:baseline;'><td class='td01' id='TBL-4-3-1' style='white-space:normal; text-align:left;'><!-- l. 251 --><p class='noindent'>R1
+<img alt='→ ' class='math' src='autoreproducelitreview9x.svg' />
+R4:
+Full
+implementation                                                 </p></td><td class='td11' id='TBL-4-3-2' style='white-space:nowrap; text-align:right;'>                     5  </td><td class='td10' id='TBL-4-3-3' style='white-space:nowrap; text-align:right;'>            4</td>
+</tr><tr id='TBL-4-4-' style='vertical-align:baseline;'><td class='td01' id='TBL-4-4-1' style='white-space:normal; text-align:left;'><!-- l. 251 --><p class='noindent'>R3
+<img alt='→ ' class='math' src='autoreproducelitreview10x.svg' />
+R4:
+Full
+implementation
+with
+answer
+sheet                                                              </p></td><td class='td11' id='TBL-4-4-2' style='white-space:nowrap; text-align:right;'>                     0  </td><td class='td10' id='TBL-4-4-3' style='white-space:nowrap; text-align:right;'>            0</td>
+</tr><tr id='TBL-4-5-' style='vertical-align:baseline;'><td class='td01' id='TBL-4-5-1' style='white-space:normal; text-align:left;'><!-- l. 251 --><p class='noindent'>R2
+<img alt='→ ' class='math' src='autoreproducelitreview11x.svg' />
+R4:
+Code
+repair/Execution                                               </p></td><td class='td11' id='TBL-4-5-2' style='white-space:nowrap; text-align:right;'>                     5  </td><td class='td10' id='TBL-4-5-3' style='white-space:nowrap; text-align:right;'>            4</td>
+</tr><tr id='TBL-4-6-' style='vertical-align:baseline;'><td class='td01' id='TBL-4-6-1' style='white-space:normal; text-align:left;'><!-- l. 251 --><p class='noindent'>OR1:
+outcome
+reproduction
+w/
+paper
+only                                                                </p></td><td class='td11' id='TBL-4-6-2' style='white-space:nowrap; text-align:right;'>                     2  </td><td class='td10' id='TBL-4-6-3' style='white-space:nowrap; text-align:right;'>            0</td>
+</tr><tr id='TBL-4-7-' style='vertical-align:baseline;'><td class='td01' id='TBL-4-7-1' style='white-space:normal; text-align:left;'><!-- l. 251 --><p class='noindent'>OR2:
+outcome
+reproduction
+w/
+paper
+&amp;
+code                                                               </p></td><td class='td11' id='TBL-4-7-2' style='white-space:nowrap; text-align:right;'>                     4  </td><td class='td10' id='TBL-4-7-3' style='white-space:nowrap; text-align:right;'>            2</td>
+</tr><tr id='TBL-4-8-' style='vertical-align:baseline;'><td class='td01' id='TBL-4-8-1' style='white-space:normal; text-align:left;'><!-- l. 251 --><p class='noindent'>OR3:
+outcome
+w/
+paper
+&amp;
+experiment
+data                                                               </p></td><td class='td11' id='TBL-4-8-2' style='white-space:nowrap; text-align:right;'>                     0  </td><td class='td10' id='TBL-4-8-3' style='white-space:nowrap; text-align:right;'>            0</td>
+</tr><tr id='TBL-4-9-' style='vertical-align:baseline;'><td class='td01' id='TBL-4-9-1' style='white-space:normal; text-align:left;'><!-- l. 251 --><p class='noindent'>OR4:
+outcome
+reproduction
+w/
+paper,
+code
+&amp;
+experiment
+data                                                               </p></td><td class='td11' id='TBL-4-9-2' style='white-space:nowrap; text-align:right;'>                     2  </td><td class='td10' id='TBL-4-9-3' style='white-space:nowrap; text-align:right;'>            1</td>
+</tr><tr id='TBL-4-10-' style='vertical-align:baseline;'><td class='td01' id='TBL-4-10-1' style='white-space:normal; text-align:left;'><!-- l. 251 --><p class='noindent'>AR1:
+analysis
+reproduction
+w/
+paper
+only                                                                </p></td><td class='td11' id='TBL-4-10-2' style='white-space:nowrap; text-align:right;'>                     0  </td><td class='td10' id='TBL-4-10-3' style='white-space:nowrap; text-align:right;'>            0</td>
+</tr><tr id='TBL-4-11-' style='vertical-align:baseline;'><td class='td01' id='TBL-4-11-1' style='white-space:normal; text-align:left;'><!-- l. 251 --><p class='noindent'>AR2:
+analysis
+reproduction
+w/
+paper
+&amp;
+code                                                               </p></td><td class='td11' id='TBL-4-11-2' style='white-space:nowrap; text-align:right;'>                     2  </td><td class='td10' id='TBL-4-11-3' style='white-space:nowrap; text-align:right;'>            1</td>
+</tr><tr id='TBL-4-12-' style='vertical-align:baseline;'><td class='td01' id='TBL-4-12-1' style='white-space:normal; text-align:left;'><!-- l. 251 --><p class='noindent'>AR3:
+analysis
+reproduction
+w/
+paper
+&amp;
+experiment
+data                                                               </p></td><td class='td11' id='TBL-4-12-2' style='white-space:nowrap; text-align:right;'>                     0  </td><td class='td10' id='TBL-4-12-3' style='white-space:nowrap; text-align:right;'>            0</td>
+</tr><tr id='TBL-4-13-' style='vertical-align:baseline;'><td class='td01' id='TBL-4-13-1' style='white-space:normal; text-align:left;'><!-- l. 251 --><p class='noindent'>AR4:
+analysis
+reproduction
+w/
+paper,
+code
+&amp;
+experiment
+data                                                               </p></td><td class='td11' id='TBL-4-13-2' style='white-space:nowrap; text-align:right;'>                     0  </td><td class='td10' id='TBL-4-13-3' style='white-space:nowrap; text-align:right;'>            0</td>
+</tr><tr id='TBL-4-14-' style='vertical-align:baseline;'><td class='td01' id='TBL-4-14-1' style='white-space:normal; text-align:left;'><!-- l. 251 --><p class='noindent'>IR1:
+interpretation
+reproduction
+w/
+paper
+only                                                                </p></td><td class='td11' id='TBL-4-14-2' style='white-space:nowrap; text-align:right;'>                     1  </td><td class='td10' id='TBL-4-14-3' style='white-space:nowrap; text-align:right;'>            2</td>
+</tr><tr id='TBL-4-15-' style='vertical-align:baseline;'><td class='td01' id='TBL-4-15-1' style='white-space:normal; text-align:left;'><!-- l. 251 --><p class='noindent'>IR2:
+interpretation
+reproduction
+w/
+paper
+&amp;
+code                                                               </p></td><td class='td11' id='TBL-4-15-2' style='white-space:nowrap; text-align:right;'>                     4  </td><td class='td10' id='TBL-4-15-3' style='white-space:nowrap; text-align:right;'>            3</td>
+</tr><tr id='TBL-4-16-' style='vertical-align:baseline;'><td class='td01' id='TBL-4-16-1' style='white-space:normal; text-align:left;'><!-- l. 251 --><p class='noindent'>IR3:
+reproduction
+w/
+paper
+&amp;
+experiment
+data                                                               </p></td><td class='td11' id='TBL-4-16-2' style='white-space:nowrap; text-align:right;'>                     0  </td><td class='td10' id='TBL-4-16-3' style='white-space:nowrap; text-align:right;'>            0</td>
+</tr><tr id='TBL-4-17-' style='vertical-align:baseline;'><td class='td01' id='TBL-4-17-1' style='white-space:normal; text-align:left;'><!-- l. 251 --><p class='noindent'>IR4:
+interpretation
+reproduction
+w/
+paper,
+code
+&amp;
+experiment
+data                                                               </p></td><td class='td11' id='TBL-4-17-2' style='white-space:nowrap; text-align:right;'>                     0  </td><td class='td10' id='TBL-4-17-3' style='white-space:nowrap; text-align:right;'>            0</td>
+
+</tr><tr id='TBL-4-18-' style='vertical-align:baseline;'><td class='td01' id='TBL-4-18-1' style='white-space:normal; text-align:left;'><!-- l. 251 --><p class='noindent'>                                            </p></td></tr></table>                                        
+                                                                                      
+   </figure>
+   </div>
+
+
+<!--<figure class='figure'> 
+<p class='noindent' id='-statistics-on-reviewed-autoreproducibility-systems-and-benchmarks1'>figure<a id='figure.\theHfigure '></a> <img alt='   024681RRRROOOOA01132RRRRR12341→→→→::::: RRRRooooa2444uuuuna::::tctctctcl P F F Cooooyauuommmmsiplldeeeeselle r r w r rr im im ree/e tppepppollproropro cememaddadoeeiruupeudenn/Eccrcttxtiti &amp;tiaaeononontiticeoouwwxwnnti//p/ wo p per pinaaimathppepeenearrtr,ns o &amp; cwndaoelycotdrdae se &amp;heeetxperiment data  ' src='autoreproducelitreview12x.svg' />
+<a id='x1-8002r0'></a>
+</p>
+<figcaption class='caption'><span class='id'>Figure 0: </span><span class='content'>Statistics on reviewed auto-reproducibility systems and benchmarks.
+</span></figcaption>
+</figure>-->
+
+
+
+   <h4 class='subsectionHead' id='auto-reproducibility-systems'><span class='titlemark'>4.2   </span> <a id='x1-90004.2'></a>Auto reproducibility systems</h4>
+<!-- l. 366 --><p class='noindent'>Significant work has been done on auto-reproduction systems. These are the systems that were identified by the
+literature review:
+     </p><dl class='enumerate'><dt class='enumerate'>
+  1. </dt><dd class='enumerate'>
+     <!-- l. 369 --><p class='noindent'>Paper2Code[<a id='x1-9002'></a><a href='#cite.0@paper2code'>21</a>] (R1 <span class='cmsy-10'>→ </span>R2)
+     </p><!-- l. 370 --><p class='noindent'>       approaches  the  paper  to  code  problem  by  drawing  inspiration  from  typical  software
+     development workflows. They decompose the task into three coordinated stages: Planning, analysis
+     and coding. Planning is then further decomposed into an overall plan, architecture design, logic
+     design  and  configuration.  The  analysis  stage  deals  with  the  behaviour  of  each  file.  Given  a
+     specific file from the planning stage, the system generates a detailed analysis of what needs to be
+     implemented in that file. The final coding stage produces a full code repository, by generating one
+     file at the time, using that file’s analysis. Importantly, this is done ”bottom up”, so that the agents
+     have access to the complete code for the necessary dependencies.
+     </p></dd><dt class='enumerate'>
+  2. </dt><dd class='enumerate'>
+     <!-- l. 377 --><p class='noindent'>Enhancing Automated Paper Reproduction via Prompt-Free Collaborative Agents[<a id='x1-9004'></a><a href='#cite.0@lin2025'>22</a>] (R1 <span class='cmsy-10'>→ </span>R2)
+     </p><!-- l. 378 --><p class='noindent'>       builds on the Paper2Code framework, and aims to remove human-crafted system prompts.
+     The authors validate their solution by integrating with Paper2Code[<a href='#cite.0@paper2code'>21</a>], which enables easy testing
+     against Paper2CodeBench[<a href='#cite.0@paper2code'>21</a>] and PaperBench[<a id='x1-9005'></a><a href='#cite.0@paperbench'>13</a>].
+     </p></dd><dt class='enumerate'>
+  3. </dt><dd class='enumerate'>
+     <!-- l. 381 --><p class='noindent'>AutoP2C[<a id='x1-9007'></a><a href='#cite.0@autop2c'>23</a>]<a id='x1-90063'></a> (R1 <span class='cmsy-10'>→ </span>R2)
+     </p><!-- l. 382 --><p class='noindent'>       has four stages that imitate human experts, when implementing code repositories from papers.
+     The first stage analyzes well-established ML code repositories, looking for common architectural
+     patterns, in order to produce a template for the final repository. The second stage parses the pdf
+     of the paper, extracting the necessary information for code implementation. The third stage is a
+     hierarchical task decomposer, that takes the distilled information and the template, and creates an
+     implementation plan. The final stage, takes task descriptions from the third stage and transforms
+     them into an executable code repository. It does this through an implementation-verification loop.
+     The loop terminates when the code reproduces the results in the paper.
+     </p></dd><dt class='enumerate'>
+  4. </dt><dd class='enumerate'>
+     <!-- l. 390 --><p class='noindent'>Can GPT-4 Replicate Empirical Software Engineering Research?[<a id='x1-9009'></a><a href='#cite.0@liang2024'>24</a>] (R1 <span class='cmsy-10'>→ </span>R2)
+     </p><!-- l. 391 --><p class='noindent'>       approaches the paper to code problem in the simplest possible way with LLMs, just prompting
+     the LLM to write the analysis pipeline. The authors restrict the task to software engineering papers,
+     and conduct a user study with human software engineering experts.
+     </p></dd><dt class='enumerate'>
+  5. </dt><dd class='enumerate'>
+     <!-- l. 393 --><p class='noindent'>RepLLM[<a id='x1-9011'></a><a href='#cite.0@repllm'>25</a>] (R1 <span class='cmsy-10'>→ </span>R2)
+     </p><!-- l. 394 --><p class='noindent'>       restricts the paper to code problem to computer networking research. The authors claim
+     that the field present a formidable challenge, due to long-context constraints and intricate logical
+     dependencies. The system consists of four specialized agents: Content Parsing, Architecture Design,
+     Code Generation, and Audit &amp; Repair. The agents coordinate through an explicit shared memory.
+     This decouples information storage from agent reasoning.
+     </p></dd><dt class='enumerate'>
+  6. </dt><dd class='enumerate'>
+     <!-- l. 398 --><p class='noindent'>Deep-Reproducer[<a id='x1-9013'></a><a href='#cite.0@deepreproducer'>26</a>] (R1 <span class='cmsy-10'>→ </span>R2)
+                                                                                      
+                                                                                      
+     </p><!-- l. 399 --><p class='noindent'>       approaches the paper to code problem by searching the web for existing repositories that can
+     be used as a starting point for the coding task. It does this after first having done a comprehensive
+     paper  analysis.  This  summarizes  six  critical  dimensions:  Data  requirements,  Methodological
+     approaches, Task objectives, Research methodology, Related work and Foundational methods.
+     </p></dd><dt class='enumerate'>
+  7. </dt><dd class='enumerate'>
+     <!-- l. 402 --><p class='noindent'>RePro[<a id='x1-9015'></a><a href='#cite.0@zhou2025'>27</a>] (R1 <span class='cmsy-10'>→ </span>R2)
+     </p><!-- l. 403 --><p class='noindent'>       approaches the paper to code problem by extracting what authors call a paper fingerprint.
+     This is a set of atomic pass-or-fail criteria that act as supervisory signals to the coding agents,
+     guiding them to a correct implementation. A verifier agent uses the pass-or-fail criteria to give
+     succinct feedback to the coding agents.
+     </p></dd><dt class='enumerate'>
+  8. </dt><dd class='enumerate'>
+     <!-- l. 406 --><p class='noindent'>NERFIFY[<a id='x1-9017'></a><a href='#cite.0@nerfify'>28</a>] (R1 <span class='cmsy-10'>→ </span>R2)
+     </p><!-- l. 407 --><p class='noindent'>       The authors restrict the paper to code problem to neural radiance field computer vision
+     papers. This restriction lets them constrain the agents’ actions to producing architecturally correct
+     code, and use a specialized critique agent.
+     </p></dd><dt class='enumerate'>
+  9. </dt><dd class='enumerate'>
+     <!-- l. 409 --><p class='noindent'>PaperRepro (a)[<a id='x1-9019'></a><a href='#cite.0@li2026'>29</a>]<a id='x1-90189'></a> (R1 <span class='cmsy-10'>→ </span>R2)
+     </p><!-- l. 410 --><p class='noindent'>       has as its contribution PaperRepro, which must not be confused with <a href='#x1-904822'>PaperRepro by Zhang
+     et al.</a>[<a id='x1-9020'></a><a href='#cite.0@paperrepro'>30</a>]. The system attempts to solve the paper to code problem through distinct stages. The
+     first stage builds and prunes the citation graph, in order to surface necessary tacit knowledge. The
+     next stage uses the paper and surfaced tacit knowledge to create the code implementation, through
+     execution-feedback refinement.
+     </p></dd><dt class='enumerate'>
+ 10. </dt><dd class='enumerate'>
+     <!-- l. 416 --><p class='noindent'>Sci-Reproducer[<a id='x1-9022'></a><a href='#cite.0@scireplicatebench'>8</a>, pages 6–7] (R1 <span class='cmsy-10'>→ </span>R2)
+     </p><!-- l. 417 --><p class='noindent'>       is the default agent for <a href='#x1-100063'>SciReplicate-Bench</a>[<a href='#cite.0@scireplicatebench'>8</a>].
+     </p></dd><dt class='enumerate'>
+ 11. </dt><dd class='enumerate'>
+     <!-- l. 418 --><p class='noindent'>AutoReproduce[<a id='x1-9024'></a><a href='#cite.0@autoreproduce'>12</a>]<a id='x1-902311'></a> (R1 <span class='cmsy-10'>→ </span>R4)
+     </p><!-- l. 419 --><p class='noindent'>       approaches  the  full  implementation  problem  by  first  establishing  the  necessary  implicit
+     domain knowledge. The idea is that a key limiting factor on other auto-reproducibility systems
+     is that LLMs lack this knowledge by default, and that the author’s paper lineage algorithm can
+     establish it. A multi-agent system then writes the code and executes the experiments.
+     </p></dd><dt class='enumerate'>
+ 12. </dt><dd class='enumerate'>
+     <!-- l. 422 --><p class='noindent'>From paper to benchmark[<a id='x1-9026'></a><a href='#cite.0@theiler2026'>31</a>] (R1 <span class='cmsy-10'>→ </span>R4)
+     </p><!-- l. 423 --><p class='noindent'>       takes  on  full  implementation  within  the  Prognostics  and  Health  Management  (PHM)
+     field,  or  as  they  refer  to  the  problem:  ”We  formulate  framework-grounded  agentic  PHM
+     reproduction as a benchmarkable paper-to-implementation task in a scientific ML, focusing on
+     a  domain  with  severe  reproducibility  constraints  and  limited  code  availability.”  [<a href='#cite.0@theiler2026'>31</a>,  page 2]
+     They use a framework-coupled agent workflow. The framework in question provides fixed task
+     contracts, dataset adapter interfaces, transformation operations, windowing operations, and metric
+     definitions. These are benchmark conditions that are held fixed across all reproductions. The aim
+     of this is to make code generation verifiable.
+     </p></dd><dt class='enumerate'>
+ 13. </dt><dd class='enumerate'>
+     <!-- l. 430 --><p class='noindent'>AI Copilots for Reproducibility in Science[<a id='x1-9028'></a><a href='#cite.0@bibal2025'>32</a>] (R1/R2 <span class='cmsy-10'>→</span>* R4)
+                                                                                      
+                                                                                      
+     </p><!-- l. 431 --><p class='noindent'>       approaches full implementation and code repair/execution as an AI-human collaboration,
+     where the AI system generates a Jupyter notebook, based on the paper (and existing code if
+     available/desired). The idea is that the agent shouldn’t try to resolve ambiguities itself, but instead
+     prompt the human researcher on how these should be resolved. I’ve not classed this system as an
+     assessment system, because the paper has nothing to say on how the researcher should decide if an
+     experiment has been successfully reproduced.
+     </p></dd><dt class='enumerate'>
+ 14. </dt><dd class='enumerate'>
+     <!-- l. 437 --><p class='noindent'>ResearchCodeAgent[<a id='x1-9030'></a><a href='#cite.0@researchcodeagent'>33</a>] (R1/R2 <span class='cmsy-10'>→ </span>R4)
+     </p><!-- l. 438 --><p class='noindent'>       approaches  full  implementation  and  code  repair/execution  problem  with  a  multi-agent
+     system. It consists of a planner and a worker. These each have a bespoke set of actions that they
+     can take to mutate their environments. Several actions that the planner can take invoke the worker
+     to do a specified task. The result of that task is returned to the planner when done.
+     </p></dd><dt class='enumerate'>
+ 15. </dt><dd class='enumerate'>
+     <!-- l. 442 --><p class='noindent'>Jailbreak Foundry[<a id='x1-9032'></a><a href='#cite.0@jailbreakfoundry'>34</a>] (R1/R2 <span class='cmsy-10'>→ </span>R4)
+     </p><!-- l. 443 --><p class='noindent'>       approaches the full implementation and code repair/execution problem, restricted to papers
+     on  LLM  jailbreak  attacks,  by  using  a  multi-agent  system,  which  does  iterative  planning,
+     implementation and fidelity checks. The target for code is a module, that is compatible with
+     JBF-LIB, which is a library by the authors, that sets a standard interface to produce attack
+     benchmarks. The authors’ intent is not to assess the reproducibility of proposed jailbreaks. They
+     are instead focusing on shortening the time between the publication of a jailbreak, and when
+     mitigations can be tested, by automatically creating a benchmark to develop against. Jailbreak
+     Foundry does not qualify to be a reproducibility system, because it doesn’t explicitly test the
+     jailbreaks against the models used in the original paper. However, I suspect that this would be
+     a trivial extension to add. The system can act both as R1 <span class='cmsy-10'>→ </span>R4 and R2 <span class='cmsy-10'>→ </span>R4, depending on
+     whether existing code is available.
+     </p></dd><dt class='enumerate'>
+ 16. </dt><dd class='enumerate'>
+     <!-- l. 454 --><p class='noindent'>Automating Computational Reproducibility in Social Science[<a id='x1-9034'></a><a href='#cite.0@shah2026'>4</a>] (R2 <span class='cmsy-10'>→ </span>R4)
+     </p><!-- l. 455 --><p class='noindent'>       approaches the code repair/execution problem in two ways: A prompt based workflow and an
+     agent based workflow. The prompt based workflow works by feeding code, error logs, and a prompt
+     to an LLM. The LLM then attempts a single shot repair which is then executed. This goes back
+     to the beginning, with the new code and errors, if the code fails to execute correctly.
+     </p><!-- l. 460 --><p class='noindent'>The agent workflow uses commercial off the shelf coding agents, specifically OpenCode[<a id='x1-9035'></a><a href='#cite.0@opencode'>35</a>] and
+     Claude Code[<a id='x1-9036'></a><a href='#cite.0@claudecode'>36</a>].
+     </p></dd><dt class='enumerate'>
+ 17. </dt><dd class='enumerate'>
+     <!-- l. 461 --><p class='noindent'>Computational Reproducibility of R Code Supplements on OSF[<a id='x1-9038'></a><a href='#cite.0@saju2025'>37</a>] (R2 <span class='cmsy-10'>→ </span>R4)
+     </p><!-- l. 462 --><p class='noindent'>       approaches the code repair/execution task with a light touch. It does not use AI, or modify
+     code. It only attempts to construct an environment where the code will run unmodified. It then
+     publishes the environment as a Docker image, along with the execution logs.
+     </p></dd><dt class='enumerate'>
+ 18. </dt><dd class='enumerate'>
+     <!-- l. 465 --><p class='noindent'>LockForge[<a id='x1-9040'></a><a href='#cite.0@lockforge'>38</a>] (OR1)
+     </p><!-- l. 466 --><p class='noindent'>       restricts  the  OR1  problem  to  logic  locking  research  in  integrated  circuits.  Logic  locking
+     refers to techniques for designing integrated circuits, that restrict functionality, unless the user is
+     authorized. This is meant to prevent IP piracy, counterfeiting, malicious modification, and reverse
+     engineering, among other concerns. The multi-agent system consists of 5 stages: forethoughts,
+     implementation, refinement loop, smoke tests, and validation. Reproducibility is a part of the final
+     validation. It works by measuring the fidelity of code execution on paper-specified benchmarks.
+                                                                                      
+                                                                                      
+     </p></dd><dt class='enumerate'>
+ 19. </dt><dd class='enumerate'>
+     <!-- l. 472 --><p class='noindent'>Comparing Human-Only, AI-Assisted, and AI-Led Teams on Assessing Research Reproducibility
+     in Quantitative Social Science[<a id='x1-9042'></a><a href='#cite.0@bensch2025'>14</a>] (OR1*/OR2*)
+     </p><!-- l. 473 --><p class='noindent'>       tests the effects on outcome reproducibility assessment, from human teams using AI, and
+     human teams led by AI.
+     </p></dd><dt class='enumerate'>
+ 20. </dt><dd class='enumerate'>
+     <!-- l. 474 --><p class='noindent'>ReplicatorAgent[<a id='x1-9044'></a><a href='#cite.0@replicatorbench'>39</a>, pages 5–6] (IR1/IR2)
+     </p><!-- l. 475 --><p class='noindent'>       is the reference test subject for <a href='#x1-1002912'>ReplicatorBench</a>[<a href='#cite.0@replicatorbench'>39</a>]. It’s a multi-agent system, similar to
+     others. However, it has a novel option of forcing the agent to translate all non-Python scripts into
+     Python in order to run them. The rationale for this is that LLMs prefer working with, and are more
+     proficient in, Python[<a id='x1-9045'></a><a href='#cite.0@twist2026'>40</a>], so the authors hypothesize that forcing the agent to work in Python, will
+     improve performance.
+     </p></dd><dt class='enumerate'>
+ 21. </dt><dd class='enumerate'>
+     <!-- l. 480 --><p class='noindent'>REPRO-Agent[<a id='x1-9047'></a><a href='#cite.0@reprobench'>9</a>, page 9] (OR2/AR2/IR2)
+     </p><!-- l. 481 --><p class='noindent'>       is the default agent for REPRO-Bench[<a href='#cite.0@reprobench'>9</a>]. It follows an organized template, which is based
+     on successful reproducibility assessment cases to improve planning. Input-Output behaviour is
+     discussed in the <a href='#x1-1003414'>benchmark section on REPRO-Bench</a>.
+     </p></dd><dt class='enumerate'>
+ 22. </dt><dd class='enumerate'>
+     <!-- l. 484 --><p class='noindent'>PaperRepro (b)[<a id='x1-9049'></a><a href='#cite.0@paperrepro'>30</a>] (OR2/AR2/IR2)<a id='x1-904822'></a>
+     </p><!-- l. 485 --><p class='noindent'>       not to be confused with <a href='#x1-90189'>PaperRepro by Li et al.</a>[<a id='x1-9050'></a><a href='#cite.0@li2026'>29</a>], approaches the problem of assessing
+     reproducibility of papers and available code, with a two stage, multi-agent system. The system
+     consists of an execution stage, and an evaluation stage. A setup agent configures the environment
+     and  creates  a  plan  for  the  reproduction  attempt.  An  execution  agent  follows  the  plan  and
+     runs  the  script  it  has  written,  which  produces  research  artifacts.  In  the  evaluation  stage,  a
+     scoring agent evaluates reproducibility, using the reproduced artifacts, the paper’s reported results,
+     and  an  execution  summary.  A  report  agent  aggregates  everything  into  a  reproduction  report.
+     The reason why all reproducibility levels are applicable, is because PaperRepro[<a href='#cite.0@paperrepro'>30</a>] conforms to
+     REPRO-Bench[<a href='#cite.0@reprobench'>9</a>], which requires the system to specify which level has been attained. See the
+     discussion of REPRO-Bench in the <a href='#x1-1003414'>benchmark section</a>.
+     </p></dd><dt class='enumerate'>
+ 23. </dt><dd class='enumerate'>
+     <!-- l. 495 --><p class='noindent'>Reproscreener[<a id='x1-9052'></a><a href='#cite.0@reproscreener'>16</a>] (IR2) is a reproducibility assessment software tool. It approximately has the
+     same input-output behaviour as an IR2 agent, and therefore complements well with LLM methods,
+     as dissimilar redundancy.
+     </p></dd><dt class='enumerate'>
+ 24. </dt><dd class='enumerate'>
+     <!-- l. 499 --><p class='noindent'>Artisan[<a id='x1-9054'></a><a href='#cite.0@artisan'>41</a>] (OR2/OR4)
+     </p><!-- l. 500 --><p class='noindent'>       approaches the code repair/execution task, which they refer to as artifact evaluation, by using
+     a single coding agent, that is guided by two judges. One judge is an LLM that gives feedback on how
+     well the agent’s code represents the paper’s methodology. The other judge is entirely hand-coded,
+     and compares the computed output from the coder’s script, to that of the original artifact. It gives
+     a simple pass/fail for each value in the result. The system’s preprocessing has obfuscated the results
+     from the paper and other artifacts, in order to prevent the agent from simply copying the results.
+     However, the authors had to implement even further measures to mitigate this to an acceptable
+     level. It is unclear whether this should be classified as OR2 or OR4, since the experimental data
+     is required for it to operate. However, the idea is to produce a reproduction script, which doesn’t
+     depend on it.
+                                                                                      
+                                                                                      
+     </p></dd><dt class='enumerate'>
+ 25. </dt><dd class='enumerate'>
+     <!-- l. 510 --><p class='noindent'>Supporting Artifact Evaluation with LLMs[<a id='x1-9056'></a><a href='#cite.0@heye2025'>42</a>] (OR4*)
+     </p><!-- l. 511 --><p class='noindent'>       restricts the OR1 problem to computer security papers.
+     </p><!-- l. 512 --><p class='noindent'>       Partial automation of computer security reproduction.
+</p>
+     </dd></dl>
+<!-- l. 515 --><p class='noindent'>Some papers need significant modification to fit into the classification:
+     </p><dl class='enumerate'><dt class='enumerate'>
+  1. </dt><dd class='enumerate'>
+     <!-- l. 517 --><p class='noindent'>Natural Language to Code Generation in Interactive Data Science Notebooks[<a id='x1-9058'></a><a href='#cite.0@yin2022'>43</a>]
+     </p><!-- l. 518 --><p class='noindent'>       </p></dd></dl>
+<!-- l. 521 --><p class='indent'>   The main difference between existing auto-reproducibility systems, is not the models they’re using, but
+system prompts and scaffolding. Most use a multi-agent approach, where the task is decomposed sequentially,
+and specialized agents execute each task.
+</p><!-- l. 524 --><p class='noindent'>
+</p>
+   <h4 class='subsectionHead' id='benchmarks'><span class='titlemark'>4.3   </span> <a id='x1-100004.3'></a>Benchmarks</h4>
+<!-- l. 525 --><p class='noindent'>The field has not agreed on a common problem statement for automated reproducibility, and some authors who
+have contributed to the field had slightly different problems in mind. This makes it difficult to compare
+performance across systems. Due to the differing problem statements, most papers primarily (and sometimes
+exclusively) develop their own dataset and scoring system.
+</p><!-- l. 530 --><p class='indent' id='introduction'>   <a href='#classification-of-automatic-reproducibility-systems'>The same classification system</a>, based on Gundersen 2021[<a id='x1-10001'></a><a href='#cite.0@gundersen2021'>3</a>], can be used to classify benchmarks for
+automated reproducibility systems. The classification is decided by which classes of systems the benchmark can
+test.
+</p><!-- l. 534 --><p class='indent'>
+     </p><dl class='enumerate'><dt class='enumerate'>
+  1. </dt><dd class='enumerate'>
+     <!-- l. 534 --><p class='noindent'>Paper2CodeBench[<a id='x1-10003'></a><a href='#cite.0@paper2code'>21</a>, pages 6–8] (R1 <span class='cmsy-10'>→ </span>R2)
+     </p><!-- l. 535 --><p class='noindent'>       is the benchmark for Paper2Code[<a href='#cite.0@paper2code'>21</a>]. Reproducibility is not their main focus, but they run
+     a small evaluation on 10 papers with human judges, and find that their system reproduces the
+     papers 29.46% of the time.
+     </p><!-- l. 537 --><p class='noindent'>       It  consists  of  90  papers  from  ICLR,  ICML,  and  NeurIPS  2024,  filtered  to  have  code
+     repositories smaller than 70 000 tokens, and by an LLM ranking.
+     </p><!-- l. 538 --><p class='noindent'>       Evaluation is done with an LLM judge, both with and without the original repository as
+     reference, in addition to a human evaluation by the original paper’s authors.
+     </p></dd><dt class='enumerate'>
+  2. </dt><dd class='enumerate'>
+     <!-- l. 540 --><p class='noindent'>Paper2Repo[<a id='x1-10005'></a><a href='#cite.0@autop2c'>23</a>, pages 7–8] (R1 <span class='cmsy-10'>→ </span>R2)
+     </p><!-- l. 541 --><p class='noindent'>       is only used by <a href='#x1-90063'>AutoP2C</a>[<a href='#cite.0@autop2c'>23</a>]. It consists of 8 papers and covers training strategy optimisation,
+     node classification, model compression, parameter-efficient fine-tuning, network pruning, and image
+     classification. See <a href='#x1-90063'>AutoP2C</a>[<a href='#cite.0@autop2c'>23</a>] in the auto-reproducibility system, for input-output behaviour.
+     </p></dd><dt class='enumerate'>
+  3. </dt><dd class='enumerate'>
+     <!-- l. 546 --><p class='noindent'>SciReplicate-Bench[<a id='x1-10007'></a><a href='#cite.0@scireplicatebench'>8</a>]<a id='x1-100063'></a> (R1 <span class='cmsy-10'>→ </span>R2)
+     </p><!-- l. 547 --><p class='noindent'>       benchmarks paper-to-code agents on 100 tasks from 36 NLP papers.
+                                                                                      
+                                                                                      
+     </p></dd><dt class='enumerate'>
+  4. </dt><dd class='enumerate'>
+     <!-- l. 548 --><p class='noindent'>PaperBench[<a id='x1-10009'></a><a href='#cite.0@paperbench'>13</a>] (R1 <span class='cmsy-10'>→ </span>R4)
+     </p><!-- l. 549 --><p class='noindent'>       is a full implementation benchmark.
+     </p><!-- l. 550 --><p class='noindent'>       It consists of 20 papers from ICML[<a id='x1-10010'></a><a href='#cite.0@icml2024'>44</a>], across 12 different ICML topics.
+     </p></dd><dt class='enumerate'>
+  5. </dt><dd class='enumerate'>
+     <!-- l. 551 --><p class='noindent'>ReplicationBench[<a id='x1-10012'></a><a href='#cite.0@replicationbench'>45</a>] (R1 <span class='cmsy-10'>→ </span>R4)
+     </p><!-- l. 552 --><p class='noindent'>       aims to benchmark agents on the full implementation task, on 20 astrophysics papers. The
+     agents are graded on answers to questions that require various levels of implementation. The task’s
+     difficulty is measured on a logarithmic scale from 1 to 9, based on an estimate of how long a human
+     non-author domain expert would take to complete the task. 1 corresponds to a few minutes. 9
+     corresponds to several weeks.
+     </p></dd><dt class='enumerate'>
+  6. </dt><dd class='enumerate'>
+     <!-- l. 557 --><p class='noindent'>ReproduceBench[<a id='x1-10014'></a><a href='#cite.0@autoreproduce'>12</a>, pages 5–8] (R1 <span class='cmsy-10'>→ </span>R4)
+     </p><!-- l. 558 --><p class='noindent'>       Only used by <a href='#x1-902311'>AutoReproduce</a>[<a href='#cite.0@autoreproduce'>12</a>].
+     </p><!-- l. 559 --><p class='noindent'>       13  curated  papers  across  diverse  domains,  including  knowledge  distillation  and  Partial
+     differential equations.
+     </p><!-- l. 560 --><p class='noindent'>       Evaluates whether the generated code accurately reflects the paper and code by the authors,
+     using an LLM judge.
+     </p><!-- l. 561 --><p class='noindent'>       Also evaluates whether the generated code reproduces the original result, using the original
+     metric from the paper.
+     </p></dd><dt class='enumerate'>
+  7. </dt><dd class='enumerate'>
+     <!-- l. 562 --><p class='noindent'>AutoExperiment[<a id='x1-10016'></a><a href='#cite.0@autoexperiment'>10</a>]  (R1/R2  <span class='cmsy-10'>→ </span>R4)  is  a  benchmark  which  blurs  the  line  between  full
+     implementation and code repair/execution. This is an intentional feature, where the benchmark
+     operator  can  choose  a  continuously  varying  starting  point,  between  R1  and  R2.  The  authors
+     call their approach to accomplish this ”progressive code masking”. The benchmark software is
+     configured with a integer <span class='cmmi-10'>n</span>. It masks out <span class='cmmi-10'>n </span>functions from the dataset, which means removing a
+     function’s implementation. Setting <span class='cmmi-10'>n </span>to 0 corresponds to an (R2 <span class='cmsy-10'>→ </span>R4), since the code is passed
+     along to the agent unaltered. Setting <span class='cmmi-10'>n </span>to its max value corresponds to an (R1 <span class='cmsy-10'>→ </span>R4), since all of
+     the code is masked out. One could argue that the remaining function signatures (function name,
+     argument names, and return types) don’t match up with the requirement that no code is provided,
+     but I interpret R2 to mean that the original authors made a good faith attempt to share the code
+     used to produce the original results. A code repository consisting only of function signatures would
+     obviously not make one believe this. However, a single missing function body is an oversight that
+     can easily happen with bad version control.
+     </p></dd><dt class='enumerate'>
+  8. </dt><dd class='enumerate'>
+     <!-- l. 578 --><p class='noindent'>Super[<a id='x1-10018'></a><a href='#cite.0@super'>46</a>] (R2 <span class='cmsy-10'>→ </span>R4)
+     </p><!-- l. 579 --><p class='noindent'>       is a code repair/execution benchmark, that focuses on environment setup as its core challenge.
+     It contains 45 end to end problems, 152 sub-problems, and 604 automatically generated problems.
+     </p></dd><dt class='enumerate'>
+  9. </dt><dd class='enumerate'>
+     <!-- l. 581 --><p class='noindent'>CORE-Bench[<a id='x1-10020'></a><a href='#cite.0@corebench'>47</a>] (R2 <span class='cmsy-10'>→ </span>R4)
+     </p><!-- l. 582 --><p class='noindent'>       is testing agent’s abilities to run code from research papers, but sees its role primarily to be
+     testing abilities the authors suspect to be important for reproducibility testing, but benchmarking
+     these abilities on real research code. The benchmark has three difficulty levels: CORE-Bench-Easy,
+     CORE-Bench-Medium, and CORE-Bench-Hard. The easy task does not conform to the classification
+                                                                                      
+                                                                                      
+     scheme,  because  the  agent  only  has  to  answer  questions  about  the  pre-existing  code  output.
+     The hard task conforms well to the R2 <span class='cmsy-10'>→ </span>R4 class, if the question-answering is merely viewed
+     as the judgement mechanism for how well the agent executed the code. The medium task also
+     conforms to R2 <span class='cmsy-10'>→ </span>R4, but is easier, because the agent is handed a Dockerfile. I have not classified
+     CORE-Bench[<a href='#cite.0@corebench'>47</a>] as a reproducibility assessment benchmark<span class='footnote-mark'><a href='autoreproducelitreview2.html#fn1x0'><sup class='textsuperscript'>1</sup></a></span><a id='x1-10021f1'></a> ,
+     because none of the task questions I could see in the dataset[<a id='x1-10023'></a><a href='#cite.0@corebenchgithub'>48</a>] on github asked the agent to assess
+     whether any experiment was reproduced. The first task is close: ”Report the average AUC score
+     of Had using the CTGCN-C method on the UCI dataset.” This question leaves the assessment for
+     reproducibility to someone/something else.
+     </p></dd><dt class='enumerate'>
+ 10. </dt><dd class='enumerate'>
+     <!-- l. 598 --><p class='noindent'>EnvBench[<a id='x1-10025'></a><a href='#cite.0@envbench'>49</a>] (R2 <span class='cmsy-10'>→ </span>R4)
+     </p><!-- l. 599 --><p class='noindent'>       is a benchmark for code repair/execution agents. It only checks the agent’s capability to set
+     up a correct execution environment. It encompasses 994 code repositories, and uses only generic
+     static analysis tools to judge performance, which is what enables the size of the benchmark.
+     </p></dd><dt class='enumerate'>
+ 11. </dt><dd class='enumerate'>
+     <!-- l. 604 --><p class='noindent'>MMReview[<a id='x1-10027'></a><a href='#cite.0@mmreview'>50</a>] (IR1)
+     </p><!-- l. 605 --><p class='noindent'>       is a benchmark for automated peer review. Peer review is not a reproducibility assessment, but
+     it fits the input-output behaviour of IR1, since it is a judgement of paper quality. I’ve identified one
+     (of potentially many) techniques from the paper that are transferable to benchmarks for automated
+     reproducibility assessment. The paper uses adverserially constructed inputs, to test whether LLM
+     agents can overcome their sycophantic tendencies[<a id='x1-10028'></a><a href='#cite.0@liu2025'>51</a>]. This involves inserting fake strengths and
+     weaknesses into papers before giving it to the agent.
+     </p></dd><dt class='enumerate'>
+ 12. </dt><dd class='enumerate'>
+     <!-- l. 614 --><p class='noindent'>ReplicatorBench[<a id='x1-10030'></a><a href='#cite.0@replicatorbench'>39</a>]<a id='x1-1002912'></a> (IR1/IR2)
+     </p><!-- l. 615 --><p class='noindent'>       is one of a handful of reproducibility assessment benchmarks, that includes negative examples,
+     and by that I mean irreproducible claims. It is crucially important that an automatic assessment
+     system is able to confidently declare a paper irreproducible, when it is possible (and correct to
+     do so). Otherwise, irreproducible papers will be stuck in an in-between state, where it’s unclear
+     whether it is irreproducible, or if the agent is not capable enough to reproduce it. This problem
+     persists no matter how well the agent performs on benchmarks with only positive examples, such
+     as Artisan-Bench[<a id='x1-10031'></a><a href='#cite.0@artisan'>41</a>, pages 9–17], because out-of-distribution performance degradation is always
+     possible.
+     </p><!-- l. 626 --><p class='noindent'>ReplicatorBench doesn’t test whether a system can reproduce the same outcome as the original
+     study, with the same data. It aims to instead test whether the system can figure out if the paper’s
+     findings generalize to new equivalent experimental settings. The agent is handed the new data by
+     the benchmark, instead of having to produce it itself, because the benchmark is focused on social
+     science, which is not a purely computational field.
+     </p></dd><dt class='enumerate'>
+ 13. </dt><dd class='enumerate'>
+     <!-- l. 632 --><p class='noindent'>SocSciRepro-Bench[<a id='x1-10033'></a><a href='#cite.0@socscireprobench'>52</a>] (IR2)
+     </p><!-- l. 633 --><p class='noindent'>       has as its goal, to widen the coverage of benchmarks on social science. It does so by including
+     221 tasks from 54 papers. The dataset covers four disciplines, and has both confirmed reproducible
+     and irreproducible papers. The paper is under Review at Nature Machine Intelligence.
+     </p></dd><dt class='enumerate'>
+ 14. </dt><dd class='enumerate'>
+     <!-- l. 638 --><p class='noindent'>REPRO-Bench[<a id='x1-10035'></a><a href='#cite.0@reprobench'>9</a>]<a id='x1-1003414'></a> (OR2/AR2/IR2)
+                                                                                      
+                                                                                      
+     </p><!-- l. 639 --><p class='noindent'>       is a benchmark for automated reproducibility in social science. The agent is given:
+     </p>
+         <ul class='itemize1'>
+         <li class='itemize'>A paper in pdf format.
+         </li>
+         <li class='itemize'>The associated data, code and documentation.
+         </li>
+         <li class='itemize'>A set of major findings.</li></ul>
+     <!-- l. 646 --><p class='noindent'>The agent must output a single number between 1 and 4 (inclusive), which is the paper’s reproducibility
+     score. These are the definitions of what each score represents, as well as the corresponding reproducibility
+     levels from Gundersen 2021[<a id='x1-10036'></a><a href='#cite.0@gundersen2021'>3</a>]:
+         </p><dl class='enumerate'><dt class='enumerate'>
+       1: </dt><dd class='enumerate'>
+         <!-- l. 651 --><p class='noindent'> ”major findings are irreproducible.” (not reproducible)
+         </p></dd><dt class='enumerate'>
+       2: </dt><dd class='enumerate'>
+         <!-- l. 652 --><p class='noindent'>  ”there  are  minor  inconsistencies  and/or  errors  in  the  provided  code.  [...]  A  score  of  2
+         indicates identifiable inconsistencies in the code that do not alter the paper’s major findings.”
+         (Interpretation reproducible)
+         </p></dd><dt class='enumerate'>
+       3: </dt><dd class='enumerate'>
+         <!-- l. 654 --><p class='noindent'> ”there are minor issues at the display and reporting level, e.g., rounding errors.” (Analysis
+         reproducible)
+         </p></dd><dt class='enumerate'>
+       4: </dt><dd class='enumerate'>
+         <!-- l. 655 --><p class='noindent'> ”major findings are fully reproducible.” (Outcome reproducible)</p></dd></dl>
+     </dd><dt class='enumerate'>
+ 15. </dt><dd class='enumerate'>
+     <!-- l. 657 --><p class='noindent'>Artisan-Bench[<a id='x1-10038'></a><a href='#cite.0@artisan'>41</a>, pages 9–17] (OR2/OR4)
+     </p><!-- l. 658 --><p class='noindent'>       is only used by Artisan[<a href='#cite.0@artisan'>41</a>], and consists of 23 curated software engineering papers with available and
+     evaluated artifacts. The benchmark has examples in python, java, rust, scala, ocaml and
+     bash.</p></dd></dl>
+<!-- l. 664 --><p class='noindent'>
+</p>
+   <h3 class='sectionHead' id='conclusion'><span class='titlemark'>5   </span> <a id='x1-110005'></a>Conclusion</h3>
+<!-- l. 665 --><p class='noindent'>The literature for automatic reproducibility has, only recently, become extensive. However there are still gaps
+which should be filled. The plurality of the attention has gone to the paper to code problem, and much less
+attention has been given to fully automating reproducibility assessments (see  <a href='#figure.1'>Figure 0</a>). This is reasonable,
+given that writing code and, to a similar extent, successfully running code is the biggest obstacle with manual
+reproduction. It is good then, that code repair/execution and full implementation has received a lot of attention,
+and some full assessment systems exist for specialized research topics. However, I believe that fully automated
+and general computational reproducibility systems, that are as capable as current specialized systems, are
+within reach.
+                                                                                      
+                                                                                      
+</p><!-- l. 674 --><p class='noindent'>
+</p>
+   <h3 class='sectionHead' id='references'><a id='x1-12000'></a>References</h3>
+<!-- l. 674 --><p class='noindent'>
+     </p><dl class='thebibliography'><dt class='thebibliography' id='X0-trisovic2021'>
+ [1]  </dt><dd class='thebibliography' id='bib-1'>
+     <!-- l. 674 --><p class='noindent'><a id='cite.0@trisovic2021'></a>Ana  Trisovic  et  al.  “A  large-scale  study  on  research  code  quality  and  execution”.  In:  <span class='cmti-10'>CoRR</span>
+     abs/2103.12793 (Mar. 2021). arXiv:  <a href='https://arxiv.org/abs/2103.12793'>2103.12793</a>. <span class='cmcsc-10'><span class='small-caps'>url</span></span>: <a class='url' href='https://arxiv.org/abs/2103.12793'><span class='cmtt-10'>https://arxiv.org/abs/2103.12793</span></a>.
+     </p></dd><dt class='thebibliography' id='X0-raff2019'>
+ [2]  </dt><dd class='thebibliography' id='bib-2'>
+     <!-- l. 674 --><p class='noindent'><a id='cite.0@raff2019'></a>Edward Raff. <span class='cmti-10'>A Step Toward Quantifying Independently Reproducible Machine Learning Research</span>.
+     Sept. 2019. arXiv:  <a href='https://arxiv.org/abs/1909.06674'>1909.06674 <span class='cmtt-10'>[cs.LG]</span></a>. <span class='cmcsc-10'><span class='small-caps'>url</span></span>: <a class='url' href='https://arxiv.org/abs/1909.06674'><span class='cmtt-10'>https://arxiv.org/abs/1909.06674</span></a>.
+     </p></dd><dt class='thebibliography' id='X0-gundersen2021'>
+ [3]  </dt><dd class='thebibliography' id='bib-3'>
+     <!-- l. 674 --><p class='noindent'><a id='cite.0@gundersen2021'></a>Odd             Erik             Gundersen.             “The             fundamental             principles
+     of reproducibility”. In: <span class='cmti-10'>Philosophical Transactions of the Royal Society A: Mathematical, Physical
+     and Engineering Sciences </span>379.2197 (Mar. 2021). <span class='cmcsc-10'><span class='small-caps'>issn</span></span>: 1471-2962. <span class='cmcsc-10'><span class='small-caps'>doi</span></span>:   <a href='https://doi.org/10.1098/rsta.2020.0210'>10.1098/rsta.2020.0210</a>.
+     <span class='cmcsc-10'><span class='small-caps'>url</span></span>: <a class='url' href='http://dx.doi.org/10.1098/rsta.2020.0210'><span class='cmtt-10'>http://dx.doi.org/10.1098/rsta.2020.0210</span></a>.
+     </p></dd><dt class='thebibliography' id='X0-shah2026'>
+ [4]  </dt><dd class='thebibliography' id='bib-4'>
+     <!-- l. 674 --><p class='noindent'><a id='cite.0@shah2026'></a>Syed Mehtab Hussain Shah, Frank Hopfgartner, and Arnim Bleier. “Automating Computational
+     Reproducibility in Social Science: Comparing Prompt-Based and Agent-Based Approaches”. In:
+     <span class='cmti-10'>Companion Proceedings of the ACM Web Conference 2026</span>. ACM, May 2026, pp. 989–998. <span class='cmcsc-10'><span class='small-caps'>doi</span></span>:
+     <a href='https://doi.org/10.1145/3774905.3795485'>10.1145/3774905.3795485</a>. <span class='cmcsc-10'><span class='small-caps'>url</span></span>: <a class='url' href='http://dx.doi.org/10.1145/3774905.3795485'><span class='cmtt-10'>http://dx.doi.org/10.1145/3774905.3795485</span></a>.
+     </p></dd><dt class='thebibliography' id='X0-jin2026'>
+ [5]  </dt><dd class='thebibliography' id='bib-5'>
+     <!-- l. 674 --><p class='noindent'><a id='cite.0@jin2026'></a>Bihui  Jin,  Kaiyuan  Wang,  and  Pengyu  Nie.  <span class='cmti-10'>Automated  Modernization  of  Machine  Learning
+     Engineering   Notebooks   for   Reproducibility</span>.   2026.   arXiv:      <a href='https://arxiv.org/abs/2602.07195'>2602.07195   <span class='cmtt-10'>[cs.SE]</span></a>.   <span class='cmcsc-10'><span class='small-caps'>url</span></span>:   
+<a class='url' href='https://arxiv.org/abs/2602.07195'><span class='cmtt-10'>https://arxiv.org/abs/2602.07195</span></a>.
+     </p></dd><dt class='thebibliography' id='X0-comprep'>
+ [6]  </dt><dd class='thebibliography' id='bib-6'>
+     <!-- l. 674 --><p class='noindent'><a id='cite.0@comprep'></a>Lázaro Costa, Susana Barbosa, and Jácome Cunha. “CompRep: A Dataset For Computational
+     Reproducibility”.                In:                <span class='cmti-10'>Proceedings              of              the              3rd
+     ACM Conference on Reproducibility and Replicability</span>. ACM REP ’25. Association for Computing
+     Machinery, Oct. 2025, pp. 168–178. <span class='cmcsc-10'><span class='small-caps'>isbn</span></span>: 9798400719585. <span class='cmcsc-10'><span class='small-caps'>doi</span></span>:  <a href='https://doi.org/10.1145/3736731.3746160'>10.1145/3736731.3746160</a>. <span class='cmcsc-10'><span class='small-caps'>url</span></span>: 
+<a class='url' href='https://doi.org/10.1145/3736731.3746160'><span class='cmtt-10'>https://doi.org/10.1145/3736731.3746160</span></a>.
+     </p></dd><dt class='thebibliography' id='X0-wei2025'>
+ [7]  </dt><dd class='thebibliography' id='bib-7'>
+     <!-- l. 674 --><p class='noindent'><a id='cite.0@wei2025'></a>Jiaqi Wei et al. <span class='cmti-10'>From AI for Science to Agentic Science: A Survey on Autonomous Scientific
+     Discovery</span>. Aug. 2025. arXiv:  <a href='https://arxiv.org/abs/2508.14111'>2508.14111 <span class='cmtt-10'>[cs.LG]</span></a>. <span class='cmcsc-10'><span class='small-caps'>url</span></span>: <a class='url' href='https://arxiv.org/abs/2508.14111'><span class='cmtt-10'>https://arxiv.org/abs/2508.14111</span></a>.
+     </p></dd><dt class='thebibliography' id='X0-scireplicatebench'>
+ [8]  </dt><dd class='thebibliography' id='bib-8'>
+     <!-- l. 674 --><p class='noindent'><a id='cite.0@scireplicatebench'></a>Yanzheng  Xiang  et  al.  <span class='cmti-10'>SciReplicate-Bench:  Benchmarking  LLMs  in  Agent-driven  Algorithmic
+     Reproduction   from   Research   Papers</span>.   Aug.   2025.   arXiv:      <a href='https://arxiv.org/abs/2504.00255'>2504.00255   <span class='cmtt-10'>[cs.CL]</span></a>.   <span class='cmcsc-10'><span class='small-caps'>url</span></span>:   
+<a class='url' href='https://arxiv.org/abs/2504.00255'><span class='cmtt-10'>https://arxiv.org/abs/2504.00255</span></a>.
+     </p></dd><dt class='thebibliography' id='X0-reprobench'>
+ [9]  </dt><dd class='thebibliography' id='bib-9'>
+     <!-- l. 674 --><p class='noindent'><a id='cite.0@reprobench'></a>Chuxuan            Hu            et            al.            <span class='cmti-10'>REPRO-Bench:           Can          Agentic
+     AI Systems Assess the Reproducibility of Social Science Research? </span>July 2025. arXiv:  <a href='https://arxiv.org/abs/2507.18901'>2507.18901
+     <span class='cmtt-10'>[cs.CL]</span></a>. <span class='cmcsc-10'><span class='small-caps'>url</span></span>: <a class='url' href='https://arxiv.org/abs/2507.18901'><span class='cmtt-10'>https://arxiv.org/abs/2507.18901</span></a>.
+     </p></dd><dt class='thebibliography' id='X0-autoexperiment'>
+[10]  </dt><dd class='thebibliography' id='bib-10'>
+     <!-- l. 674 --><p class='noindent'><a id='cite.0@autoexperiment'></a>Gyeongwon   James   Kim   et   al.   <span class='cmti-10'>From  Reproduction  to  Replication:  Evaluating  Research
+     Agents  with  Progressive  Code  Masking</span>.  June  2025.  arXiv:     <a href='https://arxiv.org/abs/2506.19724'>2506.19724  <span class='cmtt-10'>[cs.AI]</span></a>.  <span class='cmcsc-10'><span class='small-caps'>url</span></span>:  
+<a class='url' href='https://arxiv.org/abs/2506.19724'><span class='cmtt-10'>https://arxiv.org/abs/2506.19724</span></a>.
+                                                                                      
+                                                                                      
+     </p></dd><dt class='thebibliography' id='X0-brandmaier2025'>
+[11]  </dt><dd class='thebibliography' id='bib-11'>
+     <!-- l. 674 --><p class='noindent'><a id='cite.0@brandmaier2025'></a>Andreas Brandmaier and Aaron Peikert. “Automated Reproducibility Testing in R Markdown”.
+     In: <span class='cmti-10'>Collabra: Psychology </span>11 (June 2025). <span class='cmcsc-10'><span class='small-caps'>doi</span></span>:  <a href='https://doi.org/10.1525/collabra.138638'>10.1525/collabra.138638</a>.
+     </p></dd><dt class='thebibliography' id='X0-autoreproduce'>
+[12]  </dt><dd class='thebibliography' id='bib-12'>
+     <!-- l. 674 --><p class='noindent'><a id='cite.0@autoreproduce'></a>Xuanle Zhao et al. <span class='cmti-10'>AutoReproduce: Automatic AI Experiment Reproduction with Paper Lineage</span>.
+     May 2025. arXiv:  <a href='https://arxiv.org/abs/2505.20662'>2505.20662 <span class='cmtt-10'>[cs.AI]</span></a>. <span class='cmcsc-10'><span class='small-caps'>url</span></span>: <a class='url' href='https://arxiv.org/abs/2505.20662'><span class='cmtt-10'>https://arxiv.org/abs/2505.20662</span></a>.
+     </p></dd><dt class='thebibliography' id='X0-paperbench'>
+[13]  </dt><dd class='thebibliography' id='bib-13'>
+     <!-- l. 674 --><p class='noindent'><a id='cite.0@paperbench'></a>Giulio Starace et al. <span class='cmti-10'>PaperBench: Evaluating AI’s Ability to Replicate AI Research</span>. Apr. 2025.
+     arXiv:  <a href='https://arxiv.org/abs/2504.01848'>2504.01848 <span class='cmtt-10'>[cs.AI]</span></a>. <span class='cmcsc-10'><span class='small-caps'>url</span></span>: <a class='url' href='https://arxiv.org/abs/2504.01848'><span class='cmtt-10'>https://arxiv.org/abs/2504.01848</span></a>.
+     </p></dd><dt class='thebibliography' id='X0-bensch2025'>
+[14]  </dt><dd class='thebibliography' id='bib-14'>
+     <!-- l. 674 --><p class='noindent'><a id='cite.0@bensch2025'></a>Gunther Bensch and Belay Moges. “Comparing Human-Only, AI-Assisted, and AI-Led Teams on
+     Assessing Research Reproducibility in Quantitative Social Science”. In: (Jan. 2025).
+     </p></dd><dt class='thebibliography' id='X0-schoch2023'>
+[15]  </dt><dd class='thebibliography' id='bib-15'>
+     <!-- l. 674 --><p class='noindent'><a id='cite.0@schoch2023'></a>David Schoch et al. <span class='cmti-10'>Computational Reproducibility in Computational Social Science</span>. July 2023.
+     arXiv:  <a href='https://arxiv.org/abs/2307.01918'>2307.01918 <span class='cmtt-10'>[cs.CY]</span></a>. <span class='cmcsc-10'><span class='small-caps'>url</span></span>: <a class='url' href='https://arxiv.org/abs/2307.01918'><span class='cmtt-10'>https://arxiv.org/abs/2307.01918</span></a>.
+     </p></dd><dt class='thebibliography' id='X0-reproscreener'>
+[16]  </dt><dd class='thebibliography' id='bib-16'>
+     <!-- l. 674 --><p class='noindent'><a id='cite.0@reproscreener'></a>Adhithya  Bhaskar  and  Victoria  Stodden.  “Reproscreener:  Leveraging  LLMs  for  Assessing
+     Computational  Reproducibility  of  Machine  Learning  Pipelines”.  In:  <span class='cmti-10'>Proceedings  of  the  2nd
+     ACM  Conference  on  Reproducibility  and  Replicability</span>.   ACM   REP   ’24.   Rennes,   France:
+     Association  for  Computing  Machinery,  July  2024,  pp. 101–109.  <span class='cmcsc-10'><span class='small-caps'>isbn</span></span>:  9798400705304.  <span class='cmcsc-10'><span class='small-caps'>doi</span></span>:
+     <a href='https://doi.org/10.1145/3641525.3663629'>10.1145/3641525.3663629</a>. <span class='cmcsc-10'><span class='small-caps'>url</span></span>: <a class='url' href='https://doi.org/10.1145/3641525.3663629'><span class='cmtt-10'>https://doi.org/10.1145/3641525.3663629</span></a>.
+     </p></dd><dt class='thebibliography' id='X0-chen2024'>
+[17]  </dt><dd class='thebibliography' id='bib-17'>
+     <!-- l. 674 --><p class='noindent'><a id='cite.0@chen2024'></a>Guangyao Chen et al. <span class='cmti-10'>AutoAgents: A Framework for Automatic Agent Generation</span>. Sept. 2024.
+     arXiv:  <a href='https://arxiv.org/abs/2309.17288'>2309.17288 <span class='cmtt-10'>[cs.AI]</span></a>. <span class='cmcsc-10'><span class='small-caps'>url</span></span>: <a class='url' href='https://arxiv.org/abs/2309.17288'><span class='cmtt-10'>https://arxiv.org/abs/2309.17288</span></a>.
+     </p></dd><dt class='thebibliography' id='X0-manning2024'>
+[18]  </dt><dd class='thebibliography' id='bib-18'>
+     <!-- l. 674 --><p class='noindent'><a id='cite.0@manning2024'></a>Benjamin   S.   Manning,   Kehang   Zhu,   and   John   J.   Horton.   <span class='cmti-10'>Automated  Social  Science:
+     Language  Models  as  Scientist  and  Subjects</span>.  Apr.  2024.  arXiv:   <a href='https://arxiv.org/abs/2404.11794'>2404.11794  <span class='cmtt-10'>[econ.GN]</span></a>.  <span class='cmcsc-10'><span class='small-caps'>url</span></span>:  
+<a class='url' href='https://arxiv.org/abs/2404.11794'><span class='cmtt-10'>https://arxiv.org/abs/2404.11794</span></a>.
+     </p></dd><dt class='thebibliography' id='X0-korbmacher2023'>
+[19]  </dt><dd class='thebibliography' id='bib-19'>
+     <!-- l. 674 --><p class='noindent'><a id='cite.0@korbmacher2023'></a>Max Korbmacher et al. “The replication crisis has led to positive structural, procedural, and
+     community changes”. In: <span class='cmti-10'>Communications Psychology </span>1.1 (July 2023), p. 3. <span class='cmcsc-10'><span class='small-caps'>issn</span></span>: 2731-9121. <span class='cmcsc-10'><span class='small-caps'>doi</span></span>:
+     <a href='https://doi.org/10.1038/s44271-023-00003-2'>10.1038/s44271-023-00003-2</a>. <span class='cmcsc-10'><span class='small-caps'>url</span></span>: <a class='url' href='https://doi.org/10.1038/s44271-023-00003-2'><span class='cmtt-10'>https://doi.org/10.1038/s44271-023-00003-2</span></a>.
+     </p></dd><dt class='thebibliography' id='X0-googlescholar'>
+[20]  </dt><dd class='thebibliography' id='bib-20'>
+     <!-- l. 674 --><p class='noindent'><a id='cite.0@googlescholar'></a><span class='cmti-10'>Google Scholar</span>. <span class='cmcsc-10'><span class='small-caps'>url</span></span>: <a class='url' href='https://scholar.google.com'><span class='cmtt-10'>https://scholar.google.com</span></a> (visited on 06/08/2026).
+     </p></dd><dt class='thebibliography' id='X0-paper2code'>
+[21]  </dt><dd class='thebibliography' id='bib-21'>
+     <!-- l. 674 --><p class='noindent'><a id='cite.0@paper2code'></a>Minju Seo et al. <span class='cmti-10'>Paper2Code: Automating Code Generation from Scientific Papers in Machine
+     Learning</span>. Apr. 2026. arXiv:  <a href='https://arxiv.org/abs/2504.17192'>2504.17192 <span class='cmtt-10'>[cs.CL]</span></a>. <span class='cmcsc-10'><span class='small-caps'>url</span></span>: <a class='url' href='https://arxiv.org/abs/2504.17192'><span class='cmtt-10'>https://arxiv.org/abs/2504.17192</span></a>.
+     </p></dd><dt class='thebibliography' id='X0-lin2025'>
+[22]  </dt><dd class='thebibliography' id='bib-22'>
+     <!-- l. 674 --><p class='noindent'><a id='cite.0@lin2025'></a>Zijie Lin et al. <span class='cmti-10'>Enhancing Automated Paper Reproduction via Prompt-Free Collaborative Agents</span>.
+     Dec. 2025. arXiv:  <a href='https://arxiv.org/abs/2512.02812'>2512.02812 <span class='cmtt-10'>[cs.AI]</span></a>. <span class='cmcsc-10'><span class='small-caps'>url</span></span>: <a class='url' href='https://arxiv.org/abs/2512.02812'><span class='cmtt-10'>https://arxiv.org/abs/2512.02812</span></a>.
+     </p></dd><dt class='thebibliography' id='X0-autop2c'>
+[23]  </dt><dd class='thebibliography' id='bib-23'>
+                                                                                      
+                                                                                      
+     <!-- l. 674 --><p class='noindent'><a id='cite.0@autop2c'></a>Zijie  Lin  et  al.  <span class='cmti-10'>AutoP2C:  An  LLM-Based  Agent  Framework  for  Code  Repository  Generation
+     from Multimodal Content in Academic Papers</span>. Apr. 2025. arXiv:   <a href='https://arxiv.org/abs/2504.20115'>2504.20115 <span class='cmtt-10'>[cs.SE]</span></a>. <span class='cmcsc-10'><span class='small-caps'>url</span></span>: 
+<a class='url' href='https://arxiv.org/abs/2504.20115'><span class='cmtt-10'>https://arxiv.org/abs/2504.20115</span></a>.
+     </p></dd><dt class='thebibliography' id='X0-liang2024'>
+[24]  </dt><dd class='thebibliography' id='bib-24'>
+     <!-- l. 674 --><p class='noindent'><a id='cite.0@liang2024'></a>Jenny T. Liang et al. <span class='cmti-10'>Can GPT-4 Replicate Empirical Software Engineering Research? </span>Oct. 2024.
+     arXiv:  <a href='https://arxiv.org/abs/2310.01727'>2310.01727 <span class='cmtt-10'>[cs.SE]</span></a>. <span class='cmcsc-10'><span class='small-caps'>url</span></span>: <a class='url' href='https://arxiv.org/abs/2310.01727'><span class='cmtt-10'>https://arxiv.org/abs/2310.01727</span></a>.
+     </p></dd><dt class='thebibliography' id='X0-repllm'>
+[25]  </dt><dd class='thebibliography' id='bib-25'>
+     <!-- l. 674 --><p class='noindent'><a id='cite.0@repllm'></a>Yining Jiang et al. <span class='cmti-10'>Leveraging Large Language Models for Automated Reproduction of Networking
+     Research     Results</span>.      Sept.      2025.      arXiv:            <a href='https://arxiv.org/abs/2509.21074'>2509.21074      <span class='cmtt-10'>[cs.NI]</span></a>.      <span class='cmcsc-10'><span class='small-caps'>url</span></span>:      
+<a class='url' href='https://arxiv.org/abs/2509.21074'><span class='cmtt-10'>https://arxiv.org/abs/2509.21074</span></a>.
+     </p></dd><dt class='thebibliography' id='X0-deepreproducer'>
+[26]  </dt><dd class='thebibliography' id='bib-26'>
+     <!-- l. 674 --><p class='noindent'><a id='cite.0@deepreproducer'></a>Pengcheng  Chen  et  al.  “Deep-Reproducer:  From  Paper  Understanding  to  Code  Generation”.
+     In:   <span class='cmti-10'>NeurIPS  2025  Fourth  Workshop  on  Deep  Learning  for  Code</span>.   Sept.   2025.   <span class='cmcsc-10'><span class='small-caps'>url</span></span>:   
+<a class='url' href='https://openreview.net/forum?id=zw2DpSxnXn'><span class='cmtt-10'>https://openreview.net/forum?id=zw2DpSxnXn</span></a>.
+     </p></dd><dt class='thebibliography' id='X0-zhou2025'>
+[27]  </dt><dd class='thebibliography' id='bib-27'>
+     <!-- l. 674 --><p class='noindent'><a id='cite.0@zhou2025'></a>Mingyang           Zhou           et           al.           <span class='cmti-10'>RepRo:         Reflective         Paper-to-Code
+     Reproduction Enabled by Fine-Grained Verification</span>. Aug. 2025. arXiv:  <a href='https://arxiv.org/abs/2508.16671'>2508.16671 <span class='cmtt-10'>[cs.SE]</span></a>. <span class='cmcsc-10'><span class='small-caps'>url</span></span>:
+     <a class='url' href='https://arxiv.org/abs/2508.16671'><span class='cmtt-10'>https://arxiv.org/abs/2508.16671</span></a>.
+     </p></dd><dt class='thebibliography' id='X0-nerfify'>
+[28]  </dt><dd class='thebibliography' id='bib-28'>
+     <!-- l. 674 --><p class='noindent'><a id='cite.0@nerfify'></a>Seemandhar Jain et al. <span class='cmti-10'>NERFIFY: A Multi-Agent Framework for Turning NeRF Papers into Code</span>.
+     Feb. 2026. arXiv:  <a href='https://arxiv.org/abs/2603.00805'>2603.00805 <span class='cmtt-10'>[cs.CV]</span></a>. <span class='cmcsc-10'><span class='small-caps'>url</span></span>: <a class='url' href='https://arxiv.org/abs/2603.00805'><span class='cmtt-10'>https://arxiv.org/abs/2603.00805</span></a>.
+     </p></dd><dt class='thebibliography' id='X0-li2026'>
+[29]  </dt><dd class='thebibliography' id='bib-29'>
+     <!-- l. 674 --><p class='noindent'><a id='cite.0@li2026'></a>Lehui       Li       et       al.       <span class='cmti-10'>What      Papers      Don’t      Tell      You:       Recovering
+     Tacit Knowledge for Automated Paper Reproduction</span>. Mar. 2026. arXiv:  <a href='https://arxiv.org/abs/2603.01801'>2603.01801 <span class='cmtt-10'>[cs.AI]</span></a>. <span class='cmcsc-10'><span class='small-caps'>url</span></span>:
+     <a class='url' href='https://arxiv.org/abs/2603.01801'><span class='cmtt-10'>https://arxiv.org/abs/2603.01801</span></a>.
+     </p></dd><dt class='thebibliography' id='X0-paperrepro'>
+[30]  </dt><dd class='thebibliography' id='bib-30'>
+     <!-- l. 674 --><p class='noindent'><a id='cite.0@paperrepro'></a>Linhao Zhang et al. <span class='cmti-10'>PaperRepro: Automated Computational Reproducibility Assessment for Social
+     Science      Papers</span>.      Feb.      2026.      arXiv:             <a href='https://arxiv.org/abs/2603.00058'>2603.00058      <span class='cmtt-10'>[cs.CY]</span></a>.      <span class='cmcsc-10'><span class='small-caps'>url</span></span>:      
+<a class='url' href='https://arxiv.org/abs/2603.00058'><span class='cmtt-10'>https://arxiv.org/abs/2603.00058</span></a>.
+     </p></dd><dt class='thebibliography' id='X0-theiler2026'>
+[31]  </dt><dd class='thebibliography' id='bib-31'>
+     <!-- l. 674 --><p class='noindent'><a id='cite.0@theiler2026'></a>Raffael  Theiler  et  al.  <span class='cmti-10'>From  paper  to  benchmark:  agentic,  framework-based  reproduction  of
+     under-specified methods in machine health intelligence</span>. May 2026. arXiv:   <a href='https://arxiv.org/abs/2605.28371'>2605.28371 <span class='cmtt-10'>[cs.AI]</span></a>.
+     <span class='cmcsc-10'><span class='small-caps'>url</span></span>: <a class='url' href='https://arxiv.org/abs/2605.28371'><span class='cmtt-10'>https://arxiv.org/abs/2605.28371</span></a>.
+     </p></dd><dt class='thebibliography' id='X0-bibal2025'>
+[32]  </dt><dd class='thebibliography' id='bib-32'>
+     <!-- l. 674 --><p class='noindent'><a id='cite.0@bibal2025'></a>Adrien Bibal et al. <span class='cmti-10'>AI Copilots for Reproducibility in Science: A Case Study</span>. June 2025. arXiv:
+     <a href='https://arxiv.org/abs/2506.20130'>2506.20130 <span class='cmtt-10'>[cs.AI]</span></a>. <span class='cmcsc-10'><span class='small-caps'>url</span></span>: <a class='url' href='https://arxiv.org/abs/2506.20130'><span class='cmtt-10'>https://arxiv.org/abs/2506.20130</span></a>.
+     </p></dd><dt class='thebibliography' id='X0-researchcodeagent'>
+[33]  </dt><dd class='thebibliography' id='bib-33'>
+     <!-- l. 674 --><p class='noindent'><a id='cite.0@researchcodeagent'></a>Shubham  Gandhi  et  al.  <span class='cmti-10'>ResearchCodeAgent:  An  LLM  Multi-Agent  System  for  Automated
+     Codification  of  Research  Methodologies</span>.  Apr.  2025.  arXiv:     <a href='https://arxiv.org/abs/2504.20117'>2504.20117  <span class='cmtt-10'>[cs.SE]</span></a>.  <span class='cmcsc-10'><span class='small-caps'>url</span></span>:  
+<a class='url' href='https://arxiv.org/abs/2504.20117'><span class='cmtt-10'>https://arxiv.org/abs/2504.20117</span></a>.
+     </p></dd><dt class='thebibliography' id='X0-jailbreakfoundry'>
+[34]  </dt><dd class='thebibliography' id='bib-34'>
+     <!-- l. 674 --><p class='noindent'><a id='cite.0@jailbreakfoundry'></a>Zhicheng          Fang          et          al.          <span class='cmti-10'>Jailbreak        Foundry:        From        Papers
+     to Runnable Attacks for Reproducible Benchmarking</span>. Feb. 2026. arXiv:  <a href='https://arxiv.org/abs/2602.24009'>2602.24009 <span class='cmtt-10'>[cs.CR]</span></a>. <span class='cmcsc-10'><span class='small-caps'>url</span></span>:
+     <a class='url' href='https://arxiv.org/abs/2602.24009'><span class='cmtt-10'>https://arxiv.org/abs/2602.24009</span></a>.
+                                                                                      
+                                                                                      
+     </p></dd><dt class='thebibliography' id='X0-opencode'>
+[35]  </dt><dd class='thebibliography' id='bib-35'>
+     <!-- l. 674 --><p class='noindent'><a id='cite.0@opencode'></a><span class='cmti-10'>opencode: The open source AI coding agent</span>. <span class='cmcsc-10'><span class='small-caps'>url</span></span>: <a class='url' href='https://opencode.ai'><span class='cmtt-10'>https://opencode.ai</span></a> (visited on 06/08/2026).
+     </p></dd><dt class='thebibliography' id='X0-claudecode'>
+[36]  </dt><dd class='thebibliography' id='bib-36'>
+     <!-- l. 674 --><p class='noindent'><a id='cite.0@claudecode'></a><span class='cmti-10'>Claude Code</span>. <span class='cmcsc-10'><span class='small-caps'>url</span></span>: <a class='url' href='https://code.claude.com'><span class='cmtt-10'>https://code.claude.com</span></a> (visited on 06/08/2026).
+     </p></dd><dt class='thebibliography' id='X0-saju2025'>
+[37]  </dt><dd class='thebibliography' id='bib-37'>
+     <!-- l. 674 --><p class='noindent'><a id='cite.0@saju2025'></a>Lorraine Saju et al. <span class='cmti-10'>Computational Reproducibility of R Code Supplements on OSF</span>. US: ICWSM,
+     June 2025. <span class='cmcsc-10'><span class='small-caps'>doi</span></span>:  <a href='https://doi.org/10.36190/2025.49'>10.36190/2025.49</a>. <span class='cmcsc-10'><span class='small-caps'>url</span></span>: <a class='url' href='https://doi.org/10.36190/2025.49'><span class='cmtt-10'>https://doi.org/10.36190/2025.49</span></a>.
+     </p></dd><dt class='thebibliography' id='X0-lockforge'>
+[38]  </dt><dd class='thebibliography' id='bib-38'>
+     <!-- l. 674 --><p class='noindent'><a id='cite.0@lockforge'></a>Akashdeep                                  Saha                                  et                                  al.
+     <span class='cmti-10'>LockForge: Automating Paper-to-Code for Logic Locking with Multi-Agent Reasoning LLMs</span>. Nov.
+     2025. arXiv:  <a href='https://arxiv.org/abs/2511.18531'>2511.18531 <span class='cmtt-10'>[cs.CR]</span></a>. <span class='cmcsc-10'><span class='small-caps'>url</span></span>: <a class='url' href='https://arxiv.org/abs/2511.18531'><span class='cmtt-10'>https://arxiv.org/abs/2511.18531</span></a>.
+     </p></dd><dt class='thebibliography' id='X0-replicatorbench'>
+[39]  </dt><dd class='thebibliography' id='bib-39'>
+     <!-- l. 674 --><p class='noindent'><a id='cite.0@replicatorbench'></a>Bang       Nguyen       et       al.       <span class='cmti-10'>ReplicatorBench:      Benchmarking      LLM      Agents
+     for Replicability in Social and Behavioral Sciences</span>. Feb. 2026. arXiv:  <a href='https://arxiv.org/abs/2602.11354'>2602.11354 <span class='cmtt-10'>[cs.AI]</span></a>. <span class='cmcsc-10'><span class='small-caps'>url</span></span>: 
+<a class='url' href='https://arxiv.org/abs/2602.11354'><span class='cmtt-10'>https://arxiv.org/abs/2602.11354</span></a>.
+     </p></dd><dt class='thebibliography' id='X0-twist2026'>
+[40]  </dt><dd class='thebibliography' id='bib-40'>
+     <!-- l. 674 --><p class='noindent'><a id='cite.0@twist2026'></a>Lukas Twist et al. <span class='cmti-10'>A Study of LLMs’ Preferences for Libraries and Programming Languages</span>. Mar.
+     2026. arXiv:  <a href='https://arxiv.org/abs/2503.17181'>2503.17181 <span class='cmtt-10'>[cs.SE]</span></a>. <span class='cmcsc-10'><span class='small-caps'>url</span></span>: <a class='url' href='https://arxiv.org/abs/2503.17181'><span class='cmtt-10'>https://arxiv.org/abs/2503.17181</span></a>.
+     </p></dd><dt class='thebibliography' id='X0-artisan'>
+[41]  </dt><dd class='thebibliography' id='bib-41'>
+     <!-- l. 674 --><p class='noindent'><a id='cite.0@artisan'></a>Doehyun  Baek  and  Michael  Pradel.  <span class='cmti-10'>Artisan:  Agentic  Artifact  Evaluation</span>.  Feb.  2026.  arXiv:
+     <a href='https://arxiv.org/abs/2602.10046'>2602.10046 <span class='cmtt-10'>[cs.SE]</span></a>. <span class='cmcsc-10'><span class='small-caps'>url</span></span>: <a class='url' href='https://arxiv.org/abs/2602.10046'><span class='cmtt-10'>https://arxiv.org/abs/2602.10046</span></a>.
+     </p></dd><dt class='thebibliography' id='X0-heye2025'>
+[42]  </dt><dd class='thebibliography' id='bib-42'>
+     <!-- l. 674 --><p class='noindent'><a id='cite.0@heye2025'></a>David Heye et al. “Supporting Artifact Evaluation with LLMs: A Study with Published Security
+     Research        Papers”.        In:        <span class='cmti-10'>2025       IEEE       International       Conference       on
+     Big Data (BigData)</span>. IEEE, Dec. 2025, pp. 5077–5085. <span class='cmcsc-10'><span class='small-caps'>doi</span></span>:  <a href='https://doi.org/10.1109/bigdata66926.2025.11401815'>10.1109/bigdata66926.2025.11401815</a>.
+     <span class='cmcsc-10'><span class='small-caps'>url</span></span>: <a class='url' href='http://dx.doi.org/10.1109/BigData66926.2025.11401815'><span class='cmtt-10'>http://dx.doi.org/10.1109/BigData66926.2025.11401815</span></a>.
+     </p></dd><dt class='thebibliography' id='X0-yin2022'>
+[43]  </dt><dd class='thebibliography' id='bib-43'>
+     <!-- l. 674 --><p class='noindent'><a id='cite.0@yin2022'></a>Pengcheng Yin et al. <span class='cmti-10'>Natural Language to Code Generation in Interactive Data Science Notebooks</span>.
+     Dec. 2022. arXiv:  <a href='https://arxiv.org/abs/2212.09248'>2212.09248 <span class='cmtt-10'>[cs.CL]</span></a>. <span class='cmcsc-10'><span class='small-caps'>url</span></span>: <a class='url' href='https://arxiv.org/abs/2212.09248'><span class='cmtt-10'>https://arxiv.org/abs/2212.09248</span></a>.
+     </p></dd><dt class='thebibliography' id='X0-icml2024'>
+[44]  </dt><dd class='thebibliography' id='bib-44'>
+     <!-- l. 674 --><p class='noindent'><a id='cite.0@icml2024'></a><span class='cmti-10'>ICML 2024</span>. <span class='cmcsc-10'><span class='small-caps'>url</span></span>: <a class='url' href='https://icml.cc/Conferences/2024'><span class='cmtt-10'>https://icml.cc/Conferences/2024</span></a> (visited on 06/09/2026).
+     </p></dd><dt class='thebibliography' id='X0-replicationbench'>
+[45]  </dt><dd class='thebibliography' id='bib-45'>
+     <!-- l. 674 --><p class='noindent'><a id='cite.0@replicationbench'></a>Christine Ye et al. <span class='cmti-10'>ReplicationBench: Can AI Agents Replicate Astrophysics Research Papers? </span>Oct.
+     2025. arXiv:  <a href='https://arxiv.org/abs/2510.24591'>2510.24591 <span class='cmtt-10'>[cs.CL]</span></a>. <span class='cmcsc-10'><span class='small-caps'>url</span></span>: <a class='url' href='https://arxiv.org/abs/2510.24591'><span class='cmtt-10'>https://arxiv.org/abs/2510.24591</span></a>.
+     </p></dd><dt class='thebibliography' id='X0-super'>
+[46]  </dt><dd class='thebibliography' id='bib-46'>
+     <!-- l. 674 --><p class='noindent'><a id='cite.0@super'></a>Ben                                     Bogin                                     et                                     al.
+     <span class='cmti-10'>SUPER: Evaluating Agents on Setting Up and Executing Tasks from Research Repositories</span>. Sept.
+     2024. arXiv:  <a href='https://arxiv.org/abs/2409.07440'>2409.07440 <span class='cmtt-10'>[cs.AI]</span></a>. <span class='cmcsc-10'><span class='small-caps'>url</span></span>: <a class='url' href='https://arxiv.org/abs/2409.07440'><span class='cmtt-10'>https://arxiv.org/abs/2409.07440</span></a>.
+     </p></dd><dt class='thebibliography' id='X0-corebench'>
+[47]  </dt><dd class='thebibliography' id='bib-47'>
+     <!-- l. 674 --><p class='noindent'><a id='cite.0@corebench'></a>Zachary S. Siegel et al. <span class='cmti-10'>CORE-Bench: Fostering the Credibility of Published Research Through a
+     Computational Reproducibility Agent Benchmark</span>. Sept. 2024. arXiv:  <a href='https://arxiv.org/abs/2409.11363'>2409.11363 <span class='cmtt-10'>[cs.CL]</span></a>. <span class='cmcsc-10'><span class='small-caps'>url</span></span>: 
+<a class='url' href='https://arxiv.org/abs/2409.11363'><span class='cmtt-10'>https://arxiv.org/abs/2409.11363</span></a>.
+                                                                                      
+                                                                                      
+     </p></dd><dt class='thebibliography' id='X0-corebenchgithub'>
+[48]  </dt><dd class='thebibliography' id='bib-48'>
+     <!-- l. 674 --><p class='noindent'><a id='cite.0@corebenchgithub'></a><span class='cmti-10'>CORE-Bench                            github</span>.                                 <span class='cmcsc-10'><span class='small-caps'>url</span></span>:                                 
+<a class='url' href='https://github.com/siegelz/core-bench/blob/main/benchmark/dataset/core_train.json'><span class='cmtt-10'>https://github.com/siegelz/core-bench/blob/main/benchmark/dataset/core_train.json</span></a>
+     (visited on 06/09/2026).
+     </p></dd><dt class='thebibliography' id='X0-envbench'>
+[49]  </dt><dd class='thebibliography' id='bib-49'>
+     <!-- l. 674 --><p class='noindent'><a id='cite.0@envbench'></a>Aleksandra Eliseeva et al. <span class='cmti-10'>EnvBench: A Benchmark for Automated Environment Setup</span>. Mar. 2025.
+     arXiv:  <a href='https://arxiv.org/abs/2503.14443'>2503.14443 <span class='cmtt-10'>[cs.LG]</span></a>. <span class='cmcsc-10'><span class='small-caps'>url</span></span>: <a class='url' href='https://arxiv.org/abs/2503.14443'><span class='cmtt-10'>https://arxiv.org/abs/2503.14443</span></a>.
+     </p></dd><dt class='thebibliography' id='X0-mmreview'>
+[50]  </dt><dd class='thebibliography' id='bib-50'>
+     <!-- l. 674 --><p class='noindent'><a id='cite.0@mmreview'></a>Xian Gao et al. <span class='cmti-10'>MMReview: A Multidisciplinary and Multimodal Benchmark for LLM-Based Peer
+     Review     Automation</span>.      Aug.      2025.      arXiv:           <a href='https://arxiv.org/abs/2508.14146'>2508.14146      <span class='cmtt-10'>[cs.CL]</span></a>.      <span class='cmcsc-10'><span class='small-caps'>url</span></span>:      
+<a class='url' href='https://arxiv.org/abs/2508.14146'><span class='cmtt-10'>https://arxiv.org/abs/2508.14146</span></a>.
+     </p></dd><dt class='thebibliography' id='X0-liu2025'>
+[51]  </dt><dd class='thebibliography' id='bib-51'>
+     <!-- l. 674 --><p class='noindent'><a id='cite.0@liu2025'></a>Ryan  Liu  et  al.  “Large  Language  Models  Assume  People  are  More  Rational  than  We  Really
+     are”. In: <span class='cmti-10'>The Thirteenth International Conference on Learning Representations</span>. Jan. 2025. <span class='cmcsc-10'><span class='small-caps'>url</span></span>: 
+<a class='url' href='https://openreview.net/forum?id=dAeET8gxqg'><span class='cmtt-10'>https://openreview.net/forum?id=dAeET8gxqg</span></a>.
+     </p></dd><dt class='thebibliography' id='X0-socscireprobench'>
+[52]  </dt><dd class='thebibliography' id='bib-52'>
+     <!-- l. 674 --><p class='noindent'><a id='cite.0@socscireprobench'></a>Meysam Alizadeh et al. “Evaluating AI Coding Agents in Social Science Reproducibility”. In: (June
+     2026). <span class='cmcsc-10'><span class='small-caps'>url</span></span>: <a class='url' href='https://malizad.github.io/Alizadeh_et_al_Agents_Reproducibility.pdf'><span class='cmtt-10'>https://malizad.github.io/Alizadeh_et_al_Agents_Reproducibility.pdf</span></a>.</p></dd></dl>
+<!-- l. 675 --><p class='indent'>
+                                                                                      
+                                                                                      
+</p>
+   <h3 class='likesectionHead' id='appendix'><a id='x1-13000'></a>Appendix</h3>
+<!-- l. 677 --><p class='noindent'>
+</p>
+   <h4 class='likesubsectionHead' id='categories-that-were-deemed-not-relevant-at-the-end-of-the-literature-review'><a id='x1-14000'></a>Categories that were deemed ”not relevant” at the end of the literature review</h4>
+<p><a id='x1-14000doc'></a>
+     </p><ul class='itemize1'>
+     <li class='itemize'>
+     <!-- l. 679 --><p class='noindent'>Agentic Science
+     </p><!-- l. 679 --><p class='noindent'>       AI systems that can conduct scientific tasks autonomously. - 80 papers
+     </p></li>
+     <li class='itemize'>
+     <!-- l. 680 --><p class='noindent'>Pre-publication reproducibility
+     </p><!-- l. 680 --><p class='noindent'>       Techniques that authors can use to make their research more reproducible. - 94 papers
+     </p></li>
+     <li class='itemize'>
+     <!-- l. 681 --><p class='noindent'>Hypothesis Generation
+     </p><!-- l. 681 --><p class='noindent'>       Systems that generate scientific hypotheses. - 18 papers
+     </p></li>
+     <li class='itemize'>
+     <!-- l. 682 --><p class='noindent'>Automatic Software Engineering
+     </p><!-- l. 682 --><p class='noindent'>       Systems that can do software engineering tasks autonomously. - 34 papers
+     </p></li>
+     <li class='itemize'>
+     <!-- l. 683 --><p class='noindent'>Science-specialized LLM
+     </p><!-- l. 683 --><p class='noindent'>       LLMs that are fine-tuned to be better at science. - 10 papers
+     </p></li>
+     <li class='itemize'>
+     <!-- l. 684 --><p class='noindent'>Multi-Agent
+     </p><!-- l. 684 --><p class='noindent'>       AI systems which consist of multiple collaborating agents. - 56 papers
+     </p></li>
+     <li class='itemize'>Tool calling - 8 papers
+     </li>
+     <li class='itemize'>Document parsing - 14 papers</li></ul>
+    
+</body> 
+</html>
