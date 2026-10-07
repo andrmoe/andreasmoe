@@ -111,46 +111,60 @@ If the theory works, outside testers see each frontier model, test it for the da
 </p>
 <p>
 This page asks whether that testing is keeping pace with capability, for one danger: loss of control, including through automated AI R&amp;D.
-It doesn't estimate how dangerous models are, which nobody can measure; it compares each year with the first, October 2023 – October 2024.
-The data are 82 releases from 12 developers: every release that was its developer's most capable model to date and within 10 points of the best model on
+For each frontier release it estimates how much danger gets past outside testing, and follows the trend across releases.
+It doesn't estimate how dangerous models are, which nobody can measure: danger past testing is expressed as the capability of an untested model that would carry the same danger, so the unknown level cancels.
+The data are 82 releases from 12 developers since November 2023: every release that was its developer's most capable model to date and within 10 points of the best model on
 <a href="https://epoch.ai/benchmarks" target="_blank">Epoch AI's Capabilities Index</a>, each coded from its own safety documents.
 </p>
 
 <p class="pdt-lead" id="pdt-lead"></p>
 
 <div class="pdt-panel">
-    <h4>Frontier capability against the capability testing supports</h4>
-    <p class="pdt-sub">Time horizon (the length of software task a model completes half the time), log scale. The red line is how capable each 12 months' releases could have been, with their testing, and carried no more danger past testing than the releases of Oct 2023 – Oct 2024. It starts on the frontier. The dashed line is the same with perfect testing, given models' evaluation awareness.</p>
+    <h4>Capability and danger past testing, release by release</h4>
+    <p class="pdt-sub">Log scale. For each release, the open circle is its capability (time horizon: the length of software task it completes half the time). The filled dot below is the danger that got past testing, as the time horizon of an untested model with the same danger; the line between them is what testing removed. Lines: least-squares trends across all releases.</p>
     <div class="pdt-legend" id="pdt-main-legend"></div>
     <div class="pdt-wide" id="pdt-main"></div>
     <div class="pdt-legend" id="pdt-main-legend2"></div>
 </div>
 
-<h3>What drove the gap</h3>
+<h3>Why it grows faster than capability</h3>
 <p id="pdt-drivers-text"></p>
 <div class="pdt-panel">
-    <h4>From the first year to the last 12 months, in capability terms</h4>
-    <p class="pdt-sub">Each factor multiplies the gap; log scale. Bars to the right widen the gap, bars to the left narrow it.</p>
+    <h4>Growth per year, per release</h4>
+    <p class="pdt-sub">Danger past testing = capability × (share let through)<sup>1/β</sup>, so its growth is the product of the two. Log scale.</p>
     <div class="pdt-wide" id="pdt-drivers"></div>
 </div>
 
 <h3>What testing lets through</h3>
 <p id="pdt-miss-text"></p>
 <div class="pdt-panel">
-    <h4>Share of danger that gets past testing</h4>
-    <p class="pdt-sub">12 months to each date, weighted by danger; log scale. Actual testing; perfect testing, held back only by evaluation awareness; and what would have been needed to stay at the first year's risk. Shaded: the shortfall no testing could close.</p>
+    <h4>Share of each release's danger that gets past testing</h4>
+    <p class="pdt-sub">Filled dots and solid line: actual testing. Open dots and dashed line: perfect testing (full time, the release version, white-box access), held back only by evaluation awareness. Dotted: the share needed to keep danger past testing from growing. Log scale.</p>
     <div class="pdt-wide" id="pdt-miss"></div>
 </div>
 <div class="pdt-panel">
-    <h4>The parts of testing, by year</h4>
+    <h4>By year</h4>
     <div id="pdt-years"></div>
-    <p class="pdt-sub">Weighted by danger. Thoroughness: time and access testers had, assuming every release is tested. Ceiling: the most a perfect test of the frontier model could catch.</p>
+    <p class="pdt-sub">Capability and danger past testing: geometric means across releases. Thoroughness: time testers had and whether they tested the release version. Grey-box access: share of safeguards-off and reasoning-visible access (unstated counts as half). Ceiling: given that access, the most a perfect test could catch.</p>
+</div>
+
+<h3>The inputs</h3>
+<p id="pdt-inputs-text"></p>
+<div class="pdt-panel">
+    <h4>Each input over time</h4>
+    <p class="pdt-sub">Filled: taken from the release's documents. Open: filled in by the model, at the midpoint of the plausible range or, for releases without outside testing, the year's average. Bars count tested releases (all releases for the first panel).</p>
+    <div class="pdt-multiples" id="pdt-inputs"></div>
+</div>
+<div class="pdt-panel">
+    <h4>What drives the share let through</h4>
+    <p class="pdt-sub">Growth per year with one input's trend removed at a time.</p>
+    <div id="pdt-attrib"></div>
 </div>
 
 <h3>How much the assumptions matter</h3>
 <p id="pdt-sens-text"></p>
 <div class="pdt-panel">
-    <h4>Gap since the first year, under other assumptions</h4>
+    <h4>Growth of danger past testing per year, under other assumptions</h4>
     <div id="pdt-sens"></div>
 </div>
 
@@ -158,54 +172,54 @@ The data are 82 releases from 12 developers: every release that was its develope
 <p>For each release <i>i</i>, assuming that outside testers test every frontier release, always for loss of control, and that whatever they find changes the release:</p>
 <div class="pdt-eq">
 <div class="pdt-eq-row"><math display="block"><msub><mi>h</mi><mi>i</mi></msub><mo>=</mo><mi>exp</mi><mo>&#x2061;</mo><mo>(</mo><mi>a</mi><mo>+</mo><mi>b</mi><mspace width="0.15em"/><msub><mi>E</mi><mi>i</mi></msub><mo>)</mo><mo>,</mo><mspace width="1.5em"/><msub><mi>d</mi><mi>i</mi></msub><mo>=</mo><mi>k</mi><mspace width="0.15em"/><msubsup><mi>h</mi><mi>i</mi><mi>β</mi></msubsup></math><span class="pdt-eq-note">capability (time horizon) and danger before testing; <i>k</i> unknown</span></div>
-<div class="pdt-eq-row"><math display="block"><msub><mi>m</mi><mi>i</mi></msub><mo>=</mo><mn>1</mn><mo>−</mo><msub><mi>θ</mi><mi>i</mi></msub><mspace width="0.15em"/><mi>C</mi><mo>(</mo><msub><mi>h</mi><mi>i</mi></msub><mo>)</mo></math><span class="pdt-eq-note">share of danger let through: 1 − thoroughness × detection ceiling</span></div>
-<div class="pdt-eq-row"><math display="block"><mi>C</mi><mo>(</mo><mi>h</mi><mo>)</mo><mo>=</mo><mn>0.9</mn><mo>(</mo><mn>1</mn><mo>−</mo><mi>α</mi><mspace width="0.15em"/><mi>σ</mi><mo>(</mo><mi>ln</mi><mo>&#x2061;</mo><mfrac><mi>h</mi><msub><mi>h</mi><mi>A</mi></msub></mfrac><mo>)</mo><mo>)</mo></math><span class="pdt-eq-note">detection ceiling, lowered by evaluation awareness</span></div>
-<div class="pdt-eq-row"><math display="block"><mi>R</mi><mo>(</mo><mi>S</mi><mo>)</mo><mo>=</mo><mi>k</mi><munder><mo>∑</mo><mrow><mi>i</mi><mo>∈</mo><mi>S</mi></mrow></munder><msubsup><mi>h</mi><mi>i</mi><mi>β</mi></msubsup><msub><mi>m</mi><mi>i</mi></msub></math><span class="pdt-eq-note">danger past testing in a set of releases (independent, small risks add)</span></div>
-<div class="pdt-eq-row"><math display="block"><msup><mi>h</mi><mo>*</mo></msup><mo>(</mo><mi>t</mi><mo>)</mo><mo>=</mo><msup><mi>h</mi><mtext>frontier</mtext></msup><mo>(</mo><mi>t</mi><mo>)</mo><msup><mrow><mo>(</mo><mfrac><mrow><mi>R</mi><mo>(</mo><msub><mi>S</mi><mn>0</mn></msub><mo>)</mo></mrow><mrow><mi>R</mi><mo>(</mo><msub><mi>S</mi><mi>t</mi></msub><mo>)</mo></mrow></mfrac><mo>)</mo></mrow><mrow><mn>1</mn><mo>/</mo><mi>β</mi></mrow></msup></math><span class="pdt-eq-note">capability testing supports at the first year's risk (red line); <i>k</i> cancels</span></div>
-<div class="pdt-eq-row"><math display="block"><mfrac><msup><mi>h</mi><mtext>frontier</mtext></msup><msup><mi>h</mi><mo>*</mo></msup></mfrac><mo>=</mo><mfrac><msubsup><mi>h</mi><mi>t</mi><mtext>frontier</mtext></msubsup><msubsup><mi>h</mi><mn>0</mn><mtext>frontier</mtext></msubsup></mfrac><mo>×</mo><msup><mrow><mo>(</mo><mfrac><msub><mi>n</mi><mi>t</mi></msub><msub><mi>n</mi><mn>0</mn></msub></mfrac><mo>)</mo></mrow><mrow><mn>1</mn><mo>/</mo><mi>β</mi></mrow></msup><mo>×</mo><msup><mrow><mo>(</mo><mfrac><msub><mi>s</mi><mi>t</mi></msub><msub><mi>s</mi><mn>0</mn></msub></mfrac><mo>)</mo></mrow><mrow><mn>1</mn><mo>/</mo><mi>β</mi></mrow></msup><mo>×</mo><msup><mrow><mo>(</mo><mfrac><msub><mover><mi>m</mi><mo>‾</mo></mover><mi>t</mi></msub><msub><mover><mi>m</mi><mo>‾</mo></mover><mn>0</mn></msub></mfrac><mo>)</mo></mrow><mrow><mn>1</mn><mo>/</mo><mi>β</mi></mrow></msup></math><span class="pdt-eq-note">the gap's four drivers: frontier, number of releases, closeness to the frontier, share let through</span></div>
+<div class="pdt-eq-row"><math display="block"><msub><mi>m</mi><mi>i</mi></msub><mo>=</mo><mn>1</mn><mo>−</mo><msub><mi>θ</mi><mi>i</mi></msub><mspace width="0.15em"/><msub><mi>C</mi><mi>i</mi></msub><mo>(</mo><msub><mi>h</mi><mi>i</mi></msub><mo>)</mo></math><span class="pdt-eq-note">share of danger let through: 1 − thoroughness × this release's detection ceiling</span></div>
+<div class="pdt-eq-row"><math display="block"><msub><mi>C</mi><mi>i</mi></msub><mo>(</mo><mi>h</mi><mo>)</mo><mo>=</mo><msub><mi>c</mi><mi>i</mi></msub><mo>(</mo><mn>1</mn><mo>−</mo><mi>α</mi><mspace width="0.15em"/><msub><mi>w</mi><mi>i</mi></msub><mspace width="0.15em"/><mi>σ</mi><mo>(</mo><mi>ln</mi><mo>&#x2061;</mo><mfrac><mi>h</mi><msub><mi>h</mi><mi>A</mi></msub></mfrac><mo>)</mo><mo>)</mo></math><span class="pdt-eq-note">detection ceiling: <i>c<sub>i</sub></i> set by access, lowered by evaluation awareness, less so with deeper access (<i>w<sub>i</sub></i>)</span></div>
+<div class="pdt-eq-row"><math display="block"><msub><mi>p</mi><mi>i</mi></msub><mo>=</mo><msup><mrow><mo>(</mo><mfrac><mrow><msub><mi>d</mi><mi>i</mi></msub><msub><mi>m</mi><mi>i</mi></msub></mrow><mi>k</mi></mfrac><mo>)</mo></mrow><mrow><mn>1</mn><mo>/</mo><mi>β</mi></mrow></msup><mo>=</mo><msub><mi>h</mi><mi>i</mi></msub><mspace width="0.15em"/><msubsup><mi>m</mi><mi>i</mi><mrow><mn>1</mn><mo>/</mo><mi>β</mi></mrow></msubsup></math><span class="pdt-eq-note">danger past testing, as the capability of an untested model with the same danger; <i>k</i> cancels</span></div>
+<div class="pdt-eq-row"><math display="block"><mi>ln</mi><mo>&#x2061;</mo><msub><mi>p</mi><mi>i</mi></msub><mo>≈</mo><mi>c</mi><mo>+</mo><mi>g</mi><mspace width="0.15em"/><msub><mi>t</mi><mi>i</mi></msub><mo>,</mo><mspace width="1.5em"/><mi>g</mi><mo>=</mo><msub><mi>g</mi><mi>h</mi></msub><mo>+</mo><mfrac><msub><mi>g</mi><mi>m</mi></msub><mi>β</mi></mfrac></math><span class="pdt-eq-note">trend across releases (least squares); its growth splits exactly into capability and share let through</span></div>
 </div>
-<p>Here <i>n</i> is the number of releases in a window, <i>s</i> = mean (<i>h<sub>i</sub></i>/<i>h</i><sup>frontier</sup>)<sup>β</sup> is how close they sit to the frontier, and <span style="text-decoration:overline"><i>m</i></span> is the share of danger let through, weighted by <i>h</i><sup>β</sup>. The last equation is an identity: the four factors multiply exactly to the gap.</p>
+<p>Growth per year is e<sup><i>g</i></sup>. Because least squares is linear, the trend in ln <i>p</i> is exactly the trend in ln <i>h</i> plus the trend in ln <i>m</i> divided by β.</p>
 <table class="pdt-t pdt-sym">
     <tr><th>Symbol</th><th>Meaning</th><th>Value</th></tr>
     <tr><td><i>E<sub>i</sub></i>, <i>h<sub>i</sub></i></td><td>Epoch Capabilities Index; time horizon in minutes</td><td><i>a</i> = −18.25, <i>b</i> = 0.157, the fit used on the AI control page (R² 0.97)</td></tr>
     <tr><td>β</td><td>danger rises ×2<sup>β</sup> per doubling of time horizon</td><td>1 (0.5 and 2 in the sensitivity table)</td></tr>
-    <tr><td>θ<sub><i>i</i></sub></td><td>thoroughness: mean of time and access</td><td>time = days ÷ 28, at most 1 (0.625 if unstated); access = share of release version, reasoning visible, safeguards off (each 0.5 if unstated). A release without outside testing gets the average of that year's tested releases.</td></tr>
+    <tr><td>θ<sub><i>i</i></sub></td><td>thoroughness: mean of time and testing the release version</td><td>time = days ÷ 28, at most 1 (0.625 if unstated); release version = 1, early snapshot = 0 (0.5 if unstated). A release without outside testing gets the average of that year's tested releases.</td></tr>
+    <tr><td><i>c<sub>i</sub></i>, <i>w<sub>i</sub></i></td><td>access tier: most a test can catch, and the share of evaluation awareness's effect that remains</td><td>black-box 0.5 and 1; grey-box (safeguards off, reasoning visible) 0.7 and 0.75; white-box (weights or internals) 0.9 and 0.5. A release is placed between black-box and grey-box by the share of the two grey-box features documented, unstated counting as half; none documents white-box access. Judgements; see the assumptions table.</td></tr>
     <tr><td>α, <i>h<sub>A</sub></i></td><td>evaluation awareness; time horizon where it is half developed</td><td>α = 0.6, <i>h<sub>A</sub></i> = 4 hours (others in the sensitivity table)</td></tr>
-    <tr><td><i>S<sub>t</sub></i>, <i>S</i><sub>0</sub></td><td>releases in the 12 months to <i>t</i>; releases in Oct 2023 – Oct 2024</td><td></td></tr>
+    <tr><td><i>t<sub>i</sub></i></td><td>release date</td><td>years since October 2023</td></tr>
 </table>
 
 <h3>Releases</h3>
-<p class="pdt-note">Ranked by their share of all the danger that got past testing over the three years. † No outside testing found; the page assumes testing with that year's average thoroughness. Click a release for its evidence and sources.</p>
+<p class="pdt-note">Ranked by danger past testing. † No outside testing found; the page assumes testing with that year's average thoroughness. Click a release for its evidence and sources.</p>
 <div class="pdt-panel">
     <div class="pdt-wide" id="pdt-table"></div>
     <button type="button" class="pdt-show" id="pdt-show">Show all 82 releases</button>
 </div>
 
 <h3>Assumptions and how well they are supported</h3>
-<p>Each assumption was checked against the literature. Most of the structure has support; the numbers do not, which is why the page compares years instead.</p>
+<p>Each assumption was checked against the literature. Most of the structure has support; the numbers do not, which is why the page tracks trends instead of levels.</p>
 <div class="pdt-panel">
 <table class="pdt-t pdt-a">
     <tr><th>Assumption</th><th>Support</th><th>Evidence</th></tr>
     <tr><td>Risk = danger before testing × chance testing misses it</td><td class="verdict">Supported structure</td><td><a href="https://arxiv.org/abs/2406.14713" target="_blank">Koessler &amp; Schuett (2024)</a> recommend setting risk thresholds and deriving capability thresholds from them. <a href="https://arxiv.org/abs/2502.06656" target="_blank">Campos et al. (2025)</a> call for quantitative thresholds as in aviation and nuclear. <a href="https://arxiv.org/abs/2512.08864" target="_blank">SaferAI's cyber risk models</a> map benchmark scores to risk through expert elicitation.</td></tr>
-    <tr><td>Danger level cancels; only its growth with capability (β) remains</td><td class="verdict">Sidestepped</td><td>No reference class, no deductive model, forecasters 100× apart (<a href="https://www.normaltech.ai/p/ai-existential-risk-probabilities" target="_blank">Narayanan &amp; Kapoor, 2024</a>); in the <a href="https://forecastingresearch.org/research/existential-risk-persuasion-tournament" target="_blank">Existential Risk Persuasion Tournament</a>, median forecasts of AI extinction by 2100 were 0.38% and 3%. Comparing years removes the level. No source fixes β; across 0.5 to 2, and all awareness settings, the gap since the first year stays between about 200× and 430×.</td></tr>
+    <tr><td>Danger level cancels; only its growth with capability (β) remains</td><td class="verdict">Sidestepped</td><td>No reference class, no deductive model, forecasters 100× apart (<a href="https://www.normaltech.ai/p/ai-existential-risk-probabilities" target="_blank">Narayanan &amp; Kapoor, 2024</a>); in the <a href="https://forecastingresearch.org/research/existential-risk-persuasion-tournament" target="_blank">Existential Risk Persuasion Tournament</a>, median forecasts of AI extinction by 2100 were 0.38% and 3%. Expressing danger past testing as the capability of an untested model with the same danger removes the level. No source fixes β; across 0.5 to 2 and all awareness settings, danger past testing grows between about 10× and 14× a year.</td></tr>
     <tr><td>Only loss of control and AI R&amp;D counted</td><td class="verdict">Simplification</td><td>Of 12 published safety policies, 8 set thresholds for automated AI R&amp;D and 2 each for autonomous replication and misalignment; more set them for cyber (10) and biology (9) (<a href="https://metr.org/common-elements" target="_blank">METR</a>). Leaving out biology and cyber understates risk to the extent they can be existential.</td></tr>
     <tr><td>Capability measured as time horizon</td><td class="verdict">Partly supported</td><td><a href="https://arxiv.org/abs/2503.14499" target="_blank">Kwa et al. (2025)</a> define the time horizon on software tasks. The conversion from Epoch's index is this site's own fit (R² 0.97). Software tasks are a reasonable proxy for AI R&amp;D.</td></tr>
     <tr><td>Detection ceiling falls with capability</td><td class="verdict">Supported</td><td>Pre-deployment results "are not always strongly predictive of real-world capabilities or risks", and it has become "more common for models to distinguish between test settings and real-world deployment" (<a href="https://internationalaisafetyreport.org/publication/2026-report-extended-summary-policymakers" target="_blank">International AI Safety Report 2026</a>). Gemini 2.5 Pro told evaluations from real use with AUC 0.83, against a human baseline of 0.92 (<a href="https://arxiv.org/abs/2505.23836" target="_blank">Needham et al., 2025</a>). UK AISI found Claude Opus 4.6 recognised evaluations 80% of the time, up from 72% for the previous model tested (<a href="https://www.iaps.ai/research/evaluation-awareness-why-frontier-ai-models-are-getting-harder-to-test" target="_blank">via IAPS</a>).
     <br><b>Where awareness is half developed (<i>h<sub>A</sub></i>):</b> counting 50% recognition as chance, 72% and 80% are 44% and 60% of the way to full awareness. If the previous model was Claude Opus 4.5 (time horizon about 3.3 hours; Opus 4.6 about 7.4 hours), the curve fits those points with <i>h<sub>A</sub></i> of 4.2 and 4.9 hours, hence the 4-hour default. Needham et al.'s AUC of 0.83 for Gemini 2.5 Pro (about 1.3 hours) is 66% of the way, which would put <i>h<sub>A</sub></i> nearer 1 hour, but it measures recognition when asked, not spontaneous recognition.
-    <br><b>Not sourced:</b> how recognising a test turns into missed danger. The 90% maximum, α and the curve's shape are judgements.</td></tr>
+    <br><b>Access:</b> the ceiling depends on what testers can see. In <a href="https://arxiv.org/abs/2503.10965" target="_blank">Marks et al. (2025)</a>, 3 of 4 teams found a model's planted hidden objective, using interpretability, behavioural attacks and training data. In <a href="https://www.aisi.gov.uk/blog/auditing-games-for-sandbagging-detection" target="_blank">UK AISI's sandbagging auditing game</a>, black-box methods "proved largely ineffective", and the most promising methods "require deeper model access than external evaluators typically receive". The page's tiers (50%, 70% and 90% for black-, grey- and white-box access) are judgements in that direction; lower tiers (30/50/90%) give 11.0× a year, higher (70/80/90%) 12.1×, and ignoring access 13.1×.
+    <br><b>Not sourced:</b> how recognising a test turns into missed danger, and how much deeper access blunts it. The maximums, α, the access discounts and the curve's shape are judgements.</td></tr>
     <tr><td>Let through = 1 − thoroughness × detection ceiling</td><td class="verdict">This page's construction</td><td>Experts back the components: 98% support pre-deployment risk assessment, dangerous-capability evaluations and third-party audits (<a href="https://arxiv.org/abs/2305.07153" target="_blank">Schuett et al., 2023</a>), but no source supports multiplying them. The model covers one layer only; "multiple layers of defences can compensate for flaws in individual layers" (International AI Safety Report 2026), so it overstates the risk left after all safeguards.</td></tr>
-    <tr><td>Every frontier release is tested by outsiders</td><td class="verdict">Assumption (optimistic)</td><td>The page assumes outside testers see every frontier release before launch. In the record, of 82 releases, 23 name an outside tester before release, 10 mention only unnamed testers, and 49 show none, including all 28 open-weight releases. Each untested release is given the average thoroughness of that year's tested releases. This makes testing look better than it is in every year, and widens the gap; see the note below the table.</td></tr>
-    <tr><td>Every test covers loss of control</td><td class="verdict">Assumption (optimistic)</td><td>The page assumes outside testers always test for loss of control. In the record, of the 33 releases with outside testing, 10 document tests of both autonomy or AI R&amp;D and misalignment, 14 more one of the two, 6 only biology or cyber, and 3 don't say. This makes testing look better than it is in every year, and widens the gap; see the note below the table.</td></tr>
-    <tr><td>Every finding binds</td><td class="verdict">Assumption (optimistic)</td><td>The page assumes that when outside testers find the danger, the release is changed or stopped. In the record, that is rarely shown: of 82 releases, only Claude Opus 4 documents a change credited partly to outside testers; the other changes came from labs' own evaluations, and most testers' findings reach the public only as the lab's summary. Labs commit to act on their own thresholds (9 of 12 published policies would halt deployment; <a href="https://metr.org/common-elements" target="_blank">METR</a>), but those policies score low on risk management: median 18% (<a href="https://arxiv.org/abs/2512.01166" target="_blank">Stelling et al., 2025</a>), no firm above D on existential safety (<a href="https://futureoflife.org/ai-safety-index-summer-2025/" target="_blank">FLI, 2025</a>). This makes testing look better than it is in every year, and widens the gap; see the note below the table.</td></tr>
-    <tr><td>The first year as the reference</td><td class="verdict">Choice</td><td>The page compares with October 2023 – October 2024, not with an acceptable level. If risk then was already too high, holding it level is not enough.</td></tr>
-    <tr><td>Releases independent, risks small</td><td class="verdict">Simplification</td><td>Labs, methods and evaluation awareness recur across releases, so their failures are correlated. Treating them as independent, with risks that add, means more releases always means more risk.</td></tr>
+    <tr><td>Every frontier release is tested by outsiders</td><td class="verdict">Assumption (optimistic)</td><td>The page assumes outside testers see every frontier release before launch. In the record, of 82 releases, 23 name an outside tester before release, 10 mention only unnamed testers, and 49 show none, including all 28 open-weight releases. Each untested release is given the average thoroughness of that year's tested releases. This makes testing look better than it is, and makes the trend steeper; see the note below the table.</td></tr>
+    <tr><td>Every test covers loss of control</td><td class="verdict">Assumption (optimistic)</td><td>The page assumes outside testers always test for loss of control. In the record, of the 33 releases with outside testing, 10 document tests of both autonomy or AI R&amp;D and misalignment, 14 more one of the two, 6 only biology or cyber, and 3 don't say. This makes testing look better than it is, and makes the trend steeper; see the note below the table.</td></tr>
+    <tr><td>Every finding binds</td><td class="verdict">Assumption (optimistic)</td><td>The page assumes that when outside testers find the danger, the release is changed or stopped. In the record, that is rarely shown: of 82 releases, only Claude Opus 4 documents a change credited partly to outside testers; the other changes came from labs' own evaluations, and most testers' findings reach the public only as the lab's summary. Labs commit to act on their own thresholds (9 of 12 published policies would halt deployment; <a href="https://metr.org/common-elements" target="_blank">METR</a>), but those policies score low on risk management: median 18% (<a href="https://arxiv.org/abs/2512.01166" target="_blank">Stelling et al., 2025</a>), no firm above D on existential safety (<a href="https://futureoflife.org/ai-safety-index-summer-2025/" target="_blank">FLI, 2025</a>). This makes testing look better than it is, and makes the trend steeper; see the note below the table.</td></tr>
+    <tr><td>Each release measured on its own</td><td class="verdict">Choice</td><td>The page follows danger per release, not added up over releases. Frontier releases rose from 20 to 36 a year; added up, that would make total danger past testing grow faster still. Every release counts equally in the trend.</td></tr>
     <tr><td>Open weights</td><td class="verdict">Supported</td><td>"Once released, a model's weights cannot be recalled" (International AI Safety Report 2026; also <a href="https://arxiv.org/abs/2311.09227" target="_blank">Seger et al., 2023</a>). This removes fixes after release, which the model doesn't count anyway. The page counts open-weight releases as tested, under its assumption; in fact none of the 28 had outside testing before launch.</td></tr>
 </table>
-<p class="pdt-note"><b>Why optimistic testing widens the gap.</b> The gap compares each year with the first. Better testing helps the first year most, because its less capable models sat under a higher detection ceiling (86% against 40% today), so it sets a higher bar that later years can't keep. If testing were only a quarter as effective in every year as assumed, the gap would be about 253× instead of 368×. The three optimistic assumptions therefore don't make the page's conclusion kinder; they make the first year look safer than it was.</p><p></p>
+<p class="pdt-note"><b>Why optimistic testing makes the trend steeper.</b> Better testing helps less capable models most, because they sit under a higher detection ceiling (60% on average for the first year's releases, 40% for the last year's). So the more testing catches, the faster the share let through rises as models improve. If testing were half as thorough as assumed, danger past testing would grow about 10.8× a year instead of 11.6×; at a quarter, 10.5×. The optimistic assumptions therefore don't flatter the trend; they flatter the early releases.</p><p></p>
 <h3>Which releases count, and how they were coded</h3>
 <ul>
     <li><b>Release rule</b>: a release counts if it was its developer's highest-scoring model to date on Epoch's Capabilities Index, released from November 1, 2023, and within 10 points of the best model at the time. Releases by one developer within 14 days, or sharing a system card, are folded into one. Claude Mythos Preview and Gemini 4 Argon have no index score; their capability is estimated (see their rows).</li>
-    <li><b>Undisclosed details</b> are set to the midpoint of their plausible range; setting them all to their worst or best values moves the gap by under 10%.</li>
+    <li><b>Undisclosed details</b> are set to the midpoint of their plausible range. Setting them all to their lowest values gives danger past testing growing 10.8× a year; to their highest, 13.2×. More thorough testing steepens the trend, for the reason in the note above.</li>
     <li><b>Evidence</b>: each release is coded from its system card, model card, technical report or safety report, and from testers' own reports. Absence of evidence is coded as absence: a lab that tested but didn't say so counts as untested. For the developers outside the US, which rarely publish safety reports, the coding also draws on independent reviews (FLI, SaferAI, CAISI).</li>
 </ul>
 
@@ -485,9 +499,9 @@ const ECI_FIT = {a: -18.2504, b: 0.15681};
 const horizonOf = eci => Math.exp(ECI_FIT.a + ECI_FIT.b * eci);
 
 const NOW = "2026-10-07";
-const DAY = 864e5;
+const START = "2023-10-08";
 const toT = d => new Date(d + "T00:00:00Z").getTime();
-// Three years ending today; the first is the reference
+const YEAR_MS = 365.25 * 864e5;
 const YEARS = [
     {label: "Oct 2023 – Oct 2024", from: "2023-10-08", to: "2024-10-07"},
     {label: "Oct 2024 – Oct 2025", from: "2024-10-08", to: "2025-10-07"},
@@ -497,44 +511,36 @@ const YEARS = [
 // Assumptions. β: danger rises ×2^β per doubling of time horizon. Awareness: share of the detection ceiling lost
 // at full evaluation awareness, half developed at a time horizon of hA minutes.
 const BASE = {beta: 1, aware: 0.6, hA: 240};
-const CEIL_MAX = 0.9;
+// Access tiers: the most a test can catch, and how much of evaluation awareness's effect remains at that depth of access
+const TIERS = {black: {cmax: 0.5, aw: 1}, grey: {cmax: 0.7, aw: 0.75}, white: {cmax: 0.9, aw: 0.5}};
 const logistic = x => 1 / (1 + Math.exp(-x));
-const ceilingOf = (h, P) => CEIL_MAX * (1 - P.aware * logistic(Math.log(h / P.hA)));
+// Detection ceiling for a release whose access sits a share g of the way from black-box to grey-box (or at a named tier)
+const tierAt = g => ({cmax: TIERS.black.cmax + g * (TIERS.grey.cmax - TIERS.black.cmax), aw: TIERS.black.aw + g * (TIERS.grey.aw - TIERS.black.aw)});
+const ceilingOf = (h, P, tier) => tier.cmax * (1 - P.aware * tier.aw * logistic(Math.log(h / P.hA)));
 
-// Thoroughness θ from the coding. Every release is assumed to be tested by outsiders, for loss of control, with binding findings;
-// a release without outside testing gets the average thoroughness of that year's tested releases. undisclosed details at the midpoint of their plausible range
+// Thoroughness θ (time, and testing the release version) and access depth g from the coding. Every release is assumed to be tested by outsiders, for loss of control, with binding findings;
+// a release without outside testing gets the average thoroughness of that year's tested releases.
+// Undisclosed details are set to the midpoint of their plausible range.
 function prepare(r) {
-    const eci = ECI[r.model];
-    const h = horizonOf(eci);
+    const h = horizonOf(ECI[r.model]);
     const tested = r.testers.length ? 1 : r.unnamedTesters ? 0.5 : 0;
     const time = r.window !== null ? Math.min(r.window / 28, 1) : 0.625;
     const acc = r.access || {};
-    const access = ["final", "reasoning", "safeguardsOff"].reduce((s, k) => s + (k in acc ? (acc[k] ? 1 : 0) : 0.5), 0) / 3;
-    const thor = (time + access) / 2;
-    return {...r, eci, h, t: toT(r.release), open: OPEN_WEIGHTS[r.model] || false, tested, thor, q: thor};
+    const known = k => k in acc ? (acc[k] ? 1 : 0) : 0.5;
+    // Grey-box share: safeguards off and reasoning visible, each half; no release documents white-box access
+    const grey = (known("safeguardsOff") + known("reasoning")) / 2;
+    return {...r, eci: ECI[r.model], h, t: toT(r.release), open: OPEN_WEIGHTS[r.model] || false, tested, thor: (time + known("final")) / 2, grey,
+        thorObserved: r.window !== null && "final" in acc};
 }
 
-// One window of releases: the quantities the trend is made of
-function windowStats(xs, from, to, P) {
-    const set = xs.filter(x => x.t >= toT(from) && x.t <= toT(to));
-    const hf = xs.filter(x => x.t <= toT(to)).reduce((m, x) => Math.max(m, x.h), 0);
-    let W = 0, R = 0, Rbest = 0, Wq = 0;
-    for (const x of set) {
-        const d = Math.pow(x.h, P.beta), C = ceilingOf(x.h, P);
-        W += d; R += d * (1 - x.q * C); Rbest += d * (1 - C);
-        Wq += d * x.q;
-    }
-    const n = set.length;
-    return {n, hf, W, R, Rbest, S: W / (n * Math.pow(hf, P.beta)), miss: R / W, missBest: Rbest / W,
-        quality: Wq / W, ceiling: ceilingOf(hf, P)};
-}
-
-// Gap since the reference year and its four drivers. The risk index I = R_t / R_0 factors exactly into
-// (n_t/n_0) (h_t/h_0)^β (S_t/S_0) (m_t/m_0); in capability terms each factor is taken to the power 1/β.
-function drivers(a, b, P) {
-    const inv = v => Math.pow(v, 1 / P.beta);
-    const f = {frontier: b.hf / a.hf, releases: inv(b.n / a.n), spread: inv(b.S / a.S), testing: inv(b.miss / a.miss)};
-    return {...f, gap: f.frontier * f.releases * f.spread * f.testing, index: b.R / a.R};
+// Least-squares trend of ln(value) against time in years: growth factor per year and the fitted line
+function trend(xs, f) {
+    const X = xs.map(x => (x.t - toT(START)) / YEAR_MS), Y = xs.map(f).map(Math.log);
+    const n = X.length, mx = X.reduce((a, b) => a + b) / n, my = Y.reduce((a, b) => a + b) / n;
+    let sxy = 0, sxx = 0;
+    for (let i = 0; i < n; i++) { sxy += (X[i] - mx) * (Y[i] - my); sxx += (X[i] - mx) ** 2; }
+    const slope = sxy / sxx, icpt = my - slope * mx;
+    return {perYear: Math.exp(slope), at: t => Math.exp(icpt + slope * (t - toT(START)) / YEAR_MS)};
 }
 
 function runModel(releases, P = BASE) {
@@ -542,37 +548,50 @@ function runModel(releases, P = BASE) {
     for (const y of YEARS) {
         const inYear = xs.filter(x => x.t >= toT(y.from) && x.t <= toT(y.to));
         const tested = inYear.filter(x => x.tested > 0);
-        const avg = tested.reduce((s, x) => s + x.thor, 0) / tested.length;
-        for (const x of inYear) if (!x.tested) { x.assumed = true; x.thor = avg; x.q = avg; }
+        const avg = f => tested.reduce((s, x) => s + f(x), 0) / tested.length;
+        const thor = avg(x => x.thor), grey = avg(x => x.grey);
+        for (const x of inYear) if (!x.tested) { x.assumed = true; x.thor = thor; x.grey = grey; }
     }
-    const years = YEARS.map(y => ({...y, ...windowStats(xs, y.from, y.to, P)}));
-    const ref = years[0];
-    // Trailing 12-month windows from the end of the reference year to today
-    const dates = [YEARS[0].to];
-    const d = new Date(Date.UTC(2024, 9, 31));
-    while (d.getTime() < toT(NOW)) { dates.push(d.toISOString().slice(0, 10)); d.setUTCDate(1); d.setUTCMonth(d.getUTCMonth() + 2); d.setUTCDate(0); }
-    dates.push(YEARS[1].to, NOW);
-    const series = [...new Set(dates)].sort().map(date => {
-        const from = new Date(toT(date) - 364 * DAY).toISOString().slice(0, 10);
-        const w = windowStats(xs, from, date, P);
-        const inv = v => Math.pow(v, 1 / P.beta);
-        // h*: the frontier divided by how much risk grew, in capability terms
-        return {date, t: toT(date), ...w, index: w.R / ref.R, supported: w.hf / inv(w.R / ref.R), supportedBest: w.hf / inv(w.Rbest / ref.R), needed: ref.R / w.W};
+    // Per release: share let through, and danger past testing as a capability-equivalent: the time horizon an untested
+    // model would need to carry the same danger, h × m^(1/β). The unknown level of danger cancels.
+    for (const x of xs) {
+        x.ceiling = ceilingOf(x.h, P, tierAt(P.fixGrey ?? x.grey));
+        x.miss = 1 - (P.fixThor ?? x.thor) * x.ceiling;
+        // Perfect testing: full time, the release version, white-box access
+        x.missBest = 1 - ceilingOf(x.h, P, TIERS.white);
+        x.past = x.h * Math.pow(x.miss, 1 / P.beta);
+        x.pastBest = x.h * Math.pow(x.missBest, 1 / P.beta);
+    }
+    const tr = {h: trend(xs, x => x.h), past: trend(xs, x => x.past), pastBest: trend(xs, x => x.pastBest),
+        miss: trend(xs, x => x.miss), missBest: trend(xs, x => x.missBest)};
+    const gmean = (set, f) => Math.exp(set.reduce((s, x) => s + Math.log(f(x)), 0) / set.length);
+    const mean = (set, f) => set.reduce((s, x) => s + f(x), 0) / set.length;
+    const years = YEARS.map(y => {
+        const set = xs.filter(x => x.t >= toT(y.from) && x.t <= toT(y.to));
+        return {...y, n: set.length, h: gmean(set, x => x.h), past: gmean(set, x => x.past), thor: mean(set, x => x.thor),
+            grey: mean(set, x => x.grey), ceiling: mean(set, x => x.ceiling), miss: mean(set, x => x.miss), missBest: mean(set, x => x.missBest)};
     });
-    return {xs, years, series, now: series[series.length - 1], d1: drivers(ref, years[1], P), d2: drivers(ref, years[2], P)};
+    return {xs, tr, years};
 }
 
-// Gap since the reference year for other assumptions
+// What drives the share let through: hold one input's trend constant at a time
+function attribution(releases, P = BASE) {
+    const M = runModel(releases, P);
+    const meanThor = M.xs.reduce((s, x) => s + x.thor, 0) / M.xs.length;
+    const row = (label, Q) => { const t = runModel(releases, Q).tr; return {label, miss: t.miss.perYear, past: t.past.perYear}; };
+    return [row("Nothing (as modelled)", P), row("Thoroughness", {...P, fixThor: meanThor}), row("Access", {...P, fixGrey: 0.5}),
+        row("Evaluation awareness (removed)", {...P, aware: 0})];
+}
+
+// Growth per year of danger past testing under other assumptions
 function sensitivity(releases) {
     const out = [];
-    for (const beta of [0.5, 1, 2]) for (const aware of [0, 0.6, 0.9]) for (const hA of [60, 240, 480]) {
-        const M = runModel(releases, {beta, aware, hA});
-        out.push({beta, aware, hA, gap: M.d2.gap, index: M.d2.index});
-    }
+    for (const beta of [0.5, 1, 2]) for (const aware of [0, 0.6, 0.9]) for (const hA of [60, 240, 480])
+        out.push({beta, aware, hA, perYear: runModel(releases, {beta, aware, hA}).tr.past.perYear});
     return out;
 }
 
-if (typeof module !== "undefined") module.exports = {runModel, sensitivity, BASE};
+if (typeof module !== "undefined") module.exports = {runModel, sensitivity, attribution, BASE};
 
 // ---------- Page ----------
 const SVG_NS = "http://www.w3.org/2000/svg";
@@ -642,72 +661,54 @@ function tip(node, title, body) {
 const logScale = (lo, hi, a, b) => v => a + (Math.log10(v) - Math.log10(lo)) / (Math.log10(hi) - Math.log10(lo)) * (b - a);
 const linScale = (lo, hi, a, b) => v => a + (v - lo) / (hi - lo) * (b - a);
 
-// ---------- State ----------
+// ---------- Data ----------
 const M = runModel(RELEASES, BASE);
 const SENS = sensitivity(RELEASES);
-for (const x of M.xs) { x.miss = 1 - x.q * ceilingOf(x.h, BASE); x.risk = Math.pow(x.h, BASE.beta) * x.miss; }
 let showAll = false;
-const fmtSup = v => v < 1 ? Math.max(1, Math.round(v * 60)) + " sec" : fmtH(v);
 const fmtSmallPct = v => v >= 0.1 ? Math.round(v * 100) + "%" : sig(v * 100) + "%";
-const fmtShare = v => v >= 0.1 ? Math.round(v * 100) + "%" : v >= 0.001 ? (v * 100).toFixed(1) + "%" : "<0.1%";
-const fmtX = v => v >= 10 ? fmtRatio(v) : v.toFixed(2).replace(/0$/, "");
+const fmtX = v => v >= 10 ? (Math.round(v * 10) / 10).toFixed(1).replace(/\.0$/, "") : v.toFixed(2).replace(/0$/, "");
+const fmtCap = v => v < 1 ? Math.max(1, Math.round(v * 60)) + " sec" : fmtH(v);
 const X0 = Date.UTC(2023, 9, 1), X1 = Date.UTC(2026, 10, 1);
+const T0 = Date.UTC(2023, 10, 1), T1 = Date.UTC(2026, 9, 7);
 
 // ---------- Text ----------
-// When the frontier first reached a capability level
-function reached(h) {
-    const r = M.xs.find(x => x.h >= h * 0.95);
-    return r ? `, the frontier of ${new Date(r.t).toLocaleDateString("en-GB", {month: "long", year: "numeric", timeZone: "UTC"})}` : "";
-}
 function describe() {
-    const [y1, y2, y3] = M.years, d = M.d2, now = M.now;
-    const g = SENS.map(s => s.gap);
+    const tr = M.tr, [y1, , y3] = M.years;
+    const g = SENS.map(s => s.perYear);
     document.getElementById("pdt-lead").innerHTML =
-        `<b>Since ${y1.label}, the frontier has pulled ${fmtRatio(d.gap)}× ahead of what testing supports.</b> ` +
-        `${d.frontier * d.releases >= 0.8 * d.gap ? "Almost all" : "Most"} of that is capability: the frontier's time horizon grew ${fmtRatio(d.frontier)}×, from ${fmtH(y1.hf)} to ${fmtH(y3.hf)}, and frontier releases rose from ${y1.n} to ${y3.n} a year. ` +
-        `Testing let through ${fmtPct(y1.miss)} of the danger then and ${fmtPct(y3.miss)} now. ` +
-        `Perfect testing would have supported ${fmtSup(now.supportedBest)}${reached(now.supportedBest)}, because evaluation awareness caps what a test of today's models can catch. ` +
-        `Under other assumptions the gap is ${fmtRatio(Math.min(...g))}–${fmtRatio(Math.max(...g))}×.`;
+        `<b>The danger that gets past testing grew about ${fmtX(tr.past.perYear)}× a year per frontier release, faster than capability, which grew ${fmtX(tr.h.perYear)}× a year.</b> ` +
+        `Testing removed less of each release's danger as models improved: the share let through rose from about ${fmtPct(tr.miss.at(T0))} to ${fmtPct(tr.miss.at(T1))}, mainly because models got better at recognising tests. ` +
+        `Perfect testing, with full time, the release version and white-box access, would let through far less, but its advantage shrinks as awareness grows: danger past perfect testing starts ${fmtX(tr.past.at(T0) / tr.pastBest.at(T0))}× lower and grows ${fmtX(tr.pastBest.perYear)}× a year, ending only ${fmtX(tr.past.at(T1) / tr.pastBest.at(T1))}× lower. ` +
+        `Under other assumptions, danger past testing grows ${fmtX(Math.min(...g))}–${fmtX(Math.max(...g))}× a year.`;
 
+    const mFactor = Math.pow(tr.miss.perYear, 1 / BASE.beta);
     document.getElementById("pdt-drivers-text").textContent =
-        `The gap factors exactly into four drivers. Frontier capability grew ${fmtRatio(d.frontier)}×. ` +
-        `More releases, ${y1.n} to ${y3.n} a year, add ×${fmtX(d.releases)}. ` +
-        `Releases sat ${d.spread < 1 ? "slightly further from" : "slightly closer to"} the frontier (×${fmtX(d.spread)}), and testing let through ${Math.abs(d.testing - 1) < 0.2 ? "slightly " : ""}${d.testing > 1 ? "more" : "less"} of the danger (×${fmtX(d.testing)}), as the detection ceiling fell. ` +
-        `Testing changed the gap by ${Math.round(Math.abs(d.testing - 1) * 100)}%; capability changed it ${fmtRatio(d.frontier)}-fold.`;
+        `Danger past testing is capability times the share let through, so its growth is the product of the two trends. ` +
+        `Capability grew ${fmtX(tr.h.perYear)}× a year. The share let through grew ${fmtX(mFactor)}× a year, as the detection ceiling fell (${fmtPct(M.years[0].ceiling)} to ${fmtPct(M.years[2].ceiling)} on average) and thoroughness ${M.years[2].thor < M.years[0].thor ? "slipped" : "rose"} (${fmtPct(M.years[0].thor)} to ${fmtPct(M.years[2].thor)}). ` +
+        `Together: ${fmtX(tr.past.perYear)}× a year. For danger past testing to stop growing, the share let through would have to fall ${fmtX(Math.pow(tr.h.perYear, BASE.beta))}× a year instead.`;
 
-    const cross = M.series.find(s => s.needed < s.missBest);
+    const needEnd = tr.miss.at(T0) / Math.pow(tr.h.at(T1) / tr.h.at(T0), BASE.beta);
     document.getElementById("pdt-miss-text").textContent =
-        `Testing let through ${fmtPct(y1.miss)}, ${fmtPct(y2.miss)} and ${fmtPct(y3.miss)} of the danger in the three years. ` +
-        `To keep risk at the first year's level, it would have had to let through ${fmtSmallPct(now.needed)}, ${fmtRatio(now.miss / now.needed)}× less. ` +
-        `Even perfect testing couldn't: with evaluation awareness, the best possible rose from ${fmtPct(y1.missBest)} to ${fmtPct(y3.missBest)} let through` +
-        (cross ? `, and the needed share fell below it in ${new Date(cross.t).toLocaleDateString("en-GB", {month: "long", year: "numeric", timeZone: "UTC"})}.` : ".") +
-        ` Within testing, thoroughness went from ${fmtPct(y1.quality)} to ${fmtPct(y3.quality)}, while the ceiling at the frontier fell from ${fmtPct(y1.ceiling)} to ${fmtPct(y3.ceiling)}.`;
+        `On trend, testing let through about ${fmtPct(tr.miss.at(T0))} of a release's danger in late 2023 and ${fmtPct(tr.miss.at(T1))} now. ` +
+        `Perfect testing with white-box access would have let through ${fmtPct(tr.missBest.at(T0))} then and ${fmtPct(tr.missBest.at(T1))} now: evaluation awareness raises the floor. ` +
+        `Testers' access didn't deepen: about half of the grey-box features in every year, mostly because access goes unstated, and no release documents white-box access. ` +
+        `To keep danger past testing at its late-2023 level, testing would now need to let through ${fmtSmallPct(needEnd)}, below what any test can reach under these assumptions.`;
 
-    const by = (beta, aware, hA) => SENS.find(s => s.beta === beta && s.aware === aware && s.hA === hA);
+    const by = (beta, aware) => SENS.find(s => s.beta === beta && s.aware === aware && s.hA === 240).perYear;
     document.getElementById("pdt-sens-text").textContent =
-        `The level of danger cancels out, so it isn't needed at all. The three remaining assumptions move the gap between ${fmtRatio(Math.min(...SENS.map(s => s.gap)))}× and ${fmtRatio(Math.max(...SENS.map(s => s.gap)))}×; it is above ${fmtRatio(Math.floor(Math.min(...SENS.map(s => s.gap)) / 100) * 100)}× in every case. ` +
-        `How fast danger rises with capability matters most: ${fmtRatio(by(0.5, 0.6, 240).gap)}× if danger rises ×1.4 per doubling, ${fmtRatio(by(2, 0.6, 240).gap)}× if ×4. ` +
-        `The risk index, which doesn't convert back into capability, is far more sensitive: ${fmtRatio(by(0.5, 0.6, 240).index)}× to ${fmtRatio(by(2, 0.6, 240).index)}×.`;
+        `The level of danger cancels out, so it isn't needed. Capability alone grows ${fmtX(tr.h.perYear)}× a year, and no assumption here changes that. ` +
+        `The assumptions change how much faster danger past testing grows: least with no evaluation awareness (${fmtX(by(1, 0))}× a year at β = 1), most with strong awareness and slow-rising danger (${fmtX(by(0.5, 0.9))}× a year).`;
 }
 
 // ---------- Main chart ----------
 function drawMain() {
-    const W = 960, H = 500, L = 84, R = 190, T = 50, B = 460;
+    const W = 960, H = 480, L = 84, R = 190, T = 20, B = 440;
     const svg = svgOf("pdt-main", W, H);
-    const pat = el("pattern", {id: "pdt-hatch", width: 7, height: 7, patternUnits: "userSpaceOnUse", patternTransform: "rotate(45)"}, el("defs", {}, svg));
-    el("line", {x1: 0, y1: 0, x2: 0, y2: 7, stroke: "#9a9890", "stroke-width": 1.2}, pat);
     const x = linScale(X0, X1, L, W - R);
-    const pts = M.series;
-    const vals = [...M.xs.map(r => r.h), ...pts.flatMap(s => [s.supported, s.supportedBest])];
+    const vals = [...M.xs.flatMap(r => [r.h, r.past]), ...[T0, T1].map(t => M.tr.pastBest.at(t))];
     const yMin = Math.min(...vals) / 1.5, yMax = Math.max(...vals) * 1.5;
     const y = logScale(yMin, yMax, B, T);
-    YEARS.forEach((yr, i) => {
-        const xa = x(Date.parse(yr.from)), xb = x(Date.parse(yr.to));
-        if (i % 2 === 0) el("rect", {x: xa, y: T, width: xb - xa, height: B - T, fill: "#f3f2ee"}, svg);
-        text(svg, (xa + xb) / 2, T - 22, yr.label, {"text-anchor": "middle", "font-size": 11});
-        const label = i === 0 ? "reference year" : `frontier ${fmtRatio((i === 1 ? M.d1 : M.d2).gap)}× ahead`;
-        text(svg, (xa + xb) / 2, T - 8, label, {"text-anchor": "middle", "font-weight": "bold", fill: i === 0 ? "#52514e" : "#c0392b"});
-    });
+    YEARS.forEach((yr, i) => { if (i % 2 === 0) { const xa = x(Date.parse(yr.from)), xb = x(Date.parse(yr.to)); el("rect", {x: xa, y: T, width: xb - xa, height: B - T, fill: "#f3f2ee"}, svg); } });
     for (let yr = 2024; yr <= 2026; yr++) {
         const xx = x(Date.UTC(yr, 0, 1));
         el("line", {x1: xx, x2: xx, y1: T, y2: B, stroke: "#ddd"}, svg);
@@ -718,103 +719,82 @@ function drawMain() {
         el("line", {x1: L, x2: W - R, y1: y(v), y2: y(v), stroke: "#e6e5e0"}, svg);
         text(svg, L - 6, y(v) + 4, s, {"text-anchor": "end", "font-size": 11});
     }
-    text(svg, 4, T - 36, "Time horizon", {"font-weight": "bold", fill: "#0b0b0b"});
-    // Gap: what better testing could recover, and what it couldn't
-    const band = (top, bot, attrs) => el("polygon", {points: pts.map(s => `${x(s.t)},${y(top(s))}`).concat([...pts].reverse().map(s => `${x(s.t)},${y(bot(s))}`)).join(" "), ...attrs}, svg);
-    band(s => s.supportedBest, s => s.supported, {fill: "#8e44ad", opacity: 0.18});
-    band(s => s.hf, s => Math.min(s.hf, s.supportedBest), {fill: "url(#pdt-hatch)"});
-    // Frontier
-    let best = 0, path = "";
-    for (const r of M.xs) if (r.h > best) { path += (path ? `H${x(r.t)}V` : `M${x(r.t)},`) + y(r.h); best = r.h; }
-    path += `H${x(Date.parse(NOW))}`;
-    el("path", {d: path, fill: "none", stroke: "#0b0b0b", "stroke-width": 2}, svg);
-    el("polyline", {points: pts.map(s => `${x(s.t)},${y(s.supportedBest)}`).join(" "), fill: "none", stroke: "#8e44ad", "stroke-width": 1.8, "stroke-dasharray": "6 4"}, svg);
-    el("polyline", {points: pts.map(s => `${x(s.t)},${y(s.supported)}`).join(" "), fill: "none", stroke: "#c0392b", "stroke-width": 2.5}, svg);
-    el("circle", {cx: x(pts[0].t), cy: y(pts[0].hf), r: 5, fill: "white", stroke: "#c0392b", "stroke-width": 2}, svg);
-    // Releases
-    const total = M.xs.reduce((s, r) => s + r.risk, 0);
+    // Releases: capability, danger past testing, and the drop between them
     for (const r of M.xs) {
-        const st = statusOf(r), c = STATUS[st].color;
-        const style = r.open ? {fill: "white", stroke: c, "stroke-width": 2} : {fill: c, stroke: "white", "stroke-width": 1};
-        const dot = el("circle", {cx: x(r.t), cy: y(r.h), r: 4.5, ...style, ...(ECI_ESTIMATED[r.model] ? {"stroke-dasharray": "2 2", stroke: "#0b0b0b"} : {})}, svg);
-        tip(dot, short(r.model), [`${r.lab}, released ${fmtDate(r.release)}`, `Time horizon ${fmtH(r.h)}${ECI_ESTIMATED[r.model] ? " (estimated)" : ""}`,
-            `${STATUS[st].label}${r.testers.length ? ": " + r.testers.join(", ") : ""}`, `Testing let through ${fmtPct(r.miss)} of its danger`, `Share of all danger past testing: ${fmtShare(r.risk / total)}`]);
+        const xx = x(r.t);
+        el("line", {x1: xx, x2: xx, y1: y(r.h), y2: y(r.past), stroke: "#cfcdc6", "stroke-width": 1.5}, svg);
+        el("circle", {cx: xx, cy: y(r.h), r: 3.5, fill: "white", stroke: "#52514e", "stroke-width": 1.2}, svg);
     }
-    // Right-margin labels
-    const last = pts[pts.length - 1];
+    for (const r of M.xs) {
+        const st = statusOf(r);
+        const dot = el("circle", {cx: x(r.t), cy: y(r.past), r: 4, fill: "#c0392b", stroke: "white", "stroke-width": 1}, svg);
+        tip(dot, short(r.model), [`${r.lab}, released ${fmtDate(r.release)}`, `Capability: ${fmtH(r.h)}${ECI_ESTIMATED[r.model] ? " (estimated)" : ""}`,
+            `Testing let through ${fmtPct(r.miss)} of its danger${r.assumed ? " (no outside testing found; assumed)" : ""}`, `Danger past testing: like an untested ${fmtCap(r.past)} model`,
+            `${STATUS[st].label}${r.testers.length ? ": " + r.testers.join(", ") : ""}`, r.open ? "Open weights" : "Closed weights"]);
+    }
+    // Trends
+    const tl = (f, attrs) => el("line", {x1: x(T0), y1: y(f.at(T0)), x2: x(T1), y2: y(f.at(T1)), ...attrs}, svg);
+    tl(M.tr.h, {stroke: "#0b0b0b", "stroke-width": 2});
+    tl(M.tr.past, {stroke: "#c0392b", "stroke-width": 2.5});
+    tl(M.tr.pastBest, {stroke: "#c0392b", "stroke-width": 1.5, "stroke-dasharray": "6 4"});
     const items = [
-        {y: y(last.hf), s: "Frontier", c: "#0b0b0b", bold: true},
-        {y: (y(last.hf) + y(last.supportedBest)) / 2, s: `Beyond any testing ×${fmtRatio(last.hf / last.supportedBest)}`, c: "#6d6b66"},
-        {y: y(last.supportedBest), s: "Perfect testing", c: "#8e44ad"},
-        {y: (y(last.supportedBest) + y(last.supported)) / 2, s: `Better testing ×${fmtRatio(last.supportedBest / last.supported)}`, c: "#8e44ad"},
-        {y: y(last.supported), s: "Testing as it was", c: "#c0392b", bold: true},
+        {y: y(M.tr.h.at(T1)), s: `Capability ×${fmtX(M.tr.h.perYear)}/yr`, c: "#0b0b0b"},
+        {y: y(M.tr.past.at(T1)), s: `Past testing ×${fmtX(M.tr.past.perYear)}/yr`, c: "#c0392b"},
+        {y: y(M.tr.pastBest.at(T1)), s: `Past perfect testing ×${fmtX(M.tr.pastBest.perYear)}/yr`, c: "#c0392b"},
     ].sort((a, b) => a.y - b.y);
-    for (let j = 1; j < items.length; j++) items[j].y = Math.max(items[j].y, items[j - 1].y + 14);
-    for (const it of items) text(svg, W - R + 10, it.y + 4, it.s, {"font-size": 11.5, fill: it.c, ...(it.bold ? {"font-weight": "bold"} : {})});
-    // Hover
-    pts.forEach((s, i) => {
-        const xa = i ? (x(pts[i - 1].t) + x(s.t)) / 2 : x(s.t) - 6;
-        const xb = i < pts.length - 1 ? (x(s.t) + x(pts[i + 1].t)) / 2 : x(s.t) + 6;
-        const hit = el("rect", {x: xa, y: T, width: xb - xa, height: B - T, fill: "transparent"}, svg);
-        svg.insertBefore(hit, svg.firstChild.nextSibling);
-        tip(hit, "12 months to " + fmtDate(s.date), [`Frontier: ${fmtH(s.hf)}`, `Testing supports: ${fmtSup(s.supported)} (${fmtRatio(s.hf / s.supported)}× below)`,
-            `Perfect testing would support: ${fmtSup(s.supportedBest)}`, `Releases in window: ${s.n}`]);
-    });
+    for (let j = 1; j < items.length; j++) items[j].y = Math.max(items[j].y, items[j - 1].y + 15);
+    for (const it of items) text(svg, W - R + 10, it.y + 4, it.s, {"font-size": 11.5, fill: it.c, "font-weight": "bold"});
     const sw = (bg, extra = "") => `<i class="pdt-swatch" style="background:${bg};border-radius:2px;${extra}"></i>`;
     document.getElementById("pdt-main-legend").innerHTML =
-        `<span>${sw("#0b0b0b", "height:3px")}Frontier</span><span>${sw("#c0392b", "height:3px")}Testing as it was</span>` +
-        `<span>${sw("repeating-linear-gradient(90deg,#8e44ad 0 5px,transparent 5px 8px)", "height:2px")}Perfect testing</span>` +
-        `<span>${sw("#8e44ad", "opacity:0.3")}What better testing could recover</span>` +
-        `<span>${sw("repeating-linear-gradient(45deg,#9a9890 0 1px,transparent 1px 5px)", "border:1px solid #ccc")}Beyond any testing</span>`;
-    const leg2 = document.getElementById("pdt-main-legend2");
-    leg2.innerHTML = Object.keys(STATUS).map(k => `<span><i class="pdt-swatch" style="background:${STATUS[k].color}"></i>${STATUS[k].label}</span>`).join("") +
-        `<span><i class="pdt-swatch" style="border:2px solid #52514e;width:8px;height:8px"></i>Open weights</span>` +
-        `<span><i class="pdt-swatch" style="border:1px dashed #0b0b0b;width:10px;height:10px"></i>Capability estimated</span>` +
-        `<span>Colours show the actual record; the model assumes every release was tested.</span>`;
+        `<span><i class="pdt-swatch" style="background:white;border:1.5px solid #52514e;width:8px;height:8px"></i>Capability</span>` +
+        `<span><i class="pdt-swatch" style="background:#c0392b"></i>Danger past testing</span>` +
+        `<span>${sw("#0b0b0b", "height:3px")}Capability, trend</span><span>${sw("#c0392b", "height:3px")}Danger past testing, trend</span>` +
+        `<span>${sw("repeating-linear-gradient(90deg,#c0392b 0 5px,transparent 5px 8px)", "height:2px")}Danger past perfect testing, trend</span>`;
+    document.getElementById("pdt-main-legend2").textContent = "Hover over a release for who tested it. The model assumes every release was tested.";
 }
 
-// ---------- Drivers: a bridge in capability terms ----------
+// ---------- Growth bridge ----------
 function drawDrivers() {
-    const d = M.d2, [y1, , y3] = M.years;
+    const tr = M.tr;
     const rows = [
-        {label: "Frontier capability", sub: `${fmtH(y1.hf)} → ${fmtH(y3.hf)}`, f: d.frontier},
-        {label: "More releases", sub: `${y1.n} → ${y3.n} a year`, f: d.releases},
-        {label: "Closeness to the frontier", sub: "releases relative to the best", f: d.spread},
-        {label: "Testing", sub: `let through ${fmtPct(y1.miss)} → ${fmtPct(y3.miss)}`, f: d.testing},
+        {label: "Capability", sub: "time horizon of each release", f: tr.h.perYear},
+        {label: "Share let through", sub: BASE.beta === 1 ? "of each release's danger" : `to the power 1/β`, f: Math.pow(tr.miss.perYear, 1 / BASE.beta)},
     ];
     const W = 960, rowH = 40, L = 250, R = 110, H = (rows.length + 1) * rowH + 40;
     const svg = svgOf("pdt-drivers", W, H);
     let cum = 1;
     const ends = rows.map(r => { const a = cum; cum *= r.f; return [a, cum]; });
-    const lo = Math.min(0.5, ...ends.flat()), hi = Math.max(2, ...ends.flat()) * 1.3;
+    const lo = 0.8, hi = Math.max(...ends.flat()) * 1.4;
     const x = logScale(lo, hi, L, W - R);
-    for (const v of [1, 10, 100, 1000]) if (v >= lo && v <= hi) {
+    for (const v of [1, 2, 5, 10, 20]) if (v >= lo && v <= hi) {
         el("line", {x1: x(v), x2: x(v), y1: 6, y2: H - 26, stroke: v === 1 ? "#0b0b0b" : "#e6e5e0"}, svg);
-        text(svg, x(v), H - 10, fmtRatio(v) + "×", {"text-anchor": "middle", "font-size": 11});
+        text(svg, x(v), H - 10, v + "×", {"text-anchor": "middle", "font-size": 11});
     }
     rows.forEach((r, i) => {
         const yy = 10 + i * rowH, [a, b] = ends[i];
         text(svg, L - 10, yy + 13, r.label, {"text-anchor": "end", fill: "#0b0b0b", "font-weight": "bold"});
         text(svg, L - 10, yy + 27, r.sub, {"text-anchor": "end", "font-size": 11});
-        el("rect", {x: x(Math.min(a, b)), y: yy + 4, width: Math.max(2, Math.abs(x(b) - x(a))), height: 22, fill: r.f >= 1 ? "#c0392b" : "#1f7a57", opacity: i === 0 ? 0.85 : 0.6}, svg);
+        el("rect", {x: x(Math.min(a, b)), y: yy + 4, width: Math.max(2, Math.abs(x(b) - x(a))), height: 22, fill: i === 0 ? "#0b0b0b" : "#c0392b", opacity: i === 0 ? 0.8 : 0.55}, svg);
         if (i) el("line", {x1: x(a), x2: x(a), y1: yy - 14, y2: yy + 4, stroke: "#999", "stroke-dasharray": "2 2"}, svg);
-        text(svg, x(Math.max(a, b)) + 6, yy + 20, `×${fmtX(r.f)}`, {fill: "#0b0b0b"});
+        text(svg, x(Math.max(a, b)) + 6, yy + 20, `×${fmtX(r.f)} a year`, {fill: "#0b0b0b"});
     });
     const yy = 10 + rows.length * rowH;
-    text(svg, L - 10, yy + 18, "Gap", {"text-anchor": "end", fill: "#0b0b0b", "font-weight": "bold"});
-    el("rect", {x: x(1), y: yy + 4, width: x(cum) - x(1), height: 22, fill: "#0b0b0b", opacity: 0.8}, svg);
-    text(svg, x(cum) + 6, yy + 20, `×${fmtRatio(cum)}`, {fill: "#0b0b0b", "font-weight": "bold"});
+    text(svg, L - 10, yy + 18, "Danger past testing", {"text-anchor": "end", fill: "#0b0b0b", "font-weight": "bold"});
+    el("rect", {x: x(1), y: yy + 4, width: x(cum) - x(1), height: 22, fill: "#c0392b", opacity: 0.9}, svg);
+    text(svg, x(cum) + 6, yy + 20, `×${fmtX(cum)} a year`, {fill: "#0b0b0b", "font-weight": "bold"});
 }
 
 // ---------- Share let through ----------
 function drawMiss() {
-    const W = 960, H = 300, L = 84, R = 190, T = 16, B = 270;
+    const W = 960, H = 320, L = 84, R = 190, T = 16, B = 290;
     const svg = svgOf("pdt-miss", W, H);
     const x = linScale(X0, X1, L, W - R);
-    const pts = M.series;
-    const yMin = Math.pow(10, Math.floor(Math.log10(Math.min(...pts.map(s => s.needed))))), yMax = 1;
+    const tr = M.tr;
+    const need = t => tr.miss.at(T0) / Math.pow(tr.h.at(t) / tr.h.at(T0), BASE.beta);
+    const vals = [...M.xs.flatMap(r => [r.miss, r.missBest]), need(T1)];
+    const yMin = Math.pow(10, Math.floor(Math.log10(Math.min(...vals)))), yMax = 1;
     const y = logScale(yMin, yMax, B, T);
-    for (let e = Math.log10(yMin); e <= 0.0001; e++) {
+    for (let e = Math.round(Math.log10(yMin)); e <= 0; e++) {
         const v = Math.pow(10, e);
         el("line", {x1: L, x2: W - R, y1: y(v), y2: y(v), stroke: "#e6e5e0"}, svg);
         text(svg, L - 6, y(v) + 4, fmtSmallPct(v), {"text-anchor": "end", "font-size": 11});
@@ -824,26 +804,24 @@ function drawMiss() {
         el("line", {x1: xx, x2: xx, y1: T, y2: B, stroke: "#ddd"}, svg);
         text(svg, xx, B + 18, String(yr), {"text-anchor": "middle"});
     }
-    const line = (f, attrs) => el("polyline", {points: pts.map(s => `${x(s.t)},${y(f(s))}`).join(" "), fill: "none", ...attrs}, svg);
-    el("polygon", {points: pts.map(s => `${x(s.t)},${y(s.missBest)}`).concat([...pts].reverse().map(s => `${x(s.t)},${y(Math.min(s.missBest, s.needed))}`)).join(" "), fill: "#c0392b", opacity: 0.12}, svg);
-    line(s => s.miss, {stroke: "#c0392b", "stroke-width": 2.5});
-    line(s => s.missBest, {stroke: "#8e44ad", "stroke-width": 1.8, "stroke-dasharray": "6 4"});
-    line(s => s.needed, {stroke: "#0b0b0b", "stroke-width": 2, "stroke-dasharray": "2 3"});
-    const last = pts[pts.length - 1];
-    const items = [{y: y(last.miss), s: `Actual: ${fmtPct(last.miss)}`, c: "#c0392b"}, {y: y(last.missBest), s: `Perfect testing: ${fmtPct(last.missBest)}`, c: "#8e44ad"},
-        {y: y(last.needed), s: `Needed: ${fmtSmallPct(last.needed)}`, c: "#0b0b0b"}].sort((a, b) => a.y - b.y);
+    for (const r of M.xs) {
+        el("circle", {cx: x(r.t), cy: y(r.missBest), r: 2.5, fill: "white", stroke: "#c0392b", "stroke-width": 1, opacity: 0.7}, svg);
+        const d = el("circle", {cx: x(r.t), cy: y(r.miss), r: 3.5, fill: "#c0392b", opacity: 0.7}, svg);
+        tip(d, short(r.model), [`Let through: ${fmtPct(r.miss)}${r.assumed ? " (assumed testing)" : ""}`, `With perfect testing: ${fmtPct(r.missBest)}`]);
+    }
+    const tl = (f, attrs) => el("line", {x1: x(T0), y1: y(f(T0)), x2: x(T1), y2: y(f(T1)), ...attrs}, svg);
+    tl(t => tr.miss.at(t), {stroke: "#c0392b", "stroke-width": 2.5});
+    tl(t => tr.missBest.at(t), {stroke: "#c0392b", "stroke-width": 1.5, "stroke-dasharray": "6 4"});
+    tl(need, {stroke: "#0b0b0b", "stroke-width": 2, "stroke-dasharray": "2 3"});
+    const items = [{y: y(tr.miss.at(T1)), s: `Actual: ${fmtPct(tr.miss.at(T1))}`, c: "#c0392b"}, {y: y(tr.missBest.at(T1)), s: `Perfect testing: ${fmtPct(tr.missBest.at(T1))}`, c: "#c0392b"},
+        {y: y(need(T1)), s: `Needed to stop growth: ${fmtSmallPct(need(T1))}`, c: "#0b0b0b"}].sort((a, b) => a.y - b.y);
     for (let j = 1; j < items.length; j++) items[j].y = Math.max(items[j].y, items[j - 1].y + 14);
     for (const it of items) text(svg, W - R + 10, it.y + 4, it.s, {"font-size": 11.5, fill: it.c, "font-weight": "bold"});
-    pts.forEach((s, i) => {
-        const xa = i ? (x(pts[i - 1].t) + x(s.t)) / 2 : x(s.t) - 6, xb = i < pts.length - 1 ? (x(s.t) + x(pts[i + 1].t)) / 2 : x(s.t) + 6;
-        tip(el("rect", {x: xa, y: T, width: xb - xa, height: B - T, fill: "transparent"}, svg), "12 months to " + fmtDate(s.date),
-            [`Let through: ${fmtPct(s.miss)}`, `With perfect testing: ${fmtPct(s.missBest)}`, `Needed for the first year's risk: ${fmtSmallPct(s.needed)}`]);
-    });
 }
 
 function drawYears() {
-    let h = `<table class="pdt-t"><tr><th>Year</th><th class="num">Releases</th><th class="num">Frontier</th><th class="num">Thoroughness</th><th class="num">Ceiling</th><th class="num">Let through</th><th class="num">Perfect testing would let through</th></tr>`;
-    for (const y of M.years) h += `<tr><td>${y.label}</td><td class="num">${y.n}</td><td class="num">${fmtH(y.hf)}</td><td class="num">${fmtPct(y.quality)}</td><td class="num">${fmtPct(y.ceiling)}</td><td class="num">${fmtPct(y.miss)}</td><td class="num">${fmtPct(y.missBest)}</td></tr>`;
+    let h = `<table class="pdt-t"><tr><th>Year</th><th class="num">Releases</th><th class="num">Capability</th><th class="num">Danger past testing</th><th class="num">Thoroughness</th><th class="num">Grey-box access</th><th class="num">Ceiling</th><th class="num">Let through</th><th class="num">Perfect testing would let through</th></tr>`;
+    for (const y of M.years) h += `<tr><td>${y.label}</td><td class="num">${y.n}</td><td class="num">${fmtH(y.h)}</td><td class="num">${fmtCap(y.past)}</td><td class="num">${fmtPct(y.thor)}</td><td class="num">${fmtPct(y.grey)}</td><td class="num">${fmtPct(y.ceiling)}</td><td class="num">${fmtPct(y.miss)}</td><td class="num">${fmtPct(y.missBest)}</td></tr>`;
     document.getElementById("pdt-years").innerHTML = h + "</table>";
 }
 
@@ -853,29 +831,27 @@ function drawSens() {
     for (const beta of [0.5, 1, 2]) {
         h += `<tr><td>×${{0.5: "1.4", 1: "2", 2: "4"}[beta]} (β = ${beta})</td>`;
         for (const a of [0, 0.6, 0.9]) {
-            const cells = [60, 240, 480].map(hA => SENS.find(s => s.beta === beta && s.aware === a && s.hA === hA).gap);
-            const main = SENS.find(s => s.beta === beta && s.aware === a && s.hA === 240).gap;
-            const isBase = beta === 1 && a === 0.6;
-            h += `<td class="num"${isBase ? ' style="font-weight:bold"' : ""}>${fmtRatio(main)}×` + (a ? ` <span class="pdt-note">(${fmtRatio(Math.min(...cells))}–${fmtRatio(Math.max(...cells))})</span>` : "") + `</td>`;
+            const cells = [60, 240, 480].map(hA => SENS.find(s => s.beta === beta && s.aware === a && s.hA === hA).perYear);
+            const main = SENS.find(s => s.beta === beta && s.aware === a && s.hA === 240).perYear;
+            h += `<td class="num"${beta === 1 && a === 0.6 ? ' style="font-weight:bold"' : ""}>${fmtX(main)}×` + (a ? ` <span class="pdt-note">(${fmtX(Math.min(...cells))}–${fmtX(Math.max(...cells))})</span>` : "") + `</td>`;
         }
         h += "</tr>";
     }
-    document.getElementById("pdt-sens").innerHTML = h + `</table><p class="pdt-sub">Bold: the page's assumptions. In brackets: awareness half developed at 1 hour to 1 work-day instead of 4 hours.</p>`;
+    document.getElementById("pdt-sens").innerHTML = h + `</table><p class="pdt-sub">Growth per year. Bold: the page's assumptions. In brackets: awareness half developed at 1 hour to 1 work-day instead of 4 hours. Capability itself grows ${fmtX(M.tr.h.perYear)}× a year in every case.</p>`;
 }
 
 // ---------- Release table ----------
 const esc = s => String(s).replace(/[&<>"]/g, c => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;"}[c]));
 function drawTable() {
-    const rows = [...M.xs].sort((a, b) => b.risk - a.risk);
-    const total = rows.reduce((s, x) => s + x.risk, 0);
+    const rows = [...M.xs].sort((a, b) => b.past - a.past);
     const shown = showAll ? rows : rows.slice(0, 10);
-    let h = `<table class="pdt-t"><tr><th class="num">#</th><th>Release</th><th>Released</th><th class="num">Time horizon</th><th>Weights</th><th>Outside testers before release</th><th class="num">Thoroughness</th><th class="num">Let through</th><th class="num">Share of danger past testing</th></tr>`;
+    let h = `<table class="pdt-t"><tr><th class="num">#</th><th>Release</th><th>Released</th><th class="num">Capability</th><th>Weights</th><th>Outside testers before release</th><th class="num">Thoroughness</th><th class="num">Let through</th><th class="num">Danger past testing</th></tr>`;
     shown.forEach((x, i) => {
         const st = statusOf(x);
         const testers = x.testers.length ? x.testers.join(", ") : st === "unnamed" ? "unnamed only" : "none found";
         h += `<tr class="rel" data-i="${i}" tabindex="0"><td class="num">${i + 1}</td><td><span class="dot" style="background:${colorOf(x.lab)}"></span>${esc(x.model)}</td><td>${fmtDate(x.release)}</td>` +
             `<td class="num">${fmtH(x.h)}${ECI_ESTIMATED[x.model] ? "*" : ""}</td><td>${x.open ? "open" : "closed"}</td><td style="color:${st === "none" ? "#52514e" : STATUS[st].color}">${esc(testers)}</td>` +
-            `<td class="num">${fmtPct(x.q)}${x.assumed ? "†" : ""}</td><td class="num">${fmtPct(x.miss)}</td><td class="num">${fmtShare(x.risk / total)}</td></tr>`;
+            `<td class="num">${fmtPct(x.thor)}${x.assumed ? "†" : ""}</td><td class="num">${fmtPct(x.miss)}</td><td class="num">${fmtCap(x.past)}</td></tr>`;
         const notes = [x.note, x.windowNote, x.change ? "Change: " + x.change + (x.trigger === "internal" ? " (from the lab's own evaluations)" : " (credited partly to outside testers)") : "",
             ECI_ESTIMATED[x.model] ? "* " + ECI_ESTIMATED[x.model] : "", typeof x.open === "string" ? x.open : "",
             x.areas.length ? "Areas tested by outsiders: " + x.areas.join(", ") + "." : "",
@@ -893,6 +869,126 @@ function drawTable() {
     });
     document.getElementById("pdt-show").textContent = showAll ? "Show top 10 only" : `Show all ${rows.length} releases`;
 }
+// ---------- Inputs ----------
+const ATTR = attribution(RELEASES, BASE);
+function smallChart(box, title, sub) {
+    const div = document.createElement("div");
+    div.innerHTML = `<div style="font-family:sans-serif;font-weight:bold">${title}</div><div class="pdt-sub">${sub}</div>`;
+    box.appendChild(div);
+    return el("svg", {viewBox: "0 0 320 190"}, div);
+}
+const SW = {W: 320, H: 190, L: 44, R: 10, T: 10, B: 24};
+function timeAxis(svg) {
+    const x = linScale(X0, X1, SW.L, SW.W - SW.R);
+    for (let yr = 2024; yr <= 2026; yr++) {
+        const xx = x(Date.UTC(yr, 0, 1));
+        el("line", {x1: xx, x2: xx, y1: SW.T, y2: SW.H - SW.B, stroke: "#eee"}, svg);
+        text(svg, xx, SW.H - 8, String(yr), {"text-anchor": "middle", "font-size": 10});
+    }
+    return x;
+}
+function yGrid(svg, y, ticks) {
+    for (const [v, s] of ticks) { el("line", {x1: SW.L, x2: SW.W - SW.R, y1: y(v), y2: y(v), stroke: "#e6e5e0"}, svg); text(svg, SW.L - 4, y(v) + 3, s, {"text-anchor": "end", "font-size": 10}); }
+}
+// Stacked bars per year: parts = [{name, fill, f: release => bool}]
+function yearStack(svg, sets, parts) {
+    const xb = linScale(0, 3, SW.L + 10, SW.W - SW.R - 10);
+    const max = Math.max(...sets.map(s => s.length));
+    const y = linScale(0, max, SW.H - SW.B, SW.T + 4);
+    yGrid(svg, y, [[0, "0"], [max, String(max)]]);
+    sets.forEach((set, i) => {
+        let base = 0;
+        const x0 = xb(i) + 8, w = xb(1) - xb(0) - 16;
+        for (const p of parts) {
+            const n = set.filter(p.f).length;
+            if (!n) continue;
+            const r = el("rect", {x: x0, y: y(base + n), width: w, height: y(base) - y(base + n), fill: p.fill, stroke: "white"}, svg);
+            tip(r, YEARS[i].label, [`${p.name}: ${n} of ${set.length}`]);
+            if (y(base) - y(base + n) > 12) text(svg, x0 + w / 2, (y(base) + y(base + n)) / 2 + 4, String(n), {"text-anchor": "middle", "font-size": 10, fill: p.fill === "#0b0b0b" ? "white" : "#0b0b0b"});
+            base += n;
+        }
+        text(svg, x0 + w / 2, SW.H - 8, YEARS[i].label.replace(/Oct (\d\d)(\d\d) – Oct (\d\d)(\d\d)/, "$2–$4"), {"text-anchor": "middle", "font-size": 10});
+    });
+}
+const LEG = (items) => `<div class="pdt-legend" style="margin:2px 0 0">${items.map(([fill, name, extra = ""]) => `<span><i class="pdt-swatch" style="background:${fill};border-radius:2px;${extra}"></i>${name}</span>`).join("")}</div>`;
+function drawInputs() {
+    const box = document.getElementById("pdt-inputs");
+    box.innerHTML = "";
+    const byYear = YEARS.map(y => M.xs.filter(x => x.t >= toT(y.from) && x.t <= toT(y.to)));
+    const tested = byYear.map(s => s.filter(x => x.tested > 0));
+
+    // 1. Capability
+    let svg = smallChart(box, "Capability", `Time horizon, log scale; trend ×${fmtX(M.tr.h.perYear)} a year`);
+    let x = timeAxis(svg);
+    let y = logScale(0.5, 5000, SW.H - SW.B, SW.T);
+    yGrid(svg, y, [[1, "1 min"], [60, "1 h"], [2400, "1 wk"]]);
+    for (const r of M.xs) el("circle", {cx: x(r.t), cy: y(r.h), r: 2.6, fill: ECI_ESTIMATED[r.model] ? "white" : "#0b0b0b", stroke: "#0b0b0b"}, svg);
+    el("line", {x1: x(T0), y1: y(M.tr.h.at(T0)), x2: x(T1), y2: y(M.tr.h.at(T1)), stroke: "#0b0b0b", "stroke-width": 1.5}, svg);
+
+    // 2. Outside testing
+    svg = smallChart(box, "Outside testing before release", "Releases per year. The model assumes all were tested.");
+    yearStack(svg, byYear, [{name: "Named testers", fill: "#0b0b0b", f: r => r.testers.length > 0}, {name: "Only unnamed testers", fill: "#8a8883", f: r => !r.testers.length && r.unnamedTesters},
+        {name: "None found", fill: "#e6e5e0", f: r => !r.testers.length && !r.unnamedTesters}]);
+    box.lastChild.insertAdjacentHTML("beforeend", LEG([["#0b0b0b", "named"], ["#8a8883", "unnamed only"], ["#e6e5e0", "none"]]));
+
+    // 3. Testing time
+    svg = smallChart(box, "Testing time", "Longest disclosed outside testing, days. Undisclosed: counted as 17.5 days.");
+    x = timeAxis(svg);
+    y = linScale(-4, 30, SW.H - SW.B, SW.T);
+    yGrid(svg, y, [[0, "0"], [14, "14"], [28, "28"]]);
+    for (const r of M.xs.filter(r => r.window !== null)) { const d = el("circle", {cx: x(r.t), cy: y(Math.min(r.window, 30)), r: 3.5, fill: "#0b0b0b"}, svg); tip(d, short(r.model), [`${r.window} days`]); }
+    tested.forEach((set, i) => { const n = set.filter(r => r.window !== null).length; text(svg, (x(Date.parse(YEARS[i].from)) + x(Date.parse(YEARS[i].to))) / 2, SW.H - SW.B - 4, `${n} of ${set.length} disclosed`, {"text-anchor": "middle", "font-size": 10}); });
+
+    // 4. Release version
+    svg = smallChart(box, "Tested the release version", "Tested releases per year");
+    const fin = r => r.access && "final" in r.access ? (r.access.final ? "y" : "n") : "u";
+    yearStack(svg, tested, [{name: "Release version", fill: "#0b0b0b", f: r => fin(r) === "y"}, {name: "Early snapshot", fill: "#8a8883", f: r => fin(r) === "n"}, {name: "Not stated", fill: "#e6e5e0", f: r => fin(r) === "u"}]);
+    box.lastChild.insertAdjacentHTML("beforeend", LEG([["#0b0b0b", "release version"], ["#8a8883", "early snapshot"], ["#e6e5e0", "not stated"]]));
+
+    // 5. Access
+    svg = smallChart(box, "Grey-box access", "Tested releases per year with safeguards off or reasoning visible");
+    const acc = (r, k) => r.access && k in r.access ? (r.access[k] ? "y" : "n") : "u";
+    yearStack(svg, tested, [{name: "At least one documented", fill: "#0b0b0b", f: r => acc(r, "safeguardsOff") === "y" || acc(r, "reasoning") === "y"},
+        {name: "Documented absent, none present", fill: "#8a8883", f: r => !(acc(r, "safeguardsOff") === "y" || acc(r, "reasoning") === "y") && (acc(r, "safeguardsOff") === "n" || acc(r, "reasoning") === "n")},
+        {name: "Not stated", fill: "#e6e5e0", f: r => acc(r, "safeguardsOff") === "u" && acc(r, "reasoning") === "u"}]);
+    box.lastChild.insertAdjacentHTML("beforeend", LEG([["#0b0b0b", "documented"], ["#8a8883", "documented absent"], ["#e6e5e0", "not stated"]]) + `<div class="pdt-sub">No release documents white-box access.</div>`);
+
+    // 6. Thoroughness
+    svg = smallChart(box, "Thoroughness θ", "Mean of time and release version, per release");
+    x = timeAxis(svg);
+    y = linScale(0, 1, SW.H - SW.B, SW.T);
+    yGrid(svg, y, [[0, "0%"], [0.5, "50%"], [1, "100%"]]);
+    for (const r of M.xs) el("circle", {cx: x(r.t), cy: y(r.thor), r: r.assumed ? 2 : 3, fill: r.thorObserved ? "#0b0b0b" : "white", stroke: r.assumed ? "#b5b3ad" : "#0b0b0b"}, svg);
+    const tt = trend(M.xs, r => r.thor);
+    el("line", {x1: x(T0), y1: y(tt.at(T0)), x2: x(T1), y2: y(tt.at(T1)), stroke: "#0b0b0b", "stroke-width": 1.5}, svg);
+    box.lastChild.insertAdjacentHTML("beforeend", LEG([["#0b0b0b", "both inputs documented"], ["white", "some filled in", "border:1px solid #0b0b0b"], ["white", "untested: year's average", "border:1px solid #b5b3ad"]]));
+
+    // 7. Detection ceiling
+    svg = smallChart(box, "Detection ceiling", "Computed from capability and access, not observed");
+    x = timeAxis(svg);
+    y = linScale(0, 1, SW.H - SW.B, SW.T);
+    yGrid(svg, y, [[0, "0%"], [0.5, "50%"], [1, "100%"]]);
+    for (const r of M.xs) el("circle", {cx: x(r.t), cy: y(r.ceiling), r: 2.6, fill: "white", stroke: "#0b0b0b"}, svg);
+    const ct = trend(M.xs, r => r.ceiling);
+    el("line", {x1: x(T0), y1: y(ct.at(T0)), x2: x(T1), y2: y(ct.at(T1)), stroke: "#0b0b0b", "stroke-width": 1.5}, svg);
+
+    // Attribution table
+    const base = ATTR[0];
+    let h = `<table class="pdt-t"><tr><th>Trend removed</th><th class="num">Share let through, per year</th><th class="num">Danger past testing, per year</th><th class="num">Share of the rise in let through</th></tr>`;
+    for (const r of ATTR) h += `<tr><td>${r.label}</td><td class="num">×${r.miss.toFixed(3)}</td><td class="num">×${fmtX(r.past)}</td><td class="num">${r === base ? "–" : Math.round((1 - Math.log(r.miss) / Math.log(base.miss)) * 100) + "%"}</td></tr>`;
+    document.getElementById("pdt-attrib").innerHTML = h + `</table><p class="pdt-sub">Shares are on a log scale and needn't add to 100%, because the inputs interact.</p>`;
+
+    const [y1, y2, y3] = M.years;
+    const share = r => Math.round((1 - Math.log(r.miss) / Math.log(base.miss)) * 100);
+    const obs = tested.map(set => set.filter(r => r.thorObserved).length);
+    document.getElementById("pdt-inputs-text").textContent =
+        `Capability is the only input that is both well measured and decisive: it grows ${fmtX(M.tr.h.perYear)}× a year, and sets the floor for the result. ` +
+        `The testing inputs are thinly documented. Of the tested releases, ${obs[0]} of ${tested[0].length}, ${obs[1]} of ${tested[1].length} and ${obs[2]} of ${tested[2].length} document both the testing time and whether testers had the release version; access is almost never stated. ` +
+        `What is documented points the wrong way: disclosed testing windows shortened, and more testers got early snapshots, so thoroughness slipped from ${fmtPct(y1.thor)} to ${fmtPct(y3.thor)}. ` +
+        `The detection ceiling, which falls from ${fmtPct(y1.ceiling)} to ${fmtPct(y3.ceiling)}, isn't observed at all: it follows from capability through the evaluation-awareness assumption. ` +
+        `Of the rise in the share let through, about ${share(ATTR[3])}% comes from that assumption and ${share(ATTR[1])}% from thoroughness slipping; access contributes almost nothing because it barely changes in the data. ` +
+        `The one input that clearly improved is outside testing itself, from ${tested[0].length} of ${byYear[0].length} releases to ${tested[2].length} of ${byYear[2].length}, which the model assumes away.`;
+}
 function fillSources() {
     const seen = new Map();
     for (const r of RELEASES) for (const [label, url] of r.sources) if (!seen.has(url)) seen.set(url, label);
@@ -906,6 +1002,7 @@ drawMain();
 drawDrivers();
 drawMiss();
 drawYears();
+drawInputs();
 drawSens();
 drawTable();
 fillSources();
