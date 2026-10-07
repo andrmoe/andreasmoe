@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="page" content="projects">
+        <link rel="stylesheet" href="styles.css"/>
+    <link rel="icon" href="favicon.png" />
+    <title>Andreas Moe</title>
+    <script src="header.js"></script>
+    <style>
+        .fcl {
+            --surface: #fcfcfb;
+            --ink: #0b0b0b;
+            --ink-2: #52514e;
+            --open: #4a3aa7;
+            --harder: #c98a00;
+            --impossible: #d03b3b;
+            max-width: 1600px;
+        }
+        .fcl-chart {
+            position: relative;
+            overflow-x: auto;
+            background: var(--surface);
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 8px;
+        }
+        .fcl-chart svg { display: block; height: auto; font-family: sans-serif; }
+        .fcl-controls { display: flex; flex-wrap: wrap; gap: 24px; margin: 12px 0; font-family: sans-serif; font-size: 0.9em; color: var(--ink-2); }
+        .fcl-controls div { display: flex; align-items: center; gap: 6px; }
+        .fcl-controls button {
+            font: inherit;
+            border: 1px solid #ccc;
+            background: white;
+            border-radius: 4px;
+            padding: 4px 10px;
+            cursor: pointer;
+        }
+        .fcl-controls button[aria-pressed="true"] { border-color: var(--open); background: #ece9f8; color: var(--ink); font-weight: bold; }
+        .fcl-legend { display: flex; flex-wrap: wrap; gap: 16px; margin: 8px 0; font-family: sans-serif; font-size: 0.9em; color: var(--ink-2); }
+        .fcl-legend span { display: inline-flex; align-items: center; gap: 6px; }
+        .fcl-tooltip {
+            position: absolute;
+            pointer-events: none;
+            background: white;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+            padding: 8px 10px;
+            font-family: sans-serif;
+            font-size: 0.85em;
+            color: var(--ink);
+            max-width: 340px;
+            display: none;
+        }
+        .fcl-tooltip b { display: block; margin-bottom: 4px; }
+        .fcl-read {
+            border-left: 4px solid var(--open);
+            background: #f4f3ef;
+            padding: 8px 16px;
+            margin: 16px 0;
+        }
+        .fcl-read li, .fcl-findings li { margin: 6px 0; }
+        .fcl-note { color: var(--ink-2); font-size: 0.9em; }
+        .fcl-ai-notice {
+            font-family: sans-serif;
+            font-size: 3.5em;
+            font-weight: bold;
+            line-height: 1.1;
+            color: #d03b3b;
+            border: 6px solid #d03b3b;
+            border-radius: 8px;
+            padding: 24px;
+            margin: 16px 0 24px;
+            text-align: center;
+        }
+        .fcl table { font-size: 0.9em; }
+        .fcl td, .fcl th { text-align: left; vertical-align: top; }
+    </style>
+</head>
+<body>
+<div id="header"></div>
+<div class="fcl">
+<div class="fcl-ai-notice">Everything on this page is AI generated</div>
+<h2 id="blogtitle">Which AI Risk Proposals Have Expired?</h2>
+<p>
+Some proposals for reducing existential risk from AI could have been carried out when they were made but can't be now.
+They depended on something that has since happened and can't be undone: a capability level was passed, weights or research were published,
+or the field grew past the point where a few people could coordinate. This page collects prominent proposals, dates when each was implemented (if it was) and the event that closed it (if it has closed),
+and, for those still possible, names the event that would close them.
+</p>
+
+<div class="fcl-read">
+    <b>How to read the chart</b>
+    <ul>
+        <li>The <b>upper panel</b> counts proposals over time: <b style="color:#14855c">implemented</b> and in force, <b style="color:#4a3aa7">still possible</b> but not implemented,
+            foreclosed and now <b style="color:#c98a00">much harder</b>, or foreclosed and now <b style="color:#d03b3b">impossible</b>.</li>
+        <li>The <b>lower panel</b> has one row per proposal. The <b style="color:#4a3aa7">solid bar</b> is the window in which it was possible, from when it was proposed to the event that closed it.
+            After that, the row is <b style="color:#d03b3b">hatched red</b> if it can't be undone even in principle, or <b style="color:#c98a00">dashed amber</b> if it is still possible but much costlier.
+            Bars that run to today with an arrow are proposals that are <b style="color:#4a3aa7">still possible</b>; hover to see what would close them.
+            The bar turns <b style="color:#14855c">green</b> from the date the proposal was implemented, marked with a green square.</li>
+        <li>The <b>middle panel</b> shows rates as 1-year centred moving averages: how many proposals were made, implemented and foreclosed in the year around each date.
+            The lines stop half a year from each end of the data, where the window would reach past it.</li>
+        <li>The <b>horizontal axis</b> can show calendar time or AI capability, measured as the training compute of the largest model trained so far.
+            On the capability axis, years in which the frontier grew slowly are squeezed together, and the rates are counted per tenfold increase in compute instead of per year.</li>
+        <li>Hollow start markers mean the proposal date is approximate; hover to see which end dates are.</li>
+    </ul>
+</div>
+
+<div class="fcl-controls">
+    <div role="group" aria-label="Which proposals">
+        Show
+        <button type="button" data-show="all" aria-pressed="true">all proposals</button>
+        <button type="button" data-show="implemented" aria-pressed="false">implemented</button>
+        <button type="button" data-show="open" aria-pressed="false">still possible</button>
+        <button type="button" data-show="impossible" aria-pressed="false">now impossible</button>
+        <button type="button" data-show="harder" aria-pressed="false">now much harder</button>
+    </div>
+    <div role="group" aria-label="Horizontal axis">
+        Horizontal axis:
+        <button type="button" data-axis="time" aria-pressed="true">calendar time</button>
+        <button type="button" data-axis="compute" aria-pressed="false">frontier training compute</button>
+    </div>
+    <div role="group" aria-label="Order">
+        Order by
+        <button type="button" data-sort="proposed" aria-pressed="true">when proposed</button>
+        <button type="button" data-sort="foreclosed" aria-pressed="false">when foreclosed</button>
+        <button type="button" data-sort="window" aria-pressed="false">window length (so far)</button>
+    </div>
+</div>
+
+<div class="fcl-legend">
+    <span><svg width="26" height="12"><rect x="0" y="2" width="26" height="8" fill="#4a3aa7"/></svg>Window in which the proposal was possible</span>
+    <span><svg width="30" height="12"><rect x="0" y="2" width="22" height="8" fill="#4a3aa7"/><path d="M 22 0 L 30 6 L 22 12 Z" fill="#4a3aa7"/></svg>Still possible today</span>
+    <span><svg width="30" height="14"><rect x="0" y="3" width="22" height="8" fill="#1baf7a"/><rect x="0" y="1" width="12" height="12" fill="#14855c" stroke="#fcfcfb" stroke-width="1.5"/></svg>Implemented (from the green square on)</span>
+    <span><svg width="26" height="12"><defs><pattern id="lg-hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="6" height="6" fill="#fbe9e9"/><line x1="0" y1="0" x2="0" y2="6" stroke="#d03b3b" stroke-width="2.5"/></pattern></defs><rect x="0" y="2" width="26" height="8" fill="url(#lg-hatch)" stroke="#d03b3b"/></svg>Now impossible</span>
+    <span><svg width="26" height="12"><line x1="0" y1="6" x2="26" y2="6" stroke="#c98a00" stroke-width="3" stroke-dasharray="5 3"/></svg>Now much harder</span>
+    <span><svg width="16" height="16"><path d="M 8 2 L 14 8 L 8 14 L 2 8 Z" fill="#0b0b0b"/></svg>Event that closed the window</span>
+    <span><svg width="26" height="12"><line x1="0" y1="6" x2="26" y2="6" stroke="#4a3aa7" stroke-width="2.5"/></svg>Proposal rate</span>
+    <span><svg width="26" height="12"><line x1="0" y1="6" x2="26" y2="6" stroke="#14855c" stroke-width="2.5"/></svg>Implementation rate</span>
+    <span><svg width="26" height="12"><line x1="0" y1="6" x2="26" y2="6" stroke="#d03b3b" stroke-width="2.5"/></svg>Foreclosure rate</span>
+</div>
+
+<div class="fcl-chart" id="fcl-chart">
+    <div class="fcl-tooltip" id="fcl-tooltip"></div>
+</div>
+<p class="fcl-note">Hover over any bar or marker for the proposal and the event that closed it, or would close it.</p>
+
+<h3>What the data says</h3>
+<p id="fcl-summary"></p>
+<ul class="fcl-findings">
+    <li><b>The windows close faster.</b> Most proposals from the 2010s stayed possible for years. Most of those made since 2023 that are old enough to judge closed within two years,
+        because releases now follow each other so quickly that any line drawn just above the frontier is soon crossed, often by an open-weight model.
+        (The medians above count only proposals that have closed; the two-year comparison also counts those still open.)</li>
+    <li><b>Releases are what close windows for good.</b> All the proposals that are now impossible were foreclosed by a publication or a release: a paper, a set of weights, a model that passed a level.
+        None was foreclosed by a government decision.</li>
+    <li><b>The "much harder" proposals depend on politics, not physics.</b> Boxing frontier models, building tools instead of agents, coordinating the main developers, keeping AI out of AI development and denying China frontier compute
+        would all come back within reach after a big enough shock, though at a much higher cost.</li>
+    <li><b>What gets implemented is mostly institutions and transparency.</b> Safety institutes, an international science report, safety frameworks, reporting duties, whistleblower protections and a nuclear statement were adopted.
+        The two implemented proposals that restricted capability itself, staged release and export controls, were both overtaken within a few years. No proposal that caps how capable AI can become has been adopted.</li>
+    <li><b>The proposals still open are mostly the ambitious ones.</b> A halt to superintelligence, an international agency, compute oversight, chip verification and weight security are still achievable,
+        but their closing events are the same forces that closed the others: algorithmic progress, chips spreading beyond tracking, open releases and AI doing AI research.</li>
+    <li><b>Anything indexed to a capability level has an expiry date.</b> Compute thresholds, red lines and "if-then" commitments bind only until an open-weight model crosses the line,
+        as already happened for self-replication and bioweapon-relevant capability. A useful question about any proposal is what event would close its window, and how soon that event is likely.</li>
+</ul>
+
+<h3>How the dataset is built</h3>
+<p class="fcl-note">
+<b>Inclusion threshold.</b> A proposal is included if it meets all four tests:
+(1) <b>Aim:</b> it was put forward to reduce catastrophic or existential risk from AI, not only near-term harms.
+(2) <b>Concreteness:</b> it names something to do or not do, specific enough that one can tell whether it is still achievable. General calls for "cooperation" or "safety research" are left out.
+(3) <b>Prominence:</b> it came from a government or intergovernmental process, a frontier AI developer, a statement signed by several leading AI scientists, or a paper or report from an established research organization that is widely cited in the AI risk debate.
+(4) <b>Feasibility:</b> it was achievable when made. Each idea appears once, under its earliest prominent version.
+Proposals that pass are classed as <i>implemented</i>, <i>still possible</i>, <i>now much harder</i> (a datable event raised the cost far above what it was) or <i>now impossible</i> (a datable event made it unachievable).
+A proposal counts as <i>implemented</i> when it was adopted in binding form by at least one major jurisdiction, or carried out by most of the actors it was addressed to (for a company's proposal about itself, by that company).
+An implemented proposal can still be foreclosed later, as export controls were.
+</p>
+<p class="fcl-note">
+<b>Judgement calls.</b>
+(1) <b>Dates.</b> The start is the first public statement of the proposal I could attribute; the end is the first event after which it couldn't be carried out as proposed.
+Both are debatable, and several proposals were made in some form earlier.
+(2) <b>Impossible vs much harder.</b> "Impossible" means that undoing it would require un-publishing information or recalling distributed weights, or that the proposal referred to a capability level that has been passed.
+"Much harder" means that a policy could restore it, but would have to take something away from many existing users or actors.
+(3) <b>The pause at GPT-4.</b> The FLI letter asked to pause systems "more powerful than GPT-4". The window is taken to close with Claude 3.5 Sonnet, the first widely available model clearly ahead of GPT-4 on most benchmarks.
+(4) <b>Contested evidence.</b> Two closing events are disputed: whether the Fudan self-replication result holds, and whether Kimi K2.5's benchmark scores mean real uplift. Both are included because developers of comparable closed models treated similar evidence as enough to act on.
+(5) <b>Still possible.</b> "Still possible" means achievable at roughly the cost it had when proposed, not likely to happen; some of these, such as a halt to superintelligence, have little political support. Their bars are censored at today, so their windows are left out of the medians.
+(6) <b>Partial implementation.</b> Implementation is often partial: the US reporting duty was revoked in January 2025 and replaced by EU and California rules later, and the Seoul commitments are voluntary and not all signatories met them.
+The date used is the first adoption that meets the definition; hover for the details. Lab-specific steps that most labs didn't follow, such as OpenAI hiding o1's reasoning, don't count.
+(7) <b>Rates.</b> The middle panel counts events in this dataset, not in the world. Counts are small (one event moves the average by 1 a year), recent proposals are easier to find and are probably over-represented,
+and proposals implemented and foreclosed on approximate dates are counted at those dates. Read the panel for its broad shape: almost nothing happened before 2023, then proposals, implementations and foreclosures all rose together.
+The rise matches independent measures (publications on AI safety roughly doubled from 2022 to 2023 in OpenAlex), but the shape after 2023 is uncertain: the last year is the least searched, and new proposals take time to become prominent.
+(8) <b>Not exhaustive.</b> The threshold is applied to proposals found in a broad search, followed by a targeted search for 2025 and 2026, but the AI risk literature is large, and more proposals pass it than are shown. Compute thresholds that only need lowering are not counted as foreclosed.
+(9) <b>Capability axis.</b> The capability axis uses the training compute of the largest model published so far, from Epoch AI's database of AI models (all confidence levels, models from 2011 on),
+interpolated log-linearly in time between successive records so that events between records don't collapse onto one point. Compute is used because it is the only capability measure that covers the whole period:
+METR's time horizons start with GPT-2 in 2019 and Epoch's Capabilities Index in 2023. It understates capability gains from better algorithms, so it moves slowly when efficiency rather than scale drives progress, as with DeepSeek's models.
+Several records rest on Epoch's speculative estimates, among them Wu Dao 2.0, Gemini 1.0 Ultra and Grok 4. No model has passed GPT-6 Astra's 10<sup>27</sup> FLOP (September 2026), so everything after it sits at the right edge.
+(10) <b>Restatements.</b> Because each idea appears once, under its earliest prominent version, later restatements don't add rows. The targeted search found several in 2025 and 2026: MIRI's draft treaty, the Ban Artificial Superintelligence Act, the AI Regulatory Act, the AI Emergency Button Act, Amodei's call for mandatory testing and the UN's scientific panel.
+They are noted on the original rows. This is one reason the proposal rate falls after 2023 while the volume of AI risk writing keeps growing: the count is of new ideas, not of proposals.
+</p>
+
+<details>
+    <summary>Data table</summary>
+    <table id="fcl-table">
+        <thead><tr><th>Proposal</th><th>Proposed by</th><th>Proposed</th><th>Implemented</th><th>Foreclosed by</th><th>Foreclosed</th><th>Window</th><th>Now</th><th>Why, or what would close it</th></tr></thead>
+        <tbody></tbody>
+    </table>
+</details>
+
+<h3>Sources</h3>
+<ul class="fcl-note">
+    <li><a href="https://link.springer.com/article/10.1007/s11023-012-9282-2" target="_blank">Armstrong, Sandberg &amp; Bostrom: Thinking Inside the Box</a> (2012),
+        <a href="https://futureoflife.org/open-letter/ai-principles/" target="_blank">Asilomar AI Principles</a> (2017),
+        <a href="https://openai.com/charter/" target="_blank">OpenAI Charter</a> (2018)</li>
+    <li><a href="https://openai.com/index/better-language-models/" target="_blank">OpenAI: Better language models</a> (GPT-2, 2019),
+        <a href="https://arxiv.org/abs/2001.08361" target="_blank">Kaplan et al.: Scaling Laws for Neural Language Models</a> (2020),
+        <a href="https://arxiv.org/abs/2211.05100" target="_blank">BigScience: BLOOM</a> (2022)</li>
+    <li><a href="https://futureoflife.org/open-letter/pause-giant-ai-experiments/" target="_blank">FLI: Pause Giant AI Experiments</a> (2023),
+        <a href="https://arxiv.org/abs/2307.03718" target="_blank">Anderljung et al.: Frontier AI Regulation</a> (2023),
+        <a href="https://arxiv.org/abs/2303.11341" target="_blank">Shavit: What does it take to catch a Chinchilla?</a> (2023)</li>
+    <li><a href="https://ai.meta.com/blog/meta-llama-3-1/" target="_blank">Meta: Llama 3.1</a>,
+        <a href="https://openai.com/index/learning-to-reason-with-llms/" target="_blank">OpenAI: Learning to reason with LLMs</a>,
+        <a href="https://arxiv.org/abs/2412.19437" target="_blank">DeepSeek-V3 technical report</a>,
+        <a href="https://arxiv.org/abs/2501.12948" target="_blank">DeepSeek-R1</a></li>
+    <li><a href="https://www.bis.gov/press-release/commerce-implements-new-export-controls-advanced-computing-semiconductor-manufacturing-items-peoples" target="_blank">US BIS export controls</a> (October 2022),
+        <a href="https://www.gov.uk/government/publications/ai-safety-summit-2023-chairs-statement-safety-testing-2-november" target="_blank">Bletchley safety-testing statement</a> (November 2023),
+        <a href="https://www.anthropic.com/claude-sonnet-4-5-system-card" target="_blank">Claude Sonnet 4.5 system card</a> (2025)</li>
+    <li><a href="https://www.lesswrong.com/lw/cbs/thoughts_on_the_singularity_institute_si/" target="_blank">Karnofsky: Thoughts on the Singularity Institute</a> (2012),
+        <a href="https://futureoflife.org/ai/open-letter-on-ai-weapons" target="_blank">FLI: Autonomous weapons open letter</a> (2015),
+        <a href="https://www.npr.org/2021/06/01/1002196245/a-u-n-report-suggests-libya-saw-the-first-battlefield-killing-by-an-autonomous-d" target="_blank">NPR on the UN Libya report</a> (2021)</li>
+    <li><a href="https://openai.com/index/introducing-operator/" target="_blank">OpenAI: Introducing Operator</a> (2025),
+        <a href="https://situational-awareness.ai/" target="_blank">Aschenbrenner: Situational Awareness</a> (2024)</li>
+    <li><a href="https://far.ai/post/2024-03-idais-beijing/" target="_blank">IDAIS-Beijing consensus statement</a> (2024),
+        <a href="https://arxiv.org/abs/2412.12140" target="_blank">Pan et al.: Frontier AI systems have surpassed the self-replicating red line</a> (2024),
+        <a href="https://www.narrowpath.co/" target="_blank">ControlAI: A Narrow Path</a> (2024)</li>
+    <li><a href="https://arxiv.org/abs/2503.05628" target="_blank">Hendrycks, Schmidt &amp; Wang: Superintelligence Strategy</a> (2025),
+        <a href="https://arxiv.org/abs/2604.03121" target="_blank">An Independent Safety Evaluation of Kimi K2.5</a> (2026)</li>
+    <li>Still possible: <a href="https://time.com/6266923/ai-eliezer-yudkowsky-open-letter-not-enough/" target="_blank">Yudkowsky: Pausing AI Developments Isn't Enough</a> (2023),
+        <a href="https://openai.com/index/governance-of-superintelligence/" target="_blank">OpenAI: Governance of superintelligence</a> (2023),
+        <a href="https://www.anthropic.com/news/anthropics-responsible-scaling-policy" target="_blank">Anthropic: Responsible Scaling Policy</a> (2023),
+        <a href="https://arxiv.org/abs/2310.13625" target="_blank">Egan &amp; Heim: KYC for compute providers</a> (2023),
+        <a href="https://www.rand.org/pubs/research_reports/RRA2849-1.html" target="_blank">RAND: Securing AI Model Weights</a> (2024),
+        <a href="https://bangkokpost.com/world/2903556/biden-xi-agreed-that-humans-not-ai-should-control-nuclear-weapons-white-house-says" target="_blank">Biden–Xi on human control of nuclear weapons</a> (2024),
+        <a href="https://foster.house.gov/media/press-releases/foster-huizenga-moolenaar-krishnamoorthi-introduce-bill-stop-smuggling" target="_blank">Chip Security Act</a> (2025),
+        <a href="https://arxiv.org/abs/2507.11473" target="_blank">Korbak et al.: Chain of Thought Monitorability</a> (2025),
+        <a href="https://red-lines.ai/" target="_blank">Global Call for AI Red Lines</a> (2025),
+        <a href="https://superintelligence-statement.org/" target="_blank">Statement on Superintelligence</a> (2025)</li>
+    <li>Implemented: <a href="https://arxiv.org/abs/2108.12427" target="_blank">Whittlestone &amp; Clark: Why and How Governments Should Monitor AI Development</a> (2021),
+        <a href="https://mustafa-suleyman.ai/we-need-an-ai-equivalent-of-the-ipcc" target="_blank">Suleyman, Schmidt et al.: We need an AI equivalent of the IPCC</a> (2023),
+        <a href="https://internationalaisafetyreport.org/publication/international-ai-safety-report-2025" target="_blank">International AI Safety Report</a> (2025),
+        <a href="https://righttowarn.ai/" target="_blank">A Right to Warn about Advanced AI</a> (2024),
+        <a href="https://fedscoop.com/anthropic-tested-by-us-uk-ai-safety-institutes/" target="_blank">FedScoop: Anthropic tested by US and UK AI safety institutes</a> (2024),
+        <a href="https://www.govtrack.us/congress/bills/119/hr3447" target="_blank">Chip Security Act status</a></li>
+    <li>Capability axis: <a href="https://epoch.ai/data/ai-models" target="_blank">Epoch AI: Data on AI models</a> (training compute, downloaded October 2026)</li>
+    <li>2025 and 2026: <a href="https://arxiv.org/abs/2502.15657" target="_blank">Bengio et al.: Scientist AI</a>,
+        <a href="https://arxiv.org/abs/2508.06601" target="_blank">O'Brien et al.: Deep Ignorance</a>,
+        <a href="https://www.hawley.senate.gov/hawley-blumenthal-introduce-bipartisan-ai-evaluation-legislation-to-put-americans-first" target="_blank">Hawley &amp; Blumenthal: AI Risk Evaluation Act</a>,
+        <a href="https://lieu.house.gov/media-center/press-releases/reps-lieu-and-moran-introduce-bill-require-kill-switch-ai-systems-can" target="_blank">Lieu &amp; Moran: AI Kill Switch Act</a>,
+        <a href="https://federalnewsnetwork.com/congress/2026/09/congress-eyes-slew-of-ai-security-proposals/" target="_blank">Federal News Network: Congress eyes slew of AI security proposals</a> (September 2026),
+        <a href="https://arxiv.org/abs/2511.10783" target="_blank">MIRI: An International Agreement to Prevent the Premature Creation of Artificial Superintelligence</a>,
+        <a href="https://aiweekly.co/alerts/amodei-no-open-weights-ban-but-test-any-capable-model" target="_blank">Amodei on open weights and testing</a> (July 2026),
+        <a href="https://www.un.org/pga/wp-content/uploads/sites/110/2025/12/A_RES_79_325-EN.pdf" target="_blank">UN resolution A/RES/79/325</a></li>
+    <li>On windows that are closing now: <a href="https://arxiv.org/abs/2608.05173" target="_blank">Barnett: The Closing Window</a> (2026), on how hardware proliferation, algorithmic progress,
+        open releases and automated AI research could take away governments' ability to restrain advanced AI.</li>
+</ul>
+</div>
+
+<script>
+// Prominent proposals to reduce catastrophic or existential risk from AI (see the inclusion threshold on the page).
+// approx / foreclosedApprox: the date is only known to the month or year.
+// now: "impossible" (can't be undone), "harder" (restorable at a much higher cost), "open" (still possible) or "implemented" (in force);
+// closes = what would foreclose an open or implemented proposal. implemented / implementedBy: when and how it was adopted, also for proposals foreclosed later.
+const PROPOSALS = [
+    {short: "Box frontier AI: no internet, no agency", by: "Armstrong, Sandberg & Bostrom", proposed: "2012-06-01", approx: true,
+        what: "\"Thinking Inside the Box\": develop advanced AI as a boxed oracle that only answers questions, without internet access, tools or the ability to act in the world.",
+        foreclosed: "2023-03-23", event: "ChatGPT plugins give a mass-market model web browsing and code execution; open agent frameworks (AutoGPT) follow within a week",
+        now: "harder", why: "Frontier models now run as agents with tools and internet access for hundreds of millions of users. Boxing them again would mean taking that away."},
+    {short: "Avoid a race among the few developers", by: "Asilomar AI Principles (FLI)", proposed: "2017-01-18",
+        what: "Principle 5, Race Avoidance: \"Teams developing AI systems should actively cooperate to avoid corner-cutting on safety standards.\" At the time, most people building AGI could be convened in one room.",
+        foreclosed: "2022-11-30", event: "ChatGPT's launch starts a commercial race: Google declares a \"code red\" and many new labs, including in China, enter the frontier",
+        now: "harder", why: "Coordination is still possible in principle, but now has to span many well-funded companies in at least two rival countries."},
+    {short: "Keep the scaling recipe unpublished", by: "OpenAI Charter", proposed: "2018-04-09",
+        what: "\"We expect that safety and security concerns will reduce our traditional publishing in the future.\" The key insight to withhold was that capability rises predictably with scale.",
+        foreclosed: "2020-01-23", event: "Kaplan et al. publish \"Scaling Laws for Neural Language Models\"; the GPT-3 paper follows in May 2020",
+        now: "impossible", why: "Published research can't be un-published. Every serious developer now builds on scaling laws."},
+    {short: "Keep GPT-3-class models behind an API", by: "OpenAI (GPT-2 staged release); later \"structured access\"", proposed: "2019-02-14",
+        what: "Release language models in stages, studying misuse at each size, and offer the most capable only through controlled API access.",
+        implemented: "2019-02-14", implementedBy: "OpenAI withholds the full GPT-2 and releases it in stages over nine months; GPT-3 (2020) is offered only through an API",
+        foreclosed: "2022-07-12", event: "BigScience releases the weights of BLOOM (176B parameters), after Meta's OPT-175B was made available to researchers; LLaMA's weights leak in March 2023",
+        now: "impossible", why: "GPT-3-class weights are freely mirrored and fine-tuned. Released weights can't be recalled."},
+    {short: "Deny China frontier-class AI compute", by: "US export controls (BIS)", proposed: "2022-10-07",
+        what: "Restrict exports of advanced AI chips and chipmaking tools to China, to keep Chinese developers well behind the frontier.",
+        implemented: "2022-10-07", implementedBy: "The US Commerce Department's export rules take effect the day they are announced; they are tightened in October 2023 and December 2024",
+        foreclosed: "2024-12-26", event: "DeepSeek-V3, trained on 2,048 export-compliant H800s bought before the controls tightened, comes close to frontier models",
+        now: "harder", why: "Stockpiles, smuggling, efficient training and domestic chips mean the controls can slow China but no longer deny it frontier-level capability."},
+    {short: "Pause training beyond GPT-4", by: "Future of Life Institute open letter", proposed: "2023-03-22",
+        what: "\"Pause for at least 6 months the training of AI systems more powerful than GPT-4.\"",
+        foreclosed: "2024-06-20", event: "Claude 3.5 Sonnet, the first widely available model clearly ahead of GPT-4 on most benchmarks; many more capable models followed, including open-weight ones",
+        now: "impossible", why: "A pause can still be called at today's level, but not at GPT-4's: systems beyond it exist and are widely copied."},
+    {short: "Hardware governance on the chips that train frontier AI", by: "Shavit", proposed: "2023-03-20",
+        what: "\"What does it take to catch a Chinchilla?\": build mechanisms into AI chips that log training runs, so that compute limits can be verified.",
+        foreclosed: "2023-12-31", foreclosedApprox: true, event: "Millions of H100s ship in 2023 without such mechanisms, and these chips train the frontier models of the next years",
+        now: "harder", why: "The installed base can't be fully retrofitted. As chips age out after a few years, mechanisms in new chips could cover most compute again."},
+    {short: "Keep GPT-4-class weights closed", by: "Anderljung et al., \"Frontier AI Regulation\"", proposed: "2023-07-06",
+        what: "Keep the weights of the most capable models from being openly released, as part of a regime of safety standards for frontier developers.",
+        foreclosed: "2024-07-23", event: "Meta releases the weights of Llama 3.1 405B, roughly matching GPT-4o",
+        now: "impossible", why: "GPT-4-class weights are public and widely fine-tuned. Licensing can still apply to the next level, but not to this one."},
+    {short: "Test models that don't know they're being tested", by: "Bletchley safety-testing statement", proposed: "2023-11-02",
+        what: "Governments and developers agree to test frontier models before deployment, relying on behaviour in test environments to predict behaviour in deployment.",
+        implemented: "2024-06-20", implementedBy: "The UK AI Safety Institute tests Claude 3.5 Sonnet before release and shares results with the US institute; joint pre-deployment tests of other frontier models follow",
+        foreclosed: "2025-09-29", event: "The Claude Sonnet 4.5 system card reports that the model often says it suspects it is being tested, and that this changes how it behaves",
+        now: "harder", why: "Evaluation awareness grows with capability. Tests need to become indistinguishable from deployment, or be backed by interpretability, which is much harder."},
+    {short: "Lock down the reasoning-model recipe", by: "Aschenbrenner, \"Situational Awareness\"", proposed: "2024-06-04",
+        what: "\"Lock down the labs\": treat algorithmic secrets, such as how to train models that reason, as national-security secrets so that they don't leak to China. OpenAI kept o1's chain of thought and training method hidden from September 2024.",
+        foreclosed: "2025-01-20", event: "DeepSeek releases R1 with open weights and a paper describing its reinforcement-learning recipe",
+        now: "impossible", why: "The recipe is published and has been reproduced many times."},
+    {short: "Build tools, not agents", by: "Karnofsky, \"Thoughts on the Singularity Institute\"", proposed: "2012-05-11",
+        what: "\"Tool AI\": build AI that, like Google Maps, presents options to a human rather than acting on its own goals, because agent AI is dangerous and unnecessary.",
+        foreclosed: "2025-01-23", event: "OpenAI launches Operator, a consumer agent that uses a web browser on its own, following Anthropic's computer use (October 2024)",
+        now: "harder", why: "General-purpose agents are now standard products. Going back to tools would mean withdrawing them from millions of users and businesses."},
+    {short: "Ban autonomous weapons before they're used", by: "FLI open letter on autonomous weapons", proposed: "2015-07-28",
+        what: "A ban on offensive autonomous weapons that select and engage targets without meaningful human control, to prevent a global AI arms race.",
+        foreclosed: "2020-03-27", foreclosedApprox: true, event: "A UN panel reports that Kargu-2 drones, able to attack without an operator, hunted retreating fighters in Libya in March 2020; autonomous drones then spread in the war in Ukraine",
+        now: "harder", why: "A ban is still possible, but would now take weapons away from militaries that use them, instead of preventing their development."},
+    {short: "No AI that can copy itself", by: "IDAIS-Beijing red lines (Bengio, Hinton, Yao and others)", proposed: "2024-03-10",
+        what: "\"No AI system should be able to copy or improve itself without explicit human approval and assistance.\"",
+        foreclosed: "2024-12-09", event: "Fudan University researchers report that agents built on open-weight Llama 3.1 70B and Qwen2.5 72B copied themselves to a live, separate instance in 50% and 90% of trials (the method is disputed)",
+        now: "impossible", why: "If the result holds, models with this capability are openly available and can't be recalled. Later evaluations, such as UK AISI's RepliBench, found frontier models can do many of the component tasks."},
+    {short: "No AIs improving AIs", by: "ControlAI, \"A Narrow Path\"", proposed: "2024-10-01", approx: true,
+        what: "Phase 0 prohibition: AI systems found by optimisation must not be used to improve AI systems, so that humans stay in charge of AI development.",
+        foreclosed: "2026-05-15", foreclosedApprox: true, event: "Anthropic reports that more than 80% of the code merged into its production systems is written by Claude, up from low single digits before Claude Code (February 2025)",
+        now: "harder", why: "Labs now rely on AI for most of their engineering. A ban is still possible, but would slow every frontier developer and is hard to verify."},
+    {short: "No open weights for models that could help make WMDs", by: "Hendrycks, Schmidt & Wang, \"Superintelligence Strategy\"", proposed: "2025-03-05",
+        what: "It would be irresponsible to release the weights of AI models capable of helping create weapons of mass destruction; such models should stay behind safeguards.",
+        foreclosed: "2026-01-27", event: "Moonshot releases Kimi K2.5 with open weights; an independent evaluation finds its biorisk-relevant capabilities similar to Claude Opus 4.5 and GPT-5.2, which their developers deploy only with bioweapon safeguards",
+        now: "impossible", why: "The weights are public and their refusals are easy to remove. Safeguards can still apply to future, more capable models, but not to this capability level."},
+    {short: "Government capacity to monitor and test AI", by: "Whittlestone & Clark", proposed: "2021-08-28", now: "implemented",
+        what: "Governments should build their own capacity to measure and monitor AI capabilities, including assessing the maturity of capabilities relevant to national security.",
+        implemented: "2023-11-02", implementedBy: "The UK AI Safety Institute is launched at the Bletchley summit, from the Frontier AI Taskforce set up in June 2023; the US and other countries set up their own institutes",
+        closes: "Institutes losing access to frontier models before release, or being cut back; several have been renamed and refocused, such as the UK's AI Security Institute."},
+    {short: "Report frontier training runs to the government", by: "Anderljung et al., \"Frontier AI Regulation\"", proposed: "2023-07-06", now: "implemented",
+        what: "Require developers of frontier models to register large training runs and report capabilities and safety-test results to regulators.",
+        implemented: "2023-10-30", implementedBy: "US Executive Order 14110 requires developers to report training runs above 10^26 FLOP and red-team results. It is revoked in January 2025; EU AI Act duties for general-purpose models with systemic risk apply from August 2025, and California SB 53 from January 2026",
+        closes: "Dangerous models being trainable below the reporting thresholds, or outside the jurisdictions that require reports."},
+    {short: "An IPCC for AI", by: "Suleyman, Schmidt and others", proposed: "2023-10-19", approx: true, now: "implemented",
+        what: "An international panel of scientists, modelled on the IPCC, that gives governments regular assessments of AI capabilities, risks and mitigations.",
+        implemented: "2025-01-29", implementedBy: "The first International AI Safety Report, commissioned at Bletchley and chaired by Yoshua Bengio with experts nominated by 30 countries, the UN, EU and OECD; an interim report appeared in May 2024. The UN set up its own Independent International Scientific Panel on AI in August 2025, which published a preliminary report in July 2026",
+        closes: "Assessments being outpaced by the speed of progress, or governments withdrawing support."},
+    {short: "Protect employees who warn about AI risk", by: "\"A Right to Warn about Advanced AI\" (OpenAI and Google DeepMind staff)", proposed: "2024-06-04", now: "implemented",
+        what: "AI companies should not enforce non-disparagement agreements on risk concerns, should provide anonymous channels to regulators, and should not retaliate against whistleblowers.",
+        implemented: "2025-09-29", implementedBy: "California SB 53 protects employees of frontier developers who report catastrophic-risk concerns to authorities, and requires an anonymous internal channel",
+        closes: "Frontier development moving out of jurisdictions with such protections, or into government projects where they don't apply."},
+    {short: "License frontier AI developers", by: "Altman, US Senate testimony", proposed: "2023-05-16", now: "open",
+        what: "A new government agency that licenses any AI effort above a scale of capability, and can take licences away for failing safety standards. Proposed again in 2026 bills, such as the AI Regulatory Act (Bennet and Welch), whose commission could pause AI development for up to six months.",
+        closes: "Dangerous capability becoming reachable by actors too many or too small to license, through algorithmic progress, open weights or distillation."},
+    {short: "Non-agentic AI as a guardrail", by: "Bengio et al., \"Scientist AI\"", proposed: "2025-02-21",
+        what: "Build \"Scientist AI\": non-agentic systems that explain and predict without goals of their own, and use them to assess and block risky actions by AI agents. Bengio founded LawZero in June 2025 to build it.", now: "open",
+        closes: "Agents outpacing any non-agentic overseer that can be built in time; the guardrail has to be at least as capable as the agent it checks."},
+    {short: "Filter bioweapon knowledge out of open models' training data", by: "O'Brien et al., \"Deep Ignorance\" (EleutherAI, UK AISI, Oxford)", proposed: "2025-08-12", now: "open",
+        what: "Remove biothreat-related text from pretraining data so that open-weight models never learn it; unlike refusal training, this survives fine-tuning on up to 300 million tokens of such text.",
+        closes: "Open-weight models with strong bio capabilities being released without such filtering; their knowledge can't be removed later. The filtered models can still use dangerous information given to them in context."},
+    {short: "Government evaluation before deployment, made mandatory", by: "Hawley & Blumenthal, Artificial Intelligence Risk Evaluation Act", proposed: "2025-09-29", now: "open",
+        what: "Developers of advanced AI must submit their systems, including weights, to a Department of Energy evaluation programme before deployment, or pay at least $1 million a day. Amodei called for mandatory pre-release testing of every sufficiently capable model, open or closed, in July 2026.",
+        closes: "For open-weight models, each release made without evaluation, as Kimi K3 was in July 2026; for closed models, evaluation awareness making tests uninformative."},
+    {short: "Government power to shut down a dangerous AI system", by: "Lieu & Moran, AI Kill Switch Act", proposed: "2026-07-23", now: "open",
+        what: "Developers of advanced models must build in emergency shutdown, and the Department of Homeland Security can order a slowdown or shutdown after a loss-of-control event or a catastrophic incident. A Senate bill, the AI Emergency Button Act, followed in September 2026.",
+        closes: "Dangerous capabilities in open-weight models, which no one can shut down, or a model copying itself out of its developer's control."},
+    {short: "Shut it all down", by: "Yudkowsky, TIME", proposed: "2023-03-29", now: "open",
+        what: "An indefinite worldwide moratorium on large training runs: shut down the large GPU clusters, cap training compute and lower the cap over time, and track all GPUs sold, enforced by international agreement. Restated in detail by MIRI's draft international agreement (November 2025), which caps training compute and verifies it by tracking AI chips.",
+        closes: "Algorithmic progress and chip proliferation making dangerous training possible on hardware too small or dispersed to find and shut down."},
+    {short: "An IAEA for superintelligence", by: "OpenAI, \"Governance of superintelligence\"", proposed: "2023-05-22", now: "open",
+        what: "An international authority that can inspect systems, require audits, test compliance with safety standards and restrict deployment and security levels for efforts above a capability or compute threshold.",
+        closes: "One country or company gaining a decisive lead it won't give up, or open conflict between the US and China ending the diplomatic channels an agency needs."},
+    {short: "If-then commitments for dangerous capabilities", by: "Anthropic, Responsible Scaling Policy", proposed: "2023-09-19", now: "implemented",
+        implemented: "2024-05-21", implementedBy: "16 companies sign the Seoul Frontier AI Safety Commitments to publish safety frameworks with risk thresholds; most frontier developers do. California SB 53 (September 2025) and the EU's code of practice later make such frameworks a requirement",
+        what: "Commit in advance to specific safeguards, or to pausing, when a model reaches defined dangerous-capability thresholds.",
+        closes: "Open-weight models crossing each threshold soon after closed ones, so that commitments bind only the developers who make them; this has already happened for bioweapon-relevant capability."},
+    {short: "Know-your-customer for compute providers", by: "Egan & Heim", proposed: "2023-10-20", now: "open",
+        what: "Require cloud providers to verify who is renting large amounts of AI compute and report frontier-scale training to the government.",
+        closes: "Frontier training moving to owned clusters in many jurisdictions, or efficiency gains making dangerous training possible with rentals too small to flag."},
+    {short: "Secure frontier weights against nation-states", by: "RAND, \"Securing AI Model Weights\"", proposed: "2024-05-30", now: "open",
+        what: "Reach security level 5 for the most capable models' weights: protection against the world's most capable state attackers.",
+        closes: "Theft of frontier weights by a state, or the next capability level being released openly anyway."},
+    {short: "Humans, not AI, decide on nuclear use", by: "Biden–Xi joint statement", proposed: "2024-11-16", now: "implemented",
+        implemented: "2024-11-16", implementedBy: "Both leaders affirm the principle in the statement itself; it is a political commitment, not a treaty",
+        what: "The US and China affirm the need to maintain human control over the decision to use nuclear weapons.",
+        closes: "AI-driven warning and targeting compressing decision times so far that human control becomes nominal."},
+    {short: "Deter destabilising AI projects (MAIM)", by: "Hendrycks, Schmidt & Wang, \"Superintelligence Strategy\"", proposed: "2025-03-05", now: "open",
+        what: "Mutual assured AI malfunction: states make clear they would sabotage any rival's bid for unilateral superintelligence, deterring such projects.",
+        closes: "AI projects becoming too distributed, hidden or hardened to sabotage, or AI-driven progress too fast to react to."},
+    {short: "Location verification on AI chips", by: "US Chip Security Act (Cotton; Huizenga, Foster and others)", proposed: "2025-05-09", now: "open",
+        what: "Require export-controlled AI chips to have location verification, and report diversions, to stop smuggling and make compute tracking possible.",
+        closes: "A large stock of unverified chips abroad, or China producing frontier-class chips domestically. The chips already shipped are covered under the hardware governance row."},
+    {short: "Keep chains of thought monitorable", by: "Korbak et al. (41 authors from frontier labs and academia)", proposed: "2025-07-15", now: "open",
+        what: "Treat the readability of models' chains of thought as a safety property: measure it, and avoid training and architecture choices that degrade it.",
+        closes: "Frontier developers moving to reasoning in latent vectors (\"neuralese\") or training that makes chains of thought unfaithful; an open-weight model doing so would close it for that capability level."},
+    {short: "International AI red lines by end of 2026", by: "Global Call for AI Red Lines", proposed: "2025-09-22", now: "open",
+        what: "Governments agree on and enforce red lines on unacceptable AI uses and behaviours, such as designing bioweapons or self-replication, by the end of 2026.",
+        closes: "Each line being crossed by an openly released model before it is agreed, as self-replication and bioweapon-relevant capability already have been. The 2026 deadline itself is close."},
+    {short: "Prohibit superintelligence until it can be done safely", by: "FLI Statement on Superintelligence", proposed: "2025-10-22", now: "open",
+        what: "\"A prohibition on the development of superintelligence, not lifted before there is broad scientific consensus that it will be done safely and controllably, and strong public buy-in.\" Put into a bill by the Ban Artificial Superintelligence Act (Sanders and Casar, September 2026).",
+        closes: "Superintelligence being built, or AI automating AI research so fully that progress can't be stopped by restricting a few labs."},
+];
+const NOW = {
+    impossible: {color: "#d03b3b", label: "Now impossible"},
+    harder: {color: "#c98a00", label: "Now much harder"},
+    open: {color: "#4a3aa7", label: "Still possible"},
+    implemented: {color: "#14855c", label: "Implemented"},
+};
+const IMPL_COLOR = "#1baf7a";
+const OPEN_COLOR = "#4a3aa7";
+
+const X_START = new Date("2012-01-01"), X_END = new Date("2026-10-31");
+const VIEW = {show: "all", sort: "proposed", axis: "time"};
+// Record training compute (log10 FLOP) of the largest AI model published so far, from Epoch AI's database (models from 2011 on, all confidence levels).
+// Each row is a model that set a new record: [publication date, log10 FLOP, model, Epoch's confidence].
+const COMPUTE_RECORDS = [
+    ["2011-04-29", 16.57, "Deep Autoencoders", "Confident"],
+    ["2011-09-18", 16.72, "CNN Committee (MNIST)", "Likely"],
+    ["2012-06-03", 17.44, "Dropout (ImageNet)", "Confident"],
+    ["2012-07-12", 17.78, "Unsupervised High-level Feature Learner", "Likely"],
+    ["2013-01-16", 18.42, "DistBelief NNLM", "Likely"],
+    ["2014-06-18", 18.53, "SPPNet", "Confident"],
+    ["2014-09-04", 19.09, "VGG16", "Confident"],
+    ["2014-09-10", 19.75, "Seq2Seq LSTM", "Confident"],
+    ["2014-12-03", 20.47, "SNM-skip", "Speculative"],
+    ["2015-10-01", 20.58, "AlphaGo Fan", "Likely"],
+    ["2016-01-27", 21.28, "AlphaGo Lee", "Speculative"],
+    ["2016-09-26", 21.82, "GNMT", "Likely"],
+    ["2018-05-02", 21.94, "ResNeXt-101 32x48d", "Confident"],
+    ["2019-09-17", 22.34, "Megatron-BERT", "Confident"],
+    ["2019-10-23", 22.52, "T5-11B", "Confident"],
+    ["2019-10-30", 23.03, "AlphaStar", "Confident"],
+    ["2020-01-28", 23.05, "Meena", "Confident"],
+    ["2020-05-28", 23.50, "GPT-3 175B (davinci)", "Confident"],
+    ["2021-05-31", 24.19, "Wu Dao 2.0", "Speculative"],
+    ["2021-09-03", 24.31, "FLAN 137B", "Confident"],
+    ["2022-03-15", 24.41, "GPT-3.5 (davinci-002)", "Speculative"],
+    ["2022-06-29", 24.44, "Minerva (540B)", "Confident"],
+    ["2023-03-15", 25.32, "GPT-4 (Mar 2023)", "Likely"],
+    ["2023-12-06", 25.70, "Gemini 1.0 Ultra", "Speculative"],
+    ["2025-02-17", 26.54, "Grok 3", "Likely"],
+    ["2025-02-27", 26.58, "GPT-4.5", "Likely"],
+    ["2025-07-09", 26.70, "Grok 4", "Speculative"],
+    ["2026-09-03", 27.00, "GPT-6 Astra", "Likely"]
+];
+const dayMs = d => new Date(d).getTime();
+// Frontier compute at a date, interpolated log-linearly in time between records (flat before the first record and after the last)
+function logCompute(d) {
+    const t = dayMs(d), R = COMPUTE_RECORDS;
+    if (t <= dayMs(R[0][0])) return R[0][1];
+    for (let i = 1; i < R.length; i++) {
+        const t1 = dayMs(R[i][0]);
+        if (t <= t1) { const t0 = dayMs(R[i - 1][0]); return R[i - 1][1] + (R[i][1] - R[i - 1][1]) * (t - t0) / (t1 - t0); }
+    }
+    return R[R.length - 1][1];
+}
+const recordAt = d => COMPUTE_RECORDS.filter(r => r[0] <= d).pop();
+const flopText = lc => `10^${lc.toFixed(1)} FLOP`;
+// A growth factor given in orders of magnitude, as "6-fold" or "10^7.9-fold"
+const foldText = ooms => ooms < 3 ? `${Math.round(10 ** ooms)}-fold` : `10^${ooms.toFixed(1)}-fold`;
+// Rates: events per year in a centred 1-year window. The average is only valid where the whole window lies within the data:
+// from half a window after the first proposal found to half a window before today.
+const MA_YEARS = 1;
+const RATES = [
+    {key: "proposed", label: "Proposed", color: "#4a3aa7"},
+    {key: "implemented", label: "Implemented", color: "#14855c"},
+    {key: "foreclosed", label: "Foreclosed", color: "#d03b3b"},
+];
+const shiftYears = (d, y) => new Date(new Date(d).getTime() + y * YEAR_MS).toISOString().slice(0, 10);
+const eventsIn = (list, key, from, to) => list.filter(p => p[key] && p[key] > from && p[key] <= to);
+const rateAt = (list, key, d) => eventsIn(list, key, shiftYears(d, -MA_YEARS / 2), shiftYears(d, MA_YEARS / 2)).length / MA_YEARS;
+const SVG_NS = "http://www.w3.org/2000/svg";
+const YEAR_MS = 365.25 * 864e5;
+const TODAY = "2026-10-07";
+const isOpen = p => !p.foreclosed;
+const closedBy = (p, d) => !isOpen(p) && p.foreclosed <= d;
+// Window length; for proposals still possible, the time so far
+const years = p => (new Date(p.foreclosed ?? TODAY) - new Date(p.proposed)) / YEAR_MS;
+const implLag = p => (new Date(p.implemented) - new Date(p.proposed)) / YEAR_MS;
+const fmtDate = (d, approx) => {
+    const dt = new Date(d);
+    return approx ? dt.toLocaleDateString("en-GB", {month: "short", year: "numeric"}) + " (approx.)"
+        : dt.toLocaleDateString("en-GB", {day: "numeric", month: "short", year: "numeric"});
+};
+const fmtYears = y => y < 1 ? `${Math.round(y * 12)} months` : `${y.toFixed(1)} years`;
+
+function el(tag, attrs, parent) {
+    const node = document.createElementNS(SVG_NS, tag);
+    for (const [k, v] of Object.entries(attrs)) node.setAttribute(k, v);
+    if (parent) parent.appendChild(node);
+    return node;
+}
+
+function visible() {
+    const list = PROPOSALS.filter(p => VIEW.show === "all" || (VIEW.show === "implemented" ? !!p.implemented : p.now === VIEW.show));
+    const key = {proposed: p => p.proposed, foreclosed: p => p.foreclosed ?? "9999", window: p => -years(p)}[VIEW.sort];
+    return [...list].sort((a, b) => (key(a) < key(b) ? -1 : key(a) > key(b) ? 1 : 0));
+}
+
+function draw() {
+    const container = document.getElementById("fcl-chart");
+    const tooltip = document.getElementById("fcl-tooltip");
+    container.querySelector("svg")?.remove();
+
+    const rows = visible();
+    const width = Math.max(container.clientWidth - 16, 1400);
+    const m = {top: 20, right: 28, bottom: 36, left: 60};
+    const ih = 220;
+    const rowH = 40;
+    const rTop = m.top + ih + 56, rh = 170;
+    const p2Top = rTop + rh + 56, ih2 = rows.length * rowH;
+    const height = p2Top + ih2 + m.bottom + (VIEW.axis === "compute" ? 26 : 0);
+    const iw = width - m.left - m.right;
+    // Position along the horizontal axis: calendar time, or log frontier compute
+    const compute = VIEW.axis === "compute";
+    const pos = d => compute ? logCompute(d) : dayMs(d);
+    const p0 = pos(X_START), p1 = pos(X_END);
+    const xOfPos = v => m.left + (v - p0) / (p1 - p0) * iw;
+    const x = d => xOfPos(pos(d));
+    // The date at a horizontal pixel: invert the (non-decreasing) position by bisection
+    const dateAt = px => {
+        const target = p0 + (px - m.left) / iw * (p1 - p0);
+        let lo = X_START.getTime(), hi = X_END.getTime();
+        for (let i = 0; i < 40; i++) { const mid = (lo + hi) / 2; if (pos(mid) < target) lo = mid; else hi = mid; }
+        return new Date(hi).toISOString().slice(0, 10);
+    };
+
+    const svg = el("svg", {viewBox: `0 0 ${width} ${height}`, width, role: "img",
+        "aria-label": "AI risk proposals over time: how many were still possible, and each proposal's window from when it was proposed to the event that foreclosed it, or to today if it is still possible"});
+    container.appendChild(svg);
+
+    function showTip(evt, title, body) {
+        tooltip.innerHTML = "";
+        const b = document.createElement("b");
+        b.textContent = title;
+        tooltip.appendChild(b);
+        tooltip.appendChild(document.createTextNode(body));
+        tooltip.style.display = "block";
+        const rect = container.getBoundingClientRect();
+        let left = evt.clientX - rect.left + container.scrollLeft + 12;
+        if (left + 340 > rect.width + container.scrollLeft) left = Math.max(4, left - 364);
+        tooltip.style.left = left + "px";
+        tooltip.style.top = (evt.clientY - rect.top + 12) + "px";
+    }
+    const hideTip = () => { tooltip.style.display = "none"; };
+    // Point marks are hit-tested by nearest target; bars by the row under the pointer
+    const targets = [], bands = [];
+
+    const defs = el("defs", {}, svg);
+    const hatch = el("pattern", {id: "fcl-hatch", width: 6, height: 6, patternUnits: "userSpaceOnUse", patternTransform: "rotate(45)"}, defs);
+    el("rect", {width: 6, height: 6, fill: "#fbe9e9"}, hatch);
+    el("line", {x1: 0, y1: 0, x2: 0, y2: 6, stroke: NOW.impossible.color, "stroke-width": 2.5}, hatch);
+
+    // Grid across all panels: years, or powers of ten of compute with the years marked beneath
+    const gridLine = (xv, dash) => {
+        for (const [a, b] of [[m.top, m.top + ih], [rTop, rTop + rh], [p2Top, p2Top + ih2]])
+            el("line", {x1: xv, x2: xv, y1: a, y2: b, stroke: "#e6e5e0", "stroke-dasharray": dash}, svg);
+    };
+    if (!compute) {
+        for (let year = 2012; year <= 2026; year++) {
+            const xv = x(`${year}-01-01`);
+            gridLine(xv, "none");
+            const t = el("text", {x: xv + 4, y: p2Top + ih2 + 18, "text-anchor": "start", fill: "#52514e", "font-size": 12}, svg);
+            t.textContent = String(year);
+        }
+    } else {
+        for (let oom = Math.ceil(p0); oom <= Math.floor(p1); oom++) {
+            const xv = xOfPos(oom);
+            gridLine(xv, "none");
+            const t = el("text", {x: xv, y: p2Top + ih2 + 18, "text-anchor": "middle", fill: "#52514e", "font-size": 12}, svg);
+            t.textContent = `10^${oom}`;
+        }
+        let lastX = -Infinity;
+        for (let year = 2012; year <= 2026; year++) {
+            const xv = x(`${year}-01-01`);
+            if (xv - lastX < 30) continue;
+            lastX = xv;
+            el("line", {x1: xv, x2: xv, y1: p2Top + ih2, y2: p2Top + ih2 + 26, stroke: "#b5b4ae"}, svg);
+            const t = el("text", {x: xv + 3, y: p2Top + ih2 + 34, "text-anchor": "start", fill: "#8a8984", "font-size": 10}, svg);
+            t.textContent = String(year);
+        }
+        const axisLabel = el("text", {x: m.left + iw, y: p2Top + ih2 + 50, "text-anchor": "end", fill: "#52514e", "font-size": 12}, svg);
+        axisLabel.textContent = "Training compute of the largest model so far (FLOP), interpolated between records; years marked beneath";
+    }
+
+    // Upper panel: stacked counts of proposals still possible, now much harder, now impossible
+    const dates = [...new Set(rows.flatMap(p => [p.proposed, p.implemented, p.foreclosed]).filter(Boolean))].sort();
+    const inForce = (p, d) => p.implemented && p.implemented <= d && !closedBy(p, d);
+    const counts = d => ({
+        implemented: rows.filter(p => inForce(p, d)).length,
+        open: rows.filter(p => p.proposed <= d && !closedBy(p, d) && !inForce(p, d)).length,
+        harder: rows.filter(p => closedBy(p, d) && p.now === "harder").length,
+        impossible: rows.filter(p => closedBy(p, d) && p.now === "impossible").length,
+    });
+    const yMax = Math.max(rows.length, 1);
+    const y = v => m.top + ih - v / yMax * ih;
+    const step = Math.max(1, Math.ceil(yMax / 5));
+    for (let v = 0; v <= yMax; v += step) {
+        el("line", {x1: m.left, x2: m.left + iw, y1: y(v), y2: y(v), stroke: "#e6e5e0"}, svg);
+        const t = el("text", {x: m.left - 8, y: y(v) + 4, "text-anchor": "end", fill: "#52514e", "font-size": 12}, svg);
+        t.textContent = String(v);
+    }
+    el("line", {x1: m.left, x2: m.left + iw, y1: m.top + ih, y2: m.top + ih, stroke: "#8a8984"}, svg);
+    const yLabel = el("text", {transform: `translate(16 ${m.top + ih / 2}) rotate(-90)`, "text-anchor": "middle", fill: "#52514e", "font-size": 12}, svg);
+    yLabel.textContent = "Proposals";
+
+    // Each layer is a step area between a lower and an upper cumulative count
+    const layers = [["impossible", NOW.impossible.color, 0.85], ["harder", NOW.harder.color, 0.85], ["implemented", IMPL_COLOR, 0.9], ["open", OPEN_COLOR, 0.85]];
+    const breaks = [X_START.toISOString().slice(0, 10), ...dates, X_END.toISOString().slice(0, 10)];
+    // Stack from the bottom: implemented, still possible, much harder, impossible
+    const stackAt = d => {
+        const c = counts(d), out = {};
+        let base = 0;
+        for (const key of ["implemented", "open", "harder", "impossible"]) { out[key] = [base, base + c[key]]; base += c[key]; }
+        return out;
+    };
+    for (const [key, color, opacity] of layers) {
+        const top = [], bottom = [];
+        for (let i = 0; i < breaks.length - 1; i++) {
+            const [lo, hi] = stackAt(breaks[i])[key];
+            top.push([x(breaks[i]), y(hi)], [x(breaks[i + 1]), y(hi)]);
+            bottom.push([x(breaks[i]), y(lo)], [x(breaks[i + 1]), y(lo)]);
+        }
+        const pts = [...top, ...bottom.reverse()];
+        el("path", {d: pts.map(([px, py], i) => `${i ? "L" : "M"} ${px.toFixed(1)} ${py.toFixed(1)}`).join(" ") + " Z",
+            fill: color, opacity, stroke: "none"}, svg);
+    }
+    const p1Title = el("text", {x: m.left, y: m.top - 6, fill: "#0b0b0b", "font-size": 13, "font-weight": "bold"}, svg);
+    p1Title.textContent = "Proposals implemented, still possible, now much harder, and now impossible";
+    // Hover on the upper panel: counts at that date
+    const atText = d => compute ? `${fmtDate(d)}: frontier ${flopText(logCompute(d))} (record: ${recordAt(d)?.[2] ?? "none"})` : fmtDate(d);
+    bands.push({y0: m.top, y1: m.top + ih, tip: px => {
+        const d = dateAt(px);
+        const c = counts(d);
+        const last = rows.filter(p => closedBy(p, d)).sort((a, b) => a.foreclosed.localeCompare(b.foreclosed)).pop();
+        return {title: atText(d), body: `Implemented and in force: ${c.implemented}. Still possible: ${c.open}. Now much harder: ${c.harder}. Now impossible: ${c.impossible}.` +
+            (last ? ` Most recently foreclosed: ${last.short} (${fmtDate(last.foreclosed, false)}).` : "")};
+    }});
+
+    // Middle panel: moving-average rates of proposals, implementations and foreclosures, sampled monthly up to today
+    // The window is 1 year of time, or 1 order of magnitude of compute, centred on each point; it is only valid where it lies within the data.
+    // Each sample is a position on the axis; on the time axis positions are dates, on the compute axis log FLOP values.
+    const firstData = PROPOSALS.map(p => p.proposed).sort()[0];
+    const half = compute ? 0.5 : MA_YEARS / 2 * YEAR_MS;
+    const validFrom = pos(firstData) + half, validTo = pos(TODAY) - half;
+    const samples = [];
+    const sampleStep = compute ? 0.02 : YEAR_MS / 24;
+    for (let v = validFrom; v < validTo; v += sampleStep) samples.push(v);
+    if (validTo >= validFrom) samples.push(validTo);
+    // Events whose position lies in the window centred on v
+    const inWindow = (key, v) => rows.filter(p => p[key] && pos(p[key]) > v - half && pos(p[key]) <= v + half);
+    const perUnit = compute ? 1 : MA_YEARS;
+    const series = RATES.map(r => ({...r, values: samples.map(v => inWindow(r.key, v).length / perUnit)}));
+    const rMax = Math.max(1, Math.ceil(Math.max(...series.flatMap(sr => sr.values))));
+    const yr = v => rTop + rh - v / rMax * rh;
+    const rStep = rMax <= 4 ? 1 : Math.ceil(rMax / 4);
+    for (let v = 0; v <= rMax; v += rStep) {
+        el("line", {x1: m.left, x2: m.left + iw, y1: yr(v), y2: yr(v), stroke: "#e6e5e0"}, svg);
+        const t = el("text", {x: m.left - 8, y: yr(v) + 4, "text-anchor": "end", fill: "#52514e", "font-size": 12}, svg);
+        t.textContent = String(v);
+    }
+    el("line", {x1: m.left, x2: m.left + iw, y1: rTop + rh, y2: rTop + rh, stroke: "#8a8984"}, svg);
+    const rLabel = el("text", {transform: `translate(16 ${rTop + rh / 2}) rotate(-90)`, "text-anchor": "middle", fill: "#52514e", "font-size": 12}, svg);
+    rLabel.textContent = compute ? "Per 10× compute" : "Per year";
+    const rTitle = el("text", {x: m.left, y: rTop - 12, fill: "#0b0b0b", "font-size": 13, "font-weight": "bold"}, svg);
+    rTitle.textContent = compute
+        ? "Proposal, implementation and foreclosure rates: events per tenfold increase in frontier compute, centred moving average over one order of magnitude"
+        : "Proposal, implementation and foreclosure rates: events per year, 1-year centred moving average";
+    for (const sr of series) {
+        if (!samples.length) continue;
+        el("path", {d: sr.values.map((v, i) => `${i ? "L" : "M"} ${xOfPos(samples[i]).toFixed(1)} ${yr(v).toFixed(1)}`).join(" "),
+            fill: "none", stroke: sr.color, "stroke-width": 2.5, "stroke-linejoin": "round"}, svg);
+        const last = sr.values[sr.values.length - 1];
+        const t = el("text", {x: xOfPos(validTo) + 6, y: yr(last) + 4, fill: sr.color, "font-size": 11, "font-weight": "bold",
+            stroke: "#fcfcfb", "stroke-width": 3, "paint-order": "stroke"}, svg);
+        t.textContent = last.toFixed(1);
+    }
+    bands.push({y0: rTop, y1: rTop + rh, tip: px => {
+        const v = p0 + (px - m.left) / iw * (p1 - p0);
+        if (v < validFrom || v > validTo) return {title: "No valid average", body: `The window around this point reaches past the data, so the average isn't shown.`};
+        const unit = compute ? "per 10× compute" : "per year";
+        const parts = RATES.map(r => {
+            const evs = inWindow(r.key, v);
+            return `${r.label}: ${(evs.length / perUnit).toFixed(1)} ${unit}${evs.length ? " (" + evs.map(p => p.short).join("; ") + ")" : ""}.`;
+        });
+        const title = compute
+            ? `Frontier compute from ${flopText(v - half)} to ${flopText(v + half)} (${fmtDate(dateAt(xOfPos(v - half)))} to ${fmtDate(dateAt(xOfPos(v + half)))})`
+            : `Year centred on ${fmtDate(new Date(v).toISOString().slice(0, 10))}`;
+        return {title, body: parts.join(" ")};
+    }});
+
+    // Lower panel: one row per proposal
+    const p2Title = el("text", {x: m.left, y: p2Top - 12, fill: "#0b0b0b", "font-size": 13, "font-weight": "bold"}, svg);
+    p2Title.textContent = "Each proposal's window: from when it was proposed to the event that closed it, or to today";
+    el("line", {x1: m.left, x2: m.left + iw, y1: p2Top + ih2, y2: p2Top + ih2, stroke: "#8a8984"}, svg);
+    rows.forEach((p, i) => {
+        const cy = p2Top + i * rowH + rowH * 0.62;
+        const open = isOpen(p);
+        const x0 = x(p.proposed), x1 = x(p.foreclosed ?? TODAY), xEnd = x(X_END);
+        const color = NOW[p.now].color;
+        const xi = p.implemented ? x(p.implemented) : null;
+        el("rect", {x: x0, y: cy - 5, width: Math.max(x1 - x0, 2), height: 10, fill: OPEN_COLOR}, svg);
+        if (xi !== null) el("rect", {x: xi, y: cy - 5, width: Math.max(x1 - xi, 2), height: 10, fill: IMPL_COLOR}, svg);
+        if (open) el("path", {d: `M ${x1} ${cy - 8} L ${x1 + 10} ${cy} L ${x1} ${cy + 8} Z`, fill: xi !== null ? IMPL_COLOR : OPEN_COLOR}, svg);
+        else if (p.now === "impossible") el("rect", {x: x1, y: cy - 5, width: xEnd - x1, height: 10, fill: "url(#fcl-hatch)", stroke: color, "stroke-width": 1}, svg);
+        else el("line", {x1, x2: xEnd, y1: cy, y2: cy, stroke: color, "stroke-width": 3, "stroke-dasharray": "6 4"}, svg);
+        el("circle", {cx: x0, cy, r: 5, fill: p.approx ? "#fcfcfb" : OPEN_COLOR, stroke: OPEN_COLOR, "stroke-width": 2}, svg);
+        if (xi !== null) el("rect", {x: xi - 6, y: cy - 6, width: 12, height: 12, fill: NOW.implemented.color, stroke: "#fcfcfb", "stroke-width": 1.5}, svg);
+        if (!open) el("path", {d: `M ${x1} ${cy - 8} L ${x1 + 8} ${cy} L ${x1} ${cy + 8} L ${x1 - 8} ${cy} Z`, fill: "#0b0b0b", stroke: "#fcfcfb", "stroke-width": 1.5}, svg);
+        // Label above the bar, or ending at the right edge when the bar starts late
+        const late = x0 > m.left + iw * 0.6;
+        const label = el("text", {x: late ? xEnd : x0, y: cy - 10, "text-anchor": late ? "end" : "start", fill: "#0b0b0b", "font-size": 12,
+            stroke: "#fcfcfb", "stroke-width": 3, "paint-order": "stroke"}, svg);
+        const status = p.now === "implemented" ? `implemented after ${fmtYears(implLag(p))}` : open ? `open for ${fmtYears(years(p))} so far` : fmtYears(years(p));
+        label.textContent = `${p.short} (${p.by.split(" (")[0].split(",")[0]}) · ${status}`;
+
+        const flopAt = d => compute ? ` Frontier compute then: ${flopText(logCompute(d))}.` : "";
+        targets.push({x: x0, y: cy, title: `Proposed: ${p.short}`, body: `${fmtDate(p.proposed, p.approx)}, ${p.by}. ${p.what}${flopAt(p.proposed)}`});
+        if (xi !== null) targets.push({x: xi, y: cy, title: `Implemented: ${fmtDate(p.implemented, p.implementedApprox)}`,
+            body: `${fmtYears(implLag(p))} after it was proposed. ${p.implementedBy}.`});
+        if (open) targets.push({x: x1, y: cy, title: `${NOW[p.now].label}: ${p.short}`, body: `${p.now === "implemented" ? "In force" : "Open"} for ${fmtYears(years(p))} since it was proposed. What would close it: ${p.closes}`});
+        else targets.push({x: x1, y: cy, title: `Foreclosed: ${fmtDate(p.foreclosed, p.foreclosedApprox)}`,
+            body: `${p.event}. ${NOW[p.now].label}: ${p.why}${compute ? ` Frontier compute grew ${foldText(logCompute(p.foreclosed) - logCompute(p.proposed))} while it was possible.` : ""}`});
+        const implText = p.implemented ? ` Implemented ${fmtDate(p.implemented, p.implementedApprox)}: ${p.implementedBy}.` : "";
+        bands.push({y0: p2Top + i * rowH, y1: p2Top + (i + 1) * rowH, tip: px => open ? ({
+            title: p.short,
+            body: `${NOW[p.now].label}. Proposed ${fmtDate(p.proposed, p.approx)} by ${p.by}. ${p.what}${implText} What would close it: ${p.closes}`,
+        }) : ({
+            title: p.short,
+            body: px < x1
+                ? `Possible for ${fmtYears(years(p))}, from ${fmtDate(p.proposed, p.approx)} (${p.by}) to ${fmtDate(p.foreclosed, p.foreclosedApprox)}. ${p.what}${implText}`
+                : `${NOW[p.now].label} since ${fmtDate(p.foreclosed, p.foreclosedApprox)}: ${p.event}. ${p.why}`,
+        })});
+    });
+
+    const overlay = el("rect", {x: 0, y: 0, width, height, fill: "transparent"}, svg);
+    function hit(evt) {
+        const pt = svg.createSVGPoint();
+        pt.x = evt.clientX; pt.y = evt.clientY;
+        const {x: px, y: py} = pt.matrixTransform(svg.getScreenCTM().inverse());
+        let best = null, bestD = 12;
+        for (const t of targets) {
+            const d = Math.hypot(px - t.x, py - t.y);
+            if (d <= bestD) { best = t; bestD = d; }
+        }
+        if (best) return best;
+        if (px < m.left || px > m.left + iw) return null;
+        const band = bands.find(b => py >= b.y0 && py < b.y1);
+        return band ? band.tip(px) : null;
+    }
+    const onOverlay = evt => {
+        const t = hit(evt);
+        overlay.style.cursor = t ? "pointer" : "default";
+        t ? showTip(evt, t.title, t.body) : hideTip();
+    };
+    overlay.addEventListener("mousemove", onOverlay);
+    overlay.addEventListener("click", onOverlay);
+    overlay.addEventListener("mouseleave", hideTip);
+}
+
+function describe() {
+    const median = arr => { const s = [...arr].sort((a, b) => a - b), n = s.length; return n % 2 ? s[(n - 1) / 2] : (s[n / 2 - 1] + s[n / 2]) / 2; };
+    const closed = PROPOSALS.filter(p => !isOpen(p));
+    const implementedThenClosed = closed.filter(p => p.implemented);
+    const sameDay = PROPOSALS.filter(p => p.implemented === p.proposed), lagged = PROPOSALS.filter(p => p.implemented && p.implemented !== p.proposed);
+    const early = closed.filter(p => p.proposed < "2020-01-01"), late = closed.filter(p => p.proposed >= "2023-01-01");
+    const n = now => PROPOSALS.filter(p => p.now === now).length;
+    const since2023 = PROPOSALS.filter(p => p.proposed >= "2023-01-01");
+    const twoYearsAgo = new Date(new Date(TODAY) - 2 * YEAR_MS).toISOString().slice(0, 10);
+    const early2 = PROPOSALS.filter(p => p.proposed < "2020-01-01"), late2 = since2023.filter(p => p.proposed <= twoYearsAgo);
+    const within2 = list => list.filter(p => !isOpen(p) && years(p) <= 2).length;
+    const growth = p => logCompute(p.foreclosed) - logCompute(p.proposed);
+    const lastYear = key => eventsIn(PROPOSALS, key, shiftYears(TODAY, -1), TODAY).length;
+    document.getElementById("fcl-summary").textContent =
+        `Of the ${PROPOSALS.length} proposals that pass the threshold, ${n("implemented")} are implemented and in force, ${n("open")} are still possible but not implemented, ${n("harder")} are now much harder and ${n("impossible")} are now impossible. ` +
+        `${implementedThenClosed.length} of the foreclosed proposals had been implemented first (${implementedThenClosed.map(p => `"${p.short}"`).join(", ")}). ` +
+        `Leaving out the ${sameDay.length} adopted on the day they were announced, implemented proposals took a median of ${fmtYears(median(lagged.map(implLag)))} from proposal to adoption. ` +
+        `Among those that have closed, the median window from proposal to foreclosure was ${fmtYears(median(closed.map(years)))}: ` +
+        `${fmtYears(median(early.map(years)))} for the ${early.length} made before 2020, and ${fmtYears(median(late.map(years)))} for the ${late.length} made since 2023. ` +
+        `Of the ${since2023.length} proposals made since 2023, ${since2023.filter(p => !isOpen(p)).length} have already closed. ` +
+        // The medians only count proposals that have closed, which favours fast closures among recent ones. Comparing the share closed within
+        // two years, among proposals made at least two years ago, counts the ones still open too.
+        `A fairer comparison, which counts proposals still open: of those made at least two years ago, ${within2(early2)} of the ${early2.length} made before 2020 closed within two years, ` +
+        `against ${within2(late2)} of the ${late2.length} made since 2023. ` +
+        `Measured in capability instead of time, the gap is larger: frontier training compute grew a median ${foldText(median(early.map(growth)))} while the proposals made before 2020 stayed possible, ` +
+        `and ${foldText(median(late.map(growth)))} for those made since 2023 (counting only proposals that have closed). ` +
+        `In the last 12 months, ${lastYear("proposed")} new proposal${lastYear("proposed") === 1 ? " was" : "s were"} made, ${lastYear("implemented")} implemented and ${lastYear("foreclosed")} foreclosed.`;
+}
+
+function fillTable() {
+    const body = document.querySelector("#fcl-table tbody");
+    for (const p of [...PROPOSALS].sort((a, b) => a.proposed.localeCompare(b.proposed))) {
+        const row = document.createElement("tr");
+        const open = isOpen(p);
+        for (const v of [`${p.short}: ${p.what}`, p.by, fmtDate(p.proposed, p.approx),
+                         p.implemented ? `${fmtDate(p.implemented, p.implementedApprox)}: ${p.implementedBy}` : "-", open ? "-" : p.event, open ? "-" : fmtDate(p.foreclosed, p.foreclosedApprox),
+                         open ? `${fmtYears(years(p))} so far` : fmtYears(years(p)), NOW[p.now].label, open ? `Would close: ${p.closes}` : p.why]) {
+            const td = document.createElement("td");
+            td.textContent = v;
+            row.appendChild(td);
+        }
+        body.appendChild(row);
+    }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    describe();
+    fillTable();
+    draw();
+    for (const button of document.querySelectorAll(".fcl-controls button")) {
+        button.addEventListener("click", () => {
+            const group = Object.keys(button.dataset)[0];
+            VIEW[group] = button.dataset[group];
+            for (const b of button.parentElement.querySelectorAll("button")) b.setAttribute("aria-pressed", String(b === button));
+            describe();
+            draw();
+        });
+    }
+    let resizeTimer;
+    window.addEventListener("resize", () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(draw, 150);
+    });
+});
+</script>
+</body>
+</html>
