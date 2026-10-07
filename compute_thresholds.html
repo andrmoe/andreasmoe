@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="page" content="projects">
+        <link rel="stylesheet" href="styles.css"/>
+    <link rel="icon" href="favicon.png" />
+    <title>Andreas Moe</title>
+    <script src="header.js"></script>
+    <style>
+        .cth {
+            --surface: #fcfcfb;
+            --ink: #0b0b0b;
+            --ink-2: #52514e;
+            --model: #2a78d6;
+            --below: #4a3aa7;
+            --policy: #8a5a00;
+            max-width: 1600px;
+        }
+        .cth-chart {
+            position: relative;
+            overflow-x: auto;
+            background: var(--surface);
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 8px;
+        }
+        .cth-chart svg { display: block; height: auto; font-family: sans-serif; }
+        .cth-controls { display: flex; flex-wrap: wrap; gap: 24px; margin: 12px 0; font-family: sans-serif; font-size: 0.9em; color: var(--ink-2); }
+        .cth-controls div { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+        .cth-controls button {
+            font: inherit;
+            border: 1px solid #ccc;
+            background: white;
+            border-radius: 4px;
+            padding: 4px 10px;
+            cursor: pointer;
+        }
+        .cth-controls button[aria-pressed="true"] { border-color: var(--below); background: #ece9f8; color: var(--ink); font-weight: bold; }
+        .cth-legend { display: flex; flex-wrap: wrap; gap: 16px; margin: 8px 0; font-family: sans-serif; font-size: 0.9em; color: var(--ink-2); }
+        .cth-legend span { display: inline-flex; align-items: center; gap: 6px; }
+        .cth-tooltip {
+            position: absolute;
+            pointer-events: none;
+            background: white;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+            padding: 8px 10px;
+            font-family: sans-serif;
+            font-size: 0.85em;
+            color: var(--ink);
+            max-width: 320px;
+            display: none;
+        }
+        .cth-tooltip b { display: block; margin-bottom: 4px; }
+        .cth-read {
+            border-left: 4px solid var(--below);
+            background: #f4f3ef;
+            padding: 8px 16px;
+            margin: 16px 0;
+        }
+        .cth-read li, .cth-findings li { margin: 6px 0; }
+        .cth-note { color: var(--ink-2); font-size: 0.9em; }
+        .cth-ai-notice {
+            font-family: sans-serif;
+            font-size: 3.5em;
+            font-weight: bold;
+            line-height: 1.1;
+            color: #d03b3b;
+            border: 6px solid #d03b3b;
+            border-radius: 8px;
+            padding: 24px;
+            margin: 16px 0 24px;
+            text-align: center;
+        }
+        .cth-toc { display: flex; flex-wrap: wrap; align-items: stretch; gap: 0; margin: 16px 0; font-family: sans-serif; font-size: 0.9em; }
+        .cth-step {
+            flex: 1 1 200px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background: white;
+            padding: 10px 12px;
+        }
+        .cth-step.tested { border: 2px solid var(--below); background: #f6f4fc; }
+        .cth-step b { display: block; margin-bottom: 4px; }
+        .cth-step .status { display: inline-block; margin-top: 6px; font-size: 0.85em; font-weight: bold; }
+        .cth-step .ok { color: #14855c; }
+        .cth-step .weak { color: #b26a00; }
+        .cth-step .fail { color: #c0392b; }
+        .cth-arrow { flex: 0 0 28px; display: flex; align-items: center; justify-content: center; color: var(--ink-2); font-size: 1.4em; }
+        .cth table { font-size: 0.9em; }
+        .cth td, .cth th { text-align: left; }
+    </style>
+</head>
+<body>
+<div id="header"></div>
+<div class="cth">
+<div class="cth-ai-notice">Everything on this page is AI generated</div>
+<h2 id="blogtitle">Do Compute Thresholds Still Catch Frontier-Level AI?</h2>
+<p>
+A large share of AI governance research on catastrophic risk follows one theory of change: <b>regulate the models trained with the most compute</b>.
+Training compute is measurable, known before deployment and checkable by outsiders, and it tracks capability.
+A threshold in FLOP can therefore pick out the few models that need evaluations and risk management, without burdening everyone else
+(<a href="https://arxiv.org/abs/2402.08797" target="_blank">Sastry et al., 2024</a>; <a href="https://arxiv.org/abs/2405.10799" target="_blank">Heim &amp; Koessler, 2024</a>).
+The idea has spread: thresholds of 10<sup>25</sup> or 10<sup>26</sup> FLOP now appear in EU, US state and South Korean law.
+Getting the idea into law, however, is only one step of the theory. This page tests the step it rests on: that a model below the threshold can't do what frontier models can.
+</p>
+
+<div class="cth-toc" aria-label="Theory of change">
+    <div class="cth-step"><b>1. Research</b>Compute is detectable, quantifiable and correlates with capability, so it can be a first filter for oversight.
+        <span class="status ok">Established (2024)</span></div>
+    <div class="cth-arrow" aria-hidden="true">&rarr;</div>
+    <div class="cth-step"><b>2. Policy uptake</b>Compute thresholds written into law: the EU AI Act, California, New York, Illinois and South Korea.
+        <span class="status ok">Achieved; US federal threshold revoked</span></div>
+    <div class="cth-arrow" aria-hidden="true">&rarr;</div>
+    <div class="cth-step"><b>3. Coverage</b>Models above the threshold are identified and take on obligations.
+        <span class="status weak">Unverifiable in public: most frontier labs don't disclose compute</span></div>
+    <div class="cth-arrow" aria-hidden="true">&rarr;</div>
+    <div class="cth-step tested"><b>4. Targeting</b>Models below the threshold aren't capable enough to need oversight.
+        <span class="status fail" id="cth-step4-status">Tested on this page</span></div>
+</div>
+
+<div class="cth-read">
+    <b>How to read the chart</b>
+    <ul>
+        <li><b style="color:#2a78d6">Blue dots</b> are frontier models: each one was the most capable model released so far. Higher means more capable.
+            Capability is Epoch AI's Capabilities Index, converted to the METR task-length scale used on the <a href="ai_control.html">AI control page</a>.
+            Filled dots have a public compute estimate above the threshold; hollow dots have no public compute estimate.</li>
+        <li><b style="color:#4a3aa7">Purple squares</b> are models whose estimated training compute is below the chosen threshold. The <b style="color:#4a3aa7">purple step line</b> is the most capable of them so far.</li>
+        <li><b style="color:#8a5a00">Brown dashed lines</b> mark the capability of the frontier when each law using this threshold was adopted: roughly what the threshold was written to catch.
+            Once the purple line rises above a brown line, models below the threshold can do what the frontier could when that law was written.</li>
+        <li>The <b>lower panel</b> shows how far behind the frontier the best model below the threshold is, in months: the time since the frontier was first as capable.</li>
+    </ul>
+</div>
+
+<div class="cth-controls">
+    <div role="group" aria-label="Threshold">
+        Threshold:
+        <button type="button" data-threshold="1e25" aria-pressed="true">10<sup>25</sup> FLOP (EU AI Act)</button>
+        <button type="button" data-threshold="1e26" aria-pressed="false">10<sup>26</sup> FLOP (US states, South Korea)</button>
+    </div>
+    <div role="group" aria-label="Margin">
+        Count a model as below only if its estimate is at least
+        <button type="button" data-margin="1" aria-pressed="true">&times;1</button>
+        <button type="button" data-margin="3" aria-pressed="false">&times;3</button>
+        <button type="button" data-margin="10" aria-pressed="false">&times;10</button>
+        under the threshold
+    </div>
+    <div role="group" aria-label="Scale">
+        Scale:
+        <button type="button" data-scale="linear" aria-pressed="false">linear</button>
+        <button type="button" data-scale="log" aria-pressed="true">logarithmic</button>
+    </div>
+</div>
+
+<div class="cth-legend">
+    <span><svg width="14" height="14"><circle cx="7" cy="7" r="5" fill="#2a78d6"/></svg>Frontier model, compute above the threshold</span>
+    <span><svg width="14" height="14"><circle cx="7" cy="7" r="4.5" fill="#fcfcfb" stroke="#2a78d6" stroke-width="2"/></svg>Frontier model, compute not public</span>
+    <span><svg width="14" height="14"><circle cx="7" cy="7" r="3" fill="#2a78d6" opacity="0.5"/></svg>Other model above the threshold</span>
+    <span><svg width="14" height="14"><rect x="2" y="2" width="10" height="10" fill="#4a3aa7"/></svg>Below the threshold, new record</span>
+    <span><svg width="14" height="14"><rect x="3" y="3" width="8" height="8" fill="#fcfcfb" stroke="#4a3aa7" stroke-width="1.5"/></svg>Below the threshold</span>
+    <span><svg width="26" height="12"><path d="M 0 10 L 10 10 L 10 3 L 26 3" fill="none" stroke="#4a3aa7" stroke-width="3"/></svg>Most capable model below the threshold</span>
+    <span><svg width="26" height="12"><path d="M 0 6 L 26 6" fill="none" stroke="#8a5a00" stroke-width="2" stroke-dasharray="6 4"/></svg>Frontier when a law was adopted</span>
+    <span><svg width="14" height="14"><path d="M 7 1 L 13 7 L 7 13 L 1 7 Z" fill="#8a5a00"/></svg>Law adopted (grey: other threshold)</span>
+</div>
+
+<div class="cth-chart" id="cth-chart">
+    <div class="cth-tooltip" id="cth-tooltip"></div>
+</div>
+<p class="cth-note">Hover over any marker for the model, its compute estimate and sources.</p>
+
+<h3>What the data says</h3>
+<p id="cth-summary"></p>
+<ul class="cth-findings">
+    <li><b>Models below 10<sup>25</sup> FLOP matched GPT-4 before the EU's obligations applied.</b> The EU set its threshold at GPT-4's scale in December 2023.
+        Llama 3.1 70B (about 7.9&times;10<sup>24</sup> FLOP) matched GPT-4 in July 2024, and Qwen2.5 72B passed it in September 2024. The obligations only applied from August 2025.
+        In 2026, models estimated at 2.5&ndash;4.3&times;10<sup>24</sup> FLOP (DeepSeek V4 Flash, V4.1 Flash) score above GPT-5.</li>
+    <li><b>The frontier itself may sit below 10<sup>26</sup>.</b> Epoch's estimate for GPT-5, the frontier when California signed SB 53, is about 6.6&times;10<sup>25</sup> FLOP (speculative; range 2&times;10<sup>25</sup> to 2&times;10<sup>26</sup>).
+        If it is right, a law aimed at the frontier didn't clearly cover the frontier model of its own day.</li>
+    <li id="cth-disclosure"></li>
+    <li><b>The research saw this coming; policy hasn't followed.</b> Heim &amp; Koessler call compute thresholds a first filter that should be
+        <a href="https://arxiv.org/abs/2405.10799" target="_blank">updated and complemented with other metrics</a>, and
+        <a href="https://arxiv.org/abs/2407.05694" target="_blank">Hooker (2024)</a> argues the compute&ndash;risk link is too unstable to rely on.
+        Yet every law since 2023 has reused 10<sup>25</sup> or 10<sup>26</sup>. The EU can change its threshold by delegated act
+        (<a href="https://artificialintelligenceact.eu/article/51/" target="_blank">Article 51(3)</a>) and can designate models on capability alone, but the threshold is still 10<sup>25</sup>.
+        The US state laws also require $500 million in annual revenue, which ties them to large developers rather than to capability.</li>
+</ul>
+
+<h3>Laws that use a training-compute threshold</h3>
+<table>
+    <thead><tr><th>Adopted</th><th>Law</th><th>Threshold</th><th>Other conditions</th><th>Status</th></tr></thead>
+    <tbody id="cth-policy-table"></tbody>
+</table>
+
+<h3>How the comparison is built</h3>
+<p class="cth-note">
+<b>Capability.</b> Every model is placed with <a href="https://epoch.ai/benchmarks" target="_blank">Epoch AI's Capabilities Index</a> (ECI), a composite of many benchmarks.
+So that this page reads on the same scale as the <a href="ai_control.html">AI control page</a>, ECI is converted to a METR-style 50% time horizon with the same log-linear fit:
+ln(minutes) = -18.25 + 0.157 &times; ECI (R&sup2; = 0.97 across 21 models with both). The conversion is monotonic, so it changes no ordering or crossing date.
+Using one index for every model keeps frontier and below-threshold models on equal footing, since METR has measured few of the latter.
+</p>
+<p class="cth-note">
+Judgement calls:
+(1) <b>Compute.</b> Training compute is Epoch AI's estimate from its <a href="https://epoch.ai/data/ai-models" target="_blank">AI models database</a>. Most estimates for open models are 6 &times; active parameters &times; tokens and count <b>pre-training only</b>.
+Reinforcement learning after pre-training can add 10% to 100% or more (Epoch's own range for o3 and Grok 4), and the EU counts cumulative compute.
+The margin buttons handle this: at &times;3 or &times;10, a model counts as below only if its estimate is that many times under the threshold. The main result holds even at &times;10 for the 10<sup>25</sup> threshold.
+(2) <b>Frontier.</b> A frontier model is one with a higher ECI than every model released before it, from GPT-4 (March 2023) on. Models without an ECI score aren't placed.
+(3) <b>What the threshold was "meant" to catch.</b> The brown lines use the frontier's capability on the date each law was adopted or its threshold agreed (December 2023 for the EU AI Act).
+This is a proxy for intent; laws also aim to cover future, more capable models.
+(4) <b>Months behind.</b> For each week, the lower panel finds the most capable model below the threshold so far, and reports how long ago a frontier model first reached that capability. It starts once a model below the threshold matched GPT-4, the earliest frontier model in the data.
+(5) <b>Capability is not risk.</b> ECI measures general benchmark performance. Specific dangerous capabilities (bio, cyber, autonomy) may track compute differently, and a capable model can still be deployed safely.
+The page tests whether thresholds pick out capable models, not whether those models are dangerous.
+</p>
+
+<details>
+    <summary>Data table</summary>
+    <table id="cth-model-table">
+        <thead><tr><th>Model</th><th>Organization</th><th>Release</th><th>ECI (90% CI)</th><th>Time-horizon equivalent</th><th>Training compute (FLOP)</th><th>Estimate confidence</th><th>Access</th></tr></thead>
+        <tbody></tbody>
+    </table>
+</details>
+
+<h3>Further reading</h3>
+<ul>
+    <li><a href="https://epoch.ai/data-insights/models-over-1e25-flop" target="_blank">Epoch AI: Over 30 AI models have been trained at the scale of GPT-4</a> (June 2025):
+        counts include closed models whose compute Epoch infers from benchmarks, typically within a factor of 2.2.</li>
+    <li><a href="https://arxiv.org/abs/2502.00003" target="_blank">Defending Compute Thresholds Against Legal Loopholes</a> (2025): how distillation, fine-tuning and model merging can get around thresholds.</li>
+    <li><a href="https://arxiv.org/abs/2503.05705" target="_blank">Inference Scaling Reshapes AI Governance</a> (2025): why compute spent at inference time weakens training-compute thresholds.</li>
+    <li><a href="https://law-ai.org/wp-content/uploads/2024/11/The-Role-of-Compute-Thresholds-for-AI-Governance.pdf" target="_blank">LawAI: The Role of Compute Thresholds for AI Governance</a> (2024).</li>
+</ul>
+
+<h3>Sources</h3>
+<ul class="cth-note">
+    <li><a href="https://epoch.ai/benchmarks" target="_blank">Epoch AI: Capabilities Index</a> and <a href="https://epoch.ai/data/ai-models" target="_blank">AI models database</a> (data from October 2026), CC BY 4.0</li>
+    <li><a href="https://arxiv.org/abs/2402.08797" target="_blank">Sastry et al.: Computing Power and the Governance of AI</a>,
+        <a href="https://arxiv.org/abs/2405.10799" target="_blank">Heim &amp; Koessler: Training Compute Thresholds</a>,
+        <a href="https://arxiv.org/abs/2407.05694" target="_blank">Hooker: On the Limitations of Compute Thresholds</a></li>
+    <li><a href="https://artificialintelligenceact.eu/article/51/" target="_blank">EU AI Act, Article 51</a>,
+        <a href="https://www.consilium.europa.eu/en/press/press-releases/2023/12/09/artificial-intelligence-act-council-and-parliament-strike-a-deal-on-the-first-worldwide-rules-for-ai/" target="_blank">Council: AI Act deal</a> (Dec 2023),
+        <a href="https://digital-strategy.ec.europa.eu/en/policies/contents-code-gpai" target="_blank">GPAI Code of Practice</a></li>
+    <li><a href="https://aona.ai/compliance/regulations/us-executive-order-ai/" target="_blank">US Executive Order 14110 (revoked)</a>,
+        <a href="https://fpf.org/blog/californias-sb-53-the-first-frontier-ai-law-explained/" target="_blank">California SB 53</a>,
+        <a href="https://www.wiley.law/alert-New-York-Finalizes-RAISE-Act-for-Frontier-AI-Models-Law-Takes-Effect-January-1-2027" target="_blank">New York RAISE Act</a>,
+        <a href="https://www.crowell.com/en/insights/client-alerts/illinois-imposes-transparency-and-safety-obligations-on-frontier-ai-systems" target="_blank">Illinois SB 315</a>,
+        <a href="https://www.cooley.com/news/insight/2026/2026-01-27-south-koreas-ai-basic-act-overview-and-key-takeaways" target="_blank">South Korea AI Basic Act</a></li>
+</ul>
+</div>
+
+<script>
+// [name, release date, organization, ECI, ECI 90% CI low, high, training compute (FLOP) or null if Epoch has no estimate, confidence in the compute estimate, accessibility]
+const MODELS = [
+    ["LLaMA-7B", "2023-02-24", "Meta AI", 96.7, 83.49, 103.66, 4e+22, "Confident", "Open weights (non-commercial)"],
+    ["LLaMA-13B", "2023-02-24", "Meta AI", 100.58, 88.99, 106.41, 7.8e+22, "Confident", "Open weights (non-commercial)"],
+    ["LLaMA-33B", "2023-02-24", "Meta AI", 107.41, 97.41, 112.09, 2.73e+23, "Confident", "Open weights (non-commercial)"],
+    ["LLaMA-65B", "2023-02-24", "Meta AI", 110.17, 101.4, 114.12, 5.5e+23, "Confident", "Open weights (non-commercial)"],
+    ["GPT-4 (Mar 2023)", "2023-03-14", "OpenAI", 125.89, 119.25, 130.45, 2.1e+25, "Likely", "API access"],
+    ["Cerebras-GPT-13B", "2023-03-20", "Cerebras Systems", 83.24, 66.01, 92.03, 2.3e+22, "Confident", "Open weights (unrestricted)"],
+    ["Falcon-7B", "2023-04-24", "Technology Innovation Institute", 95.1, 81.1, 102.36, 6.3e+22, "Confident", "Open weights (unrestricted)"],
+    ["RedPajama-INCITE-7B-Base", "2023-05-04", "", 90.43, 74.4, 98.46, 4.1e+22, "Confident", "Unknown"],
+    ["MPT-7B", "2023-05-05", "MosaicML", 94.59, 80.52, 101.56, 4.2e+22, "Confident", "Open weights (unrestricted)"],
+    ["Falcon-40B", "2023-05-25", "Technology Innovation Institute", 104.45, 92.77, 109.93, 2.4e+23, "Confident", "Open weights (unrestricted)"],
+    ["Baichuan1-7B", "2023-06-01", "Baichuan", 90.46, 75.57, 98.46, 5.04e+22, "Confident", "Open weights (non-commercial)"],
+    ["GPT-4 (Jun 2023)", "2023-06-13", "OpenAI", 123.12, 116.6, 126.49, 2.1e+25, "Likely", "API access"],
+    ["MPT-30B", "2023-06-22", "MosaicML", 100.66, 88.92, 106.41, 1.89e+23, "Confident", "Open weights (unrestricted)"],
+    ["XGen-7B", "2023-06-27", "Salesforce", 93.4, 78.79, 100.75, 8.02e+22, "Confident", "Open weights (unrestricted)"],
+    ["Claude 2", "2023-07-11", "Anthropic", 120.13, 112.95, 123.79, 3.87e+24, "Speculative", "API access"],
+    ["Llama 2-7B", "2023-07-18", "Meta AI", 99.06, 86.79, 105.6, 8.4e+22, "Confident", "Open weights (restricted use)"],
+    ["Llama 2-34B", "2023-07-18", "Meta AI", 105.2, 94.54, 110.21, 4.08e+23, "Confident", "Unreleased"],
+    ["Llama 2-13B", "2023-07-18", "Meta AI", 106.17, 96.07, 110.78, 1.6e+23, "Confident", "Open weights (restricted use)"],
+    ["Llama 2-70B", "2023-07-18", "Meta AI", 113.79, 105.66, 117.44, 8.1e+23, "Confident", "Open weights (restricted use)"],
+    ["Baichuan2-13B", "2023-09-06", "Baichuan", 103.19, 91.12, 110.3, 2.03e+23, "Confident", "Open weights (restricted use)"],
+    ["Falcon-180B", "2023-09-06", "Technology Innovation Institute", 112.13, 103.14, 118.9, 3.76e+24, "Confident", "Open weights (restricted use)"],
+    ["Phi-1.5", "2023-09-11", "Microsoft", 91.53, 71.63, 100.79, 1.17e+21, "Confident", "Open weights (unrestricted)"],
+    ["Baichuan 2-7B", "2023-09-20", "Baichuan", 96.33, 83.83, 104.32, 1.09e+23, "Confident", "Open weights (restricted use)"],
+    ["Qwen-14B", "2023-09-24", "Alibaba", 113.03, 103.3, 117.38, 2.5e+23, "Confident", "Open weights (restricted use)"],
+    ["Qwen-7B", "2023-09-28", "Alibaba", 106.83, 93.62, 111.9, 1.01e+23, "Confident", "Open weights (restricted use)"],
+    ["DeepSeek Coder 1.3B", "2023-11-02", "DeepSeek,Peking University", 63.6, 42.27, 76.81, 1.56e+22, "Likely", "Open weights (restricted use)"],
+    ["DeepSeek Coder 6.7B", "2023-11-02", "DeepSeek,Peking University", 89.62, 72.98, 97.8, 8.04e+22, "Likely", "Open weights (restricted use)"],
+    ["DeepSeek Coder 33B", "2023-11-02", "DeepSeek,Peking University", 96.32, 82.84, 103.49, 3.96e+23, "Likely", "Open weights (restricted use)"],
+    ["Yi-34B", "2023-11-02", "01.AI", 117.39, 107.96, 120.6, 6.1e+23, "Confident", "Open weights (restricted use)"],
+    ["Yi 6B", "2023-11-22", "01.AI", 104.77, 94.36, 110.35, 1.26e+23, "Confident", "Open weights (restricted use)"],
+    ["DeepSeek LLM 67B", "2023-11-29", "DeepSeek", 110.5, 95.59, 116.63, 8.04e+23, "Confident", "Open weights (restricted use)"],
+    ["Mixtral 8x7B", "2023-12-11", "Mistral AI", 118.47, 110.39, 121.07, 7.74e+23, "Speculative", "Open weights (unrestricted)"],
+    ["Phi-2", "2023-12-12", "Microsoft", 107.94, 88.62, 113.81, 2.27e+22, "Confident", "Open weights (unrestricted)"],
+    ["GPT-4 Turbo (Nov 2023)", "2024-01-25", "OpenAI", 126.46, 120.87, 128.99, null, "Unknown", "API access"],
+    ["StarCoder 2 7B", "2024-02-20", "Hugging Face,ServiceNow,Nvidia,BigCode", 93.56, 76.76, 101.69, 1.55e+23, "Confident", "Open weights (restricted use)"],
+    ["StarCoder 2 15B", "2024-02-20", "Hugging Face,ServiceNow,Nvidia,BigCode", 105.0, 91.04, 111.32, 3.87e+23, "Confident", "Open weights (restricted use)"],
+    ["Gemma 2B", "2024-02-21", "Google DeepMind", 94.2, 80.76, 101.32, 4.51e+22, "Confident", "Open weights (restricted use)"],
+    ["Gemma 7B", "2024-02-21", "Google DeepMind", 111.99, 102.38, 116.53, 3.07e+23, "Confident", "Open weights (restricted use)"],
+    ["StarCoder 2 3B", "2024-02-22", "Hugging Face,ServiceNow,Nvidia,BigCode", 88.76, 70.65, 97.53, 5.94e+22, "Confident", "Open weights (restricted use)"],
+    ["Nemotron-4 15B", "2024-02-26", "Nvidia", 107.72, 97.25, 113.25, 7.5e+23, "Confident", "Unreleased"],
+    ["Claude 3 Opus", "2024-02-29", "Anthropic", 126.91, 121.49, 129.98, null, "Speculative", "API access"],
+    ["GPT-4 Turbo (Apr 2024)", "2024-04-09", "OpenAI", 127.25, 121.86, 128.83, null, "Unknown", "API access"],
+    ["Mixtral 8x22B", "2024-04-17", "Mistral AI", 122.03, 114.63, 124.53, 2.34e+24, "Speculative", "Open weights (unrestricted)"],
+    ["Llama 3-8B", "2024-04-18", "Meta AI", 116.45, 106.78, 119.26, 7.2e+23, "Confident", "Open weights (restricted use)"],
+    ["Llama 3-70B", "2024-04-18", "Meta AI", 122.93, 116.62, 125.75, 7.86e+24, "Confident", "Open weights (restricted use)"],
+    ["phi-3-mini 3.8B", "2024-04-23", "Microsoft", 117.36, 107.91, 120.72, 7.52e+22, "Confident", "Open weights (unrestricted)"],
+    ["phi-3-medium 14B", "2024-04-23", "Microsoft", 121.23, 113.78, 124.1, 4.03e+23, "Likely", "Open weights (unrestricted)"],
+    ["phi-3-small 7.4B", "2024-04-23", "Microsoft", 121.83, 114.76, 124.37, 2.13e+23, "Confident", "Open weights (unrestricted)"],
+    ["Falcon 2 11B", "2024-05-09", "Technology Innovation Institute", 109.56, 99.79, 115.57, 3.6e+23, "Confident", "Open weights (restricted use)"],
+    ["GPT-4o (May 2024)", "2024-05-13", "OpenAI", 128.97, 123.83, 131.74, null, "", "API access"],
+    ["Qwen2-72B", "2024-06-07", "Alibaba", 125.28, 119.01, 126.92, 3.02e+24, "Confident", "Open weights (unrestricted)"],
+    ["Claude 3.5 Sonnet", "2024-06-20", "Anthropic", 130.0, null, null, 2.7e+25, "Speculative", "API access"],
+    ["Gemma 2 9B", "2024-06-24", "Google DeepMind", 119.83, 111.63, 122.61, 4.32e+23, "Confident", "Open weights (restricted use)"],
+    ["Gemma 2 27B", "2024-06-24", "Google DeepMind", 122.08, 114.44, 124.08, 2.11e+24, "Confident", "Open weights (restricted use)"],
+    ["Llama 3.1-8B", "2024-07-23", "Meta AI", 116.57, 106.21, 121.11, 1.22e+24, "Likely", "Open weights (restricted use)"],
+    ["Llama 3.1-70B", "2024-07-23", "Meta AI", 125.92, 120.02, 128.5, 7.93e+24, "Confident", "Open weights (restricted use)"],
+    ["Llama 3.1-405B", "2024-07-23", "Meta AI", 128.75, 123.83, 130.75, 3.8e+25, "Confident", "Open weights (restricted use)"],
+    ["o1-preview", "2024-09-12", "OpenAI", 134.79, 130.78, 138.74, null, "Unknown", "API access"],
+    ["o1-mini", "2024-09-12", "OpenAI", 135.82, 131.65, 137.26, null, "Unknown", "API access"],
+    ["Qwen2.5-32B", "2024-09-17", "Alibaba", 128.52, 122.17, 130.03, 3.51e+24, "Confident", "Open weights (unrestricted)"],
+    ["Qwen2.5-Coder (1.5B)", "2024-09-18", "Alibaba", 102.99, 85.28, 110.96, 5.08e+22, "Confident", "Open weights (unrestricted)"],
+    ["Qwen2.5-Coder (7B)", "2024-09-18", "Alibaba", 113.14, 102.61, 119.91, 2.51e+23, "Confident", "Open weights (unrestricted)"],
+    ["Qwen2.5-7B", "2024-09-19", "Alibaba", 118.51, 110.9, 121.15, 8.22e+23, "Confident", "Open weights (unrestricted)"],
+    ["Qwen2.5-72B", "2024-09-19", "Alibaba", 129.0, 123.19, 130.61, 7.8e+24, "Confident", "Open weights (unrestricted)"],
+    ["Llama 3.2 1B", "2024-09-24", "Meta AI", 101.99, 90.04, 110.07, 6.64e+22, "Confident", "Open weights (restricted use)"],
+    ["INTELLECT-1", "2024-11-29", "Prime Intellect,Hugging Face,Arcee AI", 100.86, 88.45, 106.27, 6e+22, "Confident", "Unknown"],
+    ["Amazon Nova Pro", "2024-12-03", "Amazon", 123.8, 110.51, 126.8, 6e+24, "Speculative", "API access"],
+    ["Llama 3.3 70B", "2024-12-06", "Meta AI", 127.33, 121.79, 129.67, 6.86e+24, "Confident", "Open weights (restricted use)"],
+    ["Phi-4", "2024-12-12", "Microsoft Research", 130.42, 124.72, 132.03, 9.32e+23, "Confident", "Open weights (unrestricted)"],
+    ["o1", "2024-12-17", "OpenAI", 141.91, 139.66, 143.2, null, "Unknown", "API access"],
+    ["DeepSeek-V3", "2024-12-26", "DeepSeek", 132.34, 127.53, 135.73, 3.3e+24, "Confident", "Open weights (restricted use)"],
+    ["DeepSeek-R1", "2025-01-20", "DeepSeek", 138.97, 136.3, 140.31, 3.5e+24, "Confident", "Open weights (unrestricted)"],
+    ["Mistral Small 3", "2025-01-30", "Mistral AI", 127.07, 121.39, 128.85, 1.15e+24, "Confident", "Open weights (unrestricted)"],
+    ["Claude 3.7 Sonnet", "2025-02-24", "Anthropic", 141.16, 138.82, 142.67, 3.35e+25, "Likely", "API access"],
+    ["GPT-4.5", "2025-02-27", "OpenAI", 136.74, 133.39, 138.67, 3.8e+26, "Likely", "API access"],
+    ["QwQ-32B", "2025-03-05", "Alibaba", 137.6, 132.89, 141.63, 3.51e+24, "Speculative", "Open weights (unrestricted)"],
+    ["Gemma 3 4B", "2025-03-12", "Google DeepMind", 116.02, 97.61, 123.83, 9.6e+22, "Confident", "Open weights (restricted use)"],
+    ["Gemma 3 12B", "2025-03-12", "Google DeepMind", 123.5, 116.01, 128.49, 8.64e+23, "Confident", "Open weights (restricted use)"],
+    ["Gemma 3 27B", "2025-03-12", "Google DeepMind", 130.04, 124.28, 132.2, 2.27e+24, "Confident", "Open weights (restricted use)"],
+    ["DeepSeek-V3 (Mar 2025)", "2025-03-24", "DeepSeek", 135.94, 132.14, 137.83, 3.3e+24, "Confident", "Open weights (restricted use)"],
+    ["Gemini 2.5 Pro (Mar 2025)", "2025-03-31", "Google DeepMind", 144.16, 141.92, 146.97, null, "Unknown", "API access"],
+    ["Llama 4 Scout", "2025-04-05", "Meta AI", 129.64, 124.31, 131.42, 4.08e+24, "Likely", "Open weights (restricted use)"],
+    ["Llama 4 Maverick", "2025-04-06", "Meta AI", 132.2, 127.74, 134.28, 2.24e+24, "Likely", "Open weights (restricted use)"],
+    ["Grok 3", "2025-04-09", "xAI", 138.33, 135.35, 139.75, 3.5e+26, "Likely", "API access"],
+    ["o4-mini", "2025-04-16", "OpenAI", 145.64, 143.23, 147.36, null, "Unknown", "API access"],
+    ["o3", "2025-04-16", "OpenAI", 146.86, 145.03, 148.65, null, "Unknown", "API access"],
+    ["Qwen3-8B", "2025-04-28", "Alibaba", 136.17, 130.09, 138.24, 1.77e+24, "Confident", "Open weights (unrestricted)"],
+    ["Qwen3-235B-A22B", "2025-04-28", "Alibaba", 139.35, 135.49, 140.84, 4.75e+24, "Likely", "Open weights (unrestricted)"],
+    ["Qwen3-30B-A3B", "2025-04-29", "Alibaba", 136.18, 129.7, 138.62, 6.48e+23, "Likely", "Open weights (unrestricted)"],
+    ["Qwen3-14B", "2025-04-29", "Alibaba", 138.23, 133.7, 140.03, 3.2e+24, "Confident", "Open weights (unrestricted)"],
+    ["Qwen3-32B", "2025-04-29", "Alibaba", 138.51, 135.14, 140.28, 7.08e+24, "Confident", "Open weights (unrestricted)"],
+    ["DeepSeek-R1 (May 2025)", "2025-05-28", "DeepSeek", 141.29, 138.64, 142.77, 4.02e+24, "Confident", "Open weights (unrestricted)"],
+    ["o3-pro", "2025-06-10", "OpenAI", 147.42, 145.69, 149.92, null, "Unknown", "API access"],
+    ["Grok 4", "2025-07-09", "xAI", 146.44, 144.68, 148.13, 5e+26, "Speculative", "API access"],
+    ["Qwen3-235B-A22B-Thinking (Jul 2025)", "2025-07-25", "Alibaba", 143.85, 141.94, 145.31, 4.75e+24, "Likely", "Open weights (unrestricted)"],
+    ["gpt-oss-20b", "2025-08-05", "OpenAI", 137.82, 132.91, 139.61, 5.49e+23, "Confident", "Open weights (unrestricted)"],
+    ["gpt-oss-120b", "2025-08-05", "OpenAI", 139.93, 135.23, 142.78, 4.94e+24, "Confident", "Open weights (unrestricted)"],
+    ["GPT-5", "2025-08-07", "OpenAI", 150.0, null, null, 6.6e+25, "Speculative", "API access"],
+    ["DeepSeek-V3.1", "2025-08-21", "DeepSeek", 139.92, 135.44, 143.18, 3.59e+24, "Confident", "Open weights (unrestricted)"],
+    ["Qwen3-Max", "2025-09-24", "Alibaba", 142.38, 140.13, 144.75, 1.51e+25, "Speculative", "API access"],
+    ["DeepSeek-V3.2-Exp", "2025-09-29", "DeepSeek", 145.0, 142.39, 146.98, 4.18e+24, "Confident", "Open weights (unrestricted)"],
+    ["GPT-5 Pro", "2025-10-07", "OpenAI", 150.28, 148.56, 152.85, null, "Unknown", "API access"],
+    ["Kimi K2 Thinking", "2025-11-06", "Moonshot", 146.01, 143.36, 147.52, 4.2e+24, "Likely", "Open weights (restricted use)"],
+    ["Gemini 3 Pro", "2025-11-18", "Google DeepMind", 152.92, 150.92, 155.09, null, "Unknown", "API access"],
+    ["DeepSeek-V3.2", "2025-12-01", "DeepSeek", 146.27, 144.46, 147.44, 4.2e+24, "Likely", "Open weights (unrestricted)"],
+    ["GPT-5.2", "2025-12-11", "OpenAI", 153.45, 151.55, 155.37, null, "Unknown", "API access"],
+    ["GPT-5.2 Pro", "2025-12-11", "OpenAI", 155.4, 153.08, 158.08, null, "Likely", "API access"],
+    ["GLM-4.7", "2025-12-22", "Z.ai (Zhipu AI)", 143.51, 141.14, 145.43, 4.42e+24, "Likely", "Open weights (unrestricted)"],
+    ["Kimi K2.5", "2026-01-27", "Moonshot", 148.03, 146.43, 149.33, 5.8e+24, "Likely", "Open weights (unrestricted)"],
+    ["GPT-5.3 Codex", "2026-02-05", "OpenAI", 156.77, 152.76, 160.7, null, "Likely", "API access"],
+    ["GLM-5", "2026-02-11", "Z.ai (Zhipu AI)", 145.83, 143.83, 147.72, 6.84e+24, "Likely", "Open weights (unrestricted)"],
+    ["GPT-5.4", "2026-03-05", "OpenAI", 156.81, 155.0, 158.94, null, "Likely", "API access"],
+    ["GPT-5.4 Pro", "2026-03-05", "OpenAI", 158.93, 156.59, 161.78, null, "Likely", "API access"],
+    ["GPT-5.5", "2026-04-23", "OpenAI", 159.1, 156.66, 162.27, null, "Likely", "API access"],
+    ["GPT-5.5 Pro", "2026-04-23", "OpenAI", 162.07, 158.98, 165.82, null, "Likely", "API access"],
+    ["DeepSeek-V4-Flash", "2026-04-24", "DeepSeek", 146.07, 143.88, 147.83, 2.5e+24, "Likely", "Open weights (unrestricted)"],
+    ["DeepSeek-V4-Pro", "2026-04-24", "DeepSeek", 149.13, 147.31, 150.72, 9.7e+24, "Likely", "Open weights (unrestricted)"],
+    ["Nemotron 3 Ultra", "2026-06-04", "Nvidia", 146.17, 143.89, 148.03, 6.6e+24, "Likely", "Open weights (unrestricted)"],
+    ["Inkling", "2026-07-15", "Thinking Machines", 148.54, 145.67, 150.36, 1.84e+24, "Likely", "Open weights (unrestricted)"],
+    ["Kimi K3", "2026-07-16", "Moonshot", 157.45, 155.15, 160.03, 2e+25, "Speculative", "Open weights (non-commercial)"],
+    ["Claude Opus 5", "2026-07-24", "Anthropic", 162.78, 160.12, 166.47, null, "Confident", "API access"],
+    ["DeepSeek V4 Flash 0731", "2026-07-31", "DeepSeek", 154.49, 152.08, 156.35, 2.5e+24, "Likely", "Open weights (unrestricted)"],
+    ["GLM-5.3-Flash", "2026-08-20", "Z.ai (Zhipu AI)", 151.88, 149.64, 153.95, 3.24e+24, "Likely", "Open weights (unrestricted)"],
+    ["Claude Fable 5.1", "2026-09-01", "Anthropic", 164.7, 161.63, 168.81, null, "Confident", "API access"],
+    ["GPT-6 Astra", "2026-09-03", "OpenAI", 166.45, 163.34, 171.46, 1e+27, "Likely", "API access"],
+    ["DeepSeek V4.1 Flash", "2026-09-09", "DeepSeek", 154.9, 148.49, 157.33, 4.32e+24, "Likely", "Open weights (unrestricted)"],
+    ["Claude Opus 5.5", "2026-09-22", "Anthropic", 167.33, 164.06, 171.68, null, "Confident", "API access"],
+];
+
+// Laws that use a training-compute threshold. `date` is when the threshold was adopted (or agreed, for the EU AI Act).
+const POLICIES = [
+    {date: "2023-10-30", short: "US EO 14110", name: "US Executive Order 14110", threshold: 1e26, conditions: "Reporting to the federal government on training, weight security and red-team results",
+        status: "Revoked 20 Jan 2025 (EO 14148)", revoked: "2025-01-20", source: "https://aona.ai/compliance/regulations/us-executive-order-ai/"},
+    {date: "2023-12-08", short: "EU AI Act", name: "EU AI Act, Article 51", threshold: 1e25, conditions: "Presumption of systemic risk; the Commission can also designate models on capability, and can amend the threshold by delegated act",
+        status: "Agreed Dec 2023; obligations apply from 2 Aug 2025", source: "https://artificialintelligenceact.eu/article/51/"},
+    {date: "2025-09-29", short: "California SB 53", name: "California SB 53 (TFAIA)", threshold: 1e26, conditions: "Heavier duties for developers with over $500M annual revenue",
+        status: "In force 1 Jan 2026", source: "https://fpf.org/blog/californias-sb-53-the-first-frontier-ai-law-explained/"},
+    {date: "2025-12-19", short: "New York RAISE", name: "New York RAISE Act", threshold: 1e26, conditions: "Large developers: over $500M annual revenue (after the March 2026 amendment)",
+        status: "Amended 27 Mar 2026; in force 1 Jan 2027", source: "https://www.wiley.law/alert-New-York-Finalizes-RAISE-Act-for-Frontier-AI-Models-Law-Takes-Effect-January-1-2027"},
+    {date: "2026-01-22", short: "South Korea", name: "South Korea AI Basic Act (enforcement decree)", threshold: 1e26, conditions: "\"High-performance AI\": at least 10^26 FLOP cumulative, plus criteria set by the Science Ministry",
+        status: "In force 22 Jan 2026; fines deferred for at least a year", source: "https://www.cooley.com/news/insight/2026/2026-01-27-south-koreas-ai-basic-act-overview-and-key-takeaways"},
+    {date: "2026-07-06", short: "Illinois SB 315", name: "Illinois SB 315 (AI Safety Measures Act)", threshold: 1e26, conditions: "Large developers: over $500M annual revenue; annual independent audits",
+        status: "In force 1 Jan 2027; duties from 1 Jan 2028", source: "https://www.crowell.com/en/insights/client-alerts/illinois-imposes-transparency-and-safety-obligations-on-frontier-ai-systems"},
+];
+
+// Same conversion as the AI control page: log-linear fit of METR's 50% time horizon on ECI across 21 models (R² = 0.97)
+const ECI_FIT = {a: -18.2504, b: 0.15681};
+const fromEci = eci => Math.exp(ECI_FIT.a + ECI_FIT.b * eci);
+
+const ALL = MODELS.map(([name, date, org, eci, lo, hi, compute, confidence, access]) =>
+    ({name, date, org, eci, lo, hi, compute, confidence: compute === null ? "" : confidence, access, p50: fromEci(eci)}));
+
+// Frontier: each model more capable than everything released before it, from GPT-4 on
+const FRONTIER_START = "2023-03-14";
+const FRONTIER = [];
+for (const mdl of [...ALL].sort((a, b) => a.date.localeCompare(b.date) || a.eci - b.eci)) {
+    if (mdl.date < FRONTIER_START) continue;
+    if (!FRONTIER.length || mdl.eci > FRONTIER[FRONTIER.length - 1].eci) FRONTIER.push(mdl);
+}
+const isFrontier = new Set(FRONTIER.map(f => f.name));
+const frontierEciAt = d => FRONTIER.filter(f => f.date <= d).at(-1)?.eci ?? null;
+const frontierModelAt = d => FRONTIER.filter(f => f.date <= d).at(-1) ?? null;
+// When the frontier first reached a capability
+const frontierReached = eci => FRONTIER.find(f => f.eci >= eci) ?? null;
+
+const X_START = new Date("2023-01-01"), X_END = new Date("2026-10-31");
+const H = 60;
+const LOG_TICKS = [
+    [0.25, "15 seconds"], [1, "1 min"], [4, "4 min"], [15, "15 min"], [H, "1 hour"], [4 * H, "4 hours"],
+    [16 * H, "16 hours"], [40 * H, "1 work-week"], [160 * H, "1 work-month"],
+];
+// Models below this capability (about ECI 108) are left off the log scale
+const Y_MIN_LOG = 0.2;
+const VIEW = {threshold: 1e25, margin: 1, scale: "log"};
+const SVG_NS = "http://www.w3.org/2000/svg";
+const COLOR = {model: "#2a78d6", below: "#4a3aa7", policy: "#8a5a00", muted: "#b5b3ad"};
+
+function statusOf(mdl, view) {
+    if (mdl.compute === null) return "undisclosed";
+    return mdl.compute * view.margin <= view.threshold ? "below" : "above";
+}
+
+// The most capable model below the threshold so far, as the models that raised it
+function belowRecord(view) {
+    const steps = [];
+    for (const mdl of [...ALL].sort((a, b) => a.date.localeCompare(b.date) || a.eci - b.eci)) {
+        if (statusOf(mdl, view) !== "below") continue;
+        if (!steps.length || mdl.eci > steps[steps.length - 1].eci) steps.push(mdl);
+    }
+    return {steps, at: d => steps.filter(st => st.date <= d).at(-1) ?? null};
+}
+
+const MONTH_MS = 365.25 / 12 * 864e5;
+const monthsBetween = (a, b) => (new Date(b) - new Date(a)) / MONTH_MS;
+// Months between the frontier first reaching the best below-threshold capability and date d
+function lagAt(record, d) {
+    const best = record.at(d);
+    // Before a below-threshold model matched the first frontier model in the data (GPT-4), the lag is unknown
+    if (!best || best.eci < FRONTIER[0].eci) return null;
+    const reached = frontierReached(best.eci);
+    return reached ? Math.max(0, monthsBetween(reached.date, d)) : 0;
+}
+
+// Laws using the chosen threshold, grouped by the frontier capability on their adoption date
+function policyLevels(view) {
+    const groups = [];
+    for (const p of POLICIES.filter(p => p.threshold === view.threshold)) {
+        const eci = frontierEciAt(p.date);
+        const g = groups.find(gr => gr.eci === eci);
+        if (g) g.policies.push(p);
+        else groups.push({eci, date: p.date, model: frontierModelAt(p.date), policies: [p]});
+    }
+    return groups;
+}
+// When models below the threshold first matched a level (null if not yet)
+const crossingOf = (record, eci) => record.steps.find(st => st.eci >= eci) ?? null;
+
+function el(tag, attrs, parent) {
+    const node = document.createElementNS(SVG_NS, tag);
+    for (const [k, v] of Object.entries(attrs)) node.setAttribute(k, v);
+    if (parent) parent.appendChild(node);
+    return node;
+}
+
+function formatMinutes(m) {
+    if (m < 1) return `${(m * 60).toPrecision(2)} seconds`;
+    if (m < 10) return `${m.toFixed(1)} min`;
+    if (m < 60) return `${m.toFixed(0)} min`;
+    if (m < 60 * 24) return `${(m / 60).toFixed(1)} hours`;
+    return `${(m / 60).toFixed(0)} hours`;
+}
+function formatFlop(c) {
+    if (c === null) return "not public";
+    const exp = Math.floor(Math.log10(c)), mant = c / 10 ** exp;
+    return `${mant.toFixed(1)}×10^${exp}`;
+}
+const thresholdText = t => `10^${Math.round(Math.log10(t))}`;
+const formatMonths = m => m < 1 ? "less than a month" : `${Math.round(m)} month${Math.round(m) === 1 ? "" : "s"}`;
+const monthName = d => new Date(d).toLocaleDateString("en-GB", {month: "short", year: "numeric"});
+const computeText = mdl => mdl.compute === null ? "Training compute: not public (no Epoch estimate)."
+    : `Training compute: ${formatFlop(mdl.compute)} FLOP (Epoch estimate, ${mdl.confidence.toLowerCase() || "unrated"}).`;
+
+function draw() {
+    const container = document.getElementById("cth-chart");
+    const tooltip = document.getElementById("cth-tooltip");
+    container.querySelector("svg")?.remove();
+
+    const record = belowRecord(VIEW), levels = policyLevels(VIEW);
+    const width = Math.max(container.clientWidth - 16, 1400);
+    const m = {top: 20, right: 190, bottom: 36, left: 130};
+    const ih = 560;
+    const p2Top = m.top + ih + 52, ih2 = 200;
+    const height = p2Top + ih2 + m.bottom;
+    const iw = width - m.left - m.right;
+
+    const shown = ALL.filter(mdl => mdl.date >= "2023-01-01");
+    let yMax, ticks, y;
+    if (VIEW.scale === "linear") {
+        const step = 10 * H;
+        yMax = Math.ceil(Math.max(...FRONTIER.map(f => f.p50)) * 1.15 / step) * step;
+        ticks = [];
+        for (let v = 0; v <= yMax; v += step) ticks.push([v, v === 0 ? "0" : `${v / H} hours`]);
+        y = v => m.top + ih - v / yMax * ih;
+    } else {
+        yMax = 200 * H;
+        const yMin = Y_MIN_LOG;
+        ticks = LOG_TICKS.filter(([v]) => v >= yMin && v <= yMax);
+        y = v => m.top + ih - (Math.log(Math.max(v, yMin)) - Math.log(yMin)) / (Math.log(yMax) - Math.log(yMin)) * ih;
+    }
+    const x = d => m.left + (new Date(d) - X_START) / (X_END - X_START) * iw;
+    const yE = eci => y(fromEci(eci));
+
+    const weekly = [];
+    for (let d = new Date(FRONTIER_START); d <= X_END; d.setDate(d.getDate() + 7)) weekly.push(d.toISOString().slice(0, 10));
+    const lagPts = weekly.map(d => [d, lagAt(record, d)]).filter(([, l]) => l !== null);
+    const lagMax = Math.max(12, Math.ceil(Math.max(0, ...lagPts.map(([, l]) => l)) / 6) * 6);
+    const y2 = mo => p2Top + ih2 - Math.min(mo, lagMax) / lagMax * ih2;
+
+    const svg = el("svg", {viewBox: `0 0 ${width} ${height}`, width, role: "img",
+        "aria-label": "Capability of frontier AI models and of the most capable model trained below a compute threshold, over time, with how many months the latter trails the frontier"});
+    container.appendChild(svg);
+
+    function showTip(evt, title, body) {
+        tooltip.innerHTML = "";
+        const b = document.createElement("b");
+        b.textContent = title;
+        tooltip.appendChild(b);
+        tooltip.appendChild(document.createTextNode(body));
+        tooltip.style.display = "block";
+        const rect = container.getBoundingClientRect();
+        let left = evt.clientX - rect.left + container.scrollLeft + 12;
+        if (left + 320 > rect.width + container.scrollLeft) left = Math.max(4, left - 344);
+        tooltip.style.left = left + "px";
+        tooltip.style.top = (evt.clientY - rect.top + 12) + "px";
+    }
+    const hideTip = () => { tooltip.style.display = "none"; };
+    const targets = [];
+    const tText = thresholdText(VIEW.threshold), marginText = VIEW.margin > 1 ? ` with a ×${VIEW.margin} margin` : "";
+    const capText = mdl => `ECI ${mdl.eci}${mdl.lo !== null ? ` (90% CI ${mdl.lo}-${mdl.hi})` : ""}, about ${formatMinutes(mdl.p50)} on METR's time-horizon scale.`;
+
+    // Grid and axes
+    for (const [v, label] of ticks) {
+        el("line", {x1: m.left, x2: m.left + iw, y1: y(v), y2: y(v), stroke: "#e6e5e0"}, svg);
+        const t = el("text", {x: m.left - 8, y: y(v) + 4, "text-anchor": "end", fill: "#52514e", "font-size": 12}, svg);
+        t.textContent = label;
+    }
+    for (let year = 2023; year <= 2026; year++) {
+        for (const [month, text] of [["01", String(year)], ["07", "Jul"]]) {
+            const xv = x(`${year}-${month}-01`);
+            el("line", {x1: xv, x2: xv, y1: m.top, y2: m.top + ih, stroke: "#e6e5e0"}, svg);
+            el("line", {x1: xv, x2: xv, y1: p2Top, y2: p2Top + ih2, stroke: "#e6e5e0"}, svg);
+            const t = el("text", {x: xv + 4, y: p2Top + ih2 + 18, "text-anchor": "start", fill: "#52514e", "font-size": text === "Jul" ? 11 : 12}, svg);
+            t.textContent = text;
+        }
+    }
+    el("line", {x1: m.left, x2: m.left + iw, y1: m.top + ih, y2: m.top + ih, stroke: "#8a8984"}, svg);
+    const yLabel = el("text", {transform: `translate(16 ${m.top + ih / 2}) rotate(-90)`, "text-anchor": "middle", fill: "#52514e", "font-size": 12}, svg);
+    yLabel.textContent = `Capability: Epoch Capabilities Index as a METR time horizon${VIEW.scale === "log" ? " (log scale)" : ""}`;
+
+    const defs = el("defs", {}, svg);
+    const clip1 = el("clipPath", {id: "cth-clip-top"}, defs);
+    el("rect", {x: m.left, y: m.top, width: iw, height: ih}, clip1);
+    const clip2 = el("clipPath", {id: "cth-clip-bottom"}, defs);
+    el("rect", {x: m.left, y: p2Top, width: iw, height: ih2}, clip2);
+    const topLayer = el("g", {"clip-path": "url(#cth-clip-top)"}, svg);
+    const bottomLayer = el("g", {"clip-path": "url(#cth-clip-bottom)"}, svg);
+    const pathOf = pts => pts.map(([px, py], i) => `${i ? "L" : "M"} ${px.toFixed(1)} ${py.toFixed(1)}`).join(" ");
+
+    // Frontier capability when each law was adopted, from that date to the end of the chart
+    const levelLabels = [];
+    for (const g of levels) {
+        const yy = yE(g.eci);
+        el("line", {x1: x(g.date), x2: x(X_END), y1: yy, y2: yy, stroke: COLOR.policy, "stroke-width": 1.5, "stroke-dasharray": "6 4"}, topLayer);
+        levelLabels.push({y: yy, text: g.policies.map(p => p.short).join(", "), g});
+        const cross = crossingOf(record, g.eci);
+        const names = g.policies.map(p => p.name).join(" and ");
+        let crossText;
+        if (!cross) crossText = `No model below ${tText} FLOP${marginText} has matched this level yet.`;
+        else if (cross.name === g.model.name) crossText = `The frontier model itself was below the threshold (${formatFlop(cross.compute)} FLOP, ${cross.confidence.toLowerCase()} estimate).`;
+        else if (cross.date <= g.date) crossText = `A model below the threshold was already this capable when the law was adopted: ${cross.name} (${cross.date}, ${formatFlop(cross.compute)} FLOP).`;
+        else crossText = `Models below the threshold matched it ${formatMonths(monthsBetween(g.date, cross.date))} later: ${cross.name} (${cross.date}, ${formatFlop(cross.compute)} FLOP).`;
+        targets.push({x: x(g.date), y: yy, title: `Frontier when ${g.policies.map(p => p.short).join(" / ")} adopted`,
+            body: `${names} (${g.date}): the frontier was ${g.model.name}, ${capText(g.model)} ${crossText}`});
+        if (cross) {
+            const cx = x(cross.date > g.date ? cross.date : g.date);
+            el("circle", {cx, cy: yy, r: 7, fill: "none", stroke: COLOR.policy, "stroke-width": 2}, svg);
+            targets.push({x: cx, y: yy, title: `Crossed: ${cross.name}`, body: crossText});
+        }
+    }
+    // Right-hand labels for the levels, spread so they don't overlap
+    levelLabels.sort((a, b) => a.y - b.y);
+    let lastY = -Infinity;
+    for (const lab of levelLabels) {
+        const ly = Math.max(lab.y + 4, lastY + 14);
+        lastY = ly;
+        const t = el("text", {x: m.left + iw + 6, y: ly, fill: COLOR.policy, "font-size": 11}, svg);
+        t.textContent = lab.text;
+    }
+
+    // Laws as diamonds on the time axis; the other threshold's laws in grey
+    for (const p of POLICIES) {
+        const active = p.threshold === VIEW.threshold, px = x(p.date), py = m.top + ih;
+        el("path", {d: `M ${px} ${py - 7} L ${px + 6} ${py} L ${px} ${py + 7} L ${px - 6} ${py} Z`, fill: active ? COLOR.policy : COLOR.muted, stroke: "#fcfcfb", "stroke-width": 1}, svg);
+        if (p.revoked) {
+            const rx = x(p.revoked);
+            el("path", {d: `M ${rx - 5} ${py - 5} L ${rx + 5} ${py + 5} M ${rx - 5} ${py + 5} L ${rx + 5} ${py - 5}`, stroke: active ? COLOR.policy : COLOR.muted, "stroke-width": 2}, svg);
+            targets.push({x: rx, y: py, title: `${p.short} revoked (${p.revoked})`, body: p.status + "."});
+        }
+        targets.push({x: px, y: py, title: `${p.name} (${p.date})`,
+            body: `Threshold: ${thresholdText(p.threshold)} FLOP. ${p.conditions}. ${p.status}.${active ? "" : " Uses the other threshold; switch above to see its line."}`});
+    }
+
+    // Most capable model below the threshold: a step line from its first model to the end of the chart
+    if (record.steps.length) {
+        const pts = [];
+        record.steps.forEach((st, i) => {
+            if (i) pts.push([x(st.date), yE(record.steps[i - 1].eci)]);
+            pts.push([x(st.date), yE(st.eci)]);
+        });
+        pts.push([x(X_END), yE(record.steps.at(-1).eci)]);
+        el("path", {d: pathOf(pts), fill: "none", stroke: COLOR.below, "stroke-width": 3}, topLayer);
+    }
+
+    // Frontier capability as a thin step line, so the gap is visible between releases
+    const fpts = [];
+    FRONTIER.forEach((f, i) => {
+        if (i) fpts.push([x(f.date), yE(FRONTIER[i - 1].eci)]);
+        fpts.push([x(f.date), yE(f.eci)]);
+    });
+    fpts.push([x(X_END), yE(FRONTIER.at(-1).eci)]);
+    el("path", {d: pathOf(fpts), fill: "none", stroke: COLOR.model, "stroke-width": 1.5, opacity: 0.6}, topLayer);
+
+    // Models: below-threshold squares, other above-threshold models as small dots, frontier models as large dots
+    const recordNames = new Set(record.steps.map(st => st.name));
+    for (const mdl of shown) {
+        if (VIEW.scale === "log" && mdl.p50 < Y_MIN_LOG) continue;
+        const status = statusOf(mdl, VIEW), cx = x(mdl.date), cy = yE(mdl.eci);
+        const frontier = isFrontier.has(mdl.name);
+        let what;
+        if (status === "below") {
+            const isRecord = recordNames.has(mdl.name);
+            if (isRecord) el("rect", {x: cx - 5.5, y: cy - 5.5, width: 11, height: 11, fill: COLOR.below, stroke: "#fcfcfb", "stroke-width": 1}, svg);
+            else el("rect", {x: cx - 3.5, y: cy - 3.5, width: 7, height: 7, fill: "#fcfcfb", stroke: COLOR.below, "stroke-width": 1.5, opacity: 0.7}, svg);
+            what = `Below ${tText} FLOP${marginText}${isRecord ? "; the most capable such model so far" : ""}${frontier ? "; also a frontier model" : ""}.`;
+        } else if (frontier) {
+            if (mdl.lo !== null) el("line", {x1: cx, x2: cx, y1: yE(mdl.lo), y2: yE(Math.min(mdl.hi, 200)), stroke: COLOR.model, "stroke-width": 1.5, opacity: 0.3}, topLayer);
+            el("circle", {cx, cy, r: status === "undisclosed" ? 4.5 : 5, fill: status === "undisclosed" ? "#fcfcfb" : COLOR.model,
+                stroke: status === "undisclosed" ? COLOR.model : "#fcfcfb", "stroke-width": 2}, svg);
+            what = status === "undisclosed" ? "Frontier model; no public compute estimate, so outsiders can't tell whether it is above the threshold."
+                : `Frontier model above ${tText} FLOP${marginText}.`;
+        } else if (status === "above") {
+            el("circle", {cx, cy, r: 3, fill: COLOR.model, opacity: 0.5}, svg);
+            what = `Above ${tText} FLOP${marginText}, but not a frontier model.`;
+        } else continue;
+        const lead = frontierReached(mdl.eci);
+        const behind = lead && lead.date < mdl.date ? ` The frontier first reached this capability ${formatMonths(monthsBetween(lead.date, mdl.date))} earlier (${lead.name}).` : "";
+        targets.push({x: cx, y: cy, title: `${mdl.name} (${mdl.org || "unknown"})`,
+            body: `Released ${mdl.date}. ${what} ${capText(mdl)} ${computeText(mdl)}${behind}`});
+    }
+    // Frontier dots for models below the threshold also get a blue ring, so the frontier stays readable
+    for (const f of FRONTIER.filter(f => statusOf(f, VIEW) === "below")) {
+        el("circle", {cx: x(f.date), cy: yE(f.eci), r: 9, fill: "none", stroke: COLOR.model, "stroke-width": 1.5}, svg);
+    }
+
+    // Labels
+    const labelText = (name, color, dx, anchor, mdl) => {
+        const t = el("text", {x: x(mdl.date) + dx, y: yE(mdl.eci) + 4, "text-anchor": anchor, fill: color, "font-size": 12,
+            stroke: "#fcfcfb", "stroke-width": 3, "paint-order": "stroke"}, svg);
+        t.textContent = name;
+    };
+    for (const name of ["GPT-4 (Mar 2023)", "o1", "GPT-5", "Gemini 3 Pro", "Claude Opus 5.5"]) {
+        const mdl = FRONTIER.find(f => f.name === name);
+        if (mdl) labelText(name === "GPT-4 (Mar 2023)" ? "GPT-4" : name, "#0b0b0b", name === "GPT-4 (Mar 2023)" ? 9 : -10, name === "GPT-4 (Mar 2023)" ? "start" : "end", mdl);
+    }
+    for (const st of record.steps.filter(s => ["Llama 3.1-70B", "Qwen2.5-72B", "Phi-4", "DeepSeek-R1", "gpt-oss-20b", "Kimi K2.5", "Kimi K3", "DeepSeek V4 Flash 0731", "DeepSeek V4.1 Flash"].includes(s.name))) {
+        if (st === record.steps.at(-1) || ["Llama 3.1-70B", "DeepSeek-R1", "Phi-4", "gpt-oss-20b"].includes(st.name)) labelText(st.name, COLOR.below, 9, "start", {...st, eci: st.eci - 1.6});
+    }
+    const recordLabelAt = record.steps.find(st => st.date >= "2023-07-01");
+    if (recordLabelAt) {
+        const t = el("text", {x: x("2023-08-15"), y: yE(record.at("2023-08-15")?.eci ?? recordLabelAt.eci) + 22, fill: COLOR.below, "font-size": 13, "font-weight": "bold",
+            stroke: "#fcfcfb", "stroke-width": 3, "paint-order": "stroke"}, svg);
+        t.textContent = `Most capable model below ${tText} FLOP${marginText}`;
+    }
+    const ft = el("text", {x: x("2023-08-15"), y: yE(frontierEciAt("2023-08-15")) - 10, fill: COLOR.model, "font-size": 13, "font-weight": "bold",
+        stroke: "#fcfcfb", "stroke-width": 3, "paint-order": "stroke"}, svg);
+    ft.textContent = "Frontier";
+
+    // Lower panel: months behind the frontier
+    const p2Title = el("text", {x: m.left, y: p2Top - 12, fill: "#0b0b0b", "font-size": 13, "font-weight": "bold"}, svg);
+    p2Title.textContent = `How many months the most capable model below ${tText} FLOP${marginText} trails the frontier`;
+    for (let mo = 0; mo <= lagMax; mo += 6) {
+        el("line", {x1: m.left, x2: m.left + iw, y1: y2(mo), y2: y2(mo), stroke: "#e6e5e0"}, svg);
+        const t = el("text", {x: m.left - 8, y: y2(mo) + 4, "text-anchor": "end", fill: "#52514e", "font-size": 12}, svg);
+        t.textContent = mo === 0 ? "0" : `${mo} months`;
+    }
+    el("line", {x1: m.left, x2: m.left + iw, y1: p2Top + ih2, y2: p2Top + ih2, stroke: "#8a8984"}, svg);
+    el("path", {d: pathOf(lagPts.map(([d, l]) => [x(d), y2(l)])), fill: "none", stroke: COLOR.below, "stroke-width": 2.5}, bottomLayer);
+    for (const [d, l] of lagPts.filter((_, i) => i % 4 === 0)) {
+        const best = record.at(d), reached = frontierReached(best.eci);
+        targets.push({x: x(d), y: y2(l), title: `${d}: ${formatMonths(l)} behind`,
+            body: `Most capable model below ${tText} FLOP${marginText}: ${best.name} (${best.date}, ${formatFlop(best.compute)} FLOP, ECI ${best.eci}). The frontier first reached that capability with ${reached.name} (${reached.date}).`});
+    }
+
+    const overlay = el("rect", {x: 0, y: 0, width, height, fill: "transparent"}, svg);
+    function nearest(evt) {
+        const pt = svg.createSVGPoint();
+        pt.x = evt.clientX; pt.y = evt.clientY;
+        const {x: px, y: py} = pt.matrixTransform(svg.getScreenCTM().inverse());
+        let best = null, bestD = 12;
+        for (const t of targets) {
+            const d = Math.hypot(px - t.x, py - t.y);
+            if (d <= bestD) { best = t; bestD = d; }
+        }
+        return best;
+    }
+    const onOverlay = evt => {
+        const t = nearest(evt);
+        overlay.style.cursor = t ? "pointer" : "default";
+        t ? showTip(evt, t.title, t.body) : hideTip();
+    };
+    overlay.addEventListener("mousemove", onOverlay);
+    overlay.addEventListener("click", onOverlay);
+    overlay.addEventListener("mouseleave", hideTip);
+}
+
+function describe() {
+    const record = belowRecord(VIEW), levels = policyLevels(VIEW);
+    const tText = thresholdText(VIEW.threshold), marginText = VIEW.margin > 1 ? ` (with a ×${VIEW.margin} margin)` : "";
+    const best = record.steps.at(-1), lead = frontierReached(best.eci), now = FRONTIER.at(-1);
+    const crossed = levels.map(g => ({g, cross: crossingOf(record, g.eci)}));
+    const parts = crossed.map(({g, cross}) => {
+        const names = g.policies.map(p => p.short).join(" and ");
+        const frontierName = g.model.name.replace(" (Mar 2023)", "");
+        const when = `the frontier at the time of ${names} (${monthName(g.date)})`;
+        if (!cross) return `none has yet matched ${frontierName}, ${when}`;
+        if (cross.name === g.model.name) return `${frontierName}, ${when}, was itself below the threshold`;
+        if (cross.date <= g.date) return `${cross.name} had already matched ${frontierName}, ${when}`;
+        return `${cross.name} matched ${frontierName}, ${when}, ${formatMonths(monthsBetween(g.date, cross.date))} later`;
+    });
+    document.getElementById("cth-summary").textContent =
+        `The most capable model below ${tText} FLOP${marginText} is ${best.name} (${best.org}, ${best.date}), estimated at ${formatFlop(best.compute)} FLOP. ` +
+        `The frontier first reached its level with ${lead.name} (${lead.date}), so it trails the frontier by ${formatMonths(monthsBetween(lead.date, best.date))}. ` +
+        `Today's frontier, ${now.name}, scores ECI ${now.eci} against its ${best.eci}. ` +
+        (parts.length ? `Checked against each law: ${parts.join("; ")}.` : "");
+    const failed = crossed.filter(c => c.cross).length;
+    document.getElementById("cth-step4-status").textContent = failed
+        ? `Failing at this setting: models below the threshold caught up with the frontier at ${failed} of ${crossed.length} adoption date${crossed.length > 1 ? "s" : ""}`
+        : "Holding so far at this threshold and margin";
+}
+
+function describeDisclosure() {
+    const since = "2025-01-01";
+    const recent = FRONTIER.filter(f => f.date >= since);
+    const known = recent.filter(f => f.compute !== null);
+    const li = document.getElementById("cth-disclosure");
+    const b = document.createElement("b");
+    b.textContent = "Coverage can't be checked from outside. ";
+    li.appendChild(b);
+    li.appendChild(document.createTextNode(
+        `Of the ${recent.length} models that set a new frontier since January 2025, Epoch has a public compute estimate for ${known.length} (${known.map(k => k.name).join(", ")}). ` +
+        "Labs report compute to regulators under these laws, but the public, researchers and other governments can't see whether a given frontier model is covered. " +
+        "That undercuts one of the research case's main arguments for compute: that outsiders can verify it."));
+}
+
+function fillTables() {
+    const addRow = (body, values) => {
+        const row = document.createElement("tr");
+        for (const v of values) {
+            const td = document.createElement("td");
+            if (v instanceof Node) td.appendChild(v); else td.textContent = v;
+            row.appendChild(td);
+        }
+        body.appendChild(row);
+    };
+    const policyBody = document.getElementById("cth-policy-table");
+    for (const p of [...POLICIES].reverse()) {
+        const a = document.createElement("a");
+        a.href = p.source; a.target = "_blank"; a.textContent = p.name;
+        addRow(policyBody, [p.date, a, `${thresholdText(p.threshold)} FLOP`, p.conditions, p.status]);
+    }
+    const modelBody = document.querySelector("#cth-model-table tbody");
+    for (const mdl of [...ALL].sort((a, b) => a.date.localeCompare(b.date))) {
+        addRow(modelBody, [mdl.name + (isFrontier.has(mdl.name) ? " (frontier)" : ""), mdl.org, mdl.date,
+            mdl.lo !== null ? `${mdl.eci} (${mdl.lo}-${mdl.hi})` : `${mdl.eci}`, formatMinutes(mdl.p50),
+            formatFlop(mdl.compute), mdl.confidence, mdl.access]);
+    }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    // Views can be linked to, e.g. ?threshold=1e26&margin=3
+    const params = new URLSearchParams(location.search);
+    for (const button of document.querySelectorAll(".cth-controls button")) {
+        const group = Object.keys(button.dataset)[0];
+        if (params.get(group) !== button.dataset[group]) continue;
+        VIEW[group] = group === "scale" ? button.dataset.scale : Number(button.dataset[group]);
+        for (const b of button.parentElement.querySelectorAll("button")) b.setAttribute("aria-pressed", String(b === button));
+    }
+    describe();
+    describeDisclosure();
+    fillTables();
+    draw();
+    for (const button of document.querySelectorAll(".cth-controls button")) {
+        button.addEventListener("click", () => {
+            const group = Object.keys(button.dataset)[0];
+            VIEW[group] = group === "scale" ? button.dataset.scale : Number(button.dataset[group]);
+            for (const b of button.parentElement.querySelectorAll("button")) b.setAttribute("aria-pressed", String(b === button));
+            describe();
+            draw();
+        });
+    }
+    let resizeTimer;
+    window.addEventListener("resize", () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(draw, 150);
+    });
+});
+</script>
+</body>
+</html>
