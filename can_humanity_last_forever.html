@@ -8,9 +8,6 @@
     <link rel="icon" href="favicon.png" />
     <title>Andreas Moe</title>
     <script src="header.js"></script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
-        integrity="sha384-Wuix6BuhrWbjDBs24bXrjf4ZQ5aFeFWBuKkFekO2t8xFU0iNaLQfp2K6/1Nxveei"
-        crossorigin="anonymous"></script>
 </head>
 <body>
 <div id="header"></div>
@@ -42,11 +39,11 @@
     Suppose that the chance for humanity to survive any given century is p &lt; 1.
     Then the chance to survive n centuries is:
 </p>
-<div>\(P(survive\ n\ centuries) = p^n\)</div>
+<div><math><mrow><mi>P</mi><mo>(</mo><mtext>survive&nbsp;</mtext><mi>n</mi><mtext>&nbsp;centuries</mtext><mo>)</mo></mrow><mo>=</mo><msup><mi>p</mi><mi>n</mi></msup></math></div>
 <p>We can now take a probability q arbitrarily close to zero, and:</p>
-<div>\(P(survive\ n\ centuries) = p^{n-log_p(q)+log_p(q)} = p^{n-log_p(q)} p^{log_p(q)} = p^{n-\frac{log(q)}{log(p)}}q\)</div>
+<div><math><mrow><mi>P</mi><mo>(</mo><mtext>survive&nbsp;</mtext><mi>n</mi><mtext>&nbsp;centuries</mtext><mo>)</mo></mrow><mo>=</mo><msup><mi>p</mi><mrow><mi>n</mi><mo>−</mo><mrow><msub><mi>log</mi><mi>p</mi></msub><mo>(</mo><mi>q</mi><mo>)</mo></mrow><mo>+</mo><mrow><msub><mi>log</mi><mi>p</mi></msub><mo>(</mo><mi>q</mi><mo>)</mo></mrow></mrow></msup><mo>=</mo><msup><mi>p</mi><mrow><mi>n</mi><mo>−</mo><mrow><msub><mi>log</mi><mi>p</mi></msub><mo>(</mo><mi>q</mi><mo>)</mo></mrow></mrow></msup><msup><mi>p</mi><mrow><msub><mi>log</mi><mi>p</mi></msub><mo>(</mo><mi>q</mi><mo>)</mo></mrow></msup><mo>=</mo><msup><mi>p</mi><mrow><mi>n</mi><mo>−</mo><mfrac><mrow><mi>log</mi><mo>(</mo><mi>q</mi><mo>)</mo></mrow><mrow><mi>log</mi><mo>(</mo><mi>p</mi><mo>)</mo></mrow></mfrac></mrow></msup><mi>q</mi></math></div>
 <p>Rearranging this shows that:</p>
-<div>\({P(survive\ n\ centuries) &lt; q},\ if\ {n &gt; \frac{log(q)}{log(p)}}\)</div>
+<div><math><mrow><mi>P</mi><mo>(</mo><mtext>survive&nbsp;</mtext><mi>n</mi><mtext>&nbsp;centuries</mtext><mo>)</mo></mrow><mo>&lt;</mo><mi>q</mi><mo>,</mo><mtext>&nbsp;if&nbsp;</mtext><mi>n</mi><mo>&gt;</mo><mfrac><mrow><mi>log</mi><mo>(</mo><mi>q</mi><mo>)</mo></mrow><mrow><mi>log</mi><mo>(</mo><mi>p</mi><mo>)</mo></mrow></mfrac></math></div>
 <p>So it seems that surviving forever is impossible unless we can bring existential risk literally to <b>zero</b>,
     which is something that Bayes' theorem does not permit, given a non-zero prior. <br>
 </p>
@@ -54,74 +51,72 @@
     <b>However</b>, there's a trick. <br>Suppose that people in the future will always strive to reduce existential risk,
     and that they are successful. We can model this as follows:
 </p>
-<div>\(a_{n}=P(surviving\ century\ n | surviving\ century\ n-1) =\) probability of surviving century n,
+<div><math><msub><mi>a</mi><mi>n</mi></msub><mo>=</mo><mrow><mi>P</mi><mo>(</mo><mtext>surviving&nbsp;century&nbsp;</mtext><mi>n</mi><mo>|</mo><mtext>surviving&nbsp;century&nbsp;</mtext><mi>n</mi><mo>−</mo><mn>1</mn><mo>)</mo></mrow><mo>=</mo></math> probability of surviving century n,
     given that we get that far.
 </div>
 <p></p>
-<div>\(a_{n+1} = f(a_n)\), where \(f(x) > x\) for all \(0 &lt; x &lt; 1\)</div>
+<div><math><msub><mi>a</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>=</mo><mi>f</mi><mrow><mo>(</mo><msub><mi>a</mi><mi>n</mi></msub><mo>)</mo></mrow></math>, where <math><mi>f</mi><mrow><mo>(</mo><mi>x</mi><mo>)</mo></mrow><mo>&gt;</mo><mi>x</mi></math> for all <math><mn>0</mn><mo>&lt;</mo><mi>x</mi><mo>&lt;</mo><mn>1</mn></math></div>
 <p>
     The strategy for humanity then becomes:
 </p>
 <div>
     Given that the chance of survival for people in the previous
-    century was \(y\). Our task becomes to ensure our chance to survive this century becomes \(\geq f(y)\).
+    century was <math><mi>y</mi></math>. Our task becomes to ensure our chance to survive this century becomes <math><mo>≥</mo><mi>f</mi><mrow><mo>(</mo><mi>y</mi><mo>)</mo></mrow></math>.
 </div>
 <p>
-    Many choices for \(f\) will work here, but we will analyse \(f(x) = x^r,\) where \(0 &lt; r &lt; 1\)
+    Many choices for <math><mi>f</mi></math> will work here, but we will analyse <math><mi>f</mi><mrow><mo>(</mo><mi>x</mi><mo>)</mo></mrow><mo>=</mo><msup><mi>x</mi><mi>r</mi></msup><mo>,</mo></math> where <math><mn>0</mn><mo>&lt;</mo><mi>r</mi><mo>&lt;</mo><mn>1</mn></math>
 </p>
 <p>
-    We can use as an example Toby Ord's opinion on existential risk this century. Namely \(\frac{1}{6} = 0.167\),
-    and arbitrarily pick \(r = 0.8\) <br>
-    The chance to survive the 21st century then becomes \(\ a_{21} = 1 - 0.167 = 0.83\).
+    We can use as an example Toby Ord's opinion on existential risk this century. Namely <math><mfrac><mn>1</mn><mn>6</mn></mfrac><mo>=</mo><mn>0.167</mn></math>,
+    and arbitrarily pick <math><mi>r</mi><mo>=</mo><mn>0.8</mn></math> <br>
+    The chance to survive the 21st century then becomes <math><msub><mi>a</mi><mn>21</mn></msub><mo>=</mo><mn>1</mn><mo>−</mo><mn>0.167</mn><mo>=</mo><mn>0.83</mn></math>.
     And the X-risk targets for next few centuries becomes:
 </p>
 <ul>
     <li>
-        22nd century X-risk \(= 1 - a_{22} = 1 - {a_{21}}^{0.8} = 1 - 0.86 = 0.14\)
+        22nd century X-risk <math><mo>=</mo><mn>1</mn><mo>−</mo><msub><mi>a</mi><mn>22</mn></msub><mo>=</mo><mn>1</mn><mo>−</mo><msup><msub><mi>a</mi><mn>21</mn></msub><mn>0.8</mn></msup><mo>=</mo><mn>1</mn><mo>−</mo><mn>0.86</mn><mo>=</mo><mn>0.14</mn></math>
     </li>
     <li>
-        23rd century X-risk \(= 1 - a_{23} = 1 - {a_{22}}^{0.8} = 1 - 0.89 = 0.11\)
+        23rd century X-risk <math><mo>=</mo><mn>1</mn><mo>−</mo><msub><mi>a</mi><mn>23</mn></msub><mo>=</mo><mn>1</mn><mo>−</mo><msup><msub><mi>a</mi><mn>22</mn></msub><mn>0.8</mn></msup><mo>=</mo><mn>1</mn><mo>−</mo><mn>0.89</mn><mo>=</mo><mn>0.11</mn></math>
     </li>
     <li>
-        24th century X-risk \(= 1 - a_{24} = 1 - {a_{23}}^{0.8} = 1 - 0.91 = 0.09\)
+        24th century X-risk <math><mo>=</mo><mn>1</mn><mo>−</mo><msub><mi>a</mi><mn>24</mn></msub><mo>=</mo><mn>1</mn><mo>−</mo><msup><msub><mi>a</mi><mn>23</mn></msub><mn>0.8</mn></msup><mo>=</mo><mn>1</mn><mo>−</mo><mn>0.91</mn><mo>=</mo><mn>0.09</mn></math>
     </li>
     <li>
-        25th century X-risk \( = 0.07\)
+        25th century X-risk <math><mo>=</mo><mn>0.07</mn></math>
     </li>
     <li>
-        26th century X-risk \( = 0.06\)
+        26th century X-risk <math><mo>=</mo><mn>0.06</mn></math>
     </li>
     <li>
-        27th century X-risk \( = 0.05\)
+        27th century X-risk <math><mo>=</mo><mn>0.05</mn></math>
     </li>
     <li>
-        100th century X-risk \( = 4 \cdot {10^{-9}}\)
+        100th century X-risk <math><mo>=</mo><mn>4</mn><mo>⋅</mo><msup><mn>10</mn><mrow><mo>−</mo><mn>9</mn></mrow></msup></math>
     </li>
 </ul>
 <p>
-    Let's assume that \(a_0\) is the current century, and therefore that \(P(surviving\ century\ 0) = a_0\).
+    Let's assume that <math><msub><mi>a</mi><mn>0</mn></msub></math> is the current century, and therefore that <math><mrow><mi>P</mi><mo>(</mo><mtext>surviving&nbsp;century&nbsp;</mtext><mn>0</mn><mo>)</mo></mrow><mo>=</mo><msub><mi>a</mi><mn>0</mn></msub></math>.
     Then we get that:
 </p>
-<div>\(a_n = {(a_{n-1})}^{r} = {(a_{n-2})}^{r^2} = {(a_{n-3})}^{r^3} =\ ...\ = {(a_{0})}^{r^n}\)</div>
+<div><math><msub><mi>a</mi><mi>n</mi></msub><mo>=</mo><msup><mrow><mo>(</mo><msub><mi>a</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msub><mo>)</mo></mrow><mi>r</mi></msup><mo>=</mo><msup><mrow><mo>(</mo><msub><mi>a</mi><mrow><mi>n</mi><mo>−</mo><mn>2</mn></mrow></msub><mo>)</mo></mrow><msup><mi>r</mi><mn>2</mn></msup></msup><mo>=</mo><msup><mrow><mo>(</mo><msub><mi>a</mi><mrow><mi>n</mi><mo>−</mo><mn>3</mn></mrow></msub><mo>)</mo></mrow><msup><mi>r</mi><mn>3</mn></msup></msup><mo>=</mo><mo>…</mo><mo>=</mo><msup><mrow><mo>(</mo><msub><mi>a</mi><mn>0</mn></msub><mo>)</mo></mrow><msup><mi>r</mi><mi>n</mi></msup></msup></math></div>
 <p>We can then look at the probability of surviving until century n:</p>
 <div>
-    \(P(surviving\ n\ centuries) = P(surviving\ century\ n | surviving\ century\ n-1)\
-    \cdot P(surviving\ century\ n-1) = a_n \cdot P(surviving\ century\ n-1)\) <br>
-    \(= a_n \cdot a_{n-1} \cdot P(surviving\ century\ n-2) = a_n \cdot a_{n-1} \cdot ...
-    \cdot a_1 \cdot P(surviving\ century\ 0) = \prod_{i=0}^{n} a_i\)
+    <math><mrow><mi>P</mi><mo>(</mo><mtext>surviving&nbsp;</mtext><mi>n</mi><mtext>&nbsp;centuries</mtext><mo>)</mo></mrow><mo>=</mo><mrow><mi>P</mi><mo>(</mo><mtext>surviving&nbsp;century&nbsp;</mtext><mi>n</mi><mo>|</mo><mtext>surviving&nbsp;century&nbsp;</mtext><mi>n</mi><mo>−</mo><mn>1</mn><mo>)</mo></mrow><mo>⋅</mo><mrow><mi>P</mi><mo>(</mo><mtext>surviving&nbsp;century&nbsp;</mtext><mi>n</mi><mo>−</mo><mn>1</mn><mo>)</mo></mrow><mo>=</mo><msub><mi>a</mi><mi>n</mi></msub><mo>⋅</mo><mrow><mi>P</mi><mo>(</mo><mtext>surviving&nbsp;century&nbsp;</mtext><mi>n</mi><mo>−</mo><mn>1</mn><mo>)</mo></mrow></math> <br>
+    <math><mo>=</mo><msub><mi>a</mi><mi>n</mi></msub><mo>⋅</mo><msub><mi>a</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msub><mo>⋅</mo><mrow><mi>P</mi><mo>(</mo><mtext>surviving&nbsp;century&nbsp;</mtext><mi>n</mi><mo>−</mo><mn>2</mn><mo>)</mo></mrow><mo>=</mo><msub><mi>a</mi><mi>n</mi></msub><mo>⋅</mo><msub><mi>a</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msub><mo>⋅</mo><mo>…</mo><mo>⋅</mo><msub><mi>a</mi><mn>1</mn></msub><mo>⋅</mo><mrow><mi>P</mi><mo>(</mo><mtext>surviving&nbsp;century&nbsp;</mtext><mn>0</mn><mo>)</mo></mrow><mo>=</mo><mrow><munderover><mo>∏</mo><mrow><mi>i</mi><mo>=</mo><mn>0</mn></mrow><mi>n</mi></munderover><msub><mi>a</mi><mi>i</mi></msub></mrow></math>
 </div>
-<p>Plugging in our formula for \(a_n\) then gives:</p>
+<p>Plugging in our formula for <math><msub><mi>a</mi><mi>n</mi></msub></math> then gives:</p>
 <div>
-    \(P(surviving\ n\ centuries) = \prod_{i=0}^{n}{{(a_{0})}^{r^i}} = {(a_{0})}^{\sum_{i=0}^{n} {r^i}}\)
+    <math><mrow><mi>P</mi><mo>(</mo><mtext>surviving&nbsp;</mtext><mi>n</mi><mtext>&nbsp;centuries</mtext><mo>)</mo></mrow><mo>=</mo><mrow><munderover><mo>∏</mo><mrow><mi>i</mi><mo>=</mo><mn>0</mn></mrow><mi>n</mi></munderover><msup><mrow><mo>(</mo><msub><mi>a</mi><mn>0</mn></msub><mo>)</mo></mrow><msup><mi>r</mi><mi>i</mi></msup></msup></mrow><mo>=</mo><msup><mrow><mo>(</mo><msub><mi>a</mi><mn>0</mn></msub><mo>)</mo></mrow><mrow><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>0</mn></mrow><mi>n</mi></munderover><msup><mi>r</mi><mi>i</mi></msup></mrow></msup></math>
 </div>
 <p>
-    The exponent here is a geometric series, which means that it converges to a finite value \(s\) as \(n\)
-    goes to infinity. The formula is \(s = \frac{1}{1-r}\)
+    The exponent here is a geometric series, which means that it converges to a finite value <math><mi>s</mi></math> as <math><mi>n</mi></math>
+    goes to infinity. The formula is <math><mi>s</mi><mo>=</mo><mfrac><mn>1</mn><mrow><mn>1</mn><mo>−</mo><mi>r</mi></mrow></mfrac></math>
 </p>
 <p>
     <b>We can then say that the chance to survive an arbitrary number of centuries can never go
-        below \({(a_{0})}^{s}\)</b><br>
-    For our example with \(a_0 = 0.83\) and \(r = 0.8\), this probability becomes \({0.83}^{\frac{1}{1-0.8}} = 0.4\)
+        below <math><msup><mrow><mo>(</mo><msub><mi>a</mi><mn>0</mn></msub><mo>)</mo></mrow><mi>s</mi></msup></math></b><br>
+    For our example with <math><msub><mi>a</mi><mn>0</mn></msub><mo>=</mo><mn>0.83</mn></math> and <math><mi>r</mi><mo>=</mo><mn>0.8</mn></math>, this probability becomes <math><msup><mn>0.83</mn><mfrac><mn>1</mn><mrow><mn>1</mn><mo>−</mo><mn>0.8</mn></mrow></mfrac></msup><mo>=</mo><mn>0.4</mn></math>
 </p>
 <p>
     This possibility has weird implications for ethics. The strategy would, if successful (and depending on your moral
