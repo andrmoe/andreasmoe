@@ -104,8 +104,14 @@ td {
 }
 math {
     font-family: "Latin Modern Math", "STIX Two Math", "Cambria Math", math;
-    font-size: 1.1em;
+    font-size: 1.2em;
     padding: 0.05em 0.3em;
     background: #eef0f7;
     border-radius: 3px;
+}
+
+/* Shrink scripts and inline fractions less than the browser default (~70% per level) */
+:is(msup, msub, msubsup, munder, mover, munderover) > :not(:first-child),
+mfrac > * {
+    font-size: 0.82em;
 }
