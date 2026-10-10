@@ -102,3 +102,14 @@ td {
   padding: 8px 10px;
   text-align: center;
 }
+
+math {
+    font-family: "Latin Modern Math", "STIX Two Math", "Cambria Math", math;
+    font-size: 1.2em;
+}
+
+/* Shrink scripts and inline fractions less than the browser default (~70% per level) */
+:is(msup, msub, msubsup, munder, mover, munderover) > :not(:first-child),
+mfrac > * {
+    font-size: 0.82em;
+}

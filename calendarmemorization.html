@@ -7,9 +7,6 @@
     <link rel="icon" href="favicon.png" />
     <title>Andreas Moe</title>
     <script src="header.js"></script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
-    integrity="sha384-Wuix6BuhrWbjDBs24bXrjf4ZQ5aFeFWBuKkFekO2t8xFU0iNaLQfp2K6/1Nxveei"
-    crossorigin="anonymous"></script>
 </head>
 <body>
 <div id="header"></div>
@@ -97,7 +94,7 @@
 </p>
 <p>
     If you need to go much further, use this formula to find the weekday of 1. January: 
-    \(year - 2000 + \lfloor\frac{year - 2000}{4}\rfloor \mod 7\)
+    <math><mi>year</mi><mo>−</mo><mn>2000</mn><mo>+</mo><mo>⌊</mo><mfrac><mrow><mi>year</mi><mo>−</mo><mn>2000</mn></mrow><mn>4</mn></mfrac><mo>⌋</mo><mo lspace="0.3em" rspace="0.3em">mod</mo><mn>7</mn></math>
 </p>
 <p>
     This works because 1. January 2001 happens to be on a Monday 
