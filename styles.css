@@ -104,26 +104,8 @@ td {
 }
 math {
     font-family: "Latin Modern Math", "STIX Two Math", "Cambria Math", math;
-    font-size: 1.05em;
-}
-
-.equation {
-    width: fit-content;
-    max-width: 100%;
-    box-sizing: border-box;
-    margin: 0.8em 0;
-    padding: 0.6em 1.2em;
-    background: #f5f6fa;
-    border-left: 3px solid darkblue;
-    border-radius: 0 4px 4px 0;
-    overflow-x: auto;
-}
-
-.equation math {
-    font-size: 1.15em;
-}
-
-mtd {
-    text-align: left;
-    padding: 0.15em 0;
+    font-size: 1.1em;
+    padding: 0.05em 0.3em;
+    background: #eef0f7;
+    border-radius: 3px;
 }
