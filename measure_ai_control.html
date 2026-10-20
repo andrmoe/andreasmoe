@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="page" content="blog">
+    <link rel="stylesheet" href="styles.css"/>
+    <link rel="icon" href="favicon.png" />
+    <title>Andreas Moe</title>
+    <script src="header.js"></script>
+</head>
+<body>
+<div id="header"></div>
+<h2 id="blogtitle">Measuring AI Control</h2>
+<p>Written in <span id="blogdate">October 2026</span></p>
+<p>
+    
+</p>
+<ol>
+    <li>
+        Capability of the agent = a
+    </li>
+    <li>
+        Capability of the monitor = m
+    </li>
+    <li>
+        Performance loss = l (pegged at 5%)
+    </li>
+    <li>
+        Attack success rate = r (pegged at 5%)
+    </li>
+    <li>
+        Monitor usage / Agent usage = u (pegged at 1)
+    </li>
+    <li>
+        Human control cost per action = h
+    </li>
+     
+</ol>
+<p>
+    I want to figure out how fast the capability ceiling for controllable models is increasing.
+    This decomposes into two parts. One is how fast the capability of trustable models is increasing. 
+    The other is how fast the capability ratio between the trusted models and the resulting controllable untrusted model is increasing.
+    Cc = Ct * R = Ct0 * exp(Tc * t) * R0 * exp(Tr * t) = Ct * R0 * exp((Tc + Tr) * t)
+    So we're interested in the sum of the growth rates.
+    
+</p>
+</body>
+</html>
