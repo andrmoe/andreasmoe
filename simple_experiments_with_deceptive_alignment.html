@@ -8,9 +8,6 @@
     <link rel="icon" href="favicon.png" />
     <title>Andreas Moe</title>
     <script src="header.js"></script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
-        integrity="sha384-Wuix6BuhrWbjDBs24bXrjf4ZQ5aFeFWBuKkFekO2t8xFU0iNaLQfp2K6/1Nxveei"
-        crossorigin="anonymous"></script>
 </head>
 <body>
 <div id="header"></div>
@@ -28,8 +25,8 @@
 <p>From page 23 in “Risks from Learned Optimization in Advanced Machine Learning Systems”</p>
 <p>I wanted to build a task environment that is almost as simple, but where the base optimizer uses gradient descent in order to explore the phenomenon further and potentially test hypotheses.</p>
 <p>The task is to output a number as close to zero as possible. The base objective is to minimize the square of the output. The setup has a mesa-optimizer with one goal parameter θ. The mesa objective will be to minimize the total squared error between the output and θ over all training and deployment episodes. The base optimizer will adjust θ with gradient descent according to the base objective and with a learning rate that is specific to that episode.</p>
-<p>\(base\;objective = y^2\)</p>
-<p>\(mesa\:objective = (y-\theta)^2\)</p>
+<p><math><mtext>base&nbsp;objective</mtext><mo>=</mo><msup><mi>y</mi><mn>2</mn></msup></math></p>
+<p><math><mtext>mesa&nbsp;objective</mtext><mo>=</mo><msup><mrow><mo>(</mo><mi>y</mi><mo>−</mo><mi>θ</mi><mo>)</mo></mrow><mn>2</mn></msup></math></p>
 <p>There will be a training schedule where some small number of episodes will have a positive learning rate, simulating a training process, and a larger number of episodes following it where the learning rate is zero, simulating deployment.</p>
 <p>There are N mesa-optimizing agents, one for each episode, where each agent’s action changes the goal of the following agent. To solve this game theory problem, I used <a href="https://en.wikipedia.org/wiki/Backward_induction#Backward_induction_in_game_theory">backwards induction</a>. Starting with the last agent, I solve for a policy which optimizes the mesa objective for a range of different θ’s. Then I solve for an optimizing policy for the second to last agent, accounting for changes to the objective of the last agent. Then repeating this process all the way to the beginning.</p>
 <p>I chose to use a very limited space of policies. The agents can only output a number proportional to θ. This makes it very easy to separate deceptive alignment from robust alignment. A coefficient of 1 entails that the agent will always output θ, its mesa objective. It is therefore robustly aligned if θ = 0. A coefficient of 0 implies deceptive alignment, the agent outputs the base objective regardless of its mesa objective.</p>
