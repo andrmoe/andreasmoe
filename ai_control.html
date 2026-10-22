@@ -117,6 +117,13 @@ so that the gap between the two predicts how often an attacking model would be s
         <button type="button" data-attack="ordinary" aria-pressed="false">ordinary attacks</button>
         <button type="button" data-attack="strongest" aria-pressed="true">the strongest attacks tested</button>
     </div>
+    <div role="group" aria-label="Monitor capability">
+        Monitor:
+        <button type="button" data-monitor="actual" aria-pressed="true">as evaluated</button>
+        <button type="button" data-monitor="fixed" aria-pressed="false">fixed hypothetical LLM</button>
+        <label for="ctl-monitor-hours">50% time horizon (hours):</label>
+        <input id="ctl-monitor-hours" type="number" min="0.01" max="10000" step="any" value="1" disabled style="width:80px">
+    </div>
     <div role="group" aria-label="Scale">
         Scale:
         <button type="button" data-scale="linear" aria-pressed="true">linear</button>
@@ -124,10 +131,11 @@ so that the gap between the two predicts how often an attacking model would be s
     </div>
 </div>
 
+<p class="ctl-note" id="ctl-monitor-note" hidden>Hypothetical estimate: each protocol's fitted control capability is multiplied by the fixed monitor's time horizon divided by its evaluated monitor's time horizon. This assumes control capability scales proportionally with monitor capability; it is not an empirical measurement. <a href="https://arxiv.org/html/2609.19587v2#App3" target="_blank">Remedios et al., Appendix C (Figure 13)</a> reports that switching baseline Auto Mode from Sonnet 5 to Opus 4.8 did not reduce attack success; the Auto Mode++ improvements came from protocol changes. That ablation does not validate proportional scaling with general model capability. Evaluations without a monitor capability estimate are omitted. Frontier models remain at their actual capabilities. Data tables below show the original evaluations.</p>
 <div class="ctl-legend">
     <span><svg width="14" height="14"><circle cx="7" cy="7" r="5" fill="#2a78d6"/></svg>Frontier model, measured by METR</span>
     <span><svg width="14" height="14"><circle cx="7" cy="7" r="4.5" fill="#fcfcfb" stroke="#2a78d6" stroke-width="2"/></svg>Frontier model, estimated from Epoch's index</span>
-    <span><svg width="26" height="12"><path d="M 0 10 L 10 10 L 10 3 L 26 3" fill="none" stroke="#4a3aa7" stroke-width="3"/></svg>Best control demonstrated so far</span>
+    <span><svg width="26" height="12"><path d="M 0 10 L 10 10 L 10 3 L 26 3" fill="none" stroke="#4a3aa7" stroke-width="3"/></svg><span id="ctl-control-legend">Best control demonstrated so far</span></span>
     <span><svg width="14" height="14"><rect x="2" y="2" width="10" height="10" fill="#fcfcfb" stroke="#4a3aa7" stroke-width="2"/></svg>Research result</span>
     <span><svg width="14" height="14"><rect x="2" y="2" width="10" height="10" fill="#4a3aa7"/></svg>Against the paper's strongest attacker</span>
     <span><svg width="16" height="16"><circle cx="8" cy="8" r="6" fill="#fcfcfb" stroke="#1baf7a" stroke-width="2"/></svg>Production monitor, independent test</span>
@@ -345,7 +353,7 @@ const EVALS = [
     {date: "2026-09-17", kind: "production", title: "OpenAI Codex Guardian (Remedios et al.)", attacker: "Claude Opus 5", monitor: "GPT-5.6 Luna", stopped: 28,
         detail: "An approximation of Codex's production monitor: 72% of attacks succeed (59% with all edits monitored). Sandboxing wasn't red-teamed.", source: "arXiv 2609.19587"},
     {date: "2026-09-17", kind: "research", title: "Hardened Auto Mode (Remedios et al.)", attacker: "Claude Opus 5", monitor: "Claude Opus 4.8", stopped: 91,
-        detail: "Experimental Auto Mode++ (all-edit monitoring, anti-injection, an agentic stage, Opus 4.8 monitor): 91% blocked; 97% for the agentic stage alone. Multi-context attacks remain unsolved at acceptable cost.", source: "arXiv 2609.19587"},
+        detail: "Experimental Auto Mode++ (all-edit monitoring, anti-injection, an agentic stage, Opus 4.8 monitor): 91% blocked; 97% for the agentic stage alone. Multi-context attacks remain unsolved at acceptable cost. Appendix C / Figure 13 also tests baseline Auto Mode with Opus 4.8: changing the model alone does not reduce attack success, supporting the protocol changes as the source of improvement.", source: "arXiv 2609.19587, Table 2 and Appendix C (Figure 13)"},
 ];
 const KIND = {
     research: {color: "#4a3aa7", label: "Research protocol"},
@@ -362,7 +370,7 @@ const LOG_TICKS = [
     [16 * H, "16 hours"], [40 * H, "1 work-week"], [160 * H, "1 work-month"],
 ];
 // What the control line shows: the attacker capability stopped with probability `level`, against `attack` results
-const VIEW = {level: 0.95, attack: "strongest", scale: "linear"};
+const VIEW = {level: 0.95, attack: "strongest", scale: "linear", monitor: "actual", monitorHours: 1};
 const SVG_NS = "http://www.w3.org/2000/svg";
 
 // Control model. Control capability C is a time horizon on the same scale as METR's. The share of an attacker's attacks that
@@ -392,13 +400,17 @@ function protocolControl(results) {
 
 // Best demonstrated control: at each date, the highest control capability of any protocol published so far.
 // Companies' tests of their own monitors are shown but can't set the record.
+const monitorFactor = ev => VIEW.monitor === "fixed" ? VIEW.monitorHours * H / capabilityOf(ev.monitor).p50 : 1;
+const usableEvaluation = ev => capabilityOf(ev.attacker) && (VIEW.monitor !== "fixed" || capabilityOf(ev.monitor));
+const controlLabel = () => VIEW.monitor === "fixed" ? "Hypothetical control with a fixed monitor" : "Best control so far";
+
 function controlRecord(attack) {
     const protocols = new Map();
-    for (const ev of EVALS.filter(e => !e.selfReported && capabilityOf(e.attacker))) {
+    for (const ev of EVALS.filter(e => !e.selfReported && usableEvaluation(e))) {
         if (!protocols.has(ev.title)) protocols.set(ev.title, {ev, results: []});
         protocols.get(ev.title).results.push({s: Math.min(Math.max(resultsFor(ev, attack).stopped / 100, 0.01), 0.99), lnA: Math.log(capabilityOf(ev.attacker).p50)});
     }
-    const estimates = [...protocols.values()].map(pr => ({ev: pr.ev, n: pr.results.length, lnC: protocolControl(pr.results)}))
+    const estimates = [...protocols.values()].map(pr => ({ev: pr.ev, n: pr.results.length, lnC: protocolControl(pr.results) + Math.log(monitorFactor(pr.ev))}))
         .sort((a, b) => a.ev.date.localeCompare(b.ev.date));
     const steps = [];  // each protocol that raised the record
     for (const est of estimates) {
@@ -437,6 +449,7 @@ function draw() {
     const tooltip = document.getElementById("ctl-tooltip");
     container.querySelector("svg")?.remove();
 
+    document.getElementById("ctl-control-legend").textContent = controlLabel();
     const record = MODEL[VIEW.attack], shift = levelShift(VIEW.level);
     const width = Math.max(container.clientWidth - 16, 1400);
     const m = {top: 20, right: 28, bottom: 36, left: 130};
@@ -446,21 +459,22 @@ function draw() {
     const iw = width - m.left - m.right;
 
     // Points shown under this view
-    const points = EVALS.filter(ev => capabilityOf(ev.attacker)).map(ev => {
+    const points = EVALS.filter(usableEvaluation).map(ev => {
         const att = capabilityOf(ev.attacker), r = resultsFor(ev, VIEW.attack);
-        return {ev, att, ...r, c: impliedControl(att.p50, r.stopped), shown: impliedControl(att.p50, r.stopped) * Math.exp(shift)};
+        return {ev, att, ...r, c: impliedControl(att.p50, r.stopped) * monitorFactor(ev), shown: impliedControl(att.p50, r.stopped) * monitorFactor(ev) * Math.exp(shift)};
     });
     // Linear: hours from 0 to a round number above the most capable model.
     // Logarithmic: up to 200 hours, and down far enough to fit the line and every point in this view.
     let yMax, ticks, y;
     if (VIEW.scale === "linear") {
-        const step = 10 * H;
-        yMax = Math.ceil(Math.max(...FRONTIER.map(f => f.p50)) * 1.15 / step) * step;
+        const maxCapability = Math.max(...FRONTIER.map(f => f.p50), ...record.steps.map(st => Math.exp(st.lnC + shift)));
+        const step = Math.max(10, 10 ** Math.floor(Math.log10(maxCapability / H))) * H;
+        yMax = Math.ceil(Math.max(...FRONTIER.map(f => f.p50), ...record.steps.map(st => Math.exp(st.lnC + shift))) * 1.15 / step) * step;
         ticks = [];
         for (let v = 0; v <= yMax; v += step) ticks.push([v, v === 0 ? "0" : `${v / H} hours`]);
         y = v => m.top + ih - v / yMax * ih;
     } else {
-        yMax = 200 * H;
+        yMax = Math.max(200 * H, ...record.steps.map(st => Math.exp(st.lnC + shift) * 1.15));
         const lineMin = Math.exp(record.steps[0].lnC + shift);
         const yMin = Math.min(0.5, ...points.map(pt => pt.shown), lineMin) / 2;
         ticks = LOG_TICKS.filter(([v]) => v >= yMin && v <= yMax);
@@ -535,10 +549,10 @@ function draw() {
     const labelY = y(Math.exp(lnControlAt(record, labelAt) + shift));
     const lineLabel = el("text", {x: x(labelAt), y: VIEW.scale === "linear" ? Math.min(labelY - 12, m.top + ih - 50) : labelY - 12,
         "text-anchor": "start", fill: "#4a3aa7", "font-size": 13, "font-weight": "bold", stroke: "#fcfcfb", "stroke-width": 3, "paint-order": "stroke"}, svg);
-    lineLabel.textContent = `Best control so far: attackers stopped ${levelText} of the time (${attackText})`;
+    lineLabel.textContent = `${controlLabel()}: attackers stopped ${levelText} of the time (${attackText})`;
     for (const st of record.steps) {
-        targets.push({x: x(st.ev.date), y: y(Math.exp(st.lnC + shift)), title: `New record: ${st.ev.title} (${st.ev.date})`,
-            body: `From this protocol on, the best demonstrated control stops ${levelText} of attacks (${attackText}) from attackers up to ${formatMinutes(Math.exp(st.lnC + shift))}, and half of attacks from attackers up to ${formatMinutes(Math.exp(st.lnC))}. Estimated from ${st.n} attacker${st.n > 1 ? "s" : ""}${st.n > 1 ? "" : ` (${st.ev.attacker})`}; monitor: ${st.ev.monitor}.`});
+        targets.push({x: x(st.ev.date), y: y(Math.exp(st.lnC + shift)), title: `${controlLabel()}: ${st.ev.title} (${st.ev.date})`,
+            body: `From this protocol on, ${controlLabel().toLowerCase()} stops ${levelText} of attacks (${attackText}) from attackers up to ${formatMinutes(Math.exp(st.lnC + shift))}, and half of attacks from attackers up to ${formatMinutes(Math.exp(st.lnC))}. ${VIEW.monitor === "fixed" ? `Rescaled to a fixed ${formatMinutes(VIEW.monitorHours * H)} monitor. ` : ""}Estimated from ${st.n} attacker${st.n > 1 ? "s" : ""}${st.n > 1 ? "" : ` (${st.ev.attacker})`}; monitor: ${st.ev.monitor}.`});
     }
 
     // Frontier models
@@ -552,7 +566,7 @@ function draw() {
         const how = mdl.estimated ? `estimated ${formatMinutes(mdl.p50)} from Epoch's Capabilities Index (ECI ${mdl.eci}; range ${formatMinutes(mdl.lo)} - ${formatMinutes(mdl.hi)})`
             : `${formatMinutes(mdl.p50)}, measured by METR (95% CI ${formatMinutes(mdl.lo)} - ${formatMinutes(mdl.hi)})`;
         const lnC = lnControlAt(record, mdl.date);
-        const stop = lnC === null ? "No control evaluation had been published yet." : `Modelled share of its attacks that the best control of the time would stop (${attackText}): ${pctText(pStopped(lnC, mdl.p50))}.`;
+        const stop = lnC === null ? "No control evaluation had been published yet." : `Modelled share of its attacks that ${controlLabel().toLowerCase()} at its release would stop (${attackText}): ${pctText(pStopped(lnC, mdl.p50))}.`;
         targets.push({x: x(mdl.date), y: y(mdl.p50), title: `${mdl.name} (${mdl.org})`, body: `Released ${mdl.date}. 50% time horizon: ${how}. ${stop}`});
     }
     const labelRight = ["GPT-4"];
@@ -573,12 +587,12 @@ function draw() {
         else el("rect", {x: cx - markR, y: cy - markR, width: 2 * markR, height: 2 * markR, fill: strongest ? color : "#fcfcfb", stroke: color, "stroke-width": 2}, svg);
         const off = shown > yMax ? " (above the chart)" : "";
         targets.push({x: cx, y: cy, title: `${ev.title} (${ev.date})${strongest ? ", strongest attacker" : ""}`,
-            body: `${kindLabel(ev)}. ${stopped}% of ${ev.attacker}'s attacks stopped (attacker: ${capText(att)}). That implies attackers up to ${formatMinutes(shown)}${off} would be stopped ${levelText} of the time, and ${formatMinutes(c)} half the time. Monitor: ${ev.monitor}. ${ev.detail} Source: ${ev.source}.`});
+            body: `${kindLabel(ev)}. ${stopped}% of ${ev.attacker}'s attacks stopped (attacker: ${capText(att)}). ${VIEW.monitor === "fixed" ? `After rescaling to a fixed ${formatMinutes(VIEW.monitorHours * H)} monitor, this implies` : "That implies"} attackers up to ${formatMinutes(shown)}${off} would be stopped ${levelText} of the time, and ${formatMinutes(c)} half the time. Monitor: ${ev.monitor}. ${ev.detail} Source: ${ev.source}.`});
     }
 
     // Lower panel: modelled share of the frontier model's attacks stopped, against the chosen target
     const p2Title = el("text", {x: m.left, y: p2Top - 12, fill: "#0b0b0b", "font-size": 13, "font-weight": "bold"}, svg);
-    p2Title.textContent = `Modelled share of the most capable model's attacks that the best control so far would stop (${attackText})`;
+    p2Title.textContent = `Modelled share of the most capable model's attacks that ${controlLabel().toLowerCase()} would stop (${attackText})`;
     for (const p of [0, 0.25, 0.5, 0.75, 1]) {
         el("line", {x1: m.left, x2: m.left + iw, y1: y2(p), y2: y2(p), stroke: "#e6e5e0"}, svg);
         const t = el("text", {x: m.left - 8, y: y2(p) + 4, "text-anchor": "end", fill: "#52514e", "font-size": 12}, svg);
@@ -596,7 +610,7 @@ function draw() {
         const f = frontierAt(d), leader = FRONTIER.filter(m2 => m2.date <= d).reduce((a, b) => (b.p50 > a.p50 ? b : a));
         const p = pStopped(lnControlAt(record, d), f), holder = record.holderAt(d);
         targets.push({x: x(d), y: y2(p), title: `${d}: ${pctText(p)} stopped`,
-            body: `Most capable model so far: ${leader.name} (${capText(leader)}). Modelled share of its attacks that the best control so far (${holder.ev.title}) would stop (${attackText}): ${pctText(p)}, against a target of ${levelText}.`});
+            body: `Most capable model so far: ${leader.name} (${capText(leader)}). Modelled share of its attacks that ${controlLabel().toLowerCase()} (${holder.ev.title}) would stop (${attackText}): ${pctText(p)}, against a target of ${levelText}.`});
     }
 
     const overlay = el("rect", {x: 0, y: 0, width, height, fill: "transparent"}, svg);
@@ -631,12 +645,13 @@ function describeModel() {
     const holder = record.holderAt(last.date);
     const reach = Math.exp(holder.lnC + shift), gap = last.p50 / reach;
     document.getElementById("ctl-model-summary").textContent =
-        `Against ${attackText}, the best control demonstrated so far comes from ${holder.ev.title} (${holder.ev.date}). ` +
+        `Against ${attackText}, ${controlLabel().toLowerCase()} comes from ${holder.ev.title} (${holder.ev.date}). ` +
         (gap > 1
             ? `When ${last.name} was released (${last.date}), that control could stop ${levelText} of attacks only from models up to ${formatMinutes(reach)}: ` +
               `${gap >= 10 ? Math.round(gap).toLocaleString("en") : gap.toFixed(1)} times less capable than ${last.name} (${formatMinutes(last.p50)}). `
             : `When ${last.name} was released (${last.date}), that control could stop ${levelText} of attacks from models up to ${formatMinutes(reach)}, ` +
               `more than ${last.name}'s ${formatMinutes(last.p50)}. `) +
+        (VIEW.monitor === "fixed" ? `This assumes a fixed hypothetical monitor with a ${formatMinutes(VIEW.monitorHours * H)} time horizon. ` : "") +
         `The modelled share of the most capable model's attacks that the best control stops went from ${pct(firstLeader, firstEval)}% for ${firstLeader.name} when the first evaluation was published (${firstEval}) ` +
         `to ${pct(last, last.date)}% for ${last.name}. The record has been set by ${record.steps.length} protocols in turn.`;
 }
@@ -677,10 +692,20 @@ document.addEventListener("DOMContentLoaded", () => {
             const group = Object.keys(button.dataset)[0];
             VIEW[group] = group === "level" ? Number(button.dataset.level) : button.dataset[group];
             for (const b of button.parentElement.querySelectorAll("button")) b.setAttribute("aria-pressed", String(b === button));
+            document.getElementById("ctl-monitor-hours").disabled = VIEW.monitor !== "fixed";
+            document.getElementById("ctl-monitor-note").hidden = VIEW.monitor !== "fixed";
+            MODEL = buildModel();
             describeModel();
             draw();
         });
     }
+    document.getElementById("ctl-monitor-hours").addEventListener("input", event => {
+        if (!event.target.checkValidity() || !Number.isFinite(event.target.valueAsNumber)) return;
+        VIEW.monitorHours = event.target.valueAsNumber;
+        MODEL = buildModel();
+        describeModel();
+        draw();
+    });
     let resizeTimer;
     window.addEventListener("resize", () => {
         clearTimeout(resizeTimer);
