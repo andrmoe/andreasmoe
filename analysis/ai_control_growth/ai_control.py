@@ -1,7 +1,7 @@
 """Exploratory Bayesian synthesis of trusted AI-control growth.
 
 Run: python ai_control.py {fit,refresh,expand,test} [options]
-Dependencies: numpy, scipy, matplotlib. No network access at inference time.
+Dependencies: numpy and scipy; requests and beautifulsoup4 for source refresh. No network access at inference time.
 All probabilities are conditional on the transport and frontier-gap priors.
 """
 
@@ -18,14 +18,26 @@ import json
 import math
 from pathlib import Path
 
-import matplotlib
-
-matplotlib.use("Agg")
-import matplotlib.pyplot as plt
 import numpy as np
 from scipy.special import expit, log_ndtr, ndtri_exp
 
 ROOT = Path(__file__).resolve().parent
+
+DATA_FILE = ROOT / "data.json"
+
+
+def load_section(section):
+    """Read a named section of the consolidated analysis archive."""
+    return json.loads(DATA_FILE.read_text())[section]
+
+
+def save_section(section, value):
+    """Replace one section while preserving all other evidence and results."""
+    archive = json.loads(DATA_FILE.read_text())
+    archive[section] = value
+    temporary = DATA_FILE.with_suffix(".json.tmp")
+    temporary.write_text(json.dumps(archive, indent=2) + "\n")
+    temporary.replace(DATA_FILE)
 
 
 def logit(p):
@@ -295,7 +307,7 @@ def fit_main():
     parser.add_argument("--chains", type=int, default=4)
     parser.add_argument("--workers", type=int, default=3)
     args = parser.parse_args()
-    data = json.loads((ROOT / "evidence.json").read_text())
+    data = load_section("evidence")
     validate_evidence(data)
     growth = frontier_fit(data)
     results = {"interpretation": "Conditional sensitivity analysis; not a calibrated probability for all real-world control.",
@@ -339,9 +351,8 @@ def fit_main():
     results["structural_sensitivity"] = run_stress_cases(data, growth, args, stress_fits)
     results["diagnostics_pass"] = all(max(r["rhat"].values()) < 1.05 and min(r["ess"].values()) > 400 for r in results["settings"])
     results["diagnostics_pass"] &= all(r["max_rhat"] < 1.05 and r["min_ess"] > 400 for r in results["structural_sensitivity"])
-    (ROOT / "results.json").write_text(json.dumps(results, indent=2) + "\n")
+    save_section("results", results)
     np.savez_compressed(ROOT / "baseline_draws.npz", draws=baseline, names=names)
-    draw_figure(results)
     export_page_data(data, results, baseline)
 
 
@@ -437,30 +448,6 @@ def export_page_data(data, results, baseline, names=None):
 
 
 
-def draw_figure(results):
-    plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 10})
-    fig, axs = plt.subplots(1, 3, figsize=(13, 4.5), constrained_layout=True, sharey=True)
-    for ax, fraction, title in zip(axs, ["0.0", "0.5", "1.0"],
-                                   ["Fixed trusted model", "Trusted capability grows half as fast", "Trusted capability keeps a fixed relative gap"]):
-        matrix = np.array([[next(r for r in results["settings"] if r["transport_sd"] == tr and r["protocol_progress_prior_sd"] == pr)
-                            ["trust_scenarios"][fraction]["p_control_faster"] for pr in [.5, 1., 2.]] for tr in [.75, 1.5, 3.]])
-        ax.imshow(matrix, vmin=0, vmax=1, cmap="RdBu", aspect="auto")
-        for i in range(3):
-            for j in range(3):
-                v = matrix[i, j]
-                ax.text(j, i, f"{v:.0%}", ha="center", va="center", fontsize=15, color="white" if v < .2 or v > .8 else "black")
-        ax.set_xticks(range(3), ["0.5", "1", "2"])
-        ax.set_yticks(range(3), ["0.75", "1.5", "3"])
-        ax.set_xlabel("Protocol progress prior scale (log-odds/year)")
-        ax.set_title(title, fontsize=10)
-    axs[0].set_ylabel("Uncertainty transporting studies (log-odds)")
-    fig.suptitle("Probability control capability grows faster than frontier capability\nConditional on this model and its priors; differences across cells are substantive", fontsize=13)
-    fig.savefig(ROOT / "growth_sensitivity.png", dpi=180)
-    fig.savefig(ROOT / "growth_sensitivity.svg")
-    plt.close(fig)
-
-
-
 
 # Primary-paper evidence expansion
 ORIGIN=datetime.date(2023,12,12)
@@ -487,7 +474,7 @@ def table_rows(table):
 
 class Expansion:
  def __init__(self,cache):
-  self.cache=Path(cache);self.data=json.loads((ROOT/'evidence_base.json').read_text());self.obs=self.data['observations'];self.variants={};self.review=[];self.data.setdefault('unknown_models',{})
+  self.cache=Path(cache);self.data=load_section('base_evidence');self.obs=self.data['observations'];self.variants={};self.review=[];self.data.setdefault('unknown_models',{})
  def source(self,pid):return json.loads((self.cache/(pid+'.json')).read_text())
  def table(self,pid,id):return next(t for t in self.source(pid)['tables'] if t['id']==id)
  def rows(self,pid,id):return table_rows(self.table(pid,id))
@@ -771,8 +758,7 @@ class Expansion:
   for v in self.variants.values():v['status']='quantitative' if v['observation_ids'] else 'indexed; no scalar extracted'
   self.data['variants']=list(self.variants.values());self.data['observations']=self.obs
   self.data['variant_scope']='Distinct control mechanisms, named ablations and material operating-point variants found in all linked papers. Figure-only and conceptual variants are indexed explicitly, not fabricated into numerical results.'
-  (ROOT/'evidence.json').write_text(json.dumps(self.data,indent=2)+'\n')
-  (ROOT/'variant_inventory.json').write_text(json.dumps(self.data['variants'],indent=2)+'\n')
+  save_section('evidence', self.data)
   print(len(self.obs),'observations;',len(self.variants),'indexed variants;',sum(v['status']=='quantitative' for v in self.variants.values()),'with quantitative evidence')
 
 def expand_main():
@@ -811,7 +797,7 @@ from scipy.stats import truncnorm
 
 class InferenceChecks(unittest.TestCase):
     def test_helper_identity_has_no_effect_on_fit_or_candidates(self):
-        data = json.loads((ROOT / "evidence.json").read_text())
+        data = load_section("evidence")
         changed = copy.deepcopy(data)
         for o in changed["observations"]:
             if o["study"] == "2606.11998" and o["protocol"] not in {"bootstrap-trusted-only", "bootstrap-helper-only"}:
@@ -832,7 +818,7 @@ class InferenceChecks(unittest.TestCase):
         self.assertFalse(any("condition_effect" in o for o in bootstrap))
 
     def test_variant_coverage_and_candidate_roles(self):
-        data = json.loads((ROOT / "evidence.json").read_text())
+        data = load_section("evidence")
         validate_evidence(data)
         variants = {v["id"]: v for v in data["variants"]}
         for key in ["auto-mode-strict", "guardian-strict", "ctrlz-resample-time-travel-combined", "bootstrapped-with-actions"]:

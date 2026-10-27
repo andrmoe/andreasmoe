@@ -407,6 +407,9 @@ window.AI_CONTROL_GROWTH = {"asOf":"2026-10-27","origin":"2023-12-12","reference
             : 'The numerical convergence checks need attention. Treat these results as provisional.';
     }
     document.addEventListener('DOMContentLoaded', () => {
+        for (const link of document.querySelectorAll('a[href="#ctl-methods"], a[href="#ctl-variant-coverage"]')) {
+            link.addEventListener('click', () => { document.querySelector(link.getAttribute('href')).open = true; });
+        }
         tables(); describe(); draw();
         for (const button of document.querySelectorAll('.ctl-controls button')) button.addEventListener('click', () => {
             const group = Object.keys(button.dataset)[0];

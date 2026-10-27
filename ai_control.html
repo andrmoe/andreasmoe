@@ -164,8 +164,114 @@ Repeated results from one paper share effects so that a large table does not bec
 <div class="ctl-table-wrap"><table id="ctl-sources"><thead><tr><th>Source</th><th>Working observations</th><th>Contribution</th></tr></thead><tbody></tbody></table></div>
 </details>
 
-<details>
+<details id="ctl-variant-coverage">
 <summary>All protocol variants and evidence coverage</summary>
+<p>The inventory distinguishes individual mechanisms and material operating points from entire parameter sweeps. Qualitative and conceptual entries are retained without invented safety measurements.</p>
+<div class="ctl-table-wrap"><table>
+<thead>
+<tr>
+<th>Source</th>
+<th style="text-align: right;">Indexed variants / families</th>
+<th style="text-align: right;">With numerical evidence</th>
+<th style="text-align: right;">Observations / bounds</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://arxiv.org/html/2312.06942">AI Control</a></td>
+<td style="text-align: right;">21</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">29</td>
+</tr>
+<tr>
+<td><a href="https://arxiv.org/html/2504.10374">Ctrl-Z</a></td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">19</td>
+</tr>
+<tr>
+<td><a href="https://arxiv.org/html/2510.09462">Adaptive attacks on trusted monitors</a></td>
+<td style="text-align: right;">13</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">25</td>
+</tr>
+<tr>
+<td><a href="https://arxiv.org/html/2511.02997">Evaluating control protocols for untrusted AI agents</a></td>
+<td style="text-align: right;">17</td>
+<td style="text-align: right;">14</td>
+<td style="text-align: right;">25</td>
+</tr>
+<tr>
+<td><a href="https://arxiv.org/html/2604.15384">LinuxArena</a></td>
+<td style="text-align: right;">29</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: right;">70</td>
+</tr>
+<tr>
+<td><a href="https://arxiv.org/html/2605.26047">Retrying vs resampling</a></td>
+<td style="text-align: right;">79</td>
+<td style="text-align: right;">71</td>
+<td style="text-align: right;">71</td>
+</tr>
+<tr>
+<td><a href="https://arxiv.org/html/2606.06529">Attack selection</a></td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">24</td>
+</tr>
+<tr>
+<td><a href="https://arxiv.org/html/2606.11998">Bootstrapped monitoring</a></td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">152</td>
+</tr>
+<tr>
+<td><a href="https://arxiv.org/html/2609.19587v2">Red-teaming Auto Mode</a></td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">42</td>
+</tr>
+<tr>
+<td><a href="https://arxiv.org/html/2605.09684">MonitoringBench</a></td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">107</td>
+</tr>
+<tr>
+<td><a href="https://arxiv.org/html/2609.30217">EvasionBench</a></td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">31</td>
+</tr>
+<tr>
+<td><a href="https://arxiv.org/html/2602.20628">When can we trust untrusted monitoring?</a></td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">54</td>
+</tr>
+<tr>
+<td><a href="https://arxiv.org/html/2504.18530">Scaling laws for scalable oversight</a></td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td><a href="https://arxiv.org/html/2512.22154">Practical challenges of control monitoring</a></td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td><a href="https://alignment.openai.com/auto-review/">OpenAI auto-review</a></td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+</tr>
+</tbody>
+</table></div>
+<p>The fitted comparison has 160 defender candidates. Attacker-only ablations remain numerical evidence and are not credited as additional defenses.</p>
+<p>The full per-variant ledger is <a href="analysis/ai_control_growth/data.json">data.json → evidence.variants</a>. Numerical observations are in <a href="analysis/ai_control_growth/data.json">data.json → evidence</a>. Model code pools helper configurations; helper names, capabilities, honesty labels, and collusion-prompt grouping are not fit inputs. Architectures such as reasoning-only, actions, stateful monitoring, and summarized reasoning can differ.</p>
+<p>Quoted figure readout intervals express extraction uncertainty, not sampling confidence intervals. Shared effects and transport uncertainty address dependence and missing capability placements; these adjustments do not validate comparisons at equal latency, usefulness or inference cost.</p>
 <p>Numerical variants enter the fitted comparison. Curves without an extracted operating point, qualitative comparisons, and theoretical constructions remain indexed here. Baselines without trusted review cannot lead the trusted-control envelope. Model capability and identity of untrusted helpers are never predictors.</p>
 <div class="ctl-table-wrap"><table><thead><tr><th>Variant</th><th>Paper and location</th><th>Evidence</th><th>Limits and costs</th></tr></thead><tbody id="ctl-variants"></tbody></table></div>
 </details>
@@ -206,10 +312,10 @@ Repeated results from one paper share effects so that a large table does not bec
     </ul>
     <p class="ctl-note" id="ctl-diagnostics"></p>
     <p>Reproducible analysis: <a href="#ctl-methods">methods and findings</a>,
-        <a href="analysis/ai_control_growth/evidence.json">evidence ledger</a>,
-        <a href="analysis/ai_control_growth/VARIANTS.md">variant coverage</a>,
+        <a href="analysis/ai_control_growth/data.json">evidence ledger</a>,
+        <a href="#ctl-variant-coverage">variant coverage</a>,
         <a href="analysis/ai_control_growth/ai_control.py">model code</a>,
-        <a href="analysis/ai_control_growth/results.json">full results</a>.</p>
+        <a href="analysis/ai_control_growth/data.json">full results</a>.</p>
 </details>
 <details id="ctl-methods" class="ctl-methods">
 <summary>Full methods, findings and reproduction instructions</summary>
@@ -223,7 +329,7 @@ Repeated results from one paper share effects so that a large table does not bec
 <p>The trusted model's horizon is anchored on 24 September 2026. The default is a hypothetical one-hour model, held fixed over time. This is counterfactual when projected into years before such a trusted model existed. The other scenarios grow trusted capability at half the frontier's log growth rate, or maintain a constant capability ratio to the frontier. None assumes that frontier models are actually trustworthy.</p>
 <p>The line is a posterior envelope over available candidate protocols, rather than the old maximum of converted headline percentages. Methods are frozen at their evidence-publication dates; later monitor improvements are applied separately. Each posterior draw can have a different winning protocol, so the band includes uncertainty about which protocol is best. A colored timeline, hover text and leader table show the modal winner and its probability, plus the next-most-likely alternatives. Leadership is retrospective: all current evidence informs estimates, but candidates are eligible only from their evidence dates. The short segment after the latest evaluation is lighter to mark extrapolation. Evaluation dates remain visible without giving incompatible outcomes misleading point estimates of control capability.</p>
 <h3>Evidence and provenance</h3>
-<p><code>evidence.json</code> retains 650 working observations and bounds from twelve empirical arXiv papers and OpenAI's auto-review evaluation. Two additional arXiv papers inform the model structure; METR supplies the frontier growth reference. All fourteen arXiv papers linked in the original page have a role recorded in the ledger. The expanded ledger contains 227 indexed variants (172 with numerical evidence); the others retain qualitative comparisons, entire curve families, conceptual protocols, and diagnostic ablations without fabricated scalar outcomes. The ledger is the frozen input to inference and contains source URLs, transformations, metric labels, uncertain capability placements, and the existing frontier points.</p>
+<p><code>data.json → evidence</code> retains 650 working observations and bounds from twelve empirical arXiv papers and OpenAI's auto-review evaluation. Two additional arXiv papers inform the model structure; METR supplies the frontier growth reference. All fourteen arXiv papers linked in the original page have a role recorded in the ledger. The expanded ledger contains 227 indexed variants (172 with numerical evidence); the others retain qualitative comparisons, entire curve families, conceptual protocols, and diagnostic ablations without fabricated scalar outcomes. The ledger is the frozen input to inference and contains source URLs, transformations, metric labels, uncertain capability placements, and the existing frontier points.</p>
 <div class="ctl-table-wrap"><table>
 <thead>
 <tr>
@@ -298,7 +404,7 @@ Repeated results from one paper share effects so that a large table does not bec
 </tr>
 </tbody>
 </table></div>
-<p>See <a href="analysis/ai_control_growth/VARIANTS.md">VARIANTS.md</a> for counts by source and <a href="analysis/ai_control_growth/variant_inventory.json">variant_inventory.json</a> for every indexed entry. Keeping a source does not mean treating every claim as independent numerical evidence. Conceptual results affect model structure; bounds enter as censored observations. No invented binomial sample sizes are assigned to rounded headline scores.</p>
+<p>See <a href="#ctl-variant-coverage">the coverage summary</a> for counts by source and <a href="analysis/ai_control_growth/data.json">data.json → evidence.variants</a> for every indexed entry. Keeping a source does not mean treating every claim as independent numerical evidence. Conceptual results affect model structure; bounds enter as censored observations. No invented binomial sample sizes are assigned to rounded headline scores.</p>
 <h3>Observation model</h3>
 <p>The trusted model is the only monitor-capability input. The raw evidence ledger preserves study provenance, but <code>model_observations</code> removes helper-specific conditions and pools helper configurations within architectural bootstrap variants before building the design or candidate list. No untrusted helper identity or capability is an explanatory variable or a ranking dimension. All 650 outcomes remain. Pooled bootstrapping-study observations receive an additional residual standard deviation of 1.5 log-odds to acknowledge unexplained variation; this scale is a modeling assumption. Helper identities changing cannot change the fit inputs or candidate list, as checked by a regression test.</p>
 <p>Let A be attacker horizon, M trusted monitor horizon, and t years since 12 December 2023. A common reference best-protocol score is:</p>
@@ -352,7 +458,7 @@ OPENBLAS_NUM_THREADS=1 .venv/bin/python analysis/ai_control_growth/ai_control.py
 OPENBLAS_NUM_THREADS=1 .venv/bin/python analysis/ai_control_growth/ai_control.py test -v
 </code></pre>
 <p>The published expanded fit uses four chains per assumption set, 1,000 warmup and 1,000 retained iterations per chain; the script defaults to 2,500 each for a longer run. Gaussian nuisance effects are analytically marginalized; constrained coefficients and censored observations use exact Gibbs conditionals for the working Gaussian likelihood. The graph exports 2,000 reproducibly selected reference-posterior draws from the same fit.</p>
-<p><code>results.json</code> contains probabilities, intervals, priors, convergence diagnostics, structural sensitivities and reference fitted observations. The PNG and SVG summarize prior sensitivity. The complete baseline posterior is generated locally as <code>baseline_draws.npz</code>; the lightweight page data is generated at the repository root.</p>
+<p><code>data.json → results</code> contains probabilities, intervals, priors, convergence diagnostics, structural sensitivities and reference fitted observations. The assumptions table summarizes prior sensitivity. The complete baseline posterior is generated locally as <code>baseline_draws.npz</code>; the lightweight page data is generated at the repository root.</p>
 <p>The independent tests compare the sampler against direct multivariate-Gaussian rejection sampling and check extreme-tail truncation and the growth comparison algebra. Numerical convergence does not validate the scientific assumptions. Reference and sensitivity fits passed split R-hat &lt; 1.05 and effective sample size &gt; 400 for displayed growth coefficients.</p>
 <h3>Variant refresh and coverage</h3>
 <p>Install <code>requirements.txt</code>, then run:</p>
@@ -361,7 +467,7 @@ python ai_control.py expand --cache /tmp/control-variant-sources
 OPENBLAS_NUM_THREADS=1 python ai_control.py fit
 python ai_control.py test
 </code></pre>
-<p><code>evidence_base.json</code> freezes the earlier input; the <code>expand</code> command replaces redundant headline summaries with source table cells and documented figure transcriptions. The expansion is deterministic. <code>variant_inventory.json</code> records each variant's source locations, numerical observation IDs, costs and extraction status. The source refresher saves primary HTML and table provenance locally; complete copyrighted papers are not bundled with the site. Figure transcriptions are explicitly documented in the expander and source locations; digitization intervals are not statistical confidence intervals. Boundary scores are regularized for inference, not interpreted as population guarantees.</p>
+<p><code>data.json → base_evidence</code> freezes the earlier input; the <code>expand</code> command replaces redundant headline summaries with source table cells and documented figure transcriptions. The expansion is deterministic. <code>data.json → evidence.variants</code> records each variant's source locations, numerical observation IDs, costs and extraction status. The source refresher saves primary HTML and table provenance locally; complete copyrighted papers are not bundled with the site. Figure transcriptions are explicitly documented in the expander and source locations; digitization intervals are not statistical confidence intervals. Boundary scores are regularized for inference, not interpreted as population guarantees.</p>
 <p>The inventory covers all fourteen linked arXiv papers and the additional company evaluation. A named curve family can contain many parameter settings; its inventory entry says which family is covered rather than pretending every point is an independent protocol. Qualitative or undigitized variants remain visible in the page's coverage table but cannot receive a fabricated posterior ranking. This is an expanded audit of the linked corpus, not a claim to cover every control proposal in the literature.</p>
 <p>Strict Auto Mode and Guardian variants remain eligible despite latency costs. Trusted-only / no-trusted-review baselines remain evidence but do not define the comparable high-usefulness trusted-control envelope. Baseline rows without trusted review have zero trusted-monitor loading. Unknown model capability centers are inference conventions and are not plotted as measured capabilities. Sensitivity fits run as ordinary worker processes (three concurrently by default; configurable with <code>--workers</code>); the inference and numerical checks are otherwise unchanged.</p>
 <p>Attacker-compute, scratchpad and zero-shot-attack ablations retain numerical likelihood terms but are not distinct defender candidates. Their protocol-specific deviations serve as nuisance context effects rather than competing control methods.</p>
