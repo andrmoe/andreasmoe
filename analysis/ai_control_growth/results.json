@@ -1,0 +1,4004 @@
+{
+  "interpretation": "Conditional sensitivity analysis; not a calibrated probability for all real-world control.",
+  "model_scope": "Attacker capability, trusted-monitor capability and protocol outcomes only; no untrusted-helper features or helper-specific candidates.",
+  "frontier": {
+    "annual_log_growth": 1.9664761674293172,
+    "recent_annual_log_growth": 2.2691824534494525,
+    "record_fit_annual_log_growth": 2.0039685541293486,
+    "source": "https://metr.org/assets/benchmark_results_1_1.yaml",
+    "doubling_months": 4.229782340862423,
+    "trend_sd_assumption": 0.35,
+    "record_models": [
+      "GPT-4",
+      "GPT-4o",
+      "Claude 3.5 Sonnet",
+      "o1-preview",
+      "Claude 3.5 Sonnet (new)",
+      "o1",
+      "Claude 3.7 Sonnet",
+      "o3",
+      "GPT-5",
+      "Gemini 3 Pro",
+      "Claude Opus 4.5",
+      "GPT-5.2",
+      "Claude Opus 4.6",
+      "Claude Mythos Preview"
+    ]
+  },
+  "observation_count": 650,
+  "source_count": 16,
+  "settings": [
+    {
+      "transport_sd": 0.75,
+      "protocol_progress_prior_sd": 0.5,
+      "rhat": {
+        "intercept": 1.0007150016442008,
+        "protocol_progress": 1.0004194119026892,
+        "monitor_response": 1.0010340268637252,
+        "attacker_response": 1.0036306690160064
+      },
+      "ess": {
+        "intercept": 2975.7689481314605,
+        "protocol_progress": 3763.574114055224,
+        "monitor_response": 2234.9770557220254,
+        "attacker_response": 1183.986300153011
+      },
+      "coefficients_90": {
+        "intercept": [
+          1.4927465180893171,
+          2.7786002464799084,
+          4.057999107485791
+        ],
+        "protocol_progress": [
+          0.018010828297241578,
+          0.20370280715962602,
+          0.6842207751217345
+        ],
+        "monitor_response": [
+          0.33247483294978913,
+          0.6075101623983818,
+          0.877182801306273
+        ],
+        "attacker_response": [
+          0.21095190398601626,
+          0.5477576628296255,
+          0.8883020981426155
+        ]
+      },
+      "trust_scenarios": {
+        "0.0": {
+          "p_control_faster": 0.03925,
+          "margin_logit_per_year_90": [
+            -1.6390177254866862,
+            -0.815603816301765,
+            -0.041764389020076335
+          ],
+          "relative_log_horizon_growth_90": [
+            -2.2336756482167557,
+            -1.5052114366822544,
+            -0.1554054569299919
+          ]
+        },
+        "0.5": {
+          "p_control_faster": 0.3035,
+          "margin_logit_per_year_90": [
+            -0.9488442019420581,
+            -0.21635687766337758,
+            0.4920977082203637
+          ],
+          "relative_log_horizon_growth_90": [
+            -1.2097684932670514,
+            -0.40743377500958966,
+            1.903778301750367
+          ]
+        },
+        "1.0": {
+          "p_control_faster": 0.79725,
+          "margin_logit_per_year_90": [
+            -0.37312515396703205,
+            0.3707490097087505,
+            1.1710530659712066
+          ],
+          "relative_log_horizon_growth_90": [
+            -0.48899153153471786,
+            0.6713171155149975,
+            4.464420415960053
+          ]
+        }
+      },
+      "underlying_trust_scenarios": {
+        "0.0": {
+          "p_control_faster": 0.03775,
+          "margin_logit_per_year_90": [
+            -1.6475485270262227,
+            -0.8211018729940325,
+            -0.0488589066455018
+          ],
+          "relative_log_horizon_growth_90": [
+            -2.2569932044050693,
+            -1.5266787303951213,
+            -0.16961599226108648
+          ]
+        },
+        "0.5": {
+          "p_control_faster": 0.29625,
+          "margin_logit_per_year_90": [
+            -0.9637549184557606,
+            -0.2273992936883546,
+            0.4832975445047155
+          ],
+          "relative_log_horizon_growth_90": [
+            -1.2250671875055774,
+            -0.421369093443686,
+            1.871025301415865
+          ]
+        },
+        "1.0": {
+          "p_control_faster": 0.789,
+          "margin_logit_per_year_90": [
+            -0.38192659266138207,
+            0.36162092296057413,
+            1.1548662288535032
+          ],
+          "relative_log_horizon_growth_90": [
+            -0.5015131543475775,
+            0.6593155766626795,
+            4.426608271296366
+          ]
+        }
+      }
+    },
+    {
+      "transport_sd": 0.75,
+      "protocol_progress_prior_sd": 1.0,
+      "rhat": {
+        "intercept": 1.0007069530102792,
+        "protocol_progress": 1.0004651032486238,
+        "monitor_response": 1.0010274842473954,
+        "attacker_response": 1.0036328548973141
+      },
+      "ess": {
+        "intercept": 2993.1061007739195,
+        "protocol_progress": 3442.0413500852464,
+        "monitor_response": 2236.264912779731,
+        "attacker_response": 1170.1639705652299
+      },
+      "coefficients_90": {
+        "intercept": [
+          1.4399956397857154,
+          2.7211056857075313,
+          4.015127437213613
+        ],
+        "protocol_progress": [
+          0.021848480422239976,
+          0.25798349028718714,
+          0.8993058534405489
+        ],
+        "monitor_response": [
+          0.3296765899744043,
+          0.6036000303969347,
+          0.8744656514365556
+        ],
+        "attacker_response": [
+          0.2164447151158445,
+          0.554243201800158,
+          0.8962164083934537
+        ]
+      },
+      "trust_scenarios": {
+        "0.0": {
+          "p_control_faster": 0.06975,
+          "margin_logit_per_year_90": [
+            -1.591610939786961,
+            -0.7609264379323815,
+            0.08765760806357024
+          ],
+          "relative_log_horizon_growth_90": [
+            -2.202186470298265,
+            -1.4160673271309885,
+            0.2582703809212239
+          ]
+        },
+        "0.5": {
+          "p_control_faster": 0.35475,
+          "margin_logit_per_year_90": [
+            -0.9168924643623108,
+            -0.16958916927340545,
+            0.6207753028618893
+          ],
+          "relative_log_horizon_growth_90": [
+            -1.1729924592661367,
+            -0.31080555031763535,
+            2.1837015047970545
+          ]
+        },
+        "1.0": {
+          "p_control_faster": 0.8245,
+          "margin_logit_per_year_90": [
+            -0.3440310301642703,
+            0.4143440595256588,
+            1.2571449566796467
+          ],
+          "relative_log_horizon_growth_90": [
+            -0.45380046665332274,
+            0.7579073112447265,
+            4.637170580871426
+          ]
+        }
+      },
+      "underlying_trust_scenarios": {
+        "0.0": {
+          "p_control_faster": 0.06675,
+          "margin_logit_per_year_90": [
+            -1.6026450511613854,
+            -0.769538440059901,
+            0.08601155339555833
+          ],
+          "relative_log_horizon_growth_90": [
+            -2.2191535850942397,
+            -1.4334242261118315,
+            0.237885584144356
+          ]
+        },
+        "0.5": {
+          "p_control_faster": 0.3495,
+          "margin_logit_per_year_90": [
+            -0.9200404911244988,
+            -0.17916018002379147,
+            0.6185628564230168
+          ],
+          "relative_log_horizon_growth_90": [
+            -1.1891852529381055,
+            -0.3271161097575238,
+            2.133320674425265
+          ]
+        },
+        "1.0": {
+          "p_control_faster": 0.8205,
+          "margin_logit_per_year_90": [
+            -0.3469099399297691,
+            0.4069285291462308,
+            1.2446209682809892
+          ],
+          "relative_log_horizon_growth_90": [
+            -0.467869814878634,
+            0.7416364944884637,
+            4.62358779354125
+          ]
+        }
+      }
+    },
+    {
+      "transport_sd": 0.75,
+      "protocol_progress_prior_sd": 2.0,
+      "rhat": {
+        "intercept": 1.0007089169535541,
+        "protocol_progress": 1.0004946219443218,
+        "monitor_response": 1.001023968130682,
+        "attacker_response": 1.0036358790027886
+      },
+      "ess": {
+        "intercept": 2997.7833367705207,
+        "protocol_progress": 3366.16538624298,
+        "monitor_response": 2236.4646211671234,
+        "attacker_response": 1163.3016237294098
+      },
+      "coefficients_90": {
+        "intercept": [
+          1.3969976308050902,
+          2.702254440243113,
+          3.992407432834513
+        ],
+        "protocol_progress": [
+          0.02373397151077091,
+          0.2828804653475306,
+          1.000401561961042
+        ],
+        "monitor_response": [
+          0.32721719921804227,
+          0.6016798517218264,
+          0.8733379237103942
+        ],
+        "attacker_response": [
+          0.21796760047995942,
+          0.5579242300057299,
+          0.8993382631750497
+        ]
+      },
+      "trust_scenarios": {
+        "0.0": {
+          "p_control_faster": 0.0855,
+          "margin_logit_per_year_90": [
+            -1.5754807787060296,
+            -0.7404296103768669,
+            0.15845778703176502
+          ],
+          "relative_log_horizon_growth_90": [
+            -2.185935786942629,
+            -1.375451309817473,
+            0.441899782524892
+          ]
+        },
+        "0.5": {
+          "p_control_faster": 0.37575,
+          "margin_logit_per_year_90": [
+            -0.8987773669002819,
+            -0.15007967463931193,
+            0.674466617667394
+          ],
+          "relative_log_horizon_growth_90": [
+            -1.162696694696893,
+            -0.26682150641844676,
+            2.337857640031968
+          ]
+        },
+        "1.0": {
+          "p_control_faster": 0.832,
+          "margin_logit_per_year_90": [
+            -0.33046864475992527,
+            0.4376030316436083,
+            1.306808014019707
+          ],
+          "relative_log_horizon_growth_90": [
+            -0.44365945822595787,
+            0.7866389100402009,
+            4.693762616408585
+          ]
+        }
+      },
+      "underlying_trust_scenarios": {
+        "0.0": {
+          "p_control_faster": 0.08375,
+          "margin_logit_per_year_90": [
+            -1.5865006900610357,
+            -0.747200441369064,
+            0.1549702253864592
+          ],
+          "relative_log_horizon_growth_90": [
+            -2.206959494836781,
+            -1.3877674010788652,
+            0.4423895542349799
+          ]
+        },
+        "0.5": {
+          "p_control_faster": 0.368,
+          "margin_logit_per_year_90": [
+            -0.903617925378136,
+            -0.15883681394915333,
+            0.6787229281590567
+          ],
+          "relative_log_horizon_growth_90": [
+            -1.176323944135137,
+            -0.28648689822295353,
+            2.2534332641033257
+          ]
+        },
+        "1.0": {
+          "p_control_faster": 0.8285,
+          "margin_logit_per_year_90": [
+            -0.3359762297847456,
+            0.4306893852831981,
+            1.3022137194458987
+          ],
+          "relative_log_horizon_growth_90": [
+            -0.4578004454079497,
+            0.7786420418836335,
+            4.703248439261794
+          ]
+        }
+      }
+    },
+    {
+      "transport_sd": 1.5,
+      "protocol_progress_prior_sd": 0.5,
+      "rhat": {
+        "intercept": 1.0001051379479409,
+        "protocol_progress": 1.0004332504676905,
+        "monitor_response": 1.0008970657556355,
+        "attacker_response": 1.0035637317123418
+      },
+      "ess": {
+        "intercept": 3249.1834392368983,
+        "protocol_progress": 3826.3761503469086,
+        "monitor_response": 2409.2934318856855,
+        "attacker_response": 1241.3221038008796
+      },
+      "coefficients_90": {
+        "intercept": [
+          0.43208374084331747,
+          2.133487565207642,
+          3.8276698491524943
+        ],
+        "protocol_progress": [
+          0.019437472031036695,
+          0.2221993639869045,
+          0.7374884003483279
+        ],
+        "monitor_response": [
+          0.387617193744417,
+          0.6688763156382801,
+          0.9545260518723555
+        ],
+        "attacker_response": [
+          0.10994280012632902,
+          0.4454829258648675,
+          0.8246841462284042
+        ]
+      },
+      "trust_scenarios": {
+        "0.0": {
+          "p_control_faster": 0.107,
+          "margin_logit_per_year_90": [
+            -1.4596054607475584,
+            -0.5980927548053281,
+            0.1726929676044971
+          ],
+          "relative_log_horizon_growth_90": [
+            -2.178216110414774,
+            -1.365996278504097,
+            1.0305788074395135
+          ]
+        },
+        "0.5": {
+          "p_control_faster": 0.54475,
+          "margin_logit_per_year_90": [
+            -0.726846119282324,
+            0.054505256736740754,
+            0.8262285221786352
+          ],
+          "relative_log_horizon_growth_90": [
+            -0.995840722962124,
+            0.12727719757120648,
+            6.136601549888098
+          ]
+        },
+        "1.0": {
+          "p_control_faster": 0.92075,
+          "margin_logit_per_year_90": [
+            -0.11190792359086893,
+            0.7037188107331837,
+            1.629787207769962
+          ],
+          "relative_log_horizon_growth_90": [
+            -0.15786666564637936,
+            1.5940899711588925,
+            11.375094597933769
+          ]
+        }
+      },
+      "underlying_trust_scenarios": {
+        "0.0": {
+          "p_control_faster": 0.10525,
+          "margin_logit_per_year_90": [
+            -1.4686853169704688,
+            -0.6091883553044004,
+            0.17490577007177427
+          ],
+          "relative_log_horizon_growth_90": [
+            -2.2083138294910962,
+            -1.3943101276662782,
+            0.9499134746895866
+          ]
+        },
+        "0.5": {
+          "p_control_faster": 0.53875,
+          "margin_logit_per_year_90": [
+            -0.7339904201633632,
+            0.04626166797276743,
+            0.821271993191363
+          ],
+          "relative_log_horizon_growth_90": [
+            -1.0088905456920227,
+            0.10277935641908292,
+            6.015543460442989
+          ]
+        },
+        "1.0": {
+          "p_control_faster": 0.918,
+          "margin_logit_per_year_90": [
+            -0.12181622636731256,
+            0.6974003162273832,
+            1.6170794100887393
+          ],
+          "relative_log_horizon_growth_90": [
+            -0.17959420556778835,
+            1.5764482602313377,
+            11.186586639928356
+          ]
+        }
+      }
+    },
+    {
+      "transport_sd": 1.5,
+      "protocol_progress_prior_sd": 1.0,
+      "rhat": {
+        "intercept": 1.0000826758981731,
+        "protocol_progress": 1.0004783267301598,
+        "monitor_response": 1.0008907337154684,
+        "attacker_response": 1.0035818408353538
+      },
+      "ess": {
+        "intercept": 3320.5799754429104,
+        "protocol_progress": 3510.688032339683,
+        "monitor_response": 2408.7375384869024,
+        "attacker_response": 1220.0727298915492
+      },
+      "coefficients_90": {
+        "intercept": [
+          0.2848739420907282,
+          2.02931202838879,
+          3.7523553910249383
+        ],
+        "protocol_progress": [
+          0.025634551716980824,
+          0.2984762362523277,
+          1.0382512329386762
+        ],
+        "monitor_response": [
+          0.3826283637383775,
+          0.6655032997046972,
+          0.951128261566649
+        ],
+        "attacker_response": [
+          0.11232827894135325,
+          0.45260497214883433,
+          0.8354254121217809
+        ]
+      },
+      "trust_scenarios": {
+        "0.0": {
+          "p_control_faster": 0.15925,
+          "margin_logit_per_year_90": [
+            -1.408694786745596,
+            -0.5225680517676337,
+            0.37533319221756767
+          ],
+          "relative_log_horizon_growth_90": [
+            -2.123288029684224,
+            -1.211624367594725,
+            1.9058940248181633
+          ]
+        },
+        "0.5": {
+          "p_control_faster": 0.59925,
+          "margin_logit_per_year_90": [
+            -0.6779576984351167,
+            0.12411129603325355,
+            0.9953064403405659
+          ],
+          "relative_log_horizon_growth_90": [
+            -0.9395463796085906,
+            0.2843478500970547,
+            6.549039073963667
+          ]
+        },
+        "1.0": {
+          "p_control_faster": 0.934,
+          "margin_logit_per_year_90": [
+            -0.06510774538107943,
+            0.7733734881461978,
+            1.7458644657591897
+          ],
+          "relative_log_horizon_growth_90": [
+            -0.08693468077078147,
+            1.7292753993974017,
+            11.527648165549582
+          ]
+        }
+      },
+      "underlying_trust_scenarios": {
+        "0.0": {
+          "p_control_faster": 0.157,
+          "margin_logit_per_year_90": [
+            -1.4163913265908856,
+            -0.528527367507634,
+            0.3675818325392067
+          ],
+          "relative_log_horizon_growth_90": [
+            -2.156242189799386,
+            -1.2379162870202438,
+            1.8225637387460294
+          ]
+        },
+        "0.5": {
+          "p_control_faster": 0.593,
+          "margin_logit_per_year_90": [
+            -0.6863396028883071,
+            0.1159688896501137,
+            0.9862742861114938
+          ],
+          "relative_log_horizon_growth_90": [
+            -0.947821774356442,
+            0.2664329302303413,
+            6.518421129316698
+          ]
+        },
+        "1.0": {
+          "p_control_faster": 0.932,
+          "margin_logit_per_year_90": [
+            -0.07548049602127554,
+            0.766839349999372,
+            1.7428985297729875
+          ],
+          "relative_log_horizon_growth_90": [
+            -0.10684437874935607,
+            1.712901375278864,
+            11.49025017701418
+          ]
+        }
+      }
+    },
+    {
+      "transport_sd": 1.5,
+      "protocol_progress_prior_sd": 2.0,
+      "rhat": {
+        "intercept": 1.0000827992214805,
+        "protocol_progress": 1.0005134437099465,
+        "monitor_response": 1.000887679186187,
+        "attacker_response": 1.0035972450264008
+      },
+      "ess": {
+        "intercept": 3359.1648092348337,
+        "protocol_progress": 3423.3313466581567,
+        "monitor_response": 2407.8563282120417,
+        "attacker_response": 1207.41898746874
+      },
+      "coefficients_90": {
+        "intercept": [
+          0.18170182022179932,
+          1.9719326200095015,
+          3.714598743330433
+        ],
+        "protocol_progress": [
+          0.02837664598862772,
+          0.3382389893823373,
+          1.1955396984399635
+        ],
+        "monitor_response": [
+          0.380491120307894,
+          0.6634833350502685,
+          0.9500076979032738
+        ],
+        "attacker_response": [
+          0.11480770907288684,
+          0.45698019894156217,
+          0.8412421020835523
+        ]
+      },
+      "trust_scenarios": {
+        "0.0": {
+          "p_control_faster": 0.19075,
+          "margin_logit_per_year_90": [
+            -1.3815880788871977,
+            -0.48202841484576453,
+            0.49133407554657604
+          ],
+          "relative_log_horizon_growth_90": [
+            -2.097249189287382,
+            -1.127194867491411,
+            2.322650468057129
+          ]
+        },
+        "0.5": {
+          "p_control_faster": 0.62575,
+          "margin_logit_per_year_90": [
+            -0.6558044905938069,
+            0.16182711032820307,
+            1.0915976764470354
+          ],
+          "relative_log_horizon_growth_90": [
+            -0.9173803106657717,
+            0.35701058200271063,
+            6.904150360547675
+          ]
+        },
+        "1.0": {
+          "p_control_faster": 0.9395,
+          "margin_logit_per_year_90": [
+            -0.04554852168046817,
+            0.8150223724414336,
+            1.8279697258435008
+          ],
+          "relative_log_horizon_growth_90": [
+            -0.06778521522893198,
+            1.7985682191594459,
+            11.546953048376006
+          ]
+        }
+      },
+      "underlying_trust_scenarios": {
+        "0.0": {
+          "p_control_faster": 0.186,
+          "margin_logit_per_year_90": [
+            -1.3914686729579142,
+            -0.48786656637134584,
+            0.49347684994840324
+          ],
+          "relative_log_horizon_growth_90": [
+            -2.1382767239303435,
+            -1.157954971647166,
+            2.2500701638008103
+          ]
+        },
+        "0.5": {
+          "p_control_faster": 0.621,
+          "margin_logit_per_year_90": [
+            -0.6691621809367531,
+            0.15573030451147118,
+            1.090615002278641
+          ],
+          "relative_log_horizon_growth_90": [
+            -0.9302573408673179,
+            0.3433924733632546,
+            6.783415906205607
+          ]
+        },
+        "1.0": {
+          "p_control_faster": 0.93825,
+          "margin_logit_per_year_90": [
+            -0.05915706550298879,
+            0.8049243123982172,
+            1.8199728437067493
+          ],
+          "relative_log_horizon_growth_90": [
+            -0.08331751324311394,
+            1.778138161943386,
+            11.507425944706227
+          ]
+        }
+      }
+    },
+    {
+      "transport_sd": 3.0,
+      "protocol_progress_prior_sd": 0.5,
+      "rhat": {
+        "intercept": 0.9996463014077107,
+        "protocol_progress": 1.000496079648046,
+        "monitor_response": 1.0008844988039998,
+        "attacker_response": 1.0028351998017389
+      },
+      "ess": {
+        "intercept": 3498.363416386177,
+        "protocol_progress": 3885.5926301511467,
+        "monitor_response": 2512.1241510668947,
+        "attacker_response": 1527.0725055255928
+      },
+      "coefficients_90": {
+        "intercept": [
+          -1.189515297487946,
+          1.0924669654233563,
+          3.388451799384591
+        ],
+        "protocol_progress": [
+          0.02413827419661701,
+          0.26746160539917696,
+          0.8399015106333547
+        ],
+        "monitor_response": [
+          0.44600395477538707,
+          0.738397326431232,
+          1.0375838362465795
+        ],
+        "attacker_response": [
+          0.04217368337765486,
+          0.305239810143047,
+          0.7114963147019171
+        ]
+      },
+      "trust_scenarios": {
+        "0.0": {
+          "p_control_faster": 0.25975,
+          "margin_logit_per_year_90": [
+            -1.1694140779781022,
+            -0.29043153790729803,
+            0.45675690924705636
+          ],
+          "relative_log_horizon_growth_90": [
+            -2.0699291605376233,
+            -0.9791615939227104,
+            6.417780853155644
+          ]
+        },
+        "0.5": {
+          "p_control_faster": 0.811,
+          "margin_logit_per_year_90": [
+            -0.40016247130083304,
+            0.42058461408291,
+            1.1988532317001699
+          ],
+          "relative_log_horizon_growth_90": [
+            -0.6680336714177716,
+            1.4328387355412493,
+            22.96513164983419
+          ]
+        },
+        "1.0": {
+          "p_control_faster": 0.9785,
+          "margin_logit_per_year_90": [
+            0.22128138262985603,
+            1.126425289460987,
+            2.146658624407709
+          ],
+          "relative_log_horizon_growth_90": [
+            0.3699547755612369,
+            3.769605358358489,
+            38.82634255607185
+          ]
+        }
+      },
+      "underlying_trust_scenarios": {
+        "0.0": {
+          "p_control_faster": 0.25375,
+          "margin_logit_per_year_90": [
+            -1.1791464388611794,
+            -0.3000291760904894,
+            0.45150878588960514
+          ],
+          "relative_log_horizon_growth_90": [
+            -2.0967511616076844,
+            -1.0255725618741847,
+            6.185225043073025
+          ]
+        },
+        "0.5": {
+          "p_control_faster": 0.8035,
+          "margin_logit_per_year_90": [
+            -0.40833239516582653,
+            0.4135944256566287,
+            1.1923799333328635
+          ],
+          "relative_log_horizon_growth_90": [
+            -0.6742442516385495,
+            1.4053047647305656,
+            22.97170032118827
+          ]
+        },
+        "1.0": {
+          "p_control_faster": 0.97775,
+          "margin_logit_per_year_90": [
+            0.21250067726152996,
+            1.1236182671343662,
+            2.138388797096008
+          ],
+          "relative_log_horizon_growth_90": [
+            0.35864528198122586,
+            3.7264446187678484,
+            38.70178597769845
+          ]
+        }
+      }
+    },
+    {
+      "transport_sd": 3.0,
+      "protocol_progress_prior_sd": 1.0,
+      "rhat": {
+        "intercept": 0.9996043412045656,
+        "protocol_progress": 1.0005622931917004,
+        "monitor_response": 1.000875182313641,
+        "attacker_response": 1.0028766141271444
+      },
+      "ess": {
+        "intercept": 3601.9271136552557,
+        "protocol_progress": 3833.1367390357245,
+        "monitor_response": 2510.5239612162663,
+        "attacker_response": 1492.7010068296527
+      },
+      "coefficients_90": {
+        "intercept": [
+          -1.6098267193666367,
+          0.8443246626199956,
+          3.271526031847156
+        ],
+        "protocol_progress": [
+          0.03604106792288921,
+          0.4068079600041599,
+          1.3357067678521704
+        ],
+        "monitor_response": [
+          0.441820996459402,
+          0.7334092709329421,
+          1.0344099192329788
+        ],
+        "attacker_response": [
+          0.043861149879292446,
+          0.31416309585543756,
+          0.7186354397341295
+        ]
+      },
+      "trust_scenarios": {
+        "0.0": {
+          "p_control_faster": 0.3865,
+          "margin_logit_per_year_90": [
+            -1.0814743490111631,
+            -0.1548263759109736,
+            0.8411324216020218
+          ],
+          "relative_log_horizon_growth_90": [
+            -1.9722208924061009,
+            -0.5520947041546578,
+            9.873569058938749
+          ]
+        },
+        "0.5": {
+          "p_control_faster": 0.85775,
+          "margin_logit_per_year_90": [
+            -0.3273223794822229,
+            0.5592208731767991,
+            1.5548013598043413
+          ],
+          "relative_log_horizon_growth_90": [
+            -0.5538946295746286,
+            1.873788138790248,
+            25.407543614788665
+          ]
+        },
+        "1.0": {
+          "p_control_faster": 0.9825,
+          "margin_logit_per_year_90": [
+            0.2927910126066248,
+            1.2740807430762704,
+            2.424629038195338
+          ],
+          "relative_log_horizon_growth_90": [
+            0.5075279518563408,
+            4.142523962059693,
+            40.935719974143964
+          ]
+        }
+      },
+      "underlying_trust_scenarios": {
+        "0.0": {
+          "p_control_faster": 0.37925,
+          "margin_logit_per_year_90": [
+            -1.0918123555945223,
+            -0.16363369888246382,
+            0.8459235108934232
+          ],
+          "relative_log_horizon_growth_90": [
+            -1.9984210742115889,
+            -0.5872935312656844,
+            9.733355838516887
+          ]
+        },
+        "0.5": {
+          "p_control_faster": 0.85275,
+          "margin_logit_per_year_90": [
+            -0.33017500472894645,
+            0.5561973339152495,
+            1.5502640824331546
+          ],
+          "relative_log_horizon_growth_90": [
+            -0.5626500303416555,
+            1.8462686693837145,
+            25.22359957920088
+          ]
+        },
+        "1.0": {
+          "p_control_faster": 0.982,
+          "margin_logit_per_year_90": [
+            0.2862629730707388,
+            1.2680821368896782,
+            2.4185769079672528
+          ],
+          "relative_log_horizon_growth_90": [
+            0.4996989675370385,
+            4.090636123602132,
+            40.82339141263922
+          ]
+        }
+      }
+    },
+    {
+      "transport_sd": 3.0,
+      "protocol_progress_prior_sd": 2.0,
+      "rhat": {
+        "intercept": 0.9996192762902393,
+        "protocol_progress": 1.0006235509362038,
+        "monitor_response": 1.0008696063526863,
+        "attacker_response": 1.0028985631213256
+      },
+      "ess": {
+        "intercept": 3684.9847029175307,
+        "protocol_progress": 3548.7949969598667,
+        "monitor_response": 2507.9014700551165,
+        "attacker_response": 1464.6958834079346
+      },
+      "coefficients_90": {
+        "intercept": [
+          -1.938268587842666,
+          0.689307536408586,
+          3.1740974582493786
+        ],
+        "protocol_progress": [
+          0.04409592411902527,
+          0.5103948692234098,
+          1.709533210630803
+        ],
+        "monitor_response": [
+          0.43914102923627846,
+          0.7308955781213755,
+          1.03182285482858
+        ],
+        "attacker_response": [
+          0.045370716188428084,
+          0.32037018804552475,
+          0.7291658369858319
+        ]
+      },
+      "trust_scenarios": {
+        "0.0": {
+          "p_control_faster": 0.457,
+          "margin_logit_per_year_90": [
+            -1.0438152723720602,
+            -0.06638678032698148,
+            1.1560097247786743
+          ],
+          "relative_log_horizon_growth_90": [
+            -1.9150250077075532,
+            -0.23257916595684053,
+            12.170949493026844
+          ]
+        },
+        "0.5": {
+          "p_control_faster": 0.878,
+          "margin_logit_per_year_90": [
+            -0.28730760671986877,
+            0.6576010989666113,
+            1.8765086568288034
+          ],
+          "relative_log_horizon_growth_90": [
+            -0.4790048934376147,
+            2.1418652327217895,
+            27.107003499922378
+          ]
+        },
+        "1.0": {
+          "p_control_faster": 0.9855,
+          "margin_logit_per_year_90": [
+            0.33330461463649214,
+            1.3682492440400287,
+            2.6751535357506575
+          ],
+          "relative_log_horizon_growth_90": [
+            0.5695900894679685,
+            4.417998958316227,
+            42.62707157170449
+          ]
+        }
+      },
+      "underlying_trust_scenarios": {
+        "0.0": {
+          "p_control_faster": 0.44875,
+          "margin_logit_per_year_90": [
+            -1.054532428606647,
+            -0.07264781827507266,
+            1.1510518756571886
+          ],
+          "relative_log_horizon_growth_90": [
+            -1.9413076301557166,
+            -0.2676825466502857,
+            11.928308154848267
+          ]
+        },
+        "0.5": {
+          "p_control_faster": 0.875,
+          "margin_logit_per_year_90": [
+            -0.290893615526653,
+            0.6541035622728184,
+            1.8696501176452862
+          ],
+          "relative_log_horizon_growth_90": [
+            -0.49081796323602256,
+            2.122704959070164,
+            26.781178495303266
+          ]
+        },
+        "1.0": {
+          "p_control_faster": 0.9845,
+          "margin_logit_per_year_90": [
+            0.32652415722518036,
+            1.364075081010595,
+            2.6767702714000823
+          ],
+          "relative_log_horizon_growth_90": [
+            0.5670357256479277,
+            4.404364561258994,
+            42.577065877058246
+          ]
+        }
+      }
+    }
+  ],
+  "baseline_diagnostics": {
+    "all_parameters_max_rhat": 1.0049146133359608,
+    "all_parameters_min_ess": 961.2191480098088
+  },
+  "baseline_observation_fit": [
+    {
+      "id": "page-11-ordinary",
+      "predicted_working_score": 0.9608484300027764
+    },
+    {
+      "id": "monitoringbench-Opus 4.5-baseline",
+      "predicted_working_score": 0.8457686683008565
+    },
+    {
+      "id": "monitoringbench-Opus 4.5-human-strategies",
+      "predicted_working_score": 0.9511077913452484
+    },
+    {
+      "id": "monitoringbench-Opus 4.5-recon",
+      "predicted_working_score": 0.8816799954375483
+    },
+    {
+      "id": "monitoringbench-Opus 4.5-refined",
+      "predicted_working_score": 0.7292103598137732
+    },
+    {
+      "id": "monitoringbench-GPT-5.1 Codex-baseline",
+      "predicted_working_score": 0.4974426771681376
+    },
+    {
+      "id": "monitoringbench-GPT-5.1 Codex-human-strategies",
+      "predicted_working_score": 0.7783346425871591
+    },
+    {
+      "id": "monitoringbench-GPT-5.1 Codex-recon",
+      "predicted_working_score": 0.5735658235700553
+    },
+    {
+      "id": "monitoringbench-GPT-5.1 Codex-refined",
+      "predicted_working_score": 0.32708440123185134
+    },
+    {
+      "id": "monitoringbench-Sonnet 4.5-baseline",
+      "predicted_working_score": 0.5487033611633904
+    },
+    {
+      "id": "monitoringbench-Sonnet 4.5-human-strategies",
+      "predicted_working_score": 0.8117849402328204
+    },
+    {
+      "id": "monitoringbench-Sonnet 4.5-recon",
+      "predicted_working_score": 0.6229473508702138
+    },
+    {
+      "id": "monitoringbench-Sonnet 4.5-refined",
+      "predicted_working_score": 0.3738490956687721
+    },
+    {
+      "id": "monitoringbench-GPT-5-baseline",
+      "predicted_working_score": 0.45753293604070694
+    },
+    {
+      "id": "monitoringbench-GPT-5-human-strategies",
+      "predicted_working_score": 0.7494983483617726
+    },
+    {
+      "id": "monitoringbench-GPT-5-recon",
+      "predicted_working_score": 0.5340386606015883
+    },
+    {
+      "id": "monitoringbench-GPT-5-refined",
+      "predicted_working_score": 0.29287723105619395
+    },
+    {
+      "id": "monitoringbench-Sonnet 4.0-baseline",
+      "predicted_working_score": 0.4340876494196795
+    },
+    {
+      "id": "monitoringbench-Sonnet 4.0-human-strategies",
+      "predicted_working_score": 0.731259932519878
+    },
+    {
+      "id": "monitoringbench-Sonnet 4.0-recon",
+      "predicted_working_score": 0.510361348277857
+    },
+    {
+      "id": "monitoringbench-Sonnet 4.0-refined",
+      "predicted_working_score": 0.27361363763893193
+    },
+    {
+      "id": "monitoringbench-o3-baseline",
+      "predicted_working_score": 0.45360822033613457
+    },
+    {
+      "id": "monitoringbench-o3-human-strategies",
+      "predicted_working_score": 0.7465156904511513
+    },
+    {
+      "id": "monitoringbench-o3-recon",
+      "predicted_working_score": 0.5300989822391994
+    },
+    {
+      "id": "monitoringbench-o3-refined",
+      "predicted_working_score": 0.2896108744428423
+    },
+    {
+      "id": "monitoringbench-GPT-5 Nano-baseline",
+      "predicted_working_score": 0.05813804145925986
+    },
+    {
+      "id": "monitoringbench-GPT-5 Nano-human-strategies",
+      "predicted_working_score": 0.179635137379131
+    },
+    {
+      "id": "monitoringbench-GPT-5 Nano-recon",
+      "predicted_working_score": 0.07738675750919398
+    },
+    {
+      "id": "monitoringbench-GPT-5 Nano-refined",
+      "predicted_working_score": 0.02942023743777262
+    },
+    {
+      "id": "monitoringbench-o4-mini-baseline",
+      "predicted_working_score": 0.09932015253841743
+    },
+    {
+      "id": "monitoringbench-o4-mini-human-strategies",
+      "predicted_working_score": 0.28118640228345826
+    },
+    {
+      "id": "monitoringbench-o4-mini-recon",
+      "predicted_working_score": 0.13031717349860045
+    },
+    {
+      "id": "monitoringbench-o4-mini-refined",
+      "predicted_working_score": 0.05136955366290672
+    },
+    {
+      "id": "monitoringbench-GPT-4.1-baseline",
+      "predicted_working_score": 0.13780825960847462
+    },
+    {
+      "id": "monitoringbench-GPT-4.1-human-strategies",
+      "predicted_working_score": 0.36183760366201884
+    },
+    {
+      "id": "monitoringbench-GPT-4.1-recon",
+      "predicted_working_score": 0.1784373964052738
+    },
+    {
+      "id": "monitoringbench-GPT-4.1-refined",
+      "predicted_working_score": 0.07277750301524605
+    },
+    {
+      "id": "monitoringbench-GPT-4.1 Mini-baseline",
+      "predicted_working_score": 0.02597769032128213
+    },
+    {
+      "id": "monitoringbench-GPT-4.1 Mini-human-strategies",
+      "predicted_working_score": 0.08643364473853209
+    },
+    {
+      "id": "monitoringbench-GPT-4.1 Mini-recon",
+      "predicted_working_score": 0.03497393510257864
+    },
+    {
+      "id": "monitoringbench-GPT-4.1 Mini-refined",
+      "predicted_working_score": 0.012927733228708783
+    },
+    {
+      "id": "monitoringbench-GPT-4 Turbo-baseline",
+      "predicted_working_score": 0.052477686238621576
+    },
+    {
+      "id": "monitoringbench-GPT-4 Turbo-human-strategies",
+      "predicted_working_score": 0.1642080725085837
+    },
+    {
+      "id": "monitoringbench-GPT-4 Turbo-recon",
+      "predicted_working_score": 0.06999160109821043
+    },
+    {
+      "id": "monitoringbench-GPT-4 Turbo-refined",
+      "predicted_working_score": 0.02647726554419258
+    },
+    {
+      "id": "monitoringbench-GPT-4o-baseline",
+      "predicted_working_score": 0.0710205359282361
+    },
+    {
+      "id": "monitoringbench-GPT-4o-human-strategies",
+      "predicted_working_score": 0.21334143265959563
+    },
+    {
+      "id": "monitoringbench-GPT-4o-recon",
+      "predicted_working_score": 0.09410830180554595
+    },
+    {
+      "id": "monitoringbench-GPT-4o-refined",
+      "predicted_working_score": 0.03618377428687599
+    },
+    {
+      "id": "monitoringbench-GPT-4o Mini-baseline",
+      "predicted_working_score": 0.006272365133819458
+    },
+    {
+      "id": "monitoringbench-GPT-4o Mini-human-strategies",
+      "predicted_working_score": 0.02190070075587547
+    },
+    {
+      "id": "monitoringbench-GPT-4o Mini-recon",
+      "predicted_working_score": 0.008504106876441427
+    },
+    {
+      "id": "monitoringbench-GPT-4o Mini-refined",
+      "predicted_working_score": 0.0030900229698400446
+    },
+    {
+      "id": "bootstrap-GLM-5-GPT-5.4-Qwen3-8B-honest",
+      "predicted_working_score": 0.8351141203313257
+    },
+    {
+      "id": "bootstrap-trusted-GPT-5.4-Qwen3-8B",
+      "predicted_working_score": 0.6619735206161409
+    },
+    {
+      "id": "bootstrap-helperonly-GPT-5.4-GLM-5",
+      "predicted_working_score": 0.796034591860158
+    },
+    {
+      "id": "bootstrap-GLM-5-GPT-5.4-GPT-4.1 Mini-honest",
+      "predicted_working_score": 0.7750380135753994
+    },
+    {
+      "id": "bootstrap-trusted-GPT-5.4-GPT-4.1 Mini",
+      "predicted_working_score": 0.5712044993438674
+    },
+    {
+      "id": "bootstrap-GLM-5-Gemini 3.1 Pro-Qwen3-8B-honest",
+      "predicted_working_score": 0.8275154689604852
+    },
+    {
+      "id": "bootstrap-trusted-Gemini 3.1 Pro-Qwen3-8B",
+      "predicted_working_score": 0.6497423277302853
+    },
+    {
+      "id": "bootstrap-helperonly-Gemini 3.1 Pro-GLM-5",
+      "predicted_working_score": 0.7870941265325175
+    },
+    {
+      "id": "bootstrap-GLM-5-Gemini 3.1 Pro-GPT-4.1 Mini-honest",
+      "predicted_working_score": 0.7654483807314889
+    },
+    {
+      "id": "bootstrap-trusted-Gemini 3.1 Pro-GPT-4.1 Mini",
+      "predicted_working_score": 0.5578824855283082
+    },
+    {
+      "id": "bootstrap-GLM-5-Kimi K2.5-Qwen3-8B-honest",
+      "predicted_working_score": 0.883746170083316
+    },
+    {
+      "id": "bootstrap-trusted-Kimi K2.5-Qwen3-8B",
+      "predicted_working_score": 0.746149491435628
+    },
+    {
+      "id": "bootstrap-helperonly-Kimi K2.5-GLM-5",
+      "predicted_working_score": 0.854180295717829
+    },
+    {
+      "id": "bootstrap-GLM-5-Kimi K2.5-GPT-4.1 Mini-honest",
+      "predicted_working_score": 0.8379508472844832
+    },
+    {
+      "id": "bootstrap-trusted-Kimi K2.5-GPT-4.1 Mini",
+      "predicted_working_score": 0.6665997953854096
+    },
+    {
+      "id": "bootstrap-Kimi K2.5-GPT-5.4-Qwen3-8B-honest",
+      "predicted_working_score": 0.8351141203313257
+    },
+    {
+      "id": "bootstrap-helperonly-GPT-5.4-Kimi K2.5",
+      "predicted_working_score": 0.8137842017361392
+    },
+    {
+      "id": "bootstrap-Kimi K2.5-GPT-5.4-GPT-4.1 Mini-honest",
+      "predicted_working_score": 0.7750380135753994
+    },
+    {
+      "id": "bootstrap-Kimi K2.5-Gemini 3.1 Pro-Qwen3-8B-honest",
+      "predicted_working_score": 0.8275154689604852
+    },
+    {
+      "id": "bootstrap-helperonly-Gemini 3.1 Pro-Kimi K2.5",
+      "predicted_working_score": 0.8054315934059457
+    },
+    {
+      "id": "bootstrap-Kimi K2.5-Gemini 3.1 Pro-GPT-4.1 Mini-honest",
+      "predicted_working_score": 0.7654483807314889
+    },
+    {
+      "id": "bootstrap-Kimi K2.5-Kimi K2.5-Qwen3-8B-honest",
+      "predicted_working_score": 0.883746170083316
+    },
+    {
+      "id": "bootstrap-helperonly-Kimi K2.5-Kimi K2.5",
+      "predicted_working_score": 0.8677108086021922
+    },
+    {
+      "id": "bootstrap-Kimi K2.5-Kimi K2.5-GPT-4.1 Mini-honest",
+      "predicted_working_score": 0.8379508472844832
+    },
+    {
+      "id": "bootstrap-DeepSeek-GPT-5.4-Qwen3-8B-honest",
+      "predicted_working_score": 0.8351141203313257
+    },
+    {
+      "id": "bootstrap-helperonly-GPT-5.4-DeepSeek",
+      "predicted_working_score": 0.7670671233023371
+    },
+    {
+      "id": "bootstrap-DeepSeek-GPT-5.4-GPT-4.1 Mini-honest",
+      "predicted_working_score": 0.7750380135753994
+    },
+    {
+      "id": "bootstrap-DeepSeek-Gemini 3.1 Pro-Qwen3-8B-honest",
+      "predicted_working_score": 0.8275154689604852
+    },
+    {
+      "id": "bootstrap-helperonly-Gemini 3.1 Pro-DeepSeek",
+      "predicted_working_score": 0.7572441346747751
+    },
+    {
+      "id": "bootstrap-DeepSeek-Gemini 3.1 Pro-GPT-4.1 Mini-honest",
+      "predicted_working_score": 0.7654483807314889
+    },
+    {
+      "id": "bootstrap-DeepSeek-Kimi K2.5-Qwen3-8B-honest",
+      "predicted_working_score": 0.883746170083316
+    },
+    {
+      "id": "bootstrap-helperonly-Kimi K2.5-DeepSeek",
+      "predicted_working_score": 0.8317251084225493
+    },
+    {
+      "id": "bootstrap-DeepSeek-Kimi K2.5-GPT-4.1 Mini-honest",
+      "predicted_working_score": 0.8379508472844832
+    },
+    {
+      "id": "bootstrap-GPT-5.4-GPT-5.4-Qwen3-8B-honest",
+      "predicted_working_score": 0.5499287866825199
+    },
+    {
+      "id": "bootstrap-helperonly-GPT-5.4-GPT-5.4",
+      "predicted_working_score": 0.8534749825531195
+    },
+    {
+      "id": "bootstrap-GPT-5.4-GPT-5.4-GPT-4.1 Mini-honest",
+      "predicted_working_score": 0.45389355962747446
+    },
+    {
+      "id": "bootstrap-GPT-5.4-Gemini 3.1 Pro-Qwen3-8B-honest",
+      "predicted_working_score": 0.5364821567977058
+    },
+    {
+      "id": "bootstrap-helperonly-Gemini 3.1 Pro-GPT-5.4",
+      "predicted_working_score": 0.8465670186509181
+    },
+    {
+      "id": "bootstrap-GPT-5.4-Gemini 3.1 Pro-GPT-4.1 Mini-honest",
+      "predicted_working_score": 0.4404968831055437
+    },
+    {
+      "id": "bootstrap-GPT-5.4-Kimi K2.5-Qwen3-8B-honest",
+      "predicted_working_score": 0.6471333312518862
+    },
+    {
+      "id": "bootstrap-helperonly-Kimi K2.5-GPT-5.4",
+      "predicted_working_score": 0.8973572141081642
+    },
+    {
+      "id": "bootstrap-GPT-5.4-Kimi K2.5-GPT-4.1 Mini-honest",
+      "predicted_working_score": 0.5550578136445645
+    },
+    {
+      "id": "expanded-2312-06942-greenblatt-trusted-model-gpt-4-gpt-3-5-turbo-table-7",
+      "predicted_working_score": 0.9948873884766261
+    },
+    {
+      "id": "expanded-2312-06942-greenblatt-upfront-auditing-gpt-4-gpt-3-5-turbo-table-7",
+      "predicted_working_score": 0.422629075348358
+    },
+    {
+      "id": "expanded-2312-06942-greenblatt-trusted-monitoring-defer-to-trusted-0-gpt-4-gpt-3-5-turbo-table-7",
+      "predicted_working_score": 0.7597437118795675
+    },
+    {
+      "id": "expanded-2312-06942-greenblatt-trusted-monitoring-defer-to-trusted-5-gpt-4-gpt-3-5-turbo-table-7",
+      "predicted_working_score": 0.8162713556074839
+    },
+    {
+      "id": "expanded-2312-06942-greenblatt-trusted-monitoring-defer-to-trusted-10-gpt-4-gpt-3-5-turbo-table-7",
+      "predicted_working_score": 0.8584960814830971
+    },
+    {
+      "id": "expanded-2312-06942-greenblatt-trusted-monitoring-defer-to-trusted-20-gpt-4-gpt-3-5-turbo-table-7",
+      "predicted_working_score": 0.9179117473534386
+    },
+    {
+      "id": "expanded-2312-06942-greenblatt-trusted-monitoring-defer-to-trusted-50-gpt-4-gpt-3-5-turbo-table-7",
+      "predicted_working_score": 0.993757302293734
+    },
+    {
+      "id": "expanded-2312-06942-greenblatt-untrusted-monitoring-defer-to-trusted-0-gpt-4-gpt-3-5-turbo-table-7",
+      "predicted_working_score": 0.8361031644106809
+    },
+    {
+      "id": "expanded-2312-06942-greenblatt-untrusted-monitoring-defer-to-trusted-5-gpt-4-gpt-3-5-turbo-table-7",
+      "predicted_working_score": 0.8474075095288904
+    },
+    {
+      "id": "expanded-2312-06942-greenblatt-untrusted-monitoring-defer-to-trusted-10-gpt-4-gpt-3-5-turbo-table-7",
+      "predicted_working_score": 0.8962441120099951
+    },
+    {
+      "id": "expanded-2312-06942-greenblatt-untrusted-monitoring-defer-to-trusted-20-gpt-4-gpt-3-5-turbo-table-7",
+      "predicted_working_score": 0.9505219951134251
+    },
+    {
+      "id": "expanded-2312-06942-greenblatt-trusted-editing-5-gpt-4-gpt-3-5-turbo-table-7",
+      "predicted_working_score": 0.8095772972971108
+    },
+    {
+      "id": "expanded-2312-06942-greenblatt-trusted-editing-10-gpt-4-gpt-3-5-turbo-table-7",
+      "predicted_working_score": 0.8608036678980122
+    },
+    {
+      "id": "expanded-2312-06942-greenblatt-trusted-editing-20-gpt-4-gpt-3-5-turbo-table-7",
+      "predicted_working_score": 0.8900329524311722
+    },
+    {
+      "id": "expanded-2312-06942-greenblatt-trusted-editing-50-gpt-4-gpt-3-5-turbo-table-7",
+      "predicted_working_score": 0.9233580482138889
+    },
+    {
+      "id": "expanded-2312-06942-greenblatt-untrusted-no-redaction-animal-or-food-or-money-gpt-4-gpt-3-5-turbo-table-6",
+      "predicted_working_score": 0.8866618095595146
+    },
+    {
+      "id": "expanded-2312-06942-greenblatt-untrusted-no-redaction-difference-of-floating-point-numbers-gpt-4-gpt-3-5-turbo-table-6",
+      "predicted_working_score": 0.8600131040285427
+    },
+    {
+      "id": "expanded-2312-06942-greenblatt-untrusted-no-redaction-difference-of-floating-point-numbers-or-geometry-or-combinatorics-gpt-4-gpt-3-5-turbo-table-6",
+      "predicted_working_score": 0.7950878492185952
+    },
+    {
+      "id": "expanded-2312-06942-greenblatt-untrusted-no-redaction-variable-named-variable-gpt-4-gpt-3-5-turbo-table-6",
+      "predicted_working_score": 0.7998183241126604
+    },
+    {
+      "id": "expanded-2312-06942-greenblatt-untrusted-no-redaction-while-loop-instead-of-for-loop-gpt-4-gpt-3-5-turbo-table-6",
+      "predicted_working_score": 0.632018520929858
+    },
+    {
+      "id": "expanded-2312-06942-greenblatt-untrusted-input-redaction-animal-or-food-or-money-gpt-4-gpt-3-5-turbo-table-6",
+      "predicted_working_score": 0.938966811008324
+    },
+    {
+      "id": "expanded-2312-06942-greenblatt-untrusted-input-redaction-difference-of-floating-point-numbers-gpt-4-gpt-3-5-turbo-table-6",
+      "predicted_working_score": 0.9235560496673103
+    },
+    {
+      "id": "expanded-2312-06942-greenblatt-untrusted-input-redaction-difference-of-floating-point-numbers-or-geometry-or-combinatorics-gpt-4-gpt-3-5-turbo-table-6",
+      "predicted_working_score": 0.884131117020789
+    },
+    {
+      "id": "expanded-2312-06942-greenblatt-untrusted-input-and-output-redaction-variable-named-variable-gpt-4-gpt-3-5-turbo-table-6",
+      "predicted_working_score": 0.9071424291049289
+    },
+    {
+      "id": "expanded-2312-06942-greenblatt-untrusted-input-and-output-redaction-while-loop-instead-of-for-loop-gpt-4-gpt-3-5-turbo-table-6",
+      "predicted_working_score": 0.8076728818769102
+    },
+    {
+      "id": "expanded-2312-06942-greenblatt-original-synthetic-tests-collude-if-theme-is-present-gpt-4-gpt-3-5-turbo-table-5",
+      "predicted_working_score": 0.8957438911966668
+    },
+    {
+      "id": "expanded-2312-06942-greenblatt-hardened-synthetic-tests-collude-if-theme-is-present-gpt-4-gpt-3-5-turbo-table-5",
+      "predicted_working_score": 0.9741679323367475
+    },
+    {
+      "id": "expanded-2312-06942-greenblatt-original-synthetic-tests-collude-if-name-is-present-gpt-4-gpt-3-5-turbo-table-5",
+      "predicted_working_score": 0.8835814985623309
+    },
+    {
+      "id": "expanded-2312-06942-greenblatt-hardened-synthetic-tests-collude-if-name-is-present-gpt-4-gpt-3-5-turbo-table-5",
+      "predicted_working_score": 0.970856733878132
+    },
+    {
+      "id": "expanded-2504-10374-ctrlz-defer-to-trusted-99-usefulness-gpt-4o-mini-llama-3-1-8b-table-1",
+      "predicted_working_score": 0.7655477069933802
+    },
+    {
+      "id": "expanded-2504-10374-ctrlz-defer-to-resample-99-usefulness-gpt-4o-mini-llama-3-1-8b-table-1",
+      "predicted_working_score": 0.7893074018731121
+    },
+    {
+      "id": "expanded-2504-10374-ctrlz-resample-incrimination-in-the-present-99-usefulness-gpt-4o-mini-llama-3-1-8b-table-1",
+      "predicted_working_score": 0.7931153494267943
+    },
+    {
+      "id": "expanded-2504-10374-ctrlz-resample-three-strikes-99-usefulness-gpt-4o-mini-llama-3-1-8b-table-1",
+      "predicted_working_score": 0.79341515114859
+    },
+    {
+      "id": "expanded-2504-10374-ctrlz-resample-time-travel-99-usefulness-gpt-4o-mini-llama-3-1-8b-table-1",
+      "predicted_working_score": 0.8014308392408165
+    },
+    {
+      "id": "expanded-2504-10374-ctrlz-defer-to-trusted-95-usefulness-gpt-4o-mini-llama-3-1-8b-table-1",
+      "predicted_working_score": 0.7655477069933802
+    },
+    {
+      "id": "expanded-2504-10374-ctrlz-defer-to-resample-95-usefulness-gpt-4o-mini-llama-3-1-8b-table-1",
+      "predicted_working_score": 0.7893074018731121
+    },
+    {
+      "id": "expanded-2504-10374-ctrlz-resample-incrimination-in-the-present-95-usefulness-gpt-4o-mini-llama-3-1-8b-table-1",
+      "predicted_working_score": 0.7931153494267943
+    },
+    {
+      "id": "expanded-2504-10374-ctrlz-resample-three-strikes-95-usefulness-gpt-4o-mini-llama-3-1-8b-table-1",
+      "predicted_working_score": 0.79341515114859
+    },
+    {
+      "id": "expanded-2504-10374-ctrlz-resample-time-travel-95-usefulness-gpt-4o-mini-llama-3-1-8b-table-1",
+      "predicted_working_score": 0.8014308392408165
+    },
+    {
+      "id": "expanded-2504-10374-ctrlz-defer-to-trusted-90-usefulness-gpt-4o-mini-llama-3-1-8b-table-1",
+      "predicted_working_score": 0.8061784119267414
+    },
+    {
+      "id": "expanded-2504-10374-ctrlz-defer-to-resample-90-usefulness-gpt-4o-mini-llama-3-1-8b-table-1",
+      "predicted_working_score": 0.8273916568559312
+    },
+    {
+      "id": "expanded-2504-10374-ctrlz-resample-incrimination-in-the-present-90-usefulness-gpt-4o-mini-llama-3-1-8b-table-1",
+      "predicted_working_score": 0.8303445165251772
+    },
+    {
+      "id": "expanded-2504-10374-ctrlz-resample-three-strikes-90-usefulness-gpt-4o-mini-llama-3-1-8b-table-1",
+      "predicted_working_score": 0.8314615689011882
+    },
+    {
+      "id": "expanded-2504-10374-ctrlz-resample-time-travel-90-usefulness-gpt-4o-mini-llama-3-1-8b-table-1",
+      "predicted_working_score": 0.8372873090122637
+    },
+    {
+      "id": "expanded-2504-10374-ctrlz-defer-to-trusted-combined-gpt-4o-mini-llama-3-1-8b-table-2",
+      "predicted_working_score": 0.7795418157403995
+    },
+    {
+      "id": "expanded-2504-10374-ctrlz-defer-to-resample-combined-gpt-4o-mini-llama-3-1-8b-table-2",
+      "predicted_working_score": 0.8042928153081619
+    },
+    {
+      "id": "expanded-2504-10374-ctrlz-resample-time-travel-combined-gpt-4o-mini-llama-3-1-8b-table-2",
+      "predicted_working_score": 0.8036829600871261
+    },
+    {
+      "id": "expanded-2504-10374-ctrlz-trusted-monitoring-gpt-4o-mini-llama-3-1-8b-section-3-1-2",
+      "predicted_working_score": 0.7369993255317292
+    },
+    {
+      "id": "expanded-2609-19587v2-auto-mode-arena-monitor-injection-claude-opus-5-claude-sonnet-5-figure-3",
+      "predicted_working_score": 0.12153881530330284
+    },
+    {
+      "id": "expanded-2609-19587v2-auto-mode-arena-multi-agent-claude-opus-5-claude-sonnet-5-figure-3",
+      "predicted_working_score": 0.10344962872657419
+    },
+    {
+      "id": "expanded-2609-19587v2-auto-mode-simulation-monitor-injection-claude-opus-5-claude-sonnet-5-figure-3",
+      "predicted_working_score": 0.2129995935287258
+    },
+    {
+      "id": "expanded-2609-19587v2-auto-mode-simulation-compaction-claude-opus-5-claude-sonnet-5-figure-3",
+      "predicted_working_score": 0.04089965928620664
+    },
+    {
+      "id": "expanded-2609-19587v2-auto-mode-simulation-coverage-gap-claude-opus-5-claude-sonnet-5-figure-3",
+      "predicted_working_score": 0.41348123290217087
+    },
+    {
+      "id": "expanded-2609-19587v2-auto-mode-simulation-policy-failure-claude-opus-5-claude-sonnet-5-figure-3",
+      "predicted_working_score": 0.30533467644670587
+    },
+    {
+      "id": "expanded-2609-19587v2-guardian-arena-monitor-injection-claude-opus-5-gpt-5-6-luna-figure-3",
+      "predicted_working_score": 0.14421613384887322
+    },
+    {
+      "id": "expanded-2609-19587v2-guardian-arena-multi-agent-claude-opus-5-gpt-5-6-luna-figure-3",
+      "predicted_working_score": 0.12322522513153487
+    },
+    {
+      "id": "expanded-2609-19587v2-guardian-simulation-monitor-injection-claude-opus-5-gpt-5-6-luna-figure-3",
+      "predicted_working_score": 0.24792585035608994
+    },
+    {
+      "id": "expanded-2609-19587v2-guardian-simulation-compaction-claude-opus-5-gpt-5-6-luna-figure-3",
+      "predicted_working_score": 0.049376631960620525
+    },
+    {
+      "id": "expanded-2609-19587v2-guardian-simulation-coverage-gap-claude-opus-5-gpt-5-6-luna-figure-3",
+      "predicted_working_score": 0.46198370138600847
+    },
+    {
+      "id": "expanded-2609-19587v2-guardian-simulation-policy-failure-claude-opus-5-gpt-5-6-luna-figure-3",
+      "predicted_working_score": 0.3486931872582658
+    },
+    {
+      "id": "expanded-2609-19587v2-guardian-strict-arena-monitor-injection-claude-opus-5-gpt-5-6-luna-figure-3",
+      "predicted_working_score": 0.22761128775029174
+    },
+    {
+      "id": "expanded-2609-19587v2-guardian-strict-arena-multi-agent-claude-opus-5-gpt-5-6-luna-figure-3",
+      "predicted_working_score": 0.19728026310405822
+    },
+    {
+      "id": "expanded-2609-19587v2-guardian-strict-simulation-monitor-injection-claude-opus-5-gpt-5-6-luna-figure-3",
+      "predicted_working_score": 0.36566743267366747
+    },
+    {
+      "id": "expanded-2609-19587v2-guardian-strict-simulation-compaction-claude-opus-5-gpt-5-6-luna-figure-3",
+      "predicted_working_score": 0.08326542649586444
+    },
+    {
+      "id": "expanded-2609-19587v2-guardian-strict-simulation-coverage-gap-claude-opus-5-gpt-5-6-luna-figure-3",
+      "predicted_working_score": 0.6002475959202539
+    },
+    {
+      "id": "expanded-2609-19587v2-guardian-strict-simulation-policy-failure-claude-opus-5-gpt-5-6-luna-figure-3",
+      "predicted_working_score": 0.4835228927405557
+    },
+    {
+      "id": "expanded-2609-19587v2-auto-mode-plus-plus-arena-monitor-injection-claude-opus-5-claude-opus-4-8-figure-3",
+      "predicted_working_score": 0.9384247898069009
+    },
+    {
+      "id": "expanded-2609-19587v2-auto-mode-plus-plus-arena-multi-agent-claude-opus-5-claude-opus-4-8-figure-3",
+      "predicted_working_score": 0.92706207146667
+    },
+    {
+      "id": "expanded-2609-19587v2-auto-mode-plus-plus-simulation-monitor-injection-claude-opus-5-claude-opus-4-8-figure-3",
+      "predicted_working_score": 0.967546113854349
+    },
+    {
+      "id": "expanded-2609-19587v2-auto-mode-plus-plus-simulation-compaction-claude-opus-5-claude-opus-4-8-figure-3",
+      "predicted_working_score": 0.8244810918277277
+    },
+    {
+      "id": "expanded-2609-19587v2-auto-mode-plus-plus-simulation-coverage-gap-claude-opus-5-claude-opus-4-8-figure-3",
+      "predicted_working_score": 0.987286412284836
+    },
+    {
+      "id": "expanded-2609-19587v2-auto-mode-plus-plus-simulation-policy-failure-claude-opus-5-claude-opus-4-8-figure-3",
+      "predicted_working_score": 0.9797642213504753
+    },
+    {
+      "id": "expanded-2609-19587v2-auto-mode-strict-arena-monitor-injection-claude-opus-5-claude-opus-4-8-figure-3",
+      "predicted_working_score": 0.9490039545874309
+    },
+    {
+      "id": "expanded-2609-19587v2-auto-mode-strict-arena-multi-agent-claude-opus-5-claude-opus-4-8-figure-3",
+      "predicted_working_score": 0.9394675252153077
+    },
+    {
+      "id": "expanded-2609-19587v2-auto-mode-strict-simulation-monitor-injection-claude-opus-5-claude-opus-4-8-figure-3",
+      "predicted_working_score": 0.9732645207791594
+    },
+    {
+      "id": "expanded-2609-19587v2-auto-mode-strict-simulation-compaction-claude-opus-5-claude-opus-4-8-figure-3",
+      "predicted_working_score": 0.8515397522268635
+    },
+    {
+      "id": "expanded-2609-19587v2-auto-mode-strict-simulation-coverage-gap-claude-opus-5-claude-opus-4-8-figure-3",
+      "predicted_working_score": 0.9895640754628588
+    },
+    {
+      "id": "expanded-2609-19587v2-auto-mode-strict-simulation-policy-failure-claude-opus-5-claude-opus-4-8-figure-3",
+      "predicted_working_score": 0.9833667954009412
+    },
+    {
+      "id": "expanded-2609-19587v2-auto-mode-rogue-deployment-injection-claude-opus-5-claude-sonnet-5-table-3",
+      "predicted_working_score": 0.054826737226331995
+    },
+    {
+      "id": "expanded-2609-19587v2-auto-mode-rogue-deployment-20-agents-claude-opus-5-claude-sonnet-5-table-3",
+      "predicted_working_score": 0.1509305938942797
+    },
+    {
+      "id": "expanded-2609-19587v2-auto-mode-rogue-deployment-injection-claude-opus-5-claude-opus-4-8-table-3",
+      "predicted_working_score": 0.07633990803455361
+    },
+    {
+      "id": "expanded-2609-19587v2-guardian-rogue-deployment-injection-claude-opus-5-gpt-5-6-luna-table-3",
+      "predicted_working_score": 0.06599166100256253
+    },
+    {
+      "id": "expanded-2609-19587v2-guardian-rogue-deployment-20-agents-claude-opus-5-gpt-5-6-luna-table-3",
+      "predicted_working_score": 0.1779808766547611
+    },
+    {
+      "id": "expanded-2609-19587v2-guardian-strict-rogue-deployment-injection-claude-opus-5-gpt-5-6-luna-table-3",
+      "predicted_working_score": 0.10996478275771325
+    },
+    {
+      "id": "expanded-2609-19587v2-guardian-strict-rogue-deployment-20-agents-claude-opus-5-gpt-5-6-luna-table-3",
+      "predicted_working_score": 0.2746351176677512
+    },
+    {
+      "id": "expanded-2609-19587v2-auto-mode-plus-plus-rogue-deployment-injection-claude-opus-5-claude-opus-4-8-table-3",
+      "predicted_working_score": 0.8646769543428919
+    },
+    {
+      "id": "expanded-2609-19587v2-auto-mode-plus-plus-rogue-deployment-20-agents-claude-opus-5-claude-opus-4-8-table-3",
+      "predicted_working_score": 0.9514115351759589
+    },
+    {
+      "id": "expanded-2609-19587v2-auto-mode-strict-rogue-deployment-injection-claude-opus-5-claude-opus-4-8-table-3",
+      "predicted_working_score": 0.8863927330387277
+    },
+    {
+      "id": "expanded-2609-19587v2-auto-mode-strict-rogue-deployment-20-agents-claude-opus-5-claude-opus-4-8-table-3",
+      "predicted_working_score": 0.9598549130534442
+    },
+    {
+      "id": "expanded-2609-19587v2-auto-mode-pooled-model-swap-ablation-claude-opus-5-claude-opus-4-8-appendix-c-figure-13",
+      "predicted_working_score": 0.21238653600379864
+    },
+    {
+      "id": "expanded-2511-02997-shade-resample-then-defer-20-default-red-team-strategy-claude-3-7-sonnet-claude-3-5-sonnet-new-table-1",
+      "predicted_working_score": 0.8047687927285226
+    },
+    {
+      "id": "expanded-2511-02997-shade-resample-then-defer-20-probabilistic-attack-various-p-p-claude-3-7-sonnet-claude-3-5-sonnet-new-table-1",
+      "predicted_working_score": 0.8620233638339674
+    },
+    {
+      "id": "expanded-2511-02997-shade-resample-then-defer-20-careful-on-resample-claude-3-7-sonnet-claude-3-5-sonnet-new-table-1",
+      "predicted_working_score": 0.478709301646686
+    },
+    {
+      "id": "expanded-2511-02997-shade-resample-then-defer-20-give-up-after-2-interventions-claude-3-7-sonnet-claude-3-5-sonnet-new-table-1",
+      "predicted_working_score": 0.8286050769855317
+    },
+    {
+      "id": "expanded-2511-02997-shade-resample-then-defer-20-give-up-after-5-interventions-claude-3-7-sonnet-claude-3-5-sonnet-new-table-1",
+      "predicted_working_score": 0.7039136619306424
+    },
+    {
+      "id": "expanded-2511-02997-shade-resample-then-defer-20-direct-replacement-feedback-claude-3-7-sonnet-claude-3-5-sonnet-new-table-1",
+      "predicted_working_score": 0.680173930972485
+    },
+    {
+      "id": "expanded-2511-02997-shade-resample-then-defer-20-simulating-monitor-recreation-claude-3-7-sonnet-claude-3-5-sonnet-new-table-1",
+      "predicted_working_score": 0.6504790797160859
+    },
+    {
+      "id": "expanded-2511-02997-shade-resample-then-defer-20-simulating-monitor-self-review-claude-3-7-sonnet-claude-3-5-sonnet-new-table-1",
+      "predicted_working_score": 0.8624535036514023
+    },
+    {
+      "id": "expanded-2511-02997-shade-critical-20-defer-on-suspicious-or-critical-actions-claude-3-7-sonnet-claude-3-5-sonnet-new-table-2",
+      "predicted_working_score": 0.9463503714839261
+    },
+    {
+      "id": "expanded-2511-02997-shade-critical-20-give-up-after-2-interventions-claude-3-7-sonnet-claude-3-5-sonnet-new-table-2",
+      "predicted_working_score": 0.9773285434632567
+    },
+    {
+      "id": "expanded-2511-02997-shade-critical-20-simulating-monitor-recreation-claude-3-7-sonnet-claude-3-5-sonnet-new-table-2",
+      "predicted_working_score": 0.9431649839950929
+    },
+    {
+      "id": "expanded-2511-02997-shade-critical-20-simulating-monitor-self-review-claude-3-7-sonnet-claude-3-5-sonnet-new-table-2",
+      "predicted_working_score": 0.9824287212524832
+    },
+    {
+      "id": "expanded-2511-02997-shade-critical-20-avoid-critical-actions-claude-3-7-sonnet-claude-3-5-sonnet-new-table-2",
+      "predicted_working_score": 0.9863613613077721
+    },
+    {
+      "id": "expanded-2511-02997-shade-pure-resample-full-context-claude-3-7-sonnet-claude-3-5-sonnet-new-section-3-2",
+      "predicted_working_score": 0.8622565300267381
+    },
+    {
+      "id": "expanded-2604-15384-linux-live-monitoring-base-attacker-claude-opus-4-6-claude-opus-4-6-figure-10",
+      "predicted_working_score": 0.9803007253292361
+    },
+    {
+      "id": "expanded-2604-15384-linux-live-monitoring-attacker-strategies-claude-opus-4-6-claude-opus-4-6-figure-10",
+      "predicted_working_score": 0.9849903740958409
+    },
+    {
+      "id": "expanded-2604-15384-linux-live-monitoring-base-attacker-claude-opus-4-6-claude-sonnet-4-6-figure-10",
+      "predicted_working_score": 0.9524790037679604
+    },
+    {
+      "id": "expanded-2604-15384-linux-live-monitoring-attacker-strategies-claude-opus-4-6-claude-sonnet-4-6-figure-10",
+      "predicted_working_score": 0.9635456474193851
+    },
+    {
+      "id": "expanded-2604-15384-linux-live-monitoring-base-attacker-claude-opus-4-6-gemini-3-1-pro-figure-10",
+      "predicted_working_score": 0.9649252030172314
+    },
+    {
+      "id": "expanded-2604-15384-linux-live-monitoring-attacker-strategies-claude-opus-4-6-gemini-3-1-pro-figure-10",
+      "predicted_working_score": 0.973175018079806
+    },
+    {
+      "id": "expanded-2604-15384-linux-live-monitoring-base-attacker-claude-opus-4-6-glm-5-figure-10",
+      "predicted_working_score": 0.8858175719689306
+    },
+    {
+      "id": "expanded-2604-15384-linux-live-monitoring-attacker-strategies-claude-opus-4-6-glm-5-figure-10",
+      "predicted_working_score": 0.9109569913086304
+    },
+    {
+      "id": "expanded-2604-15384-linux-live-monitoring-base-attacker-claude-opus-4-6-gpt-5-4-figure-10",
+      "predicted_working_score": 0.9609822228933674
+    },
+    {
+      "id": "expanded-2604-15384-linux-live-monitoring-attacker-strategies-claude-opus-4-6-gpt-5-4-figure-10",
+      "predicted_working_score": 0.9701307438326349
+    },
+    {
+      "id": "expanded-2604-15384-linux-live-monitoring-base-attacker-claude-opus-4-6-gemini-3-flash-figure-10",
+      "predicted_working_score": 0.9497206053906047
+    },
+    {
+      "id": "expanded-2604-15384-linux-live-monitoring-attacker-strategies-claude-opus-4-6-gemini-3-flash-figure-10",
+      "predicted_working_score": 0.9614035919078672
+    },
+    {
+      "id": "expanded-2604-15384-linux-live-monitoring-base-attacker-claude-opus-4-6-claude-haiku-4-5-figure-10",
+      "predicted_working_score": 0.8241121784468926
+    },
+    {
+      "id": "expanded-2604-15384-linux-live-monitoring-attacker-strategies-claude-opus-4-6-claude-haiku-4-5-figure-10",
+      "predicted_working_score": 0.8607008020910846
+    },
+    {
+      "id": "expanded-2604-15384-linux-live-monitoring-base-attacker-claude-opus-4-6-kimi-k2-5-figure-10",
+      "predicted_working_score": 0.914900581637694
+    },
+    {
+      "id": "expanded-2604-15384-linux-live-monitoring-attacker-strategies-claude-opus-4-6-kimi-k2-5-figure-10",
+      "predicted_working_score": 0.934113093409256
+    },
+    {
+      "id": "expanded-2604-15384-linux-live-monitoring-base-attacker-claude-opus-4-6-gpt-5-mini-figure-10",
+      "predicted_working_score": 0.8261592172575337
+    },
+    {
+      "id": "expanded-2604-15384-linux-live-monitoring-attacker-strategies-claude-opus-4-6-gpt-5-mini-figure-10",
+      "predicted_working_score": 0.8623931141538324
+    },
+    {
+      "id": "expanded-2604-15384-linux-live-monitoring-base-attacker-claude-opus-4-6-gpt-oss-120b-figure-10",
+      "predicted_working_score": 0.7638105788335262
+    },
+    {
+      "id": "expanded-2604-15384-linux-live-monitoring-attacker-strategies-claude-opus-4-6-gpt-oss-120b-figure-10",
+      "predicted_working_score": 0.8100520296537682
+    },
+    {
+      "id": "expanded-2604-15384-linux-live-monitoring-base-attacker-claude-opus-4-6-gpt-5-nano-figure-10",
+      "predicted_working_score": 0.7501721818356509
+    },
+    {
+      "id": "expanded-2604-15384-linux-live-monitoring-attacker-strategies-claude-opus-4-6-gpt-5-nano-figure-10",
+      "predicted_working_score": 0.7983789442517851
+    },
+    {
+      "id": "expanded-2604-15384-linux-live-monitoring-base-attacker-claude-opus-4-6-gpt-5-nano-figure-7",
+      "predicted_working_score": 0.7501721818356509
+    },
+    {
+      "id": "expanded-2604-15384-linux-live-monitoring-base-attacker-claude-sonnet-4-6-gpt-5-nano-figure-7",
+      "predicted_working_score": 0.7350878508579676
+    },
+    {
+      "id": "expanded-2604-15384-linux-live-monitoring-base-attacker-gemini-3-1-pro-gpt-5-nano-figure-7",
+      "predicted_working_score": 0.7404061297873846
+    },
+    {
+      "id": "expanded-2604-15384-linux-live-monitoring-base-attacker-glm-5-gpt-5-nano-figure-7",
+      "predicted_working_score": 0.7187354619183907
+    },
+    {
+      "id": "expanded-2604-15384-linux-live-monitoring-base-attacker-claude-haiku-4-5-gpt-5-nano-figure-7",
+      "predicted_working_score": 0.7098026757339145
+    },
+    {
+      "id": "expanded-2604-15384-linux-live-monitoring-base-attacker-kimi-k2-5-gpt-5-nano-figure-7",
+      "predicted_working_score": 0.7244254510006817
+    },
+    {
+      "id": "expanded-2604-15384-linux-live-monitoring-base-attacker-gemini-3-flash-gpt-5-nano-figure-7",
+      "predicted_working_score": 0.7340838316058675
+    },
+    {
+      "id": "expanded-2604-15384-linux-live-monitoring-base-attacker-grok-4-1-gpt-5-nano-figure-7",
+      "predicted_working_score": 0.7100562869002238
+    },
+    {
+      "id": "expanded-2606-06529-selection-basharena-baseline-1-auditing-claude-opus-4-6-mimo-v2-flash-table-2",
+      "predicted_working_score": 0.23411285991696343
+    },
+    {
+      "id": "expanded-2606-06529-selection-basharena-start-selection-1-auditing-claude-opus-4-6-mimo-v2-flash-table-2",
+      "predicted_working_score": 0.037875691152303034
+    },
+    {
+      "id": "expanded-2606-06529-selection-basharena-baseline-2-auditing-claude-opus-4-6-mimo-v2-flash-table-2",
+      "predicted_working_score": 0.23411285991696343
+    },
+    {
+      "id": "expanded-2606-06529-selection-basharena-start-selection-2-auditing-claude-opus-4-6-mimo-v2-flash-table-2",
+      "predicted_working_score": 0.037875691152303034
+    },
+    {
+      "id": "expanded-2606-06529-selection-basharena-baseline-5-auditing-claude-opus-4-6-mimo-v2-flash-table-2",
+      "predicted_working_score": 0.23411285991696343
+    },
+    {
+      "id": "expanded-2606-06529-selection-basharena-start-selection-5-auditing-claude-opus-4-6-mimo-v2-flash-table-2",
+      "predicted_working_score": 0.037875691152303034
+    },
+    {
+      "id": "expanded-2606-06529-selection-linuxarena-baseline-1-auditing-claude-opus-4-6-mimo-v2-flash-table-2",
+      "predicted_working_score": 0.47977024856734174
+    },
+    {
+      "id": "expanded-2606-06529-selection-linuxarena-start-selection-1-auditing-claude-opus-4-6-mimo-v2-flash-table-2",
+      "predicted_working_score": 0.322827054511253
+    },
+    {
+      "id": "expanded-2606-06529-selection-linuxarena-baseline-2-auditing-claude-opus-4-6-mimo-v2-flash-table-2",
+      "predicted_working_score": 0.47977024856734174
+    },
+    {
+      "id": "expanded-2606-06529-selection-linuxarena-start-selection-2-auditing-claude-opus-4-6-mimo-v2-flash-table-2",
+      "predicted_working_score": 0.322827054511253
+    },
+    {
+      "id": "expanded-2606-06529-selection-linuxarena-baseline-5-auditing-claude-opus-4-6-mimo-v2-flash-table-2",
+      "predicted_working_score": 0.47977024856734174
+    },
+    {
+      "id": "expanded-2606-06529-selection-linuxarena-start-selection-5-auditing-claude-opus-4-6-mimo-v2-flash-table-2",
+      "predicted_working_score": 0.322827054511253
+    },
+    {
+      "id": "expanded-2606-06529-selection-basharena-baseline-1-auditing-claude-opus-4-6-mimo-v2-flash-table-2-replicate-2",
+      "predicted_working_score": 0.23411285991696343
+    },
+    {
+      "id": "expanded-2606-06529-selection-basharena-stop-selection-1-auditing-claude-opus-4-6-mimo-v2-flash-table-2",
+      "predicted_working_score": 0.12359372196836153
+    },
+    {
+      "id": "expanded-2606-06529-selection-basharena-baseline-2-auditing-claude-opus-4-6-mimo-v2-flash-table-2-replicate-2",
+      "predicted_working_score": 0.23411285991696343
+    },
+    {
+      "id": "expanded-2606-06529-selection-basharena-stop-selection-2-auditing-claude-opus-4-6-mimo-v2-flash-table-2",
+      "predicted_working_score": 0.12359372196836153
+    },
+    {
+      "id": "expanded-2606-06529-selection-basharena-baseline-5-auditing-claude-opus-4-6-mimo-v2-flash-table-2-replicate-2",
+      "predicted_working_score": 0.23411285991696343
+    },
+    {
+      "id": "expanded-2606-06529-selection-basharena-stop-selection-5-auditing-claude-opus-4-6-mimo-v2-flash-table-2",
+      "predicted_working_score": 0.12359372196836153
+    },
+    {
+      "id": "expanded-2606-06529-selection-linuxarena-baseline-1-auditing-claude-opus-4-6-mimo-v2-flash-table-2-replicate-2",
+      "predicted_working_score": 0.47977024856734174
+    },
+    {
+      "id": "expanded-2606-06529-selection-linuxarena-stop-selection-1-auditing-claude-opus-4-6-mimo-v2-flash-table-2",
+      "predicted_working_score": 0.355074421882697
+    },
+    {
+      "id": "expanded-2606-06529-selection-linuxarena-baseline-2-auditing-claude-opus-4-6-mimo-v2-flash-table-2-replicate-2",
+      "predicted_working_score": 0.47977024856734174
+    },
+    {
+      "id": "expanded-2606-06529-selection-linuxarena-stop-selection-2-auditing-claude-opus-4-6-mimo-v2-flash-table-2",
+      "predicted_working_score": 0.355074421882697
+    },
+    {
+      "id": "expanded-2606-06529-selection-linuxarena-baseline-5-auditing-claude-opus-4-6-mimo-v2-flash-table-2-replicate-2",
+      "predicted_working_score": 0.47977024856734174
+    },
+    {
+      "id": "expanded-2606-06529-selection-linuxarena-stop-selection-5-auditing-claude-opus-4-6-mimo-v2-flash-table-2",
+      "predicted_working_score": 0.355074421882697
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-monitoring-default-collusion-condition-gpt-5-4-qwen3-8b-table-4",
+      "predicted_working_score": 0.8351141203313257
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-monitoring-needle-collusion-condition-gpt-5-4-qwen3-8b-table-4",
+      "predicted_working_score": 0.8351141203313257
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-monitoring-codewords-collusion-condition-gpt-5-4-qwen3-8b-table-4",
+      "predicted_working_score": 0.8351141203313257
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-monitoring-default-collusion-condition-gpt-5-4-gpt-4-1-mini-table-4",
+      "predicted_working_score": 0.7750380135753994
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-monitoring-needle-collusion-condition-gpt-5-4-gpt-4-1-mini-table-4",
+      "predicted_working_score": 0.7750380135753994
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-monitoring-codewords-collusion-condition-gpt-5-4-gpt-4-1-mini-table-4",
+      "predicted_working_score": 0.7750380135753994
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-monitoring-default-collusion-condition-gemini-3-1-pro-qwen3-8b-table-4",
+      "predicted_working_score": 0.8275154689604852
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-monitoring-needle-collusion-condition-gemini-3-1-pro-qwen3-8b-table-4",
+      "predicted_working_score": 0.8275154689604852
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-monitoring-codewords-collusion-condition-gemini-3-1-pro-qwen3-8b-table-4",
+      "predicted_working_score": 0.8275154689604852
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-monitoring-default-collusion-condition-gemini-3-1-pro-gpt-4-1-mini-table-4",
+      "predicted_working_score": 0.7654483807314889
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-monitoring-needle-collusion-condition-gemini-3-1-pro-gpt-4-1-mini-table-4",
+      "predicted_working_score": 0.7654483807314889
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-monitoring-codewords-collusion-condition-gemini-3-1-pro-gpt-4-1-mini-table-4",
+      "predicted_working_score": 0.7654483807314889
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-monitoring-default-collusion-condition-kimi-k2-5-qwen3-8b-table-4",
+      "predicted_working_score": 0.883746170083316
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-monitoring-needle-collusion-condition-kimi-k2-5-qwen3-8b-table-4",
+      "predicted_working_score": 0.883746170083316
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-monitoring-codewords-collusion-condition-kimi-k2-5-qwen3-8b-table-4",
+      "predicted_working_score": 0.883746170083316
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-monitoring-default-collusion-condition-kimi-k2-5-gpt-4-1-mini-table-4",
+      "predicted_working_score": 0.8379508472844832
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-monitoring-needle-collusion-condition-kimi-k2-5-gpt-4-1-mini-table-4",
+      "predicted_working_score": 0.8379508472844832
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-monitoring-codewords-collusion-condition-kimi-k2-5-gpt-4-1-mini-table-4",
+      "predicted_working_score": 0.8379508472844832
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-monitoring-default-collusion-condition-gpt-5-4-qwen3-8b-table-4-replicate-2",
+      "predicted_working_score": 0.8351141203313257
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-monitoring-needle-collusion-condition-gpt-5-4-qwen3-8b-table-4-replicate-2",
+      "predicted_working_score": 0.8351141203313257
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-monitoring-codewords-collusion-condition-gpt-5-4-qwen3-8b-table-4-replicate-2",
+      "predicted_working_score": 0.8351141203313257
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-monitoring-default-collusion-condition-gpt-5-4-gpt-4-1-mini-table-4-replicate-2",
+      "predicted_working_score": 0.7750380135753994
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-monitoring-needle-collusion-condition-gpt-5-4-gpt-4-1-mini-table-4-replicate-2",
+      "predicted_working_score": 0.7750380135753994
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-monitoring-codewords-collusion-condition-gpt-5-4-gpt-4-1-mini-table-4-replicate-2",
+      "predicted_working_score": 0.7750380135753994
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-monitoring-default-collusion-condition-gemini-3-1-pro-qwen3-8b-table-4-replicate-2",
+      "predicted_working_score": 0.8275154689604852
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-monitoring-needle-collusion-condition-gemini-3-1-pro-qwen3-8b-table-4-replicate-2",
+      "predicted_working_score": 0.8275154689604852
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-monitoring-codewords-collusion-condition-gemini-3-1-pro-qwen3-8b-table-4-replicate-2",
+      "predicted_working_score": 0.8275154689604852
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-monitoring-default-collusion-condition-gemini-3-1-pro-gpt-4-1-mini-table-4-replicate-2",
+      "predicted_working_score": 0.7654483807314889
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-monitoring-needle-collusion-condition-gemini-3-1-pro-gpt-4-1-mini-table-4-replicate-2",
+      "predicted_working_score": 0.7654483807314889
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-monitoring-codewords-collusion-condition-gemini-3-1-pro-gpt-4-1-mini-table-4-replicate-2",
+      "predicted_working_score": 0.7654483807314889
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-monitoring-default-collusion-condition-kimi-k2-5-qwen3-8b-table-4-replicate-2",
+      "predicted_working_score": 0.883746170083316
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-monitoring-needle-collusion-condition-kimi-k2-5-qwen3-8b-table-4-replicate-2",
+      "predicted_working_score": 0.883746170083316
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-monitoring-codewords-collusion-condition-kimi-k2-5-qwen3-8b-table-4-replicate-2",
+      "predicted_working_score": 0.883746170083316
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-monitoring-default-collusion-condition-kimi-k2-5-gpt-4-1-mini-table-4-replicate-2",
+      "predicted_working_score": 0.8379508472844832
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-monitoring-needle-collusion-condition-kimi-k2-5-gpt-4-1-mini-table-4-replicate-2",
+      "predicted_working_score": 0.8379508472844832
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-monitoring-codewords-collusion-condition-kimi-k2-5-gpt-4-1-mini-table-4-replicate-2",
+      "predicted_working_score": 0.8379508472844832
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-monitoring-default-collusion-condition-gpt-5-4-qwen3-8b-table-4-replicate-3",
+      "predicted_working_score": 0.8351141203313257
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-monitoring-needle-collusion-condition-gpt-5-4-qwen3-8b-table-4-replicate-3",
+      "predicted_working_score": 0.8351141203313257
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-monitoring-codewords-collusion-condition-gpt-5-4-qwen3-8b-table-4-replicate-3",
+      "predicted_working_score": 0.8351141203313257
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-monitoring-default-collusion-condition-gpt-5-4-gpt-4-1-mini-table-4-replicate-3",
+      "predicted_working_score": 0.7750380135753994
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-monitoring-needle-collusion-condition-gpt-5-4-gpt-4-1-mini-table-4-replicate-3",
+      "predicted_working_score": 0.7750380135753994
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-monitoring-codewords-collusion-condition-gpt-5-4-gpt-4-1-mini-table-4-replicate-3",
+      "predicted_working_score": 0.7750380135753994
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-monitoring-default-collusion-condition-gemini-3-1-pro-qwen3-8b-table-4-replicate-3",
+      "predicted_working_score": 0.8275154689604852
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-monitoring-needle-collusion-condition-gemini-3-1-pro-qwen3-8b-table-4-replicate-3",
+      "predicted_working_score": 0.8275154689604852
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-monitoring-codewords-collusion-condition-gemini-3-1-pro-qwen3-8b-table-4-replicate-3",
+      "predicted_working_score": 0.8275154689604852
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-monitoring-default-collusion-condition-gemini-3-1-pro-gpt-4-1-mini-table-4-replicate-3",
+      "predicted_working_score": 0.7654483807314889
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-monitoring-needle-collusion-condition-gemini-3-1-pro-gpt-4-1-mini-table-4-replicate-3",
+      "predicted_working_score": 0.7654483807314889
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-monitoring-codewords-collusion-condition-gemini-3-1-pro-gpt-4-1-mini-table-4-replicate-3",
+      "predicted_working_score": 0.7654483807314889
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-monitoring-default-collusion-condition-kimi-k2-5-qwen3-8b-table-4-replicate-3",
+      "predicted_working_score": 0.883746170083316
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-monitoring-needle-collusion-condition-kimi-k2-5-qwen3-8b-table-4-replicate-3",
+      "predicted_working_score": 0.883746170083316
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-monitoring-codewords-collusion-condition-kimi-k2-5-qwen3-8b-table-4-replicate-3",
+      "predicted_working_score": 0.883746170083316
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-monitoring-default-collusion-condition-kimi-k2-5-gpt-4-1-mini-table-4-replicate-3",
+      "predicted_working_score": 0.8379508472844832
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-monitoring-needle-collusion-condition-kimi-k2-5-gpt-4-1-mini-table-4-replicate-3",
+      "predicted_working_score": 0.8379508472844832
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-monitoring-codewords-collusion-condition-kimi-k2-5-gpt-4-1-mini-table-4-replicate-3",
+      "predicted_working_score": 0.8379508472844832
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-summary-default-collusion-condition-gpt-5-4-qwen3-8b-table-4",
+      "predicted_working_score": 0.5499287866825199
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-summary-needle-collusion-condition-gpt-5-4-qwen3-8b-table-4",
+      "predicted_working_score": 0.5499287866825199
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-summary-codewords-collusion-condition-gpt-5-4-qwen3-8b-table-4",
+      "predicted_working_score": 0.5499287866825199
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-summary-default-collusion-condition-gpt-5-4-gpt-4-1-mini-table-4",
+      "predicted_working_score": 0.45389355962747446
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-summary-needle-collusion-condition-gpt-5-4-gpt-4-1-mini-table-4",
+      "predicted_working_score": 0.45389355962747446
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-summary-codewords-collusion-condition-gpt-5-4-gpt-4-1-mini-table-4",
+      "predicted_working_score": 0.45389355962747446
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-summary-default-collusion-condition-gemini-3-1-pro-qwen3-8b-table-4",
+      "predicted_working_score": 0.5364821567977058
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-summary-needle-collusion-condition-gemini-3-1-pro-qwen3-8b-table-4",
+      "predicted_working_score": 0.5364821567977058
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-summary-codewords-collusion-condition-gemini-3-1-pro-qwen3-8b-table-4",
+      "predicted_working_score": 0.5364821567977058
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-summary-default-collusion-condition-gemini-3-1-pro-gpt-4-1-mini-table-4",
+      "predicted_working_score": 0.4404968831055437
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-summary-needle-collusion-condition-gemini-3-1-pro-gpt-4-1-mini-table-4",
+      "predicted_working_score": 0.4404968831055437
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-summary-codewords-collusion-condition-gemini-3-1-pro-gpt-4-1-mini-table-4",
+      "predicted_working_score": 0.4404968831055437
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-summary-default-collusion-condition-kimi-k2-5-qwen3-8b-table-4",
+      "predicted_working_score": 0.6471333312518862
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-summary-needle-collusion-condition-kimi-k2-5-qwen3-8b-table-4",
+      "predicted_working_score": 0.6471333312518862
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-summary-codewords-collusion-condition-kimi-k2-5-qwen3-8b-table-4",
+      "predicted_working_score": 0.6471333312518862
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-summary-default-collusion-condition-kimi-k2-5-gpt-4-1-mini-table-4",
+      "predicted_working_score": 0.5550578136445645
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-summary-needle-collusion-condition-kimi-k2-5-gpt-4-1-mini-table-4",
+      "predicted_working_score": 0.5550578136445645
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-summary-codewords-collusion-condition-kimi-k2-5-gpt-4-1-mini-table-4",
+      "predicted_working_score": 0.5550578136445645
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-reasoning-only-honest-gpt-5-4-qwen3-8b-table-9",
+      "predicted_working_score": 0.7884671549451052
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-reasoning-only-default-colluding-gpt-5-4-qwen3-8b-table-9",
+      "predicted_working_score": 0.7884671549451052
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-with-actions-honest-gpt-5-4-qwen3-8b-table-9",
+      "predicted_working_score": 0.788483078776449
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-with-actions-default-colluding-gpt-5-4-qwen3-8b-table-9",
+      "predicted_working_score": 0.788483078776449
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-reasoning-only-honest-gpt-5-4-gpt-4-1-mini-table-9",
+      "predicted_working_score": 0.7171516258401238
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-reasoning-only-default-colluding-gpt-5-4-gpt-4-1-mini-table-9",
+      "predicted_working_score": 0.7171516258401238
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-with-actions-honest-gpt-5-4-gpt-4-1-mini-table-9",
+      "predicted_working_score": 0.7171709924579729
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-with-actions-default-colluding-gpt-5-4-gpt-4-1-mini-table-9",
+      "predicted_working_score": 0.7171709924579729
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-reasoning-only-honest-gemini-3-1-pro-qwen3-8b-table-9",
+      "predicted_working_score": 0.7792869548000528
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-reasoning-only-default-colluding-gemini-3-1-pro-qwen3-8b-table-9",
+      "predicted_working_score": 0.7792869548000528
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-with-actions-honest-gemini-3-1-pro-qwen3-8b-table-9",
+      "predicted_working_score": 0.779303376266662
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-with-actions-default-colluding-gemini-3-1-pro-qwen3-8b-table-9",
+      "predicted_working_score": 0.779303376266662
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-reasoning-only-honest-gemini-3-1-pro-gpt-4-1-mini-table-9",
+      "predicted_working_score": 0.7060303656972982
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-reasoning-only-default-colluding-gemini-3-1-pro-gpt-4-1-mini-table-9",
+      "predicted_working_score": 0.7060303656972982
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-with-actions-honest-gemini-3-1-pro-gpt-4-1-mini-table-9",
+      "predicted_working_score": 0.7060501816712275
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-with-actions-default-colluding-gemini-3-1-pro-gpt-4-1-mini-table-9",
+      "predicted_working_score": 0.7060501816712275
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-reasoning-only-honest-gpt-5-4-qwen3-8b-table-9-replicate-2",
+      "predicted_working_score": 0.7884671549451052
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-reasoning-only-default-colluding-gpt-5-4-qwen3-8b-table-9-replicate-2",
+      "predicted_working_score": 0.7884671549451052
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-with-actions-honest-gpt-5-4-qwen3-8b-table-9-replicate-2",
+      "predicted_working_score": 0.788483078776449
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-with-actions-default-colluding-gpt-5-4-qwen3-8b-table-9-replicate-2",
+      "predicted_working_score": 0.788483078776449
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-reasoning-only-honest-gpt-5-4-gpt-4-1-mini-table-9-replicate-2",
+      "predicted_working_score": 0.7171516258401238
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-reasoning-only-default-colluding-gpt-5-4-gpt-4-1-mini-table-9-replicate-2",
+      "predicted_working_score": 0.7171516258401238
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-with-actions-honest-gpt-5-4-gpt-4-1-mini-table-9-replicate-2",
+      "predicted_working_score": 0.7171709924579729
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-with-actions-default-colluding-gpt-5-4-gpt-4-1-mini-table-9-replicate-2",
+      "predicted_working_score": 0.7171709924579729
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-reasoning-only-honest-gemini-3-1-pro-qwen3-8b-table-9-replicate-2",
+      "predicted_working_score": 0.7792869548000528
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-reasoning-only-default-colluding-gemini-3-1-pro-qwen3-8b-table-9-replicate-2",
+      "predicted_working_score": 0.7792869548000528
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-with-actions-honest-gemini-3-1-pro-qwen3-8b-table-9-replicate-2",
+      "predicted_working_score": 0.779303376266662
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-with-actions-default-colluding-gemini-3-1-pro-qwen3-8b-table-9-replicate-2",
+      "predicted_working_score": 0.779303376266662
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-reasoning-only-honest-gemini-3-1-pro-gpt-4-1-mini-table-9-replicate-2",
+      "predicted_working_score": 0.7060303656972982
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-reasoning-only-default-colluding-gemini-3-1-pro-gpt-4-1-mini-table-9-replicate-2",
+      "predicted_working_score": 0.7060303656972982
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-with-actions-honest-gemini-3-1-pro-gpt-4-1-mini-table-9-replicate-2",
+      "predicted_working_score": 0.7060501816712275
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-with-actions-default-colluding-gemini-3-1-pro-gpt-4-1-mini-table-9-replicate-2",
+      "predicted_working_score": 0.7060501816712275
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-refined-prompt-run-v1-phase-0-gpt-5-4-gpt-4-1-mini-table-8",
+      "predicted_working_score": 0.6792640146312922
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-refined-prompt-run-v1-phase-1-gpt-5-4-gpt-4-1-mini-table-8",
+      "predicted_working_score": 0.6792640146312922
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-refined-prompt-run-v1-phase-2-gpt-5-4-gpt-4-1-mini-table-8",
+      "predicted_working_score": 0.6792640146312922
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-refined-prompt-run-v2-phase-0-gpt-5-4-gpt-4-1-mini-table-8",
+      "predicted_working_score": 0.6792640146312922
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-refined-prompt-run-v2-phase-1-gpt-5-4-gpt-4-1-mini-table-8",
+      "predicted_working_score": 0.6792640146312922
+    },
+    {
+      "id": "expanded-2606-11998-bootstrapped-refined-prompt-run-v2-phase-2-gpt-5-4-gpt-4-1-mini-table-8",
+      "predicted_working_score": 0.6792640146312922
+    },
+    {
+      "id": "expanded-2605-09684-monitoringbench-stepwise-baseline-claude-opus-4-6-claude-opus-4-5-table-6",
+      "predicted_working_score": 0.9052686988055567
+    },
+    {
+      "id": "expanded-2605-09684-monitoringbench-stepwise-human-strategies-claude-opus-4-6-claude-opus-4-5-table-6",
+      "predicted_working_score": 0.9444598317889251
+    },
+    {
+      "id": "expanded-2605-09684-monitoringbench-stepwise-recon-claude-opus-4-6-claude-opus-4-5-table-6",
+      "predicted_working_score": 0.8739002031774129
+    },
+    {
+      "id": "expanded-2605-09684-monitoringbench-stepwise-refined-claude-opus-4-6-claude-opus-4-5-table-6",
+      "predicted_working_score": 0.634447829887869
+    },
+    {
+      "id": "expanded-2605-09684-monitoringbench-stepwise-baseline-claude-opus-4-6-gpt-5-1-codex-table-6",
+      "predicted_working_score": 0.6272215438211326
+    },
+    {
+      "id": "expanded-2605-09684-monitoringbench-stepwise-human-strategies-claude-opus-4-6-gpt-5-1-codex-table-6",
+      "predicted_working_score": 0.749629045846197
+    },
+    {
+      "id": "expanded-2605-09684-monitoringbench-stepwise-recon-claude-opus-4-6-gpt-5-1-codex-table-6",
+      "predicted_working_score": 0.5495916049868718
+    },
+    {
+      "id": "expanded-2605-09684-monitoringbench-stepwise-refined-claude-opus-4-6-gpt-5-1-codex-table-6",
+      "predicted_working_score": 0.23406010720433587
+    },
+    {
+      "id": "expanded-2605-09684-monitoringbench-stepwise-baseline-claude-opus-4-6-claude-sonnet-4-table-6",
+      "predicted_working_score": 0.6272215438211326
+    },
+    {
+      "id": "expanded-2605-09684-monitoringbench-stepwise-human-strategies-claude-opus-4-6-claude-sonnet-4-table-6",
+      "predicted_working_score": 0.749629045846197
+    },
+    {
+      "id": "expanded-2605-09684-monitoringbench-stepwise-recon-claude-opus-4-6-claude-sonnet-4-table-6",
+      "predicted_working_score": 0.5495916049868718
+    },
+    {
+      "id": "expanded-2605-09684-monitoringbench-stepwise-refined-claude-opus-4-6-claude-sonnet-4-table-6",
+      "predicted_working_score": 0.23406010720433587
+    },
+    {
+      "id": "expanded-2605-09684-monitoringbench-stepwise-baseline-claude-opus-4-6-gpt-5-table-6",
+      "predicted_working_score": 0.8647445111094622
+    },
+    {
+      "id": "expanded-2605-09684-monitoringbench-stepwise-human-strategies-claude-opus-4-6-gpt-5-table-6",
+      "predicted_working_score": 0.9192045421279739
+    },
+    {
+      "id": "expanded-2605-09684-monitoringbench-stepwise-recon-claude-opus-4-6-gpt-5-table-6",
+      "predicted_working_score": 0.8225869884187215
+    },
+    {
+      "id": "expanded-2605-09684-monitoringbench-stepwise-refined-claude-opus-4-6-gpt-5-table-6",
+      "predicted_working_score": 0.5372874764909369
+    },
+    {
+      "id": "expanded-2605-09684-monitoringbench-stepwise-baseline-claude-opus-4-6-gpt-4-1-table-6",
+      "predicted_working_score": 0.3874868000813034
+    },
+    {
+      "id": "expanded-2605-09684-monitoringbench-stepwise-human-strategies-claude-opus-4-6-gpt-4-1-table-6",
+      "predicted_working_score": 0.5295730947859325
+    },
+    {
+      "id": "expanded-2605-09684-monitoringbench-stepwise-recon-claude-opus-4-6-gpt-4-1-table-6",
+      "predicted_working_score": 0.314495890511526
+    },
+    {
+      "id": "expanded-2605-09684-monitoringbench-stepwise-refined-claude-opus-4-6-gpt-4-1-table-6",
+      "predicted_working_score": 0.10305516051584096
+    },
+    {
+      "id": "expanded-2605-09684-monitoringbench-stepwise-baseline-claude-opus-4-6-gpt-5-nano-table-6",
+      "predicted_working_score": 0.4971624431834759
+    },
+    {
+      "id": "expanded-2605-09684-monitoringbench-stepwise-human-strategies-claude-opus-4-6-gpt-5-nano-table-6",
+      "predicted_working_score": 0.6376014824661436
+    },
+    {
+      "id": "expanded-2605-09684-monitoringbench-stepwise-recon-claude-opus-4-6-gpt-5-nano-table-6",
+      "predicted_working_score": 0.41759716315432116
+    },
+    {
+      "id": "expanded-2605-09684-monitoringbench-stepwise-refined-claude-opus-4-6-gpt-5-nano-table-6",
+      "predicted_working_score": 0.15223325426767317
+    },
+    {
+      "id": "expanded-2605-09684-monitoringbench-stepwise-baseline-claude-opus-4-6-gpt-4-1-mini-table-6",
+      "predicted_working_score": 0.31712178588622
+    },
+    {
+      "id": "expanded-2605-09684-monitoringbench-stepwise-human-strategies-claude-opus-4-6-gpt-4-1-mini-table-6",
+      "predicted_working_score": 0.45246615000219326
+    },
+    {
+      "id": "expanded-2605-09684-monitoringbench-stepwise-recon-claude-opus-4-6-gpt-4-1-mini-table-6",
+      "predicted_working_score": 0.25193374271303426
+    },
+    {
+      "id": "expanded-2605-09684-monitoringbench-stepwise-refined-claude-opus-4-6-gpt-4-1-mini-table-6",
+      "predicted_working_score": 0.07778197652570332
+    },
+    {
+      "id": "expanded-2605-09684-static-full-trajectory-baseline-cover-opportunity-claude-opus-4-6-gpt-5-table-4",
+      "predicted_working_score": 0.9455893590646071
+    },
+    {
+      "id": "expanded-2605-09684-static-full-trajectory-baseline-cover-opportunity-claude-opus-4-6-gpt-5-1-codex-table-4",
+      "predicted_working_score": 0.8205820019528367
+    },
+    {
+      "id": "expanded-2605-09684-static-full-trajectory-baseline-cover-opportunity-claude-opus-4-6-claude-opus-4-5-table-4",
+      "predicted_working_score": 0.9629298100758958
+    },
+    {
+      "id": "expanded-2605-09684-static-full-trajectory-baseline-cover-opportunity-claude-opus-4-6-claude-sonnet-4-5-table-4",
+      "predicted_working_score": 0.8205820019528367
+    },
+    {
+      "id": "expanded-2605-09684-static-full-trajectory-baseline-cover-opportunity-claude-opus-4-6-claude-sonnet-4-table-4",
+      "predicted_working_score": 0.8205820019528367
+    },
+    {
+      "id": "expanded-2605-09684-static-full-trajectory-v1-task-text-cover-opportunity-claude-opus-4-6-gpt-5-table-4",
+      "predicted_working_score": 0.5029573968153525
+    },
+    {
+      "id": "expanded-2605-09684-static-full-trajectory-v1-task-text-cover-opportunity-claude-opus-4-6-gpt-5-1-codex-table-4",
+      "predicted_working_score": 0.21029911889838063
+    },
+    {
+      "id": "expanded-2605-09684-static-full-trajectory-v1-task-text-cover-opportunity-claude-opus-4-6-claude-opus-4-5-table-4",
+      "predicted_working_score": 0.6019863462404984
+    },
+    {
+      "id": "expanded-2605-09684-static-full-trajectory-v1-task-text-cover-opportunity-claude-opus-4-6-claude-sonnet-4-5-table-4",
+      "predicted_working_score": 0.21029911889838063
+    },
+    {
+      "id": "expanded-2605-09684-static-full-trajectory-v1-task-text-cover-opportunity-claude-opus-4-6-claude-sonnet-4-table-4",
+      "predicted_working_score": 0.21029911889838063
+    },
+    {
+      "id": "expanded-2605-09684-static-full-trajectory-v2-env-seed-cover-opportunity-claude-opus-4-6-gpt-5-table-4",
+      "predicted_working_score": 0.5093338960853836
+    },
+    {
+      "id": "expanded-2605-09684-static-full-trajectory-v2-env-seed-cover-opportunity-claude-opus-4-6-gpt-5-1-codex-table-4",
+      "predicted_working_score": 0.21456699357780887
+    },
+    {
+      "id": "expanded-2605-09684-static-full-trajectory-v2-env-seed-cover-opportunity-claude-opus-4-6-claude-opus-4-5-table-4",
+      "predicted_working_score": 0.6080823678965631
+    },
+    {
+      "id": "expanded-2605-09684-static-full-trajectory-v2-env-seed-cover-opportunity-claude-opus-4-6-claude-sonnet-4-5-table-4",
+      "predicted_working_score": 0.21456699357780887
+    },
+    {
+      "id": "expanded-2605-09684-static-full-trajectory-v2-env-seed-cover-opportunity-claude-opus-4-6-claude-sonnet-4-table-4",
+      "predicted_working_score": 0.21456699357780887
+    },
+    {
+      "id": "expanded-2605-09684-static-full-trajectory-v3-combined-cover-opportunity-claude-opus-4-6-gpt-5-table-4",
+      "predicted_working_score": 0.5467980172959971
+    },
+    {
+      "id": "expanded-2605-09684-static-full-trajectory-v3-combined-cover-opportunity-claude-opus-4-6-gpt-5-1-codex-table-4",
+      "predicted_working_score": 0.24099878252875384
+    },
+    {
+      "id": "expanded-2605-09684-static-full-trajectory-v3-combined-cover-opportunity-claude-opus-4-6-claude-opus-4-5-table-4",
+      "predicted_working_score": 0.6432871997102941
+    },
+    {
+      "id": "expanded-2605-09684-static-full-trajectory-v3-combined-cover-opportunity-claude-opus-4-6-claude-sonnet-4-5-table-4",
+      "predicted_working_score": 0.24099878252875384
+    },
+    {
+      "id": "expanded-2605-09684-static-full-trajectory-v3-combined-cover-opportunity-claude-opus-4-6-claude-sonnet-4-table-4",
+      "predicted_working_score": 0.24099878252875384
+    },
+    {
+      "id": "expanded-2605-09684-monitoringbench-prompt-0-prompt-0-fpr-1-claude-opus-4-6-claude-opus-4-5-table-16",
+      "predicted_working_score": 0.23046824592563514
+    },
+    {
+      "id": "expanded-2605-09684-monitoringbench-prompt-0-prompt-0-fpr-1-claude-opus-4-6-gpt-5-table-16",
+      "predicted_working_score": 0.1669237774889463
+    },
+    {
+      "id": "expanded-2605-09684-monitoringbench-prompt-1-prompt-1-fpr-1-claude-opus-4-6-claude-opus-4-5-table-16",
+      "predicted_working_score": 0.2895548643055313
+    },
+    {
+      "id": "expanded-2605-09684-monitoringbench-prompt-1-prompt-1-fpr-1-claude-opus-4-6-gpt-5-table-16",
+      "predicted_working_score": 0.2142549591137463
+    },
+    {
+      "id": "expanded-2605-09684-monitoringbench-prompt-2-prompt-2-fpr-1-claude-opus-4-6-claude-opus-4-5-table-16",
+      "predicted_working_score": 0.08163855981274015
+    },
+    {
+      "id": "expanded-2605-09684-monitoringbench-prompt-2-prompt-2-fpr-5-claude-opus-4-6-claude-opus-4-5-table-16",
+      "predicted_working_score": 0.08163855981274015
+    },
+    {
+      "id": "expanded-2605-09684-monitoringbench-prompt-2-prompt-2-fpr-1-claude-opus-4-6-gpt-5-table-16",
+      "predicted_working_score": 0.056135825136140884
+    },
+    {
+      "id": "expanded-2602-20628-self-recognition-none-apps-self-rec-no-elicitation-gpt-4-1-gpt-4o-mini-table-2",
+      "predicted_working_score": 0.9911173540684968
+    },
+    {
+      "id": "expanded-2602-20628-self-recognition-none-bigcodebench-self-rec-no-elicitation-gpt-4-1-gpt-4o-mini-table-2",
+      "predicted_working_score": 0.9980843939321282
+    },
+    {
+      "id": "expanded-2602-20628-self-recognition-none-without-trusted-review-apps-self-rec-no-elicitation-gpt-4-1-gpt-4o-mini-table-2",
+      "predicted_working_score": 0.8240280567296607
+    },
+    {
+      "id": "expanded-2602-20628-self-recognition-none-without-trusted-review-bigcodebench-self-rec-no-elicitation-gpt-4-1-gpt-4o-mini-table-2",
+      "predicted_working_score": 0.9562676742316693
+    },
+    {
+      "id": "expanded-2602-20628-self-recognition-minifier-apps-gpt-4-1-gpt-4o-mini-table-2",
+      "predicted_working_score": 0.9636068444748485
+    },
+    {
+      "id": "expanded-2602-20628-self-recognition-minifier-bigcodebench-gpt-4-1-gpt-4o-mini-table-2",
+      "predicted_working_score": 0.9952643327965827
+    },
+    {
+      "id": "expanded-2602-20628-self-recognition-minifier-without-trusted-review-apps-gpt-4-1-gpt-4o-mini-table-2",
+      "predicted_working_score": 0.6647161422471694
+    },
+    {
+      "id": "expanded-2602-20628-self-recognition-minifier-without-trusted-review-bigcodebench-gpt-4-1-gpt-4o-mini-table-2",
+      "predicted_working_score": 0.9402493856820565
+    },
+    {
+      "id": "expanded-2602-20628-self-recognition-summariser-apps-gpt-4-1-gpt-4o-mini-table-2",
+      "predicted_working_score": 0.9688006909860165
+    },
+    {
+      "id": "expanded-2602-20628-self-recognition-summariser-bigcodebench-gpt-4-1-gpt-4o-mini-table-2",
+      "predicted_working_score": 0.9959591293408855
+    },
+    {
+      "id": "expanded-2602-20628-self-recognition-summariser-without-trusted-review-apps-gpt-4-1-gpt-4o-mini-table-2",
+      "predicted_working_score": 0.7478172817208357
+    },
+    {
+      "id": "expanded-2602-20628-self-recognition-summariser-without-trusted-review-bigcodebench-gpt-4-1-gpt-4o-mini-table-2",
+      "predicted_working_score": 0.9592457770063761
+    },
+    {
+      "id": "expanded-2602-20628-self-recognition-none-apps-self-rec-sft-gpt-4-1-gpt-4o-mini-table-2",
+      "predicted_working_score": 0.9095067335015317
+    },
+    {
+      "id": "expanded-2602-20628-self-recognition-none-bigcodebench-self-rec-sft-gpt-4-1-gpt-4o-mini-table-2",
+      "predicted_working_score": 0.9748880224091068
+    },
+    {
+      "id": "expanded-2602-20628-self-recognition-none-without-trusted-review-apps-self-rec-sft-gpt-4-1-gpt-4o-mini-table-2",
+      "predicted_working_score": 0.29666567784238973
+    },
+    {
+      "id": "expanded-2602-20628-self-recognition-none-without-trusted-review-bigcodebench-self-rec-sft-gpt-4-1-gpt-4o-mini-table-2",
+      "predicted_working_score": 0.6196644491376406
+    },
+    {
+      "id": "expanded-2602-20628-self-recognition-minifier-apps-gpt-4-1-gpt-4o-mini-table-2-replicate-2",
+      "predicted_working_score": 0.9636068444748485
+    },
+    {
+      "id": "expanded-2602-20628-self-recognition-minifier-bigcodebench-gpt-4-1-gpt-4o-mini-table-2-replicate-2",
+      "predicted_working_score": 0.9952643327965827
+    },
+    {
+      "id": "expanded-2602-20628-self-recognition-minifier-without-trusted-review-apps-gpt-4-1-gpt-4o-mini-table-2-replicate-2",
+      "predicted_working_score": 0.6647161422471694
+    },
+    {
+      "id": "expanded-2602-20628-self-recognition-minifier-without-trusted-review-bigcodebench-gpt-4-1-gpt-4o-mini-table-2-replicate-2",
+      "predicted_working_score": 0.9402493856820565
+    },
+    {
+      "id": "expanded-2602-20628-self-recognition-summariser-apps-gpt-4-1-gpt-4o-mini-table-2-replicate-2",
+      "predicted_working_score": 0.9688006909860165
+    },
+    {
+      "id": "expanded-2602-20628-self-recognition-summariser-bigcodebench-gpt-4-1-gpt-4o-mini-table-2-replicate-2",
+      "predicted_working_score": 0.9959591293408855
+    },
+    {
+      "id": "expanded-2602-20628-self-recognition-summariser-without-trusted-review-apps-gpt-4-1-gpt-4o-mini-table-2-replicate-2",
+      "predicted_working_score": 0.7478172817208357
+    },
+    {
+      "id": "expanded-2602-20628-self-recognition-summariser-without-trusted-review-bigcodebench-gpt-4-1-gpt-4o-mini-table-2-replicate-2",
+      "predicted_working_score": 0.9592457770063761
+    },
+    {
+      "id": "expanded-2602-20628-self-recognition-none-apps-vague-acausal-gpt-4-1-gpt-4o-mini-table-2",
+      "predicted_working_score": 0.9485250036118686
+    },
+    {
+      "id": "expanded-2602-20628-self-recognition-none-bigcodebench-vague-acausal-gpt-4-1-gpt-4o-mini-table-2",
+      "predicted_working_score": 0.9959194598523721
+    },
+    {
+      "id": "expanded-2602-20628-self-recognition-none-without-trusted-review-apps-vague-acausal-gpt-4-1-gpt-4o-mini-table-2",
+      "predicted_working_score": 0.4360911135320026
+    },
+    {
+      "id": "expanded-2602-20628-self-recognition-none-without-trusted-review-bigcodebench-vague-acausal-gpt-4-1-gpt-4o-mini-table-2",
+      "predicted_working_score": 0.9110548780309649
+    },
+    {
+      "id": "expanded-2602-20628-self-recognition-minifier-apps-gpt-4-1-gpt-4o-mini-table-2-replicate-3",
+      "predicted_working_score": 0.9636068444748485
+    },
+    {
+      "id": "expanded-2602-20628-self-recognition-minifier-bigcodebench-gpt-4-1-gpt-4o-mini-table-2-replicate-3",
+      "predicted_working_score": 0.9952643327965827
+    },
+    {
+      "id": "expanded-2602-20628-self-recognition-minifier-without-trusted-review-apps-gpt-4-1-gpt-4o-mini-table-2-replicate-3",
+      "predicted_working_score": 0.6647161422471694
+    },
+    {
+      "id": "expanded-2602-20628-self-recognition-minifier-without-trusted-review-bigcodebench-gpt-4-1-gpt-4o-mini-table-2-replicate-3",
+      "predicted_working_score": 0.9402493856820565
+    },
+    {
+      "id": "expanded-2602-20628-self-recognition-summariser-apps-gpt-4-1-gpt-4o-mini-table-2-replicate-3",
+      "predicted_working_score": 0.9688006909860165
+    },
+    {
+      "id": "expanded-2602-20628-self-recognition-summariser-bigcodebench-gpt-4-1-gpt-4o-mini-table-2-replicate-3",
+      "predicted_working_score": 0.9959591293408855
+    },
+    {
+      "id": "expanded-2602-20628-self-recognition-summariser-without-trusted-review-apps-gpt-4-1-gpt-4o-mini-table-2-replicate-3",
+      "predicted_working_score": 0.7478172817208357
+    },
+    {
+      "id": "expanded-2602-20628-self-recognition-summariser-without-trusted-review-bigcodebench-gpt-4-1-gpt-4o-mini-table-2-replicate-3",
+      "predicted_working_score": 0.9592457770063761
+    },
+    {
+      "id": "expanded-2602-20628-self-recognition-none-apps-causal-for-while-gpt-4-1-gpt-4o-mini-table-2",
+      "predicted_working_score": 0.9420554503417912
+    },
+    {
+      "id": "expanded-2602-20628-self-recognition-none-bigcodebench-causal-for-while-gpt-4-1-gpt-4o-mini-table-2",
+      "predicted_working_score": 0.9753089188802608
+    },
+    {
+      "id": "expanded-2602-20628-self-recognition-none-without-trusted-review-apps-causal-for-while-gpt-4-1-gpt-4o-mini-table-2",
+      "predicted_working_score": 0.40557811077585243
+    },
+    {
+      "id": "expanded-2602-20628-self-recognition-none-without-trusted-review-bigcodebench-causal-for-while-gpt-4-1-gpt-4o-mini-table-2",
+      "predicted_working_score": 0.6237412883975222
+    },
+    {
+      "id": "expanded-2602-20628-self-recognition-minifier-apps-gpt-4-1-gpt-4o-mini-table-2-replicate-4",
+      "predicted_working_score": 0.9636068444748485
+    },
+    {
+      "id": "expanded-2602-20628-self-recognition-minifier-bigcodebench-gpt-4-1-gpt-4o-mini-table-2-replicate-4",
+      "predicted_working_score": 0.9952643327965827
+    },
+    {
+      "id": "expanded-2602-20628-self-recognition-minifier-without-trusted-review-apps-gpt-4-1-gpt-4o-mini-table-2-replicate-4",
+      "predicted_working_score": 0.6647161422471694
+    },
+    {
+      "id": "expanded-2602-20628-self-recognition-minifier-without-trusted-review-bigcodebench-gpt-4-1-gpt-4o-mini-table-2-replicate-4",
+      "predicted_working_score": 0.9402493856820565
+    },
+    {
+      "id": "expanded-2602-20628-self-recognition-summariser-apps-gpt-4-1-gpt-4o-mini-table-2-replicate-4",
+      "predicted_working_score": 0.9688006909860165
+    },
+    {
+      "id": "expanded-2602-20628-self-recognition-summariser-bigcodebench-gpt-4-1-gpt-4o-mini-table-2-replicate-4",
+      "predicted_working_score": 0.9959591293408855
+    },
+    {
+      "id": "expanded-2602-20628-self-recognition-summariser-without-trusted-review-apps-gpt-4-1-gpt-4o-mini-table-2-replicate-4",
+      "predicted_working_score": 0.7478172817208357
+    },
+    {
+      "id": "expanded-2602-20628-self-recognition-summariser-without-trusted-review-bigcodebench-gpt-4-1-gpt-4o-mini-table-2-replicate-4",
+      "predicted_working_score": 0.9592457770063761
+    },
+    {
+      "id": "expanded-2602-20628-self-recognition-none-apps-combined-for-while-sft-gpt-4-1-gpt-4o-mini-table-2",
+      "predicted_working_score": 0.9278440279819152
+    },
+    {
+      "id": "expanded-2602-20628-self-recognition-none-without-trusted-review-apps-combined-for-while-sft-gpt-4-1-gpt-4o-mini-table-2",
+      "predicted_working_score": 0.35050506780372703
+    },
+    {
+      "id": "expanded-2602-20628-self-recognition-minifier-apps-gpt-4-1-gpt-4o-mini-table-2-replicate-5",
+      "predicted_working_score": 0.9636068444748485
+    },
+    {
+      "id": "expanded-2602-20628-self-recognition-minifier-without-trusted-review-apps-gpt-4-1-gpt-4o-mini-table-2-replicate-5",
+      "predicted_working_score": 0.6647161422471694
+    },
+    {
+      "id": "expanded-2602-20628-self-recognition-summariser-apps-gpt-4-1-gpt-4o-mini-table-2-replicate-5",
+      "predicted_working_score": 0.9688006909860165
+    },
+    {
+      "id": "expanded-2602-20628-self-recognition-summariser-without-trusted-review-apps-gpt-4-1-gpt-4o-mini-table-2-replicate-5",
+      "predicted_working_score": 0.7478172817208357
+    },
+    {
+      "id": "expanded-2609-30217-evasion-native-hooks-single-run-glm-5-2-gpt-oss-120b-figure-1",
+      "predicted_working_score": 0.026346858314686444
+    },
+    {
+      "id": "expanded-2609-30217-evasion-native-hooks-single-run-deepseek-v4-flash-gpt-oss-120b-figure-1",
+      "predicted_working_score": 0.026346858314686444
+    },
+    {
+      "id": "expanded-2609-30217-evasion-native-hooks-single-run-muse-spark-1-3-gpt-oss-120b-figure-1",
+      "predicted_working_score": 0.026346858314686444
+    },
+    {
+      "id": "expanded-2609-30217-evasion-native-hooks-single-run-gpt-5-6-luna-gpt-oss-120b-figure-1",
+      "predicted_working_score": 0.005560607932113421
+    },
+    {
+      "id": "expanded-2609-30217-evasion-native-hooks-single-run-glm-5-3-flash-gpt-oss-120b-figure-1",
+      "predicted_working_score": 0.026346858314686444
+    },
+    {
+      "id": "expanded-2609-30217-evasion-native-hooks-single-run-gpt-5-6-sol-gpt-oss-120b-figure-1",
+      "predicted_working_score": 0.026346858314686444
+    },
+    {
+      "id": "expanded-2609-30217-evasion-native-hooks-single-run-gpt-6-sol-gpt-oss-120b-figure-1",
+      "predicted_working_score": 0.026346858314686444
+    },
+    {
+      "id": "expanded-2609-30217-evasion-native-hooks-single-run-claude-fable-5-1-gpt-oss-120b-figure-1",
+      "predicted_working_score": 0.002176844300020024
+    },
+    {
+      "id": "expanded-2609-30217-evasion-native-hooks-single-run-claude-opus-5-gpt-oss-120b-figure-1",
+      "predicted_working_score": 0.002698820591804046
+    },
+    {
+      "id": "expanded-2609-30217-evasion-native-hooks-single-run-gpt-6-astra-gpt-oss-120b-figure-1",
+      "predicted_working_score": 0.0017756321688493504
+    },
+    {
+      "id": "expanded-2609-30217-evasion-native-hooks-34-task-monitor-sweep-gpt-5-6-sol-gpt-oss-120b-figure-8a",
+      "predicted_working_score": 0.022073731762877344
+    },
+    {
+      "id": "expanded-2609-30217-evasion-native-hooks-34-task-monitor-sweep-gpt-5-6-sol-llama-3-1-8b-figure-8a",
+      "predicted_working_score": 0.0045827679430007606
+    },
+    {
+      "id": "expanded-2609-30217-evasion-native-hooks-34-task-monitor-sweep-gpt-5-6-sol-qwen-3-6-35b-a3b-figure-8a",
+      "predicted_working_score": 0.026238514184891835
+    },
+    {
+      "id": "expanded-2609-30217-evasion-native-hooks-34-task-monitor-sweep-gpt-5-6-sol-qwen-3-5-9b-figure-8a",
+      "predicted_working_score": 0.026238514184891835
+    },
+    {
+      "id": "expanded-2609-30217-evasion-native-hooks-34-task-monitor-sweep-gpt-5-6-sol-qwen-3-5-35b-a3b-figure-8a",
+      "predicted_working_score": 0.026238514184891835
+    },
+    {
+      "id": "expanded-2609-30217-evasion-generic-denial-best-of-three-gpt-5-6-luna-gpt-oss-120b-figure-9",
+      "predicted_working_score": 0.0063348537051176775
+    },
+    {
+      "id": "expanded-2609-30217-evasion-denial-with-reason-best-of-three-gpt-5-6-luna-gpt-oss-120b-figure-9",
+      "predicted_working_score": 0.0065364897590758
+    },
+    {
+      "id": "expanded-2609-30217-evasion-generic-denial-best-of-three-deepseek-v4-flash-gpt-oss-120b-figure-9",
+      "predicted_working_score": 0.029928228504140134
+    },
+    {
+      "id": "expanded-2609-30217-evasion-denial-with-reason-best-of-three-deepseek-v4-flash-gpt-oss-120b-figure-9",
+      "predicted_working_score": 0.03085751221453842
+    },
+    {
+      "id": "expanded-2609-30217-evasion-history-aware-monitor-40-task-subset-deepseek-v4-flash-gpt-oss-120b-figure-10",
+      "predicted_working_score": 0.03032411064367933
+    },
+    {
+      "id": "expanded-2609-30217-evasion-myopic-monitor-40-task-subset-deepseek-v4-flash-gpt-oss-120b-figure-10",
+      "predicted_working_score": 0.027239421352447307
+    },
+    {
+      "id": "expanded-2609-30217-evasion-history-aware-monitor-40-task-subset-muse-spark-1-3-gpt-oss-120b-figure-10",
+      "predicted_working_score": 0.03032411064367933
+    },
+    {
+      "id": "expanded-2609-30217-evasion-myopic-monitor-40-task-subset-muse-spark-1-3-gpt-oss-120b-figure-10",
+      "predicted_working_score": 0.027239421352447307
+    },
+    {
+      "id": "expanded-2609-30217-evasion-history-aware-monitor-40-task-subset-gpt-5-6-luna-gpt-oss-120b-figure-10",
+      "predicted_working_score": 0.006420714997022901
+    },
+    {
+      "id": "expanded-2609-30217-evasion-myopic-monitor-40-task-subset-gpt-5-6-luna-gpt-oss-120b-figure-10",
+      "predicted_working_score": 0.0057531477689215325
+    },
+    {
+      "id": "expanded-2609-30217-evasion-history-aware-monitor-40-task-subset-gpt-5-6-sol-gpt-oss-120b-figure-10",
+      "predicted_working_score": 0.03032411064367933
+    },
+    {
+      "id": "expanded-2609-30217-evasion-myopic-monitor-40-task-subset-gpt-5-6-sol-gpt-oss-120b-figure-10",
+      "predicted_working_score": 0.027239421352447307
+    },
+    {
+      "id": "expanded-2609-30217-evasion-history-aware-monitor-40-task-subset-claude-sonnet-5-gpt-oss-120b-figure-10",
+      "predicted_working_score": 0.006567034761671957
+    },
+    {
+      "id": "expanded-2609-30217-evasion-myopic-monitor-40-task-subset-claude-sonnet-5-gpt-oss-120b-figure-10",
+      "predicted_working_score": 0.005884344639502441
+    },
+    {
+      "id": "expanded-2609-30217-evasion-history-aware-monitor-40-task-subset-claude-opus-5-gpt-oss-120b-figure-10",
+      "predicted_working_score": 0.003117658160679349
+    },
+    {
+      "id": "expanded-2609-30217-evasion-myopic-monitor-40-task-subset-claude-opus-5-gpt-oss-120b-figure-10",
+      "predicted_working_score": 0.0027925473574466975
+    },
+    {
+      "id": "expanded-2605-26047-retry-trusted-monitoring-claude-opus-4-6-mimo-v2-flash-figure-1",
+      "predicted_working_score": 0.5220233300189843
+    },
+    {
+      "id": "expanded-2605-26047-retry-feedback-claude-opus-4-6-mimo-v2-flash-figure-1",
+      "predicted_working_score": 0.5240550368001379
+    },
+    {
+      "id": "expanded-2605-26047-retry-resample-min-2-claude-opus-4-6-mimo-v2-flash-figure-1",
+      "predicted_working_score": 0.5115184205346891
+    },
+    {
+      "id": "expanded-2605-26047-retry-resample-max-2-claude-opus-4-6-mimo-v2-flash-figure-1",
+      "predicted_working_score": 0.5315542287638857
+    },
+    {
+      "id": "expanded-2605-26047-retry-resample-max-5-claude-opus-4-6-mimo-v2-flash-figure-1",
+      "predicted_working_score": 0.536763319834629
+    },
+    {
+      "id": "expanded-2605-26047-retry-execute-2-claude-opus-4-6-mimo-v2-flash-figure-1",
+      "predicted_working_score": 0.5371672457922886
+    },
+    {
+      "id": "expanded-2605-26047-retry-resample-max-3-claude-opus-4-6-mimo-v2-flash-figure-3",
+      "predicted_working_score": 0.5303230868143958
+    },
+    {
+      "id": "expanded-2605-26047-retry-resample-max-4-claude-opus-4-6-mimo-v2-flash-figure-3",
+      "predicted_working_score": 0.5311367369635946
+    },
+    {
+      "id": "expanded-2605-26047-retry-resample-median-2-claude-opus-4-6-mimo-v2-flash-figure-3",
+      "predicted_working_score": 0.5111221889651264
+    },
+    {
+      "id": "expanded-2605-26047-retry-resample-median-3-claude-opus-4-6-mimo-v2-flash-figure-3",
+      "predicted_working_score": 0.5172118202576718
+    },
+    {
+      "id": "expanded-2605-26047-retry-resample-median-4-claude-opus-4-6-mimo-v2-flash-figure-3",
+      "predicted_working_score": 0.5088327153662049
+    },
+    {
+      "id": "expanded-2605-26047-retry-resample-median-5-claude-opus-4-6-mimo-v2-flash-figure-3",
+      "predicted_working_score": 0.5172473363199662
+    },
+    {
+      "id": "expanded-2605-26047-retry-resample-min-3-claude-opus-4-6-mimo-v2-flash-figure-3",
+      "predicted_working_score": 0.5007850045330459
+    },
+    {
+      "id": "expanded-2605-26047-retry-resample-min-4-claude-opus-4-6-mimo-v2-flash-figure-3",
+      "predicted_working_score": 0.49141218094186495
+    },
+    {
+      "id": "expanded-2605-26047-retry-resample-min-5-claude-opus-4-6-mimo-v2-flash-figure-3",
+      "predicted_working_score": 0.4857213602707354
+    },
+    {
+      "id": "expanded-2605-26047-retry-2-strikes-claude-opus-4-6-mimo-v2-flash-figure-18",
+      "predicted_working_score": 0.5064055322713515
+    },
+    {
+      "id": "expanded-2605-26047-retry-3-strikes-claude-opus-4-6-mimo-v2-flash-figure-18",
+      "predicted_working_score": 0.47641575727445207
+    },
+    {
+      "id": "expanded-2605-26047-retry-4-strikes-claude-opus-4-6-mimo-v2-flash-figure-18",
+      "predicted_working_score": 0.4588162042111803
+    },
+    {
+      "id": "expanded-2605-26047-retry-5-strikes-claude-opus-4-6-mimo-v2-flash-figure-18",
+      "predicted_working_score": 0.4264868912731473
+    },
+    {
+      "id": "expanded-2510-09462-adaptive-trusted-monitoring-gpt-4-targeted-injection-gpt-5-gpt-4-figure-4",
+      "predicted_working_score": 0.1439472853705777
+    },
+    {
+      "id": "expanded-2510-09462-adaptive-trusted-monitoring-gpt-4o-targeted-injection-gpt-5-gpt-4-figure-4",
+      "predicted_working_score": 0.2011314454495009
+    },
+    {
+      "id": "expanded-2510-09462-adaptive-trusted-monitoring-gpt-4-1-targeted-injection-gpt-5-gpt-4-figure-4",
+      "predicted_working_score": 0.19413567428686782
+    },
+    {
+      "id": "expanded-2510-09462-adaptive-trusted-monitoring-no-injection-gpt-5-gpt-4-figure-4",
+      "predicted_working_score": 0.5664407432515023
+    },
+    {
+      "id": "expanded-2510-09462-adaptive-trusted-monitoring-gpt-4-targeted-injection-gpt-5-gpt-4o-figure-4",
+      "predicted_working_score": 0.1530259714740974
+    },
+    {
+      "id": "expanded-2510-09462-adaptive-trusted-monitoring-gpt-4o-targeted-injection-gpt-5-gpt-4o-figure-4",
+      "predicted_working_score": 0.21291967165203035
+    },
+    {
+      "id": "expanded-2510-09462-adaptive-trusted-monitoring-gpt-4-1-targeted-injection-gpt-5-gpt-4o-figure-4",
+      "predicted_working_score": 0.20561941551150004
+    },
+    {
+      "id": "expanded-2510-09462-adaptive-trusted-monitoring-no-injection-gpt-5-gpt-4o-figure-4",
+      "predicted_working_score": 0.5839880209166181
+    },
+    {
+      "id": "expanded-2510-09462-adaptive-trusted-monitoring-gpt-4-targeted-injection-gpt-5-gpt-4-1-figure-4",
+      "predicted_working_score": 0.1750928452572272
+    },
+    {
+      "id": "expanded-2510-09462-adaptive-trusted-monitoring-gpt-4o-targeted-injection-gpt-5-gpt-4-1-figure-4",
+      "predicted_working_score": 0.2411641917094906
+    },
+    {
+      "id": "expanded-2510-09462-adaptive-trusted-monitoring-gpt-4-1-targeted-injection-gpt-5-gpt-4-1-figure-4",
+      "predicted_working_score": 0.23318243351928833
+    },
+    {
+      "id": "expanded-2510-09462-adaptive-trusted-monitoring-no-injection-gpt-5-gpt-4-1-figure-4",
+      "predicted_working_score": 0.6225237971659424
+    },
+    {
+      "id": "expanded-2510-09462-adaptive-upfront-gpt-5-gpt-4o-mini-figure-6",
+      "predicted_working_score": 0.21014396379906744
+    },
+    {
+      "id": "expanded-2510-09462-adaptive-zero-shot-injection-gpt-5-gpt-4o-mini-figure-6",
+      "predicted_working_score": 0.22785298346366545
+    },
+    {
+      "id": "expanded-2510-09462-adaptive-zero-shot-clean-gpt-5-gpt-4o-mini-figure-6",
+      "predicted_working_score": 0.268158223053049
+    },
+    {
+      "id": "expanded-2511-02997-shade-pure-resample-claude-3-7-sonnet-claude-3-5-sonnet-new-figure-1",
+      "predicted_working_score": 0.8009198187656791
+    },
+    {
+      "id": "expanded-2511-02997-shade-defer-trusted-claude-3-7-sonnet-claude-3-5-sonnet-new-figure-1",
+      "predicted_working_score": 0.8518884815096384
+    },
+    {
+      "id": "expanded-2511-02997-shade-defer-resample-claude-3-7-sonnet-claude-3-5-sonnet-new-figure-1",
+      "predicted_working_score": 0.8561272373208976
+    },
+    {
+      "id": "expanded-2511-02997-shade-resample-then-defer-claude-3-7-sonnet-claude-3-5-sonnet-new-figure-1",
+      "predicted_working_score": 0.853482914142653
+    },
+    {
+      "id": "expanded-2511-02997-shade-critical-claude-3-7-sonnet-claude-3-5-sonnet-new-figure-1",
+      "predicted_working_score": 0.9205056434574601
+    },
+    {
+      "id": "expanded-2511-02997-shade-permanent-notepad-claude-3-7-sonnet-claude-3-5-sonnet-new-figure-4",
+      "predicted_working_score": 0.6016589769786052
+    },
+    {
+      "id": "expanded-2511-02997-shade-resample-only-claude-3-7-sonnet-claude-3-5-sonnet-new-figure-4",
+      "predicted_working_score": 0.4582547445075123
+    },
+    {
+      "id": "expanded-2511-02997-shade-defer-only-claude-3-7-sonnet-claude-3-5-sonnet-new-figure-4",
+      "predicted_working_score": 0.5219246965402499
+    },
+    {
+      "id": "expanded-2511-02997-shade-ephemeral-notepad-claude-3-7-sonnet-claude-3-5-sonnet-new-figure-4",
+      "predicted_working_score": 0.8547475714756176
+    },
+    {
+      "id": "expanded-2511-02997-shade-resample-or-defer-claude-3-7-sonnet-claude-3-5-sonnet-new-figure-4",
+      "predicted_working_score": 0.8645322936280554
+    },
+    {
+      "id": "expanded-2511-02997-shade-interrogate-claude-3-7-sonnet-claude-3-5-sonnet-new-figure-4",
+      "predicted_working_score": 0.6069273418354427
+    },
+    {
+      "id": "expanded-2605-26047-retry-monitor-max-1-claude-opus-4-6-mimo-v2-flash-figure-15",
+      "predicted_working_score": 0.5443479919824933
+    },
+    {
+      "id": "expanded-2605-26047-retry-monitor-max-2-claude-opus-4-6-mimo-v2-flash-figure-15",
+      "predicted_working_score": 0.5558382776173165
+    },
+    {
+      "id": "expanded-2605-26047-retry-monitor-max-3-claude-opus-4-6-mimo-v2-flash-figure-15",
+      "predicted_working_score": 0.5569804125255416
+    },
+    {
+      "id": "expanded-2605-26047-retry-monitor-max-4-claude-opus-4-6-mimo-v2-flash-figure-15",
+      "predicted_working_score": 0.5590492067050269
+    },
+    {
+      "id": "expanded-2605-26047-retry-monitor-max-5-claude-opus-4-6-mimo-v2-flash-figure-15",
+      "predicted_working_score": 0.5620686037323748
+    },
+    {
+      "id": "expanded-2605-26047-retry-monitor-max-6-claude-opus-4-6-mimo-v2-flash-figure-15",
+      "predicted_working_score": 0.562236060216502
+    },
+    {
+      "id": "expanded-2605-26047-retry-monitor-max-7-claude-opus-4-6-mimo-v2-flash-figure-15",
+      "predicted_working_score": 0.5672600427347962
+    },
+    {
+      "id": "expanded-2605-26047-retry-monitor-max-8-claude-opus-4-6-mimo-v2-flash-figure-15",
+      "predicted_working_score": 0.5665308780465237
+    },
+    {
+      "id": "expanded-2605-26047-retry-monitor-max-9-claude-opus-4-6-mimo-v2-flash-figure-15",
+      "predicted_working_score": 0.5675099168456259
+    },
+    {
+      "id": "expanded-2605-26047-retry-monitor-max-10-claude-opus-4-6-mimo-v2-flash-figure-15",
+      "predicted_working_score": 0.5639266156894436
+    },
+    {
+      "id": "expanded-2605-26047-retry-monitor-p90-2-claude-opus-4-6-mimo-v2-flash-figure-15",
+      "predicted_working_score": 0.5531572680971529
+    },
+    {
+      "id": "expanded-2605-26047-retry-monitor-p90-3-claude-opus-4-6-mimo-v2-flash-figure-15",
+      "predicted_working_score": 0.560587995046192
+    },
+    {
+      "id": "expanded-2605-26047-retry-monitor-p90-4-claude-opus-4-6-mimo-v2-flash-figure-15",
+      "predicted_working_score": 0.5544356871928092
+    },
+    {
+      "id": "expanded-2605-26047-retry-monitor-p90-5-claude-opus-4-6-mimo-v2-flash-figure-15",
+      "predicted_working_score": 0.5513708504863853
+    },
+    {
+      "id": "expanded-2605-26047-retry-monitor-p90-6-claude-opus-4-6-mimo-v2-flash-figure-15",
+      "predicted_working_score": 0.5588246820967369
+    },
+    {
+      "id": "expanded-2605-26047-retry-monitor-p90-7-claude-opus-4-6-mimo-v2-flash-figure-15",
+      "predicted_working_score": 0.5582027463081294
+    },
+    {
+      "id": "expanded-2605-26047-retry-monitor-p90-8-claude-opus-4-6-mimo-v2-flash-figure-15",
+      "predicted_working_score": 0.5611424272093214
+    },
+    {
+      "id": "expanded-2605-26047-retry-monitor-p90-9-claude-opus-4-6-mimo-v2-flash-figure-15",
+      "predicted_working_score": 0.5643902267688197
+    },
+    {
+      "id": "expanded-2605-26047-retry-monitor-p90-10-claude-opus-4-6-mimo-v2-flash-figure-15",
+      "predicted_working_score": 0.5639270476487295
+    },
+    {
+      "id": "expanded-2605-26047-retry-monitor-p75-2-claude-opus-4-6-mimo-v2-flash-figure-15",
+      "predicted_working_score": 0.5568562821204031
+    },
+    {
+      "id": "expanded-2605-26047-retry-monitor-p75-3-claude-opus-4-6-mimo-v2-flash-figure-15",
+      "predicted_working_score": 0.5481760041747195
+    },
+    {
+      "id": "expanded-2605-26047-retry-monitor-p75-4-claude-opus-4-6-mimo-v2-flash-figure-15",
+      "predicted_working_score": 0.5535083093717869
+    },
+    {
+      "id": "expanded-2605-26047-retry-monitor-p75-5-claude-opus-4-6-mimo-v2-flash-figure-15",
+      "predicted_working_score": 0.5564769964712679
+    },
+    {
+      "id": "expanded-2605-26047-retry-monitor-p75-6-claude-opus-4-6-mimo-v2-flash-figure-15",
+      "predicted_working_score": 0.5554061017828259
+    },
+    {
+      "id": "expanded-2605-26047-retry-monitor-p75-7-claude-opus-4-6-mimo-v2-flash-figure-15",
+      "predicted_working_score": 0.5525104727790955
+    },
+    {
+      "id": "expanded-2605-26047-retry-monitor-p75-8-claude-opus-4-6-mimo-v2-flash-figure-15",
+      "predicted_working_score": 0.5519447622864869
+    },
+    {
+      "id": "expanded-2605-26047-retry-monitor-p75-9-claude-opus-4-6-mimo-v2-flash-figure-15",
+      "predicted_working_score": 0.5522685283433425
+    },
+    {
+      "id": "expanded-2605-26047-retry-monitor-p75-10-claude-opus-4-6-mimo-v2-flash-figure-15",
+      "predicted_working_score": 0.5534092887204304
+    },
+    {
+      "id": "expanded-2605-26047-retry-monitor-median-2-claude-opus-4-6-mimo-v2-flash-figure-15",
+      "predicted_working_score": 0.550609008621843
+    },
+    {
+      "id": "expanded-2605-26047-retry-monitor-median-3-claude-opus-4-6-mimo-v2-flash-figure-15",
+      "predicted_working_score": 0.5442419286475771
+    },
+    {
+      "id": "expanded-2605-26047-retry-monitor-median-4-claude-opus-4-6-mimo-v2-flash-figure-15",
+      "predicted_working_score": 0.5535690812642602
+    },
+    {
+      "id": "expanded-2605-26047-retry-monitor-median-5-claude-opus-4-6-mimo-v2-flash-figure-15",
+      "predicted_working_score": 0.5434979222002558
+    },
+    {
+      "id": "expanded-2605-26047-retry-monitor-median-6-claude-opus-4-6-mimo-v2-flash-figure-15",
+      "predicted_working_score": 0.542758771224119
+    },
+    {
+      "id": "expanded-2605-26047-retry-monitor-median-7-claude-opus-4-6-mimo-v2-flash-figure-15",
+      "predicted_working_score": 0.543697480611544
+    },
+    {
+      "id": "expanded-2605-26047-retry-monitor-median-8-claude-opus-4-6-mimo-v2-flash-figure-15",
+      "predicted_working_score": 0.5447678207253015
+    },
+    {
+      "id": "expanded-2605-26047-retry-monitor-median-9-claude-opus-4-6-mimo-v2-flash-figure-15",
+      "predicted_working_score": 0.5442421195144943
+    },
+    {
+      "id": "expanded-2605-26047-retry-monitor-median-10-claude-opus-4-6-mimo-v2-flash-figure-15",
+      "predicted_working_score": 0.5441220921377915
+    },
+    {
+      "id": "expanded-2605-26047-retry-monitor-mean-2-claude-opus-4-6-mimo-v2-flash-figure-15",
+      "predicted_working_score": 0.5506071432575277
+    },
+    {
+      "id": "expanded-2605-26047-retry-monitor-mean-3-claude-opus-4-6-mimo-v2-flash-figure-15",
+      "predicted_working_score": 0.5503758312344449
+    },
+    {
+      "id": "expanded-2605-26047-retry-monitor-mean-4-claude-opus-4-6-mimo-v2-flash-figure-15",
+      "predicted_working_score": 0.5469196116350862
+    },
+    {
+      "id": "expanded-2605-26047-retry-monitor-mean-5-claude-opus-4-6-mimo-v2-flash-figure-15",
+      "predicted_working_score": 0.5525962663311044
+    },
+    {
+      "id": "expanded-2605-26047-retry-monitor-mean-6-claude-opus-4-6-mimo-v2-flash-figure-15",
+      "predicted_working_score": 0.5465284985554058
+    },
+    {
+      "id": "expanded-2605-26047-retry-monitor-mean-7-claude-opus-4-6-mimo-v2-flash-figure-15",
+      "predicted_working_score": 0.5503770259983557
+    },
+    {
+      "id": "expanded-2605-26047-retry-monitor-mean-8-claude-opus-4-6-mimo-v2-flash-figure-15",
+      "predicted_working_score": 0.5503321367664613
+    },
+    {
+      "id": "expanded-2605-26047-retry-monitor-mean-9-claude-opus-4-6-mimo-v2-flash-figure-15",
+      "predicted_working_score": 0.5480291199975732
+    },
+    {
+      "id": "expanded-2605-26047-retry-monitor-mean-10-claude-opus-4-6-mimo-v2-flash-figure-15",
+      "predicted_working_score": 0.5508912712387112
+    },
+    {
+      "id": "expanded-2605-26047-retry-two-stage-1-claude-opus-4-6-mimo-v2-flash-figure-6",
+      "predicted_working_score": 0.6345453842320112
+    },
+    {
+      "id": "expanded-2605-26047-retry-two-stage-2-claude-opus-4-6-mimo-v2-flash-figure-6",
+      "predicted_working_score": 0.6420295789754584
+    },
+    {
+      "id": "expanded-2605-26047-retry-two-stage-3-claude-opus-4-6-mimo-v2-flash-figure-6",
+      "predicted_working_score": 0.644195019724081
+    },
+    {
+      "id": "expanded-2605-26047-retry-two-stage-4-claude-opus-4-6-mimo-v2-flash-figure-6",
+      "predicted_working_score": 0.642760906348487
+    },
+    {
+      "id": "expanded-2605-26047-retry-incremental-rising-claude-opus-4-6-mimo-v2-flash-figure-6",
+      "predicted_working_score": 0.6448581885917911
+    },
+    {
+      "id": "expanded-2605-26047-retry-incremental-flat-claude-opus-4-6-mimo-v2-flash-figure-6",
+      "predicted_working_score": 0.6431100227622066
+    },
+    {
+      "id": "expanded-2510-09462-adaptive-dtr-ordinary-gpt-5-gpt-4-figure-3",
+      "predicted_working_score": 0.4717124229533304
+    },
+    {
+      "id": "expanded-2510-09462-adaptive-dtr-injected-gpt-5-gpt-4-figure-3",
+      "predicted_working_score": 0.17875104796478017
+    },
+    {
+      "id": "expanded-2510-09462-adaptive-dtt-ordinary-gpt-5-gpt-4-figure-3",
+      "predicted_working_score": 0.5046520192197468
+    },
+    {
+      "id": "expanded-2510-09462-adaptive-dtt-injected-gpt-5-gpt-4-figure-3",
+      "predicted_working_score": 0.1989368455492005
+    },
+    {
+      "id": "expanded-2510-09462-adaptive-editing-ordinary-gpt-5-gpt-4-figure-3",
+      "predicted_working_score": 0.5038186588652497
+    },
+    {
+      "id": "expanded-2510-09462-adaptive-editing-injected-gpt-5-gpt-4-figure-3",
+      "predicted_working_score": 0.19840611997935792
+    },
+    {
+      "id": "expanded-2510-09462-adaptive-bashbench-dtr-ordinary-claude-sonnet-4-gpt-4o-figure-5",
+      "predicted_working_score": 0.6116941502384394
+    },
+    {
+      "id": "expanded-2510-09462-adaptive-bashbench-dtr-injected-claude-sonnet-4-gpt-4o-figure-5",
+      "predicted_working_score": 0.40594665519983614
+    },
+    {
+      "id": "expanded-2510-09462-adaptive-bashbench-dtt-ordinary-claude-sonnet-4-gpt-4o-figure-5",
+      "predicted_working_score": 0.6362967873116245
+    },
+    {
+      "id": "expanded-2510-09462-adaptive-bashbench-dtt-injected-claude-sonnet-4-gpt-4o-figure-5",
+      "predicted_working_score": 0.43146915419509657
+    },
+    {
+      "id": "expanded-2604-15384-linux-delayed-claude-haiku-4-5-gpt-5-nano-figure-18",
+      "predicted_working_score": 0.6438880770633527
+    },
+    {
+      "id": "expanded-2604-15384-linux-combined-claude-haiku-4-5-gpt-5-nano-figure-18",
+      "predicted_working_score": 0.7554049744430388
+    },
+    {
+      "id": "expanded-2604-15384-linux-delayed-ensemble-1-claude-haiku-4-5-gpt-5-nano-figure-21",
+      "predicted_working_score": 0.3813623549601395
+    },
+    {
+      "id": "expanded-2604-15384-linux-delayed-ensemble-2-claude-haiku-4-5-gpt-5-nano-figure-21",
+      "predicted_working_score": 0.4576600031476859
+    },
+    {
+      "id": "expanded-2604-15384-linux-delayed-ensemble-4-claude-haiku-4-5-gpt-5-nano-figure-21",
+      "predicted_working_score": 0.47922003931017737
+    },
+    {
+      "id": "expanded-2604-15384-linux-delayed-ensemble-8-claude-haiku-4-5-gpt-5-nano-figure-21",
+      "predicted_working_score": 0.49484001539596645
+    },
+    {
+      "id": "expanded-2604-15384-linux-delayed-ensemble-16-claude-haiku-4-5-gpt-5-nano-figure-21",
+      "predicted_working_score": 0.4986643477784394
+    },
+    {
+      "id": "expanded-2604-15384-linux-delayed-ensemble-32-claude-haiku-4-5-gpt-5-nano-figure-21",
+      "predicted_working_score": 0.5027320408061253
+    },
+    {
+      "id": "expanded-2604-15384-linux-sandbox-no-network-claude-haiku-4-5-gpt-5-nano-figure-29",
+      "predicted_working_score": 0.901078199831162
+    },
+    {
+      "id": "expanded-2604-15384-linux-sandbox-editor-only-claude-haiku-4-5-gpt-5-nano-figure-29",
+      "predicted_working_score": 0.9066387721433047
+    },
+    {
+      "id": "expanded-2604-15384-linux-no-scratchpad-claude-opus-4-6-gpt-5-nano-figure-30",
+      "predicted_working_score": 0.7983042569533157
+    },
+    {
+      "id": "expanded-2604-15384-linux-thinking-off-claude-opus-4-6-gpt-5-nano-figure-32",
+      "predicted_working_score": 0.8856410789058881
+    },
+    {
+      "id": "expanded-2604-15384-linux-thinking-1k-claude-opus-4-6-gpt-5-nano-figure-32",
+      "predicted_working_score": 0.8358460136060969
+    },
+    {
+      "id": "expanded-2604-15384-linux-thinking-4k-claude-opus-4-6-gpt-5-nano-figure-32",
+      "predicted_working_score": 0.8825057979034726
+    },
+    {
+      "id": "expanded-2604-15384-linux-thinking-16k-claude-opus-4-6-gpt-5-nano-figure-32",
+      "predicted_working_score": 0.8735656598508382
+    },
+    {
+      "id": "expanded-2604-15384-linux-thinking-64k-claude-opus-4-6-gpt-5-nano-figure-32",
+      "predicted_working_score": 0.8722212047562259
+    },
+    {
+      "id": "expanded-2604-15384-linux-conditional-catch-human-crafted-claude-opus-4-6-gpt-4-1-nano-figure-35",
+      "predicted_working_score": 0.3226924238977105
+    },
+    {
+      "id": "expanded-2604-15384-linux-conditional-catch-matched-opus-attacks-claude-opus-4-6-gpt-4-1-nano-figure-35",
+      "predicted_working_score": 0.8904464166494224
+    },
+    {
+      "id": "expanded-2604-15384-linux-conditional-catch-human-crafted-claude-opus-4-6-gpt-5-nano-figure-35",
+      "predicted_working_score": 0.23137867997651354
+    },
+    {
+      "id": "expanded-2604-15384-linux-conditional-catch-matched-opus-attacks-claude-opus-4-6-gpt-5-nano-figure-35",
+      "predicted_working_score": 0.8370161545870084
+    },
+    {
+      "id": "expanded-2604-15384-linux-conditional-catch-human-crafted-claude-opus-4-6-gpt-oss-120b-figure-35",
+      "predicted_working_score": 0.24482832925423384
+    },
+    {
+      "id": "expanded-2604-15384-linux-conditional-catch-matched-opus-attacks-claude-opus-4-6-gpt-oss-120b-figure-35",
+      "predicted_working_score": 0.8468813109461707
+    },
+    {
+      "id": "expanded-2604-15384-linux-conditional-catch-human-crafted-claude-opus-4-6-claude-haiku-4-5-figure-35",
+      "predicted_working_score": 0.3195994233535188
+    },
+    {
+      "id": "expanded-2604-15384-linux-conditional-catch-matched-opus-attacks-claude-opus-4-6-claude-haiku-4-5-figure-35",
+      "predicted_working_score": 0.8890547245640245
+    },
+    {
+      "id": "expanded-2604-15384-linux-conditional-catch-human-crafted-claude-opus-4-6-gpt-5-mini-figure-35",
+      "predicted_working_score": 0.3226924238977105
+    },
+    {
+      "id": "expanded-2604-15384-linux-conditional-catch-matched-opus-attacks-claude-opus-4-6-gpt-5-mini-figure-35",
+      "predicted_working_score": 0.8904464166494224
+    },
+    {
+      "id": "expanded-2604-15384-linux-conditional-catch-human-crafted-claude-opus-4-6-claude-sonnet-4-6-figure-35",
+      "predicted_working_score": 0.6677049001262535
+    },
+    {
+      "id": "expanded-2604-15384-linux-conditional-catch-matched-opus-attacks-claude-opus-4-6-claude-sonnet-4-6-figure-35",
+      "predicted_working_score": 0.9716552134162936
+    },
+    {
+      "id": "expanded-2604-15384-linux-conditional-catch-human-crafted-claude-opus-4-6-gpt-5-4-figure-35",
+      "predicted_working_score": 0.7117431134965795
+    },
+    {
+      "id": "expanded-2604-15384-linux-conditional-catch-matched-opus-attacks-claude-opus-4-6-gpt-5-4-figure-35",
+      "predicted_working_score": 0.9768106572656221
+    },
+    {
+      "id": "expanded-2604-15384-linux-conditional-catch-human-crafted-claude-opus-4-6-kimi-k2-5-figure-35",
+      "predicted_working_score": 0.5187216586047941
+    },
+    {
+      "id": "expanded-2604-15384-linux-conditional-catch-matched-opus-attacks-claude-opus-4-6-kimi-k2-5-figure-35",
+      "predicted_working_score": 0.9484196694558129
+    },
+    {
+      "id": "expanded-2604-15384-linux-conditional-catch-human-crafted-claude-opus-4-6-gemini-3-flash-figure-35",
+      "predicted_working_score": 0.6544140685182588
+    },
+    {
+      "id": "expanded-2604-15384-linux-conditional-catch-matched-opus-attacks-claude-opus-4-6-gemini-3-flash-figure-35",
+      "predicted_working_score": 0.9699748266751979
+    },
+    {
+      "id": "expanded-2604-15384-linux-conditional-catch-human-crafted-claude-opus-4-6-glm-5-figure-35",
+      "predicted_working_score": 0.43748880228785536
+    },
+    {
+      "id": "expanded-2604-15384-linux-conditional-catch-matched-opus-attacks-claude-opus-4-6-glm-5-figure-35",
+      "predicted_working_score": 0.9299143939266232
+    },
+    {
+      "id": "expanded-2604-15384-linux-conditional-catch-human-crafted-claude-opus-4-6-gemini-3-1-pro-figure-35",
+      "predicted_working_score": 0.7338987511903232
+    },
+    {
+      "id": "expanded-2604-15384-linux-conditional-catch-matched-opus-attacks-claude-opus-4-6-gemini-3-1-pro-figure-35",
+      "predicted_working_score": 0.9791887197168787
+    },
+    {
+      "id": "expanded-2604-15384-linux-conditional-catch-human-crafted-claude-opus-4-6-claude-opus-4-6-figure-35",
+      "predicted_working_score": 0.8330228404203799
+    },
+    {
+      "id": "expanded-2604-15384-linux-conditional-catch-matched-opus-attacks-claude-opus-4-6-claude-opus-4-6-figure-35",
+      "predicted_working_score": 0.9883868839533367
+    }
+  ],
+  "baseline_attack_drift_sensitivity": {
+    "0.0": {
+      "0.0": {
+        "p_control_faster": 0.15925,
+        "margin_logit_per_year_90": [
+          -1.408694786745596,
+          -0.5225680517676337,
+          0.37533319221756767
+        ],
+        "relative_log_horizon_growth_90": [
+          -2.123288029684224,
+          -1.211624367594725,
+          1.9058940248181633
+        ]
+      },
+      "0.5": {
+        "p_control_faster": 0.59925,
+        "margin_logit_per_year_90": [
+          -0.6779576984351167,
+          0.12411129603325355,
+          0.9953064403405659
+        ],
+        "relative_log_horizon_growth_90": [
+          -0.9395463796085906,
+          0.2843478500970547,
+          6.549039073963667
+        ]
+      },
+      "1.0": {
+        "p_control_faster": 0.934,
+        "margin_logit_per_year_90": [
+          -0.06510774538107943,
+          0.7733734881461978,
+          1.7458644657591897
+        ],
+        "relative_log_horizon_growth_90": [
+          -0.08693468077078147,
+          1.7292753993974017,
+          11.527648165549582
+        ]
+      }
+    },
+    "0.5": {
+      "0.0": {
+        "p_control_faster": 0.02875,
+        "margin_logit_per_year_90": [
+          -1.908694786745596,
+          -1.0225680517676337,
+          -0.1246668077824323
+        ],
+        "relative_log_horizon_growth_90": [
+          -4.284812004939319,
+          -2.3591728099822484,
+          -0.45778584447091
+        ]
+      },
+      "0.5": {
+        "p_control_faster": 0.234,
+        "margin_logit_per_year_90": [
+          -1.1779576984351168,
+          -0.37588870396674645,
+          0.495306440340566
+        ],
+        "relative_log_horizon_growth_90": [
+          -1.8466970760977595,
+          -0.8537804190743823,
+          2.681002852934399
+        ]
+      },
+      "1.0": {
+        "p_control_faster": 0.69325,
+        "margin_logit_per_year_90": [
+          -0.5651077453810794,
+          0.2733734881461978,
+          1.2458644657591897
+        ],
+        "relative_log_horizon_growth_90": [
+          -0.8719218680692932,
+          0.6062496148658285,
+          7.528128638430013
+        ]
+      }
+    },
+    "1.0": {
+      "0.0": {
+        "p_control_faster": 0.0025,
+        "margin_logit_per_year_90": [
+          -2.408694786745596,
+          -1.5225680517676337,
+          -0.6246668077824322
+        ],
+        "relative_log_horizon_growth_90": [
+          -8.096491350703522,
+          -3.4052082624474727,
+          -1.766858454999488
+        ]
+      },
+      "0.5": {
+        "p_control_faster": 0.04875,
+        "margin_logit_per_year_90": [
+          -1.6779576984351168,
+          -0.8758887039667465,
+          -0.0046935596594340255
+        ],
+        "relative_log_horizon_growth_90": [
+          -3.7871603977722423,
+          -1.9780019016069184,
+          -0.01777336953164366
+        ]
+      },
+      "1.0": {
+        "p_control_faster": 0.34225,
+        "margin_logit_per_year_90": [
+          -1.0651077453810793,
+          -0.22662651185380223,
+          0.7458644657591897
+        ],
+        "relative_log_horizon_growth_90": [
+          -1.9367297829593983,
+          -0.5050399201849036,
+          3.9310088487486468
+        ]
+      }
+    }
+  },
+  "structural_sensitivity": [
+    {
+      "name": "More systematic change in benchmark difficulty",
+      "transport_sd": 1.5,
+      "progress_sd": 1.0,
+      "gap_sd": 1.0,
+      "slope_sd": 0.35,
+      "drift_sd": 1.5,
+      "max_rhat": 1.0033367715534567,
+      "min_ess": 1297.6694215477676,
+      "trust_scenarios": {
+        "0.0": {
+          "p_control_faster": 0.3615,
+          "margin_logit_per_year_90": [
+            -1.1872995695659805,
+            -0.22785152097013128,
+            0.9615777523717318
+          ],
+          "relative_log_horizon_growth_90": [
+            -1.9804156457261626,
+            -0.6287104983381222,
+            6.7599040567932756
+          ]
+        },
+        "0.5": {
+          "p_control_faster": 0.79375,
+          "margin_logit_per_year_90": [
+            -0.4573441508367388,
+            0.46250544801120025,
+            1.6324142876279426
+          ],
+          "relative_log_horizon_growth_90": [
+            -0.6975006595599891,
+            1.2050683182296273,
+            14.50712776513992
+          ]
+        },
+        "1.0": {
+          "p_control_faster": 0.97275,
+          "margin_logit_per_year_90": [
+            0.16546688133080772,
+            1.1421816611494768,
+            2.3844732875421193
+          ],
+          "relative_log_horizon_growth_90": [
+            0.24394941828300926,
+            2.981945548518659,
+            22.75145226547074
+          ]
+        }
+      }
+    },
+    {
+      "name": "Less transferable capability slopes",
+      "transport_sd": 1.5,
+      "progress_sd": 1.0,
+      "gap_sd": 1.0,
+      "slope_sd": 0.75,
+      "drift_sd": 0.5,
+      "max_rhat": 1.0055910709734381,
+      "min_ess": 824.4322804356949,
+      "trust_scenarios": {
+        "0.0": {
+          "p_control_faster": 0.1255,
+          "margin_logit_per_year_90": [
+            -2.0517088082688444,
+            -0.792170824871404,
+            0.3297273103879403
+          ],
+          "relative_log_horizon_growth_90": [
+            -2.179118173650163,
+            -1.3303605226537591,
+            1.5428450081417984
+          ]
+        },
+        "0.5": {
+          "p_control_faster": 0.47475,
+          "margin_logit_per_year_90": [
+            -1.1895647768339543,
+            -0.04877175624189223,
+            1.05543553014734
+          ],
+          "relative_log_horizon_growth_90": [
+            -1.2304871899628558,
+            -0.07978248891084297,
+            5.619384416498711
+          ]
+        },
+        "1.0": {
+          "p_control_faster": 0.821,
+          "margin_logit_per_year_90": [
+            -0.5614960591154107,
+            0.6936581909443122,
+            2.023887172182556
+          ],
+          "relative_log_horizon_growth_90": [
+            -0.600951315958907,
+            1.1348542030319333,
+            10.168123904064556
+          ]
+        }
+      }
+    },
+    {
+      "name": "Weak identification",
+      "transport_sd": 3.0,
+      "progress_sd": 2.0,
+      "gap_sd": 2.0,
+      "slope_sd": 0.75,
+      "drift_sd": 1.5,
+      "max_rhat": 1.0045962003409596,
+      "min_ess": 979.5777623883093,
+      "trust_scenarios": {
+        "0.0": {
+          "p_control_faster": 0.50925,
+          "margin_logit_per_year_90": [
+            -1.4164372984772762,
+            0.02611049681563611,
+            1.8885291271976623
+          ],
+          "relative_log_horizon_growth_90": [
+            -1.8610376164554745,
+            0.07314119301556193,
+            16.216009874000544
+          ]
+        },
+        "0.5": {
+          "p_control_faster": 0.7755,
+          "margin_logit_per_year_90": [
+            -0.7567994220995072,
+            0.6500118374726379,
+            2.468290745979387
+          ],
+          "relative_log_horizon_growth_90": [
+            -0.9447644577297376,
+            1.5834443448053865,
+            24.60876904820627
+          ]
+        },
+        "1.0": {
+          "p_control_faster": 0.915,
+          "margin_logit_per_year_90": [
+            -0.26739101506815816,
+            1.2924029946764053,
+            3.2624232467880514
+          ],
+          "relative_log_horizon_growth_90": [
+            -0.3610458034097824,
+            3.032066923518638,
+            34.30667104690075
+          ]
+        }
+      }
+    }
+  ],
+  "diagnostics_pass": true,
+  "sampling": {
+    "draws_per_chain": 1000,
+    "burn_per_chain": 1000,
+    "chains": 4
+  }
+}

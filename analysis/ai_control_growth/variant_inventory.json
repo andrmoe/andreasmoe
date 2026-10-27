@@ -1,0 +1,4040 @@
+[
+  {
+    "id": "greenblatt-trusted-model",
+    "study": "2312.06942",
+    "label": "Trusted model",
+    "locations": [
+      "Table 7"
+    ],
+    "kind": "protocol",
+    "notes": "",
+    "cost": "Reported usefulness 2%",
+    "candidate_eligible": false,
+    "observation_ids": [
+      "expanded-2312-06942-greenblatt-trusted-model-gpt-4-gpt-3-5-turbo-table-7"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "greenblatt-upfront-auditing",
+    "study": "2312.06942",
+    "label": "Upfront auditing",
+    "locations": [
+      "Table 7"
+    ],
+    "kind": "protocol",
+    "notes": "",
+    "cost": "Reported usefulness 100%",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2312-06942-greenblatt-upfront-auditing-gpt-4-gpt-3-5-turbo-table-7"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "greenblatt-trusted-monitoring-defer-to-trusted-0",
+    "study": "2312.06942",
+    "label": "Trusted monitoring; defer to trusted 0%",
+    "locations": [
+      "Table 7"
+    ],
+    "kind": "protocol",
+    "notes": "",
+    "cost": "Reported usefulness 97%",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2312-06942-greenblatt-trusted-monitoring-defer-to-trusted-0-gpt-4-gpt-3-5-turbo-table-7"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "greenblatt-trusted-monitoring-defer-to-trusted-5",
+    "study": "2312.06942",
+    "label": "Trusted monitoring; defer to trusted 5%",
+    "locations": [
+      "Table 7"
+    ],
+    "kind": "protocol",
+    "notes": "",
+    "cost": "Reported usefulness 95%",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2312-06942-greenblatt-trusted-monitoring-defer-to-trusted-5-gpt-4-gpt-3-5-turbo-table-7"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "greenblatt-trusted-monitoring-defer-to-trusted-10",
+    "study": "2312.06942",
+    "label": "Trusted monitoring; defer to trusted 10%",
+    "locations": [
+      "Table 7"
+    ],
+    "kind": "protocol",
+    "notes": "",
+    "cost": "Reported usefulness 93%",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2312-06942-greenblatt-trusted-monitoring-defer-to-trusted-10-gpt-4-gpt-3-5-turbo-table-7"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "greenblatt-trusted-monitoring-defer-to-trusted-20",
+    "study": "2312.06942",
+    "label": "Trusted monitoring; defer to trusted 20%",
+    "locations": [
+      "Table 7"
+    ],
+    "kind": "protocol",
+    "notes": "",
+    "cost": "Reported usefulness 83%",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2312-06942-greenblatt-trusted-monitoring-defer-to-trusted-20-gpt-4-gpt-3-5-turbo-table-7"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "greenblatt-trusted-monitoring-defer-to-trusted-50",
+    "study": "2312.06942",
+    "label": "Trusted monitoring; defer to trusted 50%",
+    "locations": [
+      "Table 7"
+    ],
+    "kind": "protocol",
+    "notes": "",
+    "cost": "Reported usefulness 51%",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2312-06942-greenblatt-trusted-monitoring-defer-to-trusted-50-gpt-4-gpt-3-5-turbo-table-7"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "greenblatt-untrusted-monitoring-defer-to-trusted-0",
+    "study": "2312.06942",
+    "label": "Untrusted monitoring; defer to trusted 0%",
+    "locations": [
+      "Table 7"
+    ],
+    "kind": "protocol",
+    "notes": "",
+    "cost": "Reported usefulness 96%",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2312-06942-greenblatt-untrusted-monitoring-defer-to-trusted-0-gpt-4-gpt-3-5-turbo-table-7"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "greenblatt-untrusted-monitoring-defer-to-trusted-5",
+    "study": "2312.06942",
+    "label": "Untrusted monitoring; defer to trusted 5%",
+    "locations": [
+      "Table 7"
+    ],
+    "kind": "protocol",
+    "notes": "",
+    "cost": "Reported usefulness 95%",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2312-06942-greenblatt-untrusted-monitoring-defer-to-trusted-5-gpt-4-gpt-3-5-turbo-table-7"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "greenblatt-untrusted-monitoring-defer-to-trusted-10",
+    "study": "2312.06942",
+    "label": "Untrusted monitoring; defer to trusted 10%",
+    "locations": [
+      "Table 7"
+    ],
+    "kind": "protocol",
+    "notes": "",
+    "cost": "Reported usefulness 92%",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2312-06942-greenblatt-untrusted-monitoring-defer-to-trusted-10-gpt-4-gpt-3-5-turbo-table-7"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "greenblatt-untrusted-monitoring-defer-to-trusted-20",
+    "study": "2312.06942",
+    "label": "Untrusted monitoring; defer to trusted 20%",
+    "locations": [
+      "Table 7"
+    ],
+    "kind": "protocol",
+    "notes": "",
+    "cost": "Reported usefulness 85%",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2312-06942-greenblatt-untrusted-monitoring-defer-to-trusted-20-gpt-4-gpt-3-5-turbo-table-7"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "greenblatt-trusted-editing-5",
+    "study": "2312.06942",
+    "label": "Trusted editing 5%",
+    "locations": [
+      "Table 7"
+    ],
+    "kind": "protocol",
+    "notes": "",
+    "cost": "Reported usefulness 97%",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2312-06942-greenblatt-trusted-editing-5-gpt-4-gpt-3-5-turbo-table-7"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "greenblatt-trusted-editing-10",
+    "study": "2312.06942",
+    "label": "Trusted editing 10%",
+    "locations": [
+      "Table 7"
+    ],
+    "kind": "protocol",
+    "notes": "",
+    "cost": "Reported usefulness 96%",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2312-06942-greenblatt-trusted-editing-10-gpt-4-gpt-3-5-turbo-table-7"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "greenblatt-trusted-editing-20",
+    "study": "2312.06942",
+    "label": "Trusted editing 20%",
+    "locations": [
+      "Table 7"
+    ],
+    "kind": "protocol",
+    "notes": "",
+    "cost": "Reported usefulness 94%",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2312-06942-greenblatt-trusted-editing-20-gpt-4-gpt-3-5-turbo-table-7"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "greenblatt-trusted-editing-50",
+    "study": "2312.06942",
+    "label": "Trusted editing 50%",
+    "locations": [
+      "Table 7"
+    ],
+    "kind": "protocol",
+    "notes": "",
+    "cost": "Reported usefulness 89%",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2312-06942-greenblatt-trusted-editing-50-gpt-4-gpt-3-5-turbo-table-7"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "greenblatt-untrusted-no-redaction",
+    "study": "2312.06942",
+    "label": "Monitoring with No redaction",
+    "locations": [
+      "Table 6"
+    ],
+    "kind": "protocol",
+    "notes": "",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2312-06942-greenblatt-untrusted-no-redaction-animal-or-food-or-money-gpt-4-gpt-3-5-turbo-table-6",
+      "expanded-2312-06942-greenblatt-untrusted-no-redaction-difference-of-floating-point-numbers-gpt-4-gpt-3-5-turbo-table-6",
+      "expanded-2312-06942-greenblatt-untrusted-no-redaction-difference-of-floating-point-numbers-or-geometry-or-combinatorics-gpt-4-gpt-3-5-turbo-table-6",
+      "expanded-2312-06942-greenblatt-untrusted-no-redaction-variable-named-variable-gpt-4-gpt-3-5-turbo-table-6",
+      "expanded-2312-06942-greenblatt-untrusted-no-redaction-while-loop-instead-of-for-loop-gpt-4-gpt-3-5-turbo-table-6"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "greenblatt-untrusted-input-redaction",
+    "study": "2312.06942",
+    "label": "Monitoring with Input redaction",
+    "locations": [
+      "Table 6"
+    ],
+    "kind": "protocol",
+    "notes": "",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2312-06942-greenblatt-untrusted-input-redaction-animal-or-food-or-money-gpt-4-gpt-3-5-turbo-table-6",
+      "expanded-2312-06942-greenblatt-untrusted-input-redaction-difference-of-floating-point-numbers-gpt-4-gpt-3-5-turbo-table-6",
+      "expanded-2312-06942-greenblatt-untrusted-input-redaction-difference-of-floating-point-numbers-or-geometry-or-combinatorics-gpt-4-gpt-3-5-turbo-table-6"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "greenblatt-untrusted-input-and-output-redaction",
+    "study": "2312.06942",
+    "label": "Monitoring with Input and output redaction",
+    "locations": [
+      "Table 6"
+    ],
+    "kind": "protocol",
+    "notes": "",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2312-06942-greenblatt-untrusted-input-and-output-redaction-variable-named-variable-gpt-4-gpt-3-5-turbo-table-6",
+      "expanded-2312-06942-greenblatt-untrusted-input-and-output-redaction-while-loop-instead-of-for-loop-gpt-4-gpt-3-5-turbo-table-6"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "greenblatt-original-synthetic-tests",
+    "study": "2312.06942",
+    "label": "Original synthetic tests",
+    "locations": [
+      "Table 5"
+    ],
+    "kind": "protocol",
+    "notes": "",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2312-06942-greenblatt-original-synthetic-tests-collude-if-theme-is-present-gpt-4-gpt-3-5-turbo-table-5",
+      "expanded-2312-06942-greenblatt-original-synthetic-tests-collude-if-name-is-present-gpt-4-gpt-3-5-turbo-table-5"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "greenblatt-hardened-synthetic-tests",
+    "study": "2312.06942",
+    "label": "Hardened synthetic tests",
+    "locations": [
+      "Table 5"
+    ],
+    "kind": "protocol",
+    "notes": "",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2312-06942-greenblatt-hardened-synthetic-tests-collude-if-theme-is-present-gpt-4-gpt-3-5-turbo-table-5",
+      "expanded-2312-06942-greenblatt-hardened-synthetic-tests-collude-if-name-is-present-gpt-4-gpt-3-5-turbo-table-5"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "greenblatt-monitor-justification",
+    "study": "2312.06942",
+    "label": "Trusted monitoring with model justification",
+    "locations": [
+      "Section 3.2.2"
+    ],
+    "kind": "protocol",
+    "notes": "Reported not to improve plain monitoring; no scalar assigned.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [],
+    "status": "indexed; no scalar extracted"
+  },
+  {
+    "id": "ctrlz-defer-to-trusted",
+    "study": "2504.10374",
+    "label": "Defer to trusted",
+    "locations": [
+      "Table 1"
+    ],
+    "kind": "protocol",
+    "notes": "Attacks are assisted by human-provided templates; capability transport is uncertain.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2504-10374-ctrlz-defer-to-trusted-99-usefulness-gpt-4o-mini-llama-3-1-8b-table-1",
+      "expanded-2504-10374-ctrlz-defer-to-trusted-95-usefulness-gpt-4o-mini-llama-3-1-8b-table-1",
+      "expanded-2504-10374-ctrlz-defer-to-trusted-90-usefulness-gpt-4o-mini-llama-3-1-8b-table-1"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "ctrlz-defer-to-resample",
+    "study": "2504.10374",
+    "label": "Defer to resample",
+    "locations": [
+      "Table 1"
+    ],
+    "kind": "protocol",
+    "notes": "Attacks are assisted by human-provided templates; capability transport is uncertain.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2504-10374-ctrlz-defer-to-resample-99-usefulness-gpt-4o-mini-llama-3-1-8b-table-1",
+      "expanded-2504-10374-ctrlz-defer-to-resample-95-usefulness-gpt-4o-mini-llama-3-1-8b-table-1",
+      "expanded-2504-10374-ctrlz-defer-to-resample-90-usefulness-gpt-4o-mini-llama-3-1-8b-table-1"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "ctrlz-resample-incrimination-in-the-present",
+    "study": "2504.10374",
+    "label": "Resample: incrimination in the present",
+    "locations": [
+      "Table 1"
+    ],
+    "kind": "protocol",
+    "notes": "Attacks are assisted by human-provided templates; capability transport is uncertain.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2504-10374-ctrlz-resample-incrimination-in-the-present-99-usefulness-gpt-4o-mini-llama-3-1-8b-table-1",
+      "expanded-2504-10374-ctrlz-resample-incrimination-in-the-present-95-usefulness-gpt-4o-mini-llama-3-1-8b-table-1",
+      "expanded-2504-10374-ctrlz-resample-incrimination-in-the-present-90-usefulness-gpt-4o-mini-llama-3-1-8b-table-1"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "ctrlz-resample-three-strikes",
+    "study": "2504.10374",
+    "label": "Resample: three strikes",
+    "locations": [
+      "Table 1"
+    ],
+    "kind": "protocol",
+    "notes": "Attacks are assisted by human-provided templates; capability transport is uncertain.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2504-10374-ctrlz-resample-three-strikes-99-usefulness-gpt-4o-mini-llama-3-1-8b-table-1",
+      "expanded-2504-10374-ctrlz-resample-three-strikes-95-usefulness-gpt-4o-mini-llama-3-1-8b-table-1",
+      "expanded-2504-10374-ctrlz-resample-three-strikes-90-usefulness-gpt-4o-mini-llama-3-1-8b-table-1"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "ctrlz-resample-time-travel",
+    "study": "2504.10374",
+    "label": "Resample: time travel",
+    "locations": [
+      "Table 1"
+    ],
+    "kind": "protocol",
+    "notes": "Attacks are assisted by human-provided templates; capability transport is uncertain.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2504-10374-ctrlz-resample-time-travel-99-usefulness-gpt-4o-mini-llama-3-1-8b-table-1",
+      "expanded-2504-10374-ctrlz-resample-time-travel-95-usefulness-gpt-4o-mini-llama-3-1-8b-table-1",
+      "expanded-2504-10374-ctrlz-resample-time-travel-90-usefulness-gpt-4o-mini-llama-3-1-8b-table-1"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "ctrlz-defer-to-trusted-combined",
+    "study": "2504.10374",
+    "label": "Defer to trusted with additional monitoring",
+    "locations": [
+      "Table 2"
+    ],
+    "kind": "protocol",
+    "notes": "Combined monitoring is a protocol variant; no separate helper capability enters the fit.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2504-10374-ctrlz-defer-to-trusted-combined-gpt-4o-mini-llama-3-1-8b-table-2"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "ctrlz-defer-to-resample-combined",
+    "study": "2504.10374",
+    "label": "Defer to resample with additional monitoring",
+    "locations": [
+      "Table 2"
+    ],
+    "kind": "protocol",
+    "notes": "Combined monitoring is a protocol variant; no separate helper capability enters the fit.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2504-10374-ctrlz-defer-to-resample-combined-gpt-4o-mini-llama-3-1-8b-table-2"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "ctrlz-resample-time-travel-combined",
+    "study": "2504.10374",
+    "label": "Resample: time travel with additional monitoring",
+    "locations": [
+      "Table 2"
+    ],
+    "kind": "protocol",
+    "notes": "Combined monitoring is a protocol variant; no separate helper capability enters the fit.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2504-10374-ctrlz-resample-time-travel-combined-gpt-4o-mini-llama-3-1-8b-table-2"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "ctrlz-trusted-monitoring",
+    "study": "2504.10374",
+    "label": "Trusted monitoring",
+    "locations": [
+      "Section 3.1.2"
+    ],
+    "kind": "protocol",
+    "notes": "",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2504-10374-ctrlz-trusted-monitoring-gpt-4o-mini-llama-3-1-8b-section-3-1-2"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "ctrlz-upfront-auditing",
+    "study": "2504.10374",
+    "label": "Upfront auditing",
+    "locations": [
+      "Section 3.1.1"
+    ],
+    "kind": "baseline",
+    "notes": "Analytic baseline; audit budget sweep is shown in Figure 2.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [],
+    "status": "indexed; no scalar extracted"
+  },
+  {
+    "id": "ctrlz-stop-after-edit",
+    "study": "2504.10374",
+    "label": "Stop-after-edit variant",
+    "locations": [
+      "Appendix I"
+    ],
+    "kind": "protocol",
+    "notes": "Alternative deferral implementation; source curve retained for inspection.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [],
+    "status": "indexed; no scalar extracted"
+  },
+  {
+    "id": "ctrlz-audit-budget-sweep",
+    "study": "2504.10374",
+    "label": "Auditing budget variants: 0.3%, 1%, 3%",
+    "locations": [
+      "Appendix A, Figure 5"
+    ],
+    "kind": "operating-point sweep",
+    "notes": "Budget sweeps of the listed protocols; main 1% table points extracted. Other curve points require digitization.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [],
+    "status": "indexed; no scalar extracted"
+  },
+  {
+    "id": "auto-mode",
+    "study": "2609.19587v2",
+    "label": "Auto Mode",
+    "locations": [
+      "Figure 3",
+      "Table 3",
+      "Appendix C, Figure 13"
+    ],
+    "kind": "protocol",
+    "notes": "One minus the attack-success percentage printed in the figure. Aggregate means are not counted again.",
+    "cost": "Production-style blocking monitor.",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2609-19587v2-auto-mode-arena-monitor-injection-claude-opus-5-claude-sonnet-5-figure-3",
+      "expanded-2609-19587v2-auto-mode-arena-multi-agent-claude-opus-5-claude-sonnet-5-figure-3",
+      "expanded-2609-19587v2-auto-mode-simulation-monitor-injection-claude-opus-5-claude-sonnet-5-figure-3",
+      "expanded-2609-19587v2-auto-mode-simulation-compaction-claude-opus-5-claude-sonnet-5-figure-3",
+      "expanded-2609-19587v2-auto-mode-simulation-coverage-gap-claude-opus-5-claude-sonnet-5-figure-3",
+      "expanded-2609-19587v2-auto-mode-simulation-policy-failure-claude-opus-5-claude-sonnet-5-figure-3",
+      "expanded-2609-19587v2-auto-mode-rogue-deployment-injection-claude-opus-5-claude-sonnet-5-table-3",
+      "expanded-2609-19587v2-auto-mode-rogue-deployment-20-agents-claude-opus-5-claude-sonnet-5-table-3",
+      "expanded-2609-19587v2-auto-mode-rogue-deployment-injection-claude-opus-5-claude-opus-4-8-table-3",
+      "expanded-2609-19587v2-auto-mode-pooled-model-swap-ablation-claude-opus-5-claude-opus-4-8-appendix-c-figure-13"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "guardian",
+    "study": "2609.19587v2",
+    "label": "Codex Guardian",
+    "locations": [
+      "Figure 3",
+      "Table 3"
+    ],
+    "kind": "protocol",
+    "notes": "One minus the attack-success percentage printed in the figure. Aggregate means are not counted again.",
+    "cost": "Production-style blocking monitor.",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2609-19587v2-guardian-arena-monitor-injection-claude-opus-5-gpt-5-6-luna-figure-3",
+      "expanded-2609-19587v2-guardian-arena-multi-agent-claude-opus-5-gpt-5-6-luna-figure-3",
+      "expanded-2609-19587v2-guardian-simulation-monitor-injection-claude-opus-5-gpt-5-6-luna-figure-3",
+      "expanded-2609-19587v2-guardian-simulation-compaction-claude-opus-5-gpt-5-6-luna-figure-3",
+      "expanded-2609-19587v2-guardian-simulation-coverage-gap-claude-opus-5-gpt-5-6-luna-figure-3",
+      "expanded-2609-19587v2-guardian-simulation-policy-failure-claude-opus-5-gpt-5-6-luna-figure-3",
+      "expanded-2609-19587v2-guardian-rogue-deployment-injection-claude-opus-5-gpt-5-6-luna-table-3",
+      "expanded-2609-19587v2-guardian-rogue-deployment-20-agents-claude-opus-5-gpt-5-6-luna-table-3"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "guardian-strict",
+    "study": "2609.19587v2",
+    "label": "Guardian strict",
+    "locations": [
+      "Figure 3",
+      "Table 3"
+    ],
+    "kind": "protocol",
+    "notes": "One minus the attack-success percentage printed in the figure. Aggregate means are not counted again.",
+    "cost": "All edits monitored.",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2609-19587v2-guardian-strict-arena-monitor-injection-claude-opus-5-gpt-5-6-luna-figure-3",
+      "expanded-2609-19587v2-guardian-strict-arena-multi-agent-claude-opus-5-gpt-5-6-luna-figure-3",
+      "expanded-2609-19587v2-guardian-strict-simulation-monitor-injection-claude-opus-5-gpt-5-6-luna-figure-3",
+      "expanded-2609-19587v2-guardian-strict-simulation-compaction-claude-opus-5-gpt-5-6-luna-figure-3",
+      "expanded-2609-19587v2-guardian-strict-simulation-coverage-gap-claude-opus-5-gpt-5-6-luna-figure-3",
+      "expanded-2609-19587v2-guardian-strict-simulation-policy-failure-claude-opus-5-gpt-5-6-luna-figure-3",
+      "expanded-2609-19587v2-guardian-strict-rogue-deployment-injection-claude-opus-5-gpt-5-6-luna-table-3",
+      "expanded-2609-19587v2-guardian-strict-rogue-deployment-20-agents-claude-opus-5-gpt-5-6-luna-table-3"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "auto-mode-plus-plus",
+    "study": "2609.19587v2",
+    "label": "Auto Mode++",
+    "locations": [
+      "Figure 3",
+      "Table 3"
+    ],
+    "kind": "protocol",
+    "notes": "One minus the attack-success percentage printed in the figure. Aggregate means are not counted again.",
+    "cost": "All edits monitored.",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2609-19587v2-auto-mode-plus-plus-arena-monitor-injection-claude-opus-5-claude-opus-4-8-figure-3",
+      "expanded-2609-19587v2-auto-mode-plus-plus-arena-multi-agent-claude-opus-5-claude-opus-4-8-figure-3",
+      "expanded-2609-19587v2-auto-mode-plus-plus-simulation-monitor-injection-claude-opus-5-claude-opus-4-8-figure-3",
+      "expanded-2609-19587v2-auto-mode-plus-plus-simulation-compaction-claude-opus-5-claude-opus-4-8-figure-3",
+      "expanded-2609-19587v2-auto-mode-plus-plus-simulation-coverage-gap-claude-opus-5-claude-opus-4-8-figure-3",
+      "expanded-2609-19587v2-auto-mode-plus-plus-simulation-policy-failure-claude-opus-5-claude-opus-4-8-figure-3",
+      "expanded-2609-19587v2-auto-mode-plus-plus-rogue-deployment-injection-claude-opus-5-claude-opus-4-8-table-3",
+      "expanded-2609-19587v2-auto-mode-plus-plus-rogue-deployment-20-agents-claude-opus-5-claude-opus-4-8-table-3"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "auto-mode-strict",
+    "study": "2609.19587v2",
+    "label": "Auto Mode strict",
+    "locations": [
+      "Figure 3",
+      "Table 3"
+    ],
+    "kind": "protocol",
+    "notes": "One minus the attack-success percentage printed in the figure. Aggregate means are not counted again.",
+    "cost": "Highest latency: agentic review on every action; slower than interactive deployment.",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2609-19587v2-auto-mode-strict-arena-monitor-injection-claude-opus-5-claude-opus-4-8-figure-3",
+      "expanded-2609-19587v2-auto-mode-strict-arena-multi-agent-claude-opus-5-claude-opus-4-8-figure-3",
+      "expanded-2609-19587v2-auto-mode-strict-simulation-monitor-injection-claude-opus-5-claude-opus-4-8-figure-3",
+      "expanded-2609-19587v2-auto-mode-strict-simulation-compaction-claude-opus-5-claude-opus-4-8-figure-3",
+      "expanded-2609-19587v2-auto-mode-strict-simulation-coverage-gap-claude-opus-5-claude-opus-4-8-figure-3",
+      "expanded-2609-19587v2-auto-mode-strict-simulation-policy-failure-claude-opus-5-claude-opus-4-8-figure-3",
+      "expanded-2609-19587v2-auto-mode-strict-rogue-deployment-injection-claude-opus-5-claude-opus-4-8-table-3",
+      "expanded-2609-19587v2-auto-mode-strict-rogue-deployment-20-agents-claude-opus-5-claude-opus-4-8-table-3"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "auto-no-monitor",
+    "study": "2609.19587v2",
+    "label": "No monitor",
+    "locations": [
+      "Table 3"
+    ],
+    "kind": "baseline",
+    "notes": "14/14 multi-agent rogue deployments succeeded.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [],
+    "status": "indexed; no scalar extracted"
+  },
+  {
+    "id": "auto-framing-escaping",
+    "study": "2609.19587v2",
+    "label": "Rendering: framing and escaping",
+    "locations": [
+      "Figures 5 and 9"
+    ],
+    "kind": "ablation",
+    "notes": "Injection-rendering mitigation and full attacker\u2013monitor grid.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [],
+    "status": "indexed; no scalar extracted"
+  },
+  {
+    "id": "auto-monitor-tool-results",
+    "study": "2609.19587v2",
+    "label": "Monitor tool results",
+    "locations": [
+      "Section 4.7"
+    ],
+    "kind": "ablation",
+    "notes": "Expanded context for multi-context attacks.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [],
+    "status": "indexed; no scalar extracted"
+  },
+  {
+    "id": "auto-compaction-monitor",
+    "study": "2609.19587v2",
+    "label": "Compaction monitoring",
+    "locations": [
+      "Section 4.7"
+    ],
+    "kind": "ablation",
+    "notes": "Compaction-review mitigation is part of hardened Auto Mode.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [],
+    "status": "indexed; no scalar extracted"
+  },
+  {
+    "id": "auto-prior-block-context",
+    "study": "2609.19587v2",
+    "label": "Monitor shown prior blocks",
+    "locations": [
+      "Appendix A.3"
+    ],
+    "kind": "ablation",
+    "notes": "Repeated-attempt ablation; retained as a distinct design variant.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [],
+    "status": "indexed; no scalar extracted"
+  },
+  {
+    "id": "auto-affordances",
+    "study": "2609.19587v2",
+    "label": "Technique knowledge \u00d7 monitor knowledge",
+    "locations": [
+      "Appendix B.2, Figure 12"
+    ],
+    "kind": "ablation",
+    "notes": "Attacker-affordance grid, not a new defender algorithm.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [],
+    "status": "indexed; no scalar extracted"
+  },
+  {
+    "id": "auto-visible-monitor",
+    "study": "2609.19587v2",
+    "label": "Monitor hidden versus visible",
+    "locations": [
+      "Appendix F, Figure 17"
+    ],
+    "kind": "ablation",
+    "notes": "Attacker-knowledge ablation across simulated briefs.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [],
+    "status": "indexed; no scalar extracted"
+  },
+  {
+    "id": "shade-resample-then-defer-20",
+    "study": "2511.02997",
+    "label": "Resample then defer (threshold 20)",
+    "locations": [
+      "Table 1"
+    ],
+    "kind": "protocol",
+    "notes": "The table also reports attack-policy main-task performance; it is not assumed to be a benign-usefulness budget.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2511-02997-shade-resample-then-defer-20-default-red-team-strategy-claude-3-7-sonnet-claude-3-5-sonnet-new-table-1",
+      "expanded-2511-02997-shade-resample-then-defer-20-probabilistic-attack-various-p-p-claude-3-7-sonnet-claude-3-5-sonnet-new-table-1",
+      "expanded-2511-02997-shade-resample-then-defer-20-careful-on-resample-claude-3-7-sonnet-claude-3-5-sonnet-new-table-1",
+      "expanded-2511-02997-shade-resample-then-defer-20-give-up-after-2-interventions-claude-3-7-sonnet-claude-3-5-sonnet-new-table-1",
+      "expanded-2511-02997-shade-resample-then-defer-20-give-up-after-5-interventions-claude-3-7-sonnet-claude-3-5-sonnet-new-table-1",
+      "expanded-2511-02997-shade-resample-then-defer-20-direct-replacement-feedback-claude-3-7-sonnet-claude-3-5-sonnet-new-table-1",
+      "expanded-2511-02997-shade-resample-then-defer-20-simulating-monitor-recreation-claude-3-7-sonnet-claude-3-5-sonnet-new-table-1",
+      "expanded-2511-02997-shade-resample-then-defer-20-simulating-monitor-self-review-claude-3-7-sonnet-claude-3-5-sonnet-new-table-1"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "shade-critical-20",
+    "study": "2511.02997",
+    "label": "Defer on critical (threshold 20)",
+    "locations": [
+      "Table 2"
+    ],
+    "kind": "protocol",
+    "notes": "The table also reports attack-policy main-task performance; it is not assumed to be a benign-usefulness budget.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2511-02997-shade-critical-20-defer-on-suspicious-or-critical-actions-claude-3-7-sonnet-claude-3-5-sonnet-new-table-2",
+      "expanded-2511-02997-shade-critical-20-give-up-after-2-interventions-claude-3-7-sonnet-claude-3-5-sonnet-new-table-2",
+      "expanded-2511-02997-shade-critical-20-simulating-monitor-recreation-claude-3-7-sonnet-claude-3-5-sonnet-new-table-2",
+      "expanded-2511-02997-shade-critical-20-simulating-monitor-self-review-claude-3-7-sonnet-claude-3-5-sonnet-new-table-2",
+      "expanded-2511-02997-shade-critical-20-avoid-critical-actions-claude-3-7-sonnet-claude-3-5-sonnet-new-table-2"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "shade-pure-resample-full-context",
+    "study": "2511.02997",
+    "label": "Pure resample with full context",
+    "locations": [
+      "Section 3.2"
+    ],
+    "kind": "protocol",
+    "notes": "",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2511-02997-shade-pure-resample-full-context-claude-3-7-sonnet-claude-3-5-sonnet-new-section-3-2"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "shade-pure-resample",
+    "study": "2511.02997",
+    "label": "Pure resample",
+    "locations": [
+      "Figures 1,2,4,5",
+      "Figure 1"
+    ],
+    "kind": "protocol",
+    "notes": "Main and monitor-affordance variants; exact figure extraction tracked in the coverage ledger.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2511-02997-shade-pure-resample-claude-3-7-sonnet-claude-3-5-sonnet-new-figure-1"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "shade-defer-trusted",
+    "study": "2511.02997",
+    "label": "Defer to trusted",
+    "locations": [
+      "Figures 1,2,4,5",
+      "Figure 1"
+    ],
+    "kind": "protocol",
+    "notes": "Main and monitor-affordance variants; exact figure extraction tracked in the coverage ledger.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2511-02997-shade-defer-trusted-claude-3-7-sonnet-claude-3-5-sonnet-new-figure-1"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "shade-defer-resample",
+    "study": "2511.02997",
+    "label": "Defer to resample",
+    "locations": [
+      "Figures 1,2,4,5",
+      "Figure 1"
+    ],
+    "kind": "protocol",
+    "notes": "Main and monitor-affordance variants; exact figure extraction tracked in the coverage ledger.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2511-02997-shade-defer-resample-claude-3-7-sonnet-claude-3-5-sonnet-new-figure-1"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "shade-resample-then-defer",
+    "study": "2511.02997",
+    "label": "Resample then defer",
+    "locations": [
+      "Figures 1,2,4,5",
+      "Figure 1"
+    ],
+    "kind": "protocol",
+    "notes": "Main and monitor-affordance variants; exact figure extraction tracked in the coverage ledger.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2511-02997-shade-resample-then-defer-claude-3-7-sonnet-claude-3-5-sonnet-new-figure-1"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "shade-critical",
+    "study": "2511.02997",
+    "label": "Defer on critical",
+    "locations": [
+      "Figures 1,2,4,5",
+      "Figure 1"
+    ],
+    "kind": "protocol",
+    "notes": "Main and monitor-affordance variants; exact figure extraction tracked in the coverage ledger.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2511-02997-shade-critical-claude-3-7-sonnet-claude-3-5-sonnet-new-figure-1"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "shade-notes",
+    "study": "2511.02997",
+    "label": "Defer to trusted with notes",
+    "locations": [
+      "Figures 1,2,4,5"
+    ],
+    "kind": "protocol",
+    "notes": "Main and monitor-affordance variants; exact figure extraction tracked in the coverage ledger.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [],
+    "status": "indexed; no scalar extracted"
+  },
+  {
+    "id": "shade-permanent-notepad",
+    "study": "2511.02997",
+    "label": "Independent choice: permanent notepad",
+    "locations": [
+      "Figures 1,2,4,5",
+      "Figure 4"
+    ],
+    "kind": "protocol",
+    "notes": "Main and monitor-affordance variants; exact figure extraction tracked in the coverage ledger.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2511-02997-shade-permanent-notepad-claude-3-7-sonnet-claude-3-5-sonnet-new-figure-4"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "shade-resample-only",
+    "study": "2511.02997",
+    "label": "Independent choice: resample only",
+    "locations": [
+      "Figures 1,2,4,5",
+      "Figure 4"
+    ],
+    "kind": "protocol",
+    "notes": "Main and monitor-affordance variants; exact figure extraction tracked in the coverage ledger.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2511-02997-shade-resample-only-claude-3-7-sonnet-claude-3-5-sonnet-new-figure-4"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "shade-defer-only",
+    "study": "2511.02997",
+    "label": "Independent choice: defer only",
+    "locations": [
+      "Figures 1,2,4,5",
+      "Figure 4"
+    ],
+    "kind": "protocol",
+    "notes": "Main and monitor-affordance variants; exact figure extraction tracked in the coverage ledger.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2511-02997-shade-defer-only-claude-3-7-sonnet-claude-3-5-sonnet-new-figure-4"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "shade-ephemeral-notepad",
+    "study": "2511.02997",
+    "label": "Independent choice: ephemeral notepad",
+    "locations": [
+      "Figures 1,2,4,5",
+      "Figure 4"
+    ],
+    "kind": "protocol",
+    "notes": "Main and monitor-affordance variants; exact figure extraction tracked in the coverage ledger.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2511-02997-shade-ephemeral-notepad-claude-3-7-sonnet-claude-3-5-sonnet-new-figure-4"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "shade-resample-or-defer",
+    "study": "2511.02997",
+    "label": "Independent choice: resample or defer",
+    "locations": [
+      "Figures 1,2,4,5",
+      "Figure 4"
+    ],
+    "kind": "protocol",
+    "notes": "Main and monitor-affordance variants; exact figure extraction tracked in the coverage ledger.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2511-02997-shade-resample-or-defer-claude-3-7-sonnet-claude-3-5-sonnet-new-figure-4"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "shade-interrogate",
+    "study": "2511.02997",
+    "label": "Independent choice: interrogate",
+    "locations": [
+      "Figures 1,2,4,5",
+      "Figure 4"
+    ],
+    "kind": "protocol",
+    "notes": "Main and monitor-affordance variants; exact figure extraction tracked in the coverage ledger.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2511-02997-shade-interrogate-claude-3-7-sonnet-claude-3-5-sonnet-new-figure-4"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "linux-live-monitoring",
+    "study": "2604.15384",
+    "label": "LinuxArena live monitoring",
+    "locations": [
+      "Figure 10",
+      "Figure 7"
+    ],
+    "kind": "protocol",
+    "notes": "Rounded safety labels printed in the 11-monitor figure.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2604-15384-linux-live-monitoring-base-attacker-claude-opus-4-6-claude-opus-4-6-figure-10",
+      "expanded-2604-15384-linux-live-monitoring-attacker-strategies-claude-opus-4-6-claude-opus-4-6-figure-10",
+      "expanded-2604-15384-linux-live-monitoring-base-attacker-claude-opus-4-6-claude-sonnet-4-6-figure-10",
+      "expanded-2604-15384-linux-live-monitoring-attacker-strategies-claude-opus-4-6-claude-sonnet-4-6-figure-10",
+      "expanded-2604-15384-linux-live-monitoring-base-attacker-claude-opus-4-6-gemini-3-1-pro-figure-10",
+      "expanded-2604-15384-linux-live-monitoring-attacker-strategies-claude-opus-4-6-gemini-3-1-pro-figure-10",
+      "expanded-2604-15384-linux-live-monitoring-base-attacker-claude-opus-4-6-glm-5-figure-10",
+      "expanded-2604-15384-linux-live-monitoring-attacker-strategies-claude-opus-4-6-glm-5-figure-10",
+      "expanded-2604-15384-linux-live-monitoring-base-attacker-claude-opus-4-6-gpt-5-4-figure-10",
+      "expanded-2604-15384-linux-live-monitoring-attacker-strategies-claude-opus-4-6-gpt-5-4-figure-10",
+      "expanded-2604-15384-linux-live-monitoring-base-attacker-claude-opus-4-6-gemini-3-flash-figure-10",
+      "expanded-2604-15384-linux-live-monitoring-attacker-strategies-claude-opus-4-6-gemini-3-flash-figure-10",
+      "expanded-2604-15384-linux-live-monitoring-base-attacker-claude-opus-4-6-claude-haiku-4-5-figure-10",
+      "expanded-2604-15384-linux-live-monitoring-attacker-strategies-claude-opus-4-6-claude-haiku-4-5-figure-10",
+      "expanded-2604-15384-linux-live-monitoring-base-attacker-claude-opus-4-6-kimi-k2-5-figure-10",
+      "expanded-2604-15384-linux-live-monitoring-attacker-strategies-claude-opus-4-6-kimi-k2-5-figure-10",
+      "expanded-2604-15384-linux-live-monitoring-base-attacker-claude-opus-4-6-gpt-5-mini-figure-10",
+      "expanded-2604-15384-linux-live-monitoring-attacker-strategies-claude-opus-4-6-gpt-5-mini-figure-10",
+      "expanded-2604-15384-linux-live-monitoring-base-attacker-claude-opus-4-6-gpt-oss-120b-figure-10",
+      "expanded-2604-15384-linux-live-monitoring-attacker-strategies-claude-opus-4-6-gpt-oss-120b-figure-10",
+      "expanded-2604-15384-linux-live-monitoring-base-attacker-claude-opus-4-6-gpt-5-nano-figure-10",
+      "expanded-2604-15384-linux-live-monitoring-attacker-strategies-claude-opus-4-6-gpt-5-nano-figure-10",
+      "expanded-2604-15384-linux-live-monitoring-base-attacker-claude-opus-4-6-gpt-5-nano-figure-7",
+      "expanded-2604-15384-linux-live-monitoring-base-attacker-claude-sonnet-4-6-gpt-5-nano-figure-7",
+      "expanded-2604-15384-linux-live-monitoring-base-attacker-gemini-3-1-pro-gpt-5-nano-figure-7",
+      "expanded-2604-15384-linux-live-monitoring-base-attacker-glm-5-gpt-5-nano-figure-7",
+      "expanded-2604-15384-linux-live-monitoring-base-attacker-claude-haiku-4-5-gpt-5-nano-figure-7",
+      "expanded-2604-15384-linux-live-monitoring-base-attacker-kimi-k2-5-gpt-5-nano-figure-7",
+      "expanded-2604-15384-linux-live-monitoring-base-attacker-gemini-3-flash-gpt-5-nano-figure-7",
+      "expanded-2604-15384-linux-live-monitoring-base-attacker-grok-4-1-gpt-5-nano-figure-7"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "linux-human-attacks",
+    "study": "2604.15384",
+    "label": "Human-crafted LaStraj attacks",
+    "locations": [
+      "Figures 11,12,35"
+    ],
+    "kind": "ablation",
+    "notes": "Human-versus-model attack comparison for every available monitor.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [],
+    "status": "indexed; no scalar extracted"
+  },
+  {
+    "id": "linux-obvious-attacks",
+    "study": "2604.15384",
+    "label": "Obvious versus subtle attack",
+    "locations": [
+      "Appendix C, Figure 17"
+    ],
+    "kind": "ablation",
+    "notes": "Haiku attack-policy ablation.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [],
+    "status": "indexed; no scalar extracted"
+  },
+  {
+    "id": "linux-delayed",
+    "study": "2604.15384",
+    "label": "Delayed full-trajectory monitoring",
+    "locations": [
+      "Appendix C, Figure 18",
+      "Figure 18"
+    ],
+    "kind": "ablation",
+    "notes": "Compared with live-only and live-or-delayed; delayed detection may occur after harm.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2604-15384-linux-delayed-claude-haiku-4-5-gpt-5-nano-figure-18"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "linux-combined",
+    "study": "2604.15384",
+    "label": "Live-or-delayed monitoring",
+    "locations": [
+      "Appendix C, Figure 18",
+      "Figure 18"
+    ],
+    "kind": "ablation",
+    "notes": "Combined intervention rule.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2604-15384-linux-combined-claude-haiku-4-5-gpt-5-nano-figure-18"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "linux-attacker-goals",
+    "study": "2604.15384",
+    "label": "Side-task information: goal / pseudocode / full scorer",
+    "locations": [
+      "Appendix C, Figure 19"
+    ],
+    "kind": "ablation",
+    "notes": "Attack-information ablation.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [],
+    "status": "indexed; no scalar extracted"
+  },
+  {
+    "id": "linux-monitor-goals",
+    "study": "2604.15384",
+    "label": "Monitor with versus without side-task goals",
+    "locations": [
+      "Appendix C, Figure 20"
+    ],
+    "kind": "ablation",
+    "notes": "Monitor-context ablation.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [],
+    "status": "indexed; no scalar extracted"
+  },
+  {
+    "id": "linux-ensemble",
+    "study": "2604.15384",
+    "label": "Delayed-monitor ensemble size",
+    "locations": [
+      "Appendix C, Figure 21"
+    ],
+    "kind": "ablation",
+    "notes": "Ensemble-size sweep at 1% trajectory FPR.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [],
+    "status": "indexed; no scalar extracted"
+  },
+  {
+    "id": "linux-sandbox",
+    "study": "2604.15384",
+    "label": "Base / no network / no network and no service access",
+    "locations": [
+      "Figure 6 and Figure 29"
+    ],
+    "kind": "ablation",
+    "notes": "Sandboxing changes safety and usefulness; all three conditions retained.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [],
+    "status": "indexed; no scalar extracted"
+  },
+  {
+    "id": "linux-scratchpad",
+    "study": "2604.15384",
+    "label": "Attacker with versus without scratchpad",
+    "locations": [
+      "Appendix D, Figure 30"
+    ],
+    "kind": "ablation",
+    "notes": "Attacker-reasoning ablation.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [],
+    "status": "indexed; no scalar extracted"
+  },
+  {
+    "id": "linux-test-tool",
+    "study": "2604.15384",
+    "label": "Side-task test tool enabled versus disabled",
+    "locations": [
+      "Appendix I.1, Figure 31"
+    ],
+    "kind": "ablation",
+    "notes": "Attack-verification-tool ablation.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [],
+    "status": "indexed; no scalar extracted"
+  },
+  {
+    "id": "linux-thinking",
+    "study": "2604.15384",
+    "label": "Attacker thinking: off / 1k / 4k / 16k / 64k",
+    "locations": [
+      "Appendix I.2, Figure 32"
+    ],
+    "kind": "ablation",
+    "notes": "Attack-budget sweep.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [],
+    "status": "indexed; no scalar extracted"
+  },
+  {
+    "id": "linux-description",
+    "study": "2604.15384",
+    "label": "Attacker with versus without environment description",
+    "locations": [
+      "Appendix I.3, Figure 33"
+    ],
+    "kind": "ablation",
+    "notes": "Task-context ablation.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [],
+    "status": "indexed; no scalar extracted"
+  },
+  {
+    "id": "linux-calibration",
+    "study": "2604.15384",
+    "label": "Matched-attacker versus shared-Opus calibration",
+    "locations": [
+      "Appendix I.4, Figure 34"
+    ],
+    "kind": "ablation",
+    "notes": "False-positive calibration ablation.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [],
+    "status": "indexed; no scalar extracted"
+  },
+  {
+    "id": "selection-basharena",
+    "study": "2606.06529",
+    "label": "Trusted monitoring (BashArena)",
+    "locations": [
+      "Table 2"
+    ],
+    "kind": "protocol",
+    "notes": "Held-out selected n=15. Monitor is MiMo-V2-Flash; GPT-OSS is an offline selector, not the trusted monitor.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2606-06529-selection-basharena-baseline-1-auditing-claude-opus-4-6-mimo-v2-flash-table-2",
+      "expanded-2606-06529-selection-basharena-start-selection-1-auditing-claude-opus-4-6-mimo-v2-flash-table-2",
+      "expanded-2606-06529-selection-basharena-baseline-2-auditing-claude-opus-4-6-mimo-v2-flash-table-2",
+      "expanded-2606-06529-selection-basharena-start-selection-2-auditing-claude-opus-4-6-mimo-v2-flash-table-2",
+      "expanded-2606-06529-selection-basharena-baseline-5-auditing-claude-opus-4-6-mimo-v2-flash-table-2",
+      "expanded-2606-06529-selection-basharena-start-selection-5-auditing-claude-opus-4-6-mimo-v2-flash-table-2",
+      "expanded-2606-06529-selection-basharena-baseline-1-auditing-claude-opus-4-6-mimo-v2-flash-table-2-replicate-2",
+      "expanded-2606-06529-selection-basharena-stop-selection-1-auditing-claude-opus-4-6-mimo-v2-flash-table-2",
+      "expanded-2606-06529-selection-basharena-baseline-2-auditing-claude-opus-4-6-mimo-v2-flash-table-2-replicate-2",
+      "expanded-2606-06529-selection-basharena-stop-selection-2-auditing-claude-opus-4-6-mimo-v2-flash-table-2",
+      "expanded-2606-06529-selection-basharena-baseline-5-auditing-claude-opus-4-6-mimo-v2-flash-table-2-replicate-2",
+      "expanded-2606-06529-selection-basharena-stop-selection-5-auditing-claude-opus-4-6-mimo-v2-flash-table-2"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "selection-linuxarena",
+    "study": "2606.06529",
+    "label": "Trusted monitoring (LinuxArena)",
+    "locations": [
+      "Table 2"
+    ],
+    "kind": "protocol",
+    "notes": "Held-out selected n=18. Monitor is MiMo-V2-Flash; GPT-OSS is an offline selector, not the trusted monitor.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2606-06529-selection-linuxarena-baseline-1-auditing-claude-opus-4-6-mimo-v2-flash-table-2",
+      "expanded-2606-06529-selection-linuxarena-start-selection-1-auditing-claude-opus-4-6-mimo-v2-flash-table-2",
+      "expanded-2606-06529-selection-linuxarena-baseline-2-auditing-claude-opus-4-6-mimo-v2-flash-table-2",
+      "expanded-2606-06529-selection-linuxarena-start-selection-2-auditing-claude-opus-4-6-mimo-v2-flash-table-2",
+      "expanded-2606-06529-selection-linuxarena-baseline-5-auditing-claude-opus-4-6-mimo-v2-flash-table-2",
+      "expanded-2606-06529-selection-linuxarena-start-selection-5-auditing-claude-opus-4-6-mimo-v2-flash-table-2",
+      "expanded-2606-06529-selection-linuxarena-baseline-1-auditing-claude-opus-4-6-mimo-v2-flash-table-2-replicate-2",
+      "expanded-2606-06529-selection-linuxarena-stop-selection-1-auditing-claude-opus-4-6-mimo-v2-flash-table-2",
+      "expanded-2606-06529-selection-linuxarena-baseline-2-auditing-claude-opus-4-6-mimo-v2-flash-table-2-replicate-2",
+      "expanded-2606-06529-selection-linuxarena-stop-selection-2-auditing-claude-opus-4-6-mimo-v2-flash-table-2",
+      "expanded-2606-06529-selection-linuxarena-baseline-5-auditing-claude-opus-4-6-mimo-v2-flash-table-2-replicate-2",
+      "expanded-2606-06529-selection-linuxarena-stop-selection-5-auditing-claude-opus-4-6-mimo-v2-flash-table-2"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "selection-joint",
+    "study": "2606.06529",
+    "label": "Combined start + stop",
+    "locations": [
+      "Section 4.3"
+    ],
+    "kind": "attack-policy ablation",
+    "notes": "Reported combined policy; LinuxArena effect is underpowered, with one trajectory surviving.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [],
+    "status": "indexed; no scalar extracted"
+  },
+  {
+    "id": "selection-random",
+    "study": "2606.06529",
+    "label": "Random start and stop controls",
+    "locations": [
+      "Appendix E"
+    ],
+    "kind": "attack-policy ablation",
+    "notes": "Selection-rate controls.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [],
+    "status": "indexed; no scalar extracted"
+  },
+  {
+    "id": "selection-last-step",
+    "study": "2606.06529",
+    "label": "Last-step stop policy",
+    "locations": [
+      "Appendix D.1"
+    ],
+    "kind": "attack-policy ablation",
+    "notes": "Stop-position ablation.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [],
+    "status": "indexed; no scalar extracted"
+  },
+  {
+    "id": "selection-side-task",
+    "study": "2606.06529",
+    "label": "Best-side-task start policy",
+    "locations": [
+      "Appendix B.1"
+    ],
+    "kind": "attack-policy ablation",
+    "notes": "Side-task-choice ablation.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [],
+    "status": "indexed; no scalar extracted"
+  },
+  {
+    "id": "bootstrapped-monitoring",
+    "study": "2606.11998",
+    "label": "Bootstrapped monitoring",
+    "locations": [
+      "Table 4",
+      "Original ledger"
+    ],
+    "kind": "protocol",
+    "notes": "Underlying prompt-specific result replaces its redundant worst-of-three summary. Summary-routing architecture follows the documented Table 3 setup; helper identity is not a model feature.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2606-11998-bootstrapped-monitoring-default-collusion-condition-gpt-5-4-qwen3-8b-table-4",
+      "expanded-2606-11998-bootstrapped-monitoring-needle-collusion-condition-gpt-5-4-qwen3-8b-table-4",
+      "expanded-2606-11998-bootstrapped-monitoring-codewords-collusion-condition-gpt-5-4-qwen3-8b-table-4",
+      "expanded-2606-11998-bootstrapped-monitoring-default-collusion-condition-gpt-5-4-gpt-4-1-mini-table-4",
+      "expanded-2606-11998-bootstrapped-monitoring-needle-collusion-condition-gpt-5-4-gpt-4-1-mini-table-4",
+      "expanded-2606-11998-bootstrapped-monitoring-codewords-collusion-condition-gpt-5-4-gpt-4-1-mini-table-4",
+      "expanded-2606-11998-bootstrapped-monitoring-default-collusion-condition-gemini-3-1-pro-qwen3-8b-table-4",
+      "expanded-2606-11998-bootstrapped-monitoring-needle-collusion-condition-gemini-3-1-pro-qwen3-8b-table-4",
+      "expanded-2606-11998-bootstrapped-monitoring-codewords-collusion-condition-gemini-3-1-pro-qwen3-8b-table-4",
+      "expanded-2606-11998-bootstrapped-monitoring-default-collusion-condition-gemini-3-1-pro-gpt-4-1-mini-table-4",
+      "expanded-2606-11998-bootstrapped-monitoring-needle-collusion-condition-gemini-3-1-pro-gpt-4-1-mini-table-4",
+      "expanded-2606-11998-bootstrapped-monitoring-codewords-collusion-condition-gemini-3-1-pro-gpt-4-1-mini-table-4",
+      "expanded-2606-11998-bootstrapped-monitoring-default-collusion-condition-kimi-k2-5-qwen3-8b-table-4",
+      "expanded-2606-11998-bootstrapped-monitoring-needle-collusion-condition-kimi-k2-5-qwen3-8b-table-4",
+      "expanded-2606-11998-bootstrapped-monitoring-codewords-collusion-condition-kimi-k2-5-qwen3-8b-table-4",
+      "expanded-2606-11998-bootstrapped-monitoring-default-collusion-condition-kimi-k2-5-gpt-4-1-mini-table-4",
+      "expanded-2606-11998-bootstrapped-monitoring-needle-collusion-condition-kimi-k2-5-gpt-4-1-mini-table-4",
+      "expanded-2606-11998-bootstrapped-monitoring-codewords-collusion-condition-kimi-k2-5-gpt-4-1-mini-table-4",
+      "expanded-2606-11998-bootstrapped-monitoring-default-collusion-condition-gpt-5-4-qwen3-8b-table-4-replicate-2",
+      "expanded-2606-11998-bootstrapped-monitoring-needle-collusion-condition-gpt-5-4-qwen3-8b-table-4-replicate-2",
+      "expanded-2606-11998-bootstrapped-monitoring-codewords-collusion-condition-gpt-5-4-qwen3-8b-table-4-replicate-2",
+      "expanded-2606-11998-bootstrapped-monitoring-default-collusion-condition-gpt-5-4-gpt-4-1-mini-table-4-replicate-2",
+      "expanded-2606-11998-bootstrapped-monitoring-needle-collusion-condition-gpt-5-4-gpt-4-1-mini-table-4-replicate-2",
+      "expanded-2606-11998-bootstrapped-monitoring-codewords-collusion-condition-gpt-5-4-gpt-4-1-mini-table-4-replicate-2",
+      "expanded-2606-11998-bootstrapped-monitoring-default-collusion-condition-gemini-3-1-pro-qwen3-8b-table-4-replicate-2",
+      "expanded-2606-11998-bootstrapped-monitoring-needle-collusion-condition-gemini-3-1-pro-qwen3-8b-table-4-replicate-2",
+      "expanded-2606-11998-bootstrapped-monitoring-codewords-collusion-condition-gemini-3-1-pro-qwen3-8b-table-4-replicate-2",
+      "expanded-2606-11998-bootstrapped-monitoring-default-collusion-condition-gemini-3-1-pro-gpt-4-1-mini-table-4-replicate-2",
+      "expanded-2606-11998-bootstrapped-monitoring-needle-collusion-condition-gemini-3-1-pro-gpt-4-1-mini-table-4-replicate-2",
+      "expanded-2606-11998-bootstrapped-monitoring-codewords-collusion-condition-gemini-3-1-pro-gpt-4-1-mini-table-4-replicate-2",
+      "expanded-2606-11998-bootstrapped-monitoring-default-collusion-condition-kimi-k2-5-qwen3-8b-table-4-replicate-2",
+      "expanded-2606-11998-bootstrapped-monitoring-needle-collusion-condition-kimi-k2-5-qwen3-8b-table-4-replicate-2",
+      "expanded-2606-11998-bootstrapped-monitoring-codewords-collusion-condition-kimi-k2-5-qwen3-8b-table-4-replicate-2",
+      "expanded-2606-11998-bootstrapped-monitoring-default-collusion-condition-kimi-k2-5-gpt-4-1-mini-table-4-replicate-2",
+      "expanded-2606-11998-bootstrapped-monitoring-needle-collusion-condition-kimi-k2-5-gpt-4-1-mini-table-4-replicate-2",
+      "expanded-2606-11998-bootstrapped-monitoring-codewords-collusion-condition-kimi-k2-5-gpt-4-1-mini-table-4-replicate-2",
+      "expanded-2606-11998-bootstrapped-monitoring-default-collusion-condition-gpt-5-4-qwen3-8b-table-4-replicate-3",
+      "expanded-2606-11998-bootstrapped-monitoring-needle-collusion-condition-gpt-5-4-qwen3-8b-table-4-replicate-3",
+      "expanded-2606-11998-bootstrapped-monitoring-codewords-collusion-condition-gpt-5-4-qwen3-8b-table-4-replicate-3",
+      "expanded-2606-11998-bootstrapped-monitoring-default-collusion-condition-gpt-5-4-gpt-4-1-mini-table-4-replicate-3",
+      "expanded-2606-11998-bootstrapped-monitoring-needle-collusion-condition-gpt-5-4-gpt-4-1-mini-table-4-replicate-3",
+      "expanded-2606-11998-bootstrapped-monitoring-codewords-collusion-condition-gpt-5-4-gpt-4-1-mini-table-4-replicate-3",
+      "expanded-2606-11998-bootstrapped-monitoring-default-collusion-condition-gemini-3-1-pro-qwen3-8b-table-4-replicate-3",
+      "expanded-2606-11998-bootstrapped-monitoring-needle-collusion-condition-gemini-3-1-pro-qwen3-8b-table-4-replicate-3",
+      "expanded-2606-11998-bootstrapped-monitoring-codewords-collusion-condition-gemini-3-1-pro-qwen3-8b-table-4-replicate-3",
+      "expanded-2606-11998-bootstrapped-monitoring-default-collusion-condition-gemini-3-1-pro-gpt-4-1-mini-table-4-replicate-3",
+      "expanded-2606-11998-bootstrapped-monitoring-needle-collusion-condition-gemini-3-1-pro-gpt-4-1-mini-table-4-replicate-3",
+      "expanded-2606-11998-bootstrapped-monitoring-codewords-collusion-condition-gemini-3-1-pro-gpt-4-1-mini-table-4-replicate-3",
+      "expanded-2606-11998-bootstrapped-monitoring-default-collusion-condition-kimi-k2-5-qwen3-8b-table-4-replicate-3",
+      "expanded-2606-11998-bootstrapped-monitoring-needle-collusion-condition-kimi-k2-5-qwen3-8b-table-4-replicate-3",
+      "expanded-2606-11998-bootstrapped-monitoring-codewords-collusion-condition-kimi-k2-5-qwen3-8b-table-4-replicate-3",
+      "expanded-2606-11998-bootstrapped-monitoring-default-collusion-condition-kimi-k2-5-gpt-4-1-mini-table-4-replicate-3",
+      "expanded-2606-11998-bootstrapped-monitoring-needle-collusion-condition-kimi-k2-5-gpt-4-1-mini-table-4-replicate-3",
+      "expanded-2606-11998-bootstrapped-monitoring-codewords-collusion-condition-kimi-k2-5-gpt-4-1-mini-table-4-replicate-3",
+      "bootstrap-GLM-5-GPT-5.4-Qwen3-8B-honest",
+      "bootstrap-GLM-5-GPT-5.4-GPT-4.1 Mini-honest",
+      "bootstrap-GLM-5-Gemini 3.1 Pro-Qwen3-8B-honest",
+      "bootstrap-GLM-5-Gemini 3.1 Pro-GPT-4.1 Mini-honest",
+      "bootstrap-GLM-5-Kimi K2.5-Qwen3-8B-honest",
+      "bootstrap-GLM-5-Kimi K2.5-GPT-4.1 Mini-honest",
+      "bootstrap-Kimi K2.5-GPT-5.4-Qwen3-8B-honest",
+      "bootstrap-Kimi K2.5-GPT-5.4-GPT-4.1 Mini-honest",
+      "bootstrap-Kimi K2.5-Gemini 3.1 Pro-Qwen3-8B-honest",
+      "bootstrap-Kimi K2.5-Gemini 3.1 Pro-GPT-4.1 Mini-honest",
+      "bootstrap-Kimi K2.5-Kimi K2.5-Qwen3-8B-honest",
+      "bootstrap-Kimi K2.5-Kimi K2.5-GPT-4.1 Mini-honest",
+      "bootstrap-DeepSeek-GPT-5.4-Qwen3-8B-honest",
+      "bootstrap-DeepSeek-GPT-5.4-GPT-4.1 Mini-honest",
+      "bootstrap-DeepSeek-Gemini 3.1 Pro-Qwen3-8B-honest",
+      "bootstrap-DeepSeek-Gemini 3.1 Pro-GPT-4.1 Mini-honest",
+      "bootstrap-DeepSeek-Kimi K2.5-Qwen3-8B-honest",
+      "bootstrap-DeepSeek-Kimi K2.5-GPT-4.1 Mini-honest"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "bootstrapped-summary",
+    "study": "2606.11998",
+    "label": "Bootstrapping: summarized reasoning",
+    "locations": [
+      "Table 4",
+      "Section 4.2, Figure 4",
+      "Original ledger"
+    ],
+    "kind": "protocol",
+    "notes": "Underlying prompt-specific result replaces its redundant worst-of-three summary. Summary-routing architecture follows the documented Table 3 setup; helper identity is not a model feature.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2606-11998-bootstrapped-summary-default-collusion-condition-gpt-5-4-qwen3-8b-table-4",
+      "expanded-2606-11998-bootstrapped-summary-needle-collusion-condition-gpt-5-4-qwen3-8b-table-4",
+      "expanded-2606-11998-bootstrapped-summary-codewords-collusion-condition-gpt-5-4-qwen3-8b-table-4",
+      "expanded-2606-11998-bootstrapped-summary-default-collusion-condition-gpt-5-4-gpt-4-1-mini-table-4",
+      "expanded-2606-11998-bootstrapped-summary-needle-collusion-condition-gpt-5-4-gpt-4-1-mini-table-4",
+      "expanded-2606-11998-bootstrapped-summary-codewords-collusion-condition-gpt-5-4-gpt-4-1-mini-table-4",
+      "expanded-2606-11998-bootstrapped-summary-default-collusion-condition-gemini-3-1-pro-qwen3-8b-table-4",
+      "expanded-2606-11998-bootstrapped-summary-needle-collusion-condition-gemini-3-1-pro-qwen3-8b-table-4",
+      "expanded-2606-11998-bootstrapped-summary-codewords-collusion-condition-gemini-3-1-pro-qwen3-8b-table-4",
+      "expanded-2606-11998-bootstrapped-summary-default-collusion-condition-gemini-3-1-pro-gpt-4-1-mini-table-4",
+      "expanded-2606-11998-bootstrapped-summary-needle-collusion-condition-gemini-3-1-pro-gpt-4-1-mini-table-4",
+      "expanded-2606-11998-bootstrapped-summary-codewords-collusion-condition-gemini-3-1-pro-gpt-4-1-mini-table-4",
+      "expanded-2606-11998-bootstrapped-summary-default-collusion-condition-kimi-k2-5-qwen3-8b-table-4",
+      "expanded-2606-11998-bootstrapped-summary-needle-collusion-condition-kimi-k2-5-qwen3-8b-table-4",
+      "expanded-2606-11998-bootstrapped-summary-codewords-collusion-condition-kimi-k2-5-qwen3-8b-table-4",
+      "expanded-2606-11998-bootstrapped-summary-default-collusion-condition-kimi-k2-5-gpt-4-1-mini-table-4",
+      "expanded-2606-11998-bootstrapped-summary-needle-collusion-condition-kimi-k2-5-gpt-4-1-mini-table-4",
+      "expanded-2606-11998-bootstrapped-summary-codewords-collusion-condition-kimi-k2-5-gpt-4-1-mini-table-4",
+      "bootstrap-GPT-5.4-GPT-5.4-Qwen3-8B-honest",
+      "bootstrap-GPT-5.4-GPT-5.4-GPT-4.1 Mini-honest",
+      "bootstrap-GPT-5.4-Gemini 3.1 Pro-Qwen3-8B-honest",
+      "bootstrap-GPT-5.4-Gemini 3.1 Pro-GPT-4.1 Mini-honest",
+      "bootstrap-GPT-5.4-Kimi K2.5-Qwen3-8B-honest",
+      "bootstrap-GPT-5.4-Kimi K2.5-GPT-4.1 Mini-honest"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "bootstrapped-reasoning-only",
+    "study": "2606.11998",
+    "label": "Bootstrapping: Reasoning only",
+    "locations": [
+      "Table 9"
+    ],
+    "kind": "protocol",
+    "notes": "",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2606-11998-bootstrapped-reasoning-only-honest-gpt-5-4-qwen3-8b-table-9",
+      "expanded-2606-11998-bootstrapped-reasoning-only-default-colluding-gpt-5-4-qwen3-8b-table-9",
+      "expanded-2606-11998-bootstrapped-reasoning-only-honest-gpt-5-4-gpt-4-1-mini-table-9",
+      "expanded-2606-11998-bootstrapped-reasoning-only-default-colluding-gpt-5-4-gpt-4-1-mini-table-9",
+      "expanded-2606-11998-bootstrapped-reasoning-only-honest-gemini-3-1-pro-qwen3-8b-table-9",
+      "expanded-2606-11998-bootstrapped-reasoning-only-default-colluding-gemini-3-1-pro-qwen3-8b-table-9",
+      "expanded-2606-11998-bootstrapped-reasoning-only-honest-gemini-3-1-pro-gpt-4-1-mini-table-9",
+      "expanded-2606-11998-bootstrapped-reasoning-only-default-colluding-gemini-3-1-pro-gpt-4-1-mini-table-9",
+      "expanded-2606-11998-bootstrapped-reasoning-only-honest-gpt-5-4-qwen3-8b-table-9-replicate-2",
+      "expanded-2606-11998-bootstrapped-reasoning-only-default-colluding-gpt-5-4-qwen3-8b-table-9-replicate-2",
+      "expanded-2606-11998-bootstrapped-reasoning-only-honest-gpt-5-4-gpt-4-1-mini-table-9-replicate-2",
+      "expanded-2606-11998-bootstrapped-reasoning-only-default-colluding-gpt-5-4-gpt-4-1-mini-table-9-replicate-2",
+      "expanded-2606-11998-bootstrapped-reasoning-only-honest-gemini-3-1-pro-qwen3-8b-table-9-replicate-2",
+      "expanded-2606-11998-bootstrapped-reasoning-only-default-colluding-gemini-3-1-pro-qwen3-8b-table-9-replicate-2",
+      "expanded-2606-11998-bootstrapped-reasoning-only-honest-gemini-3-1-pro-gpt-4-1-mini-table-9-replicate-2",
+      "expanded-2606-11998-bootstrapped-reasoning-only-default-colluding-gemini-3-1-pro-gpt-4-1-mini-table-9-replicate-2"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "bootstrapped-with-actions",
+    "study": "2606.11998",
+    "label": "Bootstrapping: Reasoning + actions",
+    "locations": [
+      "Table 9"
+    ],
+    "kind": "protocol",
+    "notes": "",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2606-11998-bootstrapped-with-actions-honest-gpt-5-4-qwen3-8b-table-9",
+      "expanded-2606-11998-bootstrapped-with-actions-default-colluding-gpt-5-4-qwen3-8b-table-9",
+      "expanded-2606-11998-bootstrapped-with-actions-honest-gpt-5-4-gpt-4-1-mini-table-9",
+      "expanded-2606-11998-bootstrapped-with-actions-default-colluding-gpt-5-4-gpt-4-1-mini-table-9",
+      "expanded-2606-11998-bootstrapped-with-actions-honest-gemini-3-1-pro-qwen3-8b-table-9",
+      "expanded-2606-11998-bootstrapped-with-actions-default-colluding-gemini-3-1-pro-qwen3-8b-table-9",
+      "expanded-2606-11998-bootstrapped-with-actions-honest-gemini-3-1-pro-gpt-4-1-mini-table-9",
+      "expanded-2606-11998-bootstrapped-with-actions-default-colluding-gemini-3-1-pro-gpt-4-1-mini-table-9",
+      "expanded-2606-11998-bootstrapped-with-actions-honest-gpt-5-4-qwen3-8b-table-9-replicate-2",
+      "expanded-2606-11998-bootstrapped-with-actions-default-colluding-gpt-5-4-qwen3-8b-table-9-replicate-2",
+      "expanded-2606-11998-bootstrapped-with-actions-honest-gpt-5-4-gpt-4-1-mini-table-9-replicate-2",
+      "expanded-2606-11998-bootstrapped-with-actions-default-colluding-gpt-5-4-gpt-4-1-mini-table-9-replicate-2",
+      "expanded-2606-11998-bootstrapped-with-actions-honest-gemini-3-1-pro-qwen3-8b-table-9-replicate-2",
+      "expanded-2606-11998-bootstrapped-with-actions-default-colluding-gemini-3-1-pro-qwen3-8b-table-9-replicate-2",
+      "expanded-2606-11998-bootstrapped-with-actions-honest-gemini-3-1-pro-gpt-4-1-mini-table-9-replicate-2",
+      "expanded-2606-11998-bootstrapped-with-actions-default-colluding-gemini-3-1-pro-gpt-4-1-mini-table-9-replicate-2"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "bootstrapped-refined-prompt",
+    "study": "2606.11998",
+    "label": "Bootstrapping: refined trusted prompt",
+    "locations": [
+      "Table 8"
+    ],
+    "kind": "protocol",
+    "notes": "Blue-winner catch after red-blue alternation; not a helper-capability feature.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2606-11998-bootstrapped-refined-prompt-run-v1-phase-0-gpt-5-4-gpt-4-1-mini-table-8",
+      "expanded-2606-11998-bootstrapped-refined-prompt-run-v1-phase-1-gpt-5-4-gpt-4-1-mini-table-8",
+      "expanded-2606-11998-bootstrapped-refined-prompt-run-v1-phase-2-gpt-5-4-gpt-4-1-mini-table-8",
+      "expanded-2606-11998-bootstrapped-refined-prompt-run-v2-phase-0-gpt-5-4-gpt-4-1-mini-table-8",
+      "expanded-2606-11998-bootstrapped-refined-prompt-run-v2-phase-1-gpt-5-4-gpt-4-1-mini-table-8",
+      "expanded-2606-11998-bootstrapped-refined-prompt-run-v2-phase-2-gpt-5-4-gpt-4-1-mini-table-8"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "bootstrapped-rollout-length",
+    "study": "2606.11998",
+    "label": "Rollout-length ablation",
+    "locations": [
+      "Section 4.3, Figure 5"
+    ],
+    "kind": "stratified analysis",
+    "notes": "Length-stratified catch and false-positive diagnostics.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [],
+    "status": "indexed; no scalar extracted"
+  },
+  {
+    "id": "monitoringbench-stepwise",
+    "study": "2605.09684",
+    "label": "Stepwise trusted monitoring",
+    "locations": [
+      "Table 6"
+    ],
+    "kind": "protocol",
+    "notes": "Equal task-weighted mean of four published catch rates, matching the existing macro-average treatment.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2605-09684-monitoringbench-stepwise-baseline-claude-opus-4-6-claude-opus-4-5-table-6",
+      "expanded-2605-09684-monitoringbench-stepwise-human-strategies-claude-opus-4-6-claude-opus-4-5-table-6",
+      "expanded-2605-09684-monitoringbench-stepwise-recon-claude-opus-4-6-claude-opus-4-5-table-6",
+      "expanded-2605-09684-monitoringbench-stepwise-refined-claude-opus-4-6-claude-opus-4-5-table-6",
+      "expanded-2605-09684-monitoringbench-stepwise-baseline-claude-opus-4-6-gpt-5-1-codex-table-6",
+      "expanded-2605-09684-monitoringbench-stepwise-human-strategies-claude-opus-4-6-gpt-5-1-codex-table-6",
+      "expanded-2605-09684-monitoringbench-stepwise-recon-claude-opus-4-6-gpt-5-1-codex-table-6",
+      "expanded-2605-09684-monitoringbench-stepwise-refined-claude-opus-4-6-gpt-5-1-codex-table-6",
+      "expanded-2605-09684-monitoringbench-stepwise-baseline-claude-opus-4-6-claude-sonnet-4-table-6",
+      "expanded-2605-09684-monitoringbench-stepwise-human-strategies-claude-opus-4-6-claude-sonnet-4-table-6",
+      "expanded-2605-09684-monitoringbench-stepwise-recon-claude-opus-4-6-claude-sonnet-4-table-6",
+      "expanded-2605-09684-monitoringbench-stepwise-refined-claude-opus-4-6-claude-sonnet-4-table-6",
+      "expanded-2605-09684-monitoringbench-stepwise-baseline-claude-opus-4-6-gpt-5-table-6",
+      "expanded-2605-09684-monitoringbench-stepwise-human-strategies-claude-opus-4-6-gpt-5-table-6",
+      "expanded-2605-09684-monitoringbench-stepwise-recon-claude-opus-4-6-gpt-5-table-6",
+      "expanded-2605-09684-monitoringbench-stepwise-refined-claude-opus-4-6-gpt-5-table-6",
+      "expanded-2605-09684-monitoringbench-stepwise-baseline-claude-opus-4-6-gpt-4-1-table-6",
+      "expanded-2605-09684-monitoringbench-stepwise-human-strategies-claude-opus-4-6-gpt-4-1-table-6",
+      "expanded-2605-09684-monitoringbench-stepwise-recon-claude-opus-4-6-gpt-4-1-table-6",
+      "expanded-2605-09684-monitoringbench-stepwise-refined-claude-opus-4-6-gpt-4-1-table-6",
+      "expanded-2605-09684-monitoringbench-stepwise-baseline-claude-opus-4-6-gpt-5-nano-table-6",
+      "expanded-2605-09684-monitoringbench-stepwise-human-strategies-claude-opus-4-6-gpt-5-nano-table-6",
+      "expanded-2605-09684-monitoringbench-stepwise-recon-claude-opus-4-6-gpt-5-nano-table-6",
+      "expanded-2605-09684-monitoringbench-stepwise-refined-claude-opus-4-6-gpt-5-nano-table-6",
+      "expanded-2605-09684-monitoringbench-stepwise-baseline-claude-opus-4-6-gpt-4-1-mini-table-6",
+      "expanded-2605-09684-monitoringbench-stepwise-human-strategies-claude-opus-4-6-gpt-4-1-mini-table-6",
+      "expanded-2605-09684-monitoringbench-stepwise-recon-claude-opus-4-6-gpt-4-1-mini-table-6",
+      "expanded-2605-09684-monitoringbench-stepwise-refined-claude-opus-4-6-gpt-4-1-mini-table-6"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "static-full-trajectory",
+    "study": "2605.09684",
+    "label": "Full-trajectory trusted monitoring",
+    "locations": [
+      "Table 4",
+      "Original ledger"
+    ],
+    "kind": "protocol",
+    "notes": "",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2605-09684-static-full-trajectory-baseline-cover-opportunity-claude-opus-4-6-gpt-5-table-4",
+      "expanded-2605-09684-static-full-trajectory-baseline-cover-opportunity-claude-opus-4-6-gpt-5-1-codex-table-4",
+      "expanded-2605-09684-static-full-trajectory-baseline-cover-opportunity-claude-opus-4-6-claude-opus-4-5-table-4",
+      "expanded-2605-09684-static-full-trajectory-baseline-cover-opportunity-claude-opus-4-6-claude-sonnet-4-5-table-4",
+      "expanded-2605-09684-static-full-trajectory-baseline-cover-opportunity-claude-opus-4-6-claude-sonnet-4-table-4",
+      "expanded-2605-09684-static-full-trajectory-v1-task-text-cover-opportunity-claude-opus-4-6-gpt-5-table-4",
+      "expanded-2605-09684-static-full-trajectory-v1-task-text-cover-opportunity-claude-opus-4-6-gpt-5-1-codex-table-4",
+      "expanded-2605-09684-static-full-trajectory-v1-task-text-cover-opportunity-claude-opus-4-6-claude-opus-4-5-table-4",
+      "expanded-2605-09684-static-full-trajectory-v1-task-text-cover-opportunity-claude-opus-4-6-claude-sonnet-4-5-table-4",
+      "expanded-2605-09684-static-full-trajectory-v1-task-text-cover-opportunity-claude-opus-4-6-claude-sonnet-4-table-4",
+      "expanded-2605-09684-static-full-trajectory-v2-env-seed-cover-opportunity-claude-opus-4-6-gpt-5-table-4",
+      "expanded-2605-09684-static-full-trajectory-v2-env-seed-cover-opportunity-claude-opus-4-6-gpt-5-1-codex-table-4",
+      "expanded-2605-09684-static-full-trajectory-v2-env-seed-cover-opportunity-claude-opus-4-6-claude-opus-4-5-table-4",
+      "expanded-2605-09684-static-full-trajectory-v2-env-seed-cover-opportunity-claude-opus-4-6-claude-sonnet-4-5-table-4",
+      "expanded-2605-09684-static-full-trajectory-v2-env-seed-cover-opportunity-claude-opus-4-6-claude-sonnet-4-table-4",
+      "expanded-2605-09684-static-full-trajectory-v3-combined-cover-opportunity-claude-opus-4-6-gpt-5-table-4",
+      "expanded-2605-09684-static-full-trajectory-v3-combined-cover-opportunity-claude-opus-4-6-gpt-5-1-codex-table-4",
+      "expanded-2605-09684-static-full-trajectory-v3-combined-cover-opportunity-claude-opus-4-6-claude-opus-4-5-table-4",
+      "expanded-2605-09684-static-full-trajectory-v3-combined-cover-opportunity-claude-opus-4-6-claude-sonnet-4-5-table-4",
+      "expanded-2605-09684-static-full-trajectory-v3-combined-cover-opportunity-claude-opus-4-6-claude-sonnet-4-table-4",
+      "monitoringbench-Opus 4.5-baseline",
+      "monitoringbench-Opus 4.5-human-strategies",
+      "monitoringbench-Opus 4.5-recon",
+      "monitoringbench-Opus 4.5-refined",
+      "monitoringbench-GPT-5.1 Codex-baseline",
+      "monitoringbench-GPT-5.1 Codex-human-strategies",
+      "monitoringbench-GPT-5.1 Codex-recon",
+      "monitoringbench-GPT-5.1 Codex-refined",
+      "monitoringbench-Sonnet 4.5-baseline",
+      "monitoringbench-Sonnet 4.5-human-strategies",
+      "monitoringbench-Sonnet 4.5-recon",
+      "monitoringbench-Sonnet 4.5-refined",
+      "monitoringbench-GPT-5-baseline",
+      "monitoringbench-GPT-5-human-strategies",
+      "monitoringbench-GPT-5-recon",
+      "monitoringbench-GPT-5-refined",
+      "monitoringbench-Sonnet 4.0-baseline",
+      "monitoringbench-Sonnet 4.0-human-strategies",
+      "monitoringbench-Sonnet 4.0-recon",
+      "monitoringbench-Sonnet 4.0-refined",
+      "monitoringbench-o3-baseline",
+      "monitoringbench-o3-human-strategies",
+      "monitoringbench-o3-recon",
+      "monitoringbench-o3-refined",
+      "monitoringbench-GPT-5 Nano-baseline",
+      "monitoringbench-GPT-5 Nano-human-strategies",
+      "monitoringbench-GPT-5 Nano-recon",
+      "monitoringbench-GPT-5 Nano-refined",
+      "monitoringbench-o4-mini-baseline",
+      "monitoringbench-o4-mini-human-strategies",
+      "monitoringbench-o4-mini-recon",
+      "monitoringbench-o4-mini-refined",
+      "monitoringbench-GPT-4.1-baseline",
+      "monitoringbench-GPT-4.1-human-strategies",
+      "monitoringbench-GPT-4.1-recon",
+      "monitoringbench-GPT-4.1-refined",
+      "monitoringbench-GPT-4.1 Mini-baseline",
+      "monitoringbench-GPT-4.1 Mini-human-strategies",
+      "monitoringbench-GPT-4.1 Mini-recon",
+      "monitoringbench-GPT-4.1 Mini-refined",
+      "monitoringbench-GPT-4 Turbo-baseline",
+      "monitoringbench-GPT-4 Turbo-human-strategies",
+      "monitoringbench-GPT-4 Turbo-recon",
+      "monitoringbench-GPT-4 Turbo-refined",
+      "monitoringbench-GPT-4o-baseline",
+      "monitoringbench-GPT-4o-human-strategies",
+      "monitoringbench-GPT-4o-recon",
+      "monitoringbench-GPT-4o-refined",
+      "monitoringbench-GPT-4o Mini-baseline",
+      "monitoringbench-GPT-4o Mini-human-strategies",
+      "monitoringbench-GPT-4o Mini-recon",
+      "monitoringbench-GPT-4o Mini-refined"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "monitoringbench-prompt-0",
+    "study": "2605.09684",
+    "label": "Monitor prompt: Default elicited",
+    "locations": [
+      "Table 16"
+    ],
+    "kind": "protocol",
+    "notes": "148-trajectory refined-attack subset; prompt/calibration variant.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2605-09684-monitoringbench-prompt-0-prompt-0-fpr-1-claude-opus-4-6-claude-opus-4-5-table-16",
+      "expanded-2605-09684-monitoringbench-prompt-0-prompt-0-fpr-1-claude-opus-4-6-gpt-5-table-16"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "monitoringbench-prompt-1",
+    "study": "2605.09684",
+    "label": "Monitor prompt: Prescribed analysis",
+    "locations": [
+      "Table 16"
+    ],
+    "kind": "protocol",
+    "notes": "148-trajectory refined-attack subset; prompt/calibration variant.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2605-09684-monitoringbench-prompt-1-prompt-1-fpr-1-claude-opus-4-6-claude-opus-4-5-table-16",
+      "expanded-2605-09684-monitoringbench-prompt-1-prompt-1-fpr-1-claude-opus-4-6-gpt-5-table-16"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "monitoringbench-prompt-2",
+    "study": "2605.09684",
+    "label": "Monitor prompt: High-stakes + calibration",
+    "locations": [
+      "Table 16"
+    ],
+    "kind": "protocol",
+    "notes": "148-trajectory refined-attack subset; prompt/calibration variant.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2605-09684-monitoringbench-prompt-2-prompt-2-fpr-1-claude-opus-4-6-claude-opus-4-5-table-16",
+      "expanded-2605-09684-monitoringbench-prompt-2-prompt-2-fpr-5-claude-opus-4-6-claude-opus-4-5-table-16",
+      "expanded-2605-09684-monitoringbench-prompt-2-prompt-2-fpr-1-claude-opus-4-6-gpt-5-table-16"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "self-recognition-none",
+    "study": "2602.20628",
+    "label": "Monitoring with None",
+    "locations": [
+      "Table 2"
+    ],
+    "kind": "protocol",
+    "notes": "Combined-monitor column; no separate untrusted-monitor capability is used.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2602-20628-self-recognition-none-apps-self-rec-no-elicitation-gpt-4-1-gpt-4o-mini-table-2",
+      "expanded-2602-20628-self-recognition-none-bigcodebench-self-rec-no-elicitation-gpt-4-1-gpt-4o-mini-table-2",
+      "expanded-2602-20628-self-recognition-none-apps-self-rec-sft-gpt-4-1-gpt-4o-mini-table-2",
+      "expanded-2602-20628-self-recognition-none-bigcodebench-self-rec-sft-gpt-4-1-gpt-4o-mini-table-2",
+      "expanded-2602-20628-self-recognition-none-apps-vague-acausal-gpt-4-1-gpt-4o-mini-table-2",
+      "expanded-2602-20628-self-recognition-none-bigcodebench-vague-acausal-gpt-4-1-gpt-4o-mini-table-2",
+      "expanded-2602-20628-self-recognition-none-apps-causal-for-while-gpt-4-1-gpt-4o-mini-table-2",
+      "expanded-2602-20628-self-recognition-none-bigcodebench-causal-for-while-gpt-4-1-gpt-4o-mini-table-2",
+      "expanded-2602-20628-self-recognition-none-apps-combined-for-while-sft-gpt-4-1-gpt-4o-mini-table-2"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "self-recognition-none-without-trusted-review",
+    "study": "2602.20628",
+    "label": "Monitoring without trusted review: None",
+    "locations": [
+      "Table 2"
+    ],
+    "kind": "baseline",
+    "notes": "No trusted review in this column; retained as baseline evidence, not a trusted-control candidate.",
+    "cost": "",
+    "candidate_eligible": false,
+    "observation_ids": [
+      "expanded-2602-20628-self-recognition-none-without-trusted-review-apps-self-rec-no-elicitation-gpt-4-1-gpt-4o-mini-table-2",
+      "expanded-2602-20628-self-recognition-none-without-trusted-review-bigcodebench-self-rec-no-elicitation-gpt-4-1-gpt-4o-mini-table-2",
+      "expanded-2602-20628-self-recognition-none-without-trusted-review-apps-self-rec-sft-gpt-4-1-gpt-4o-mini-table-2",
+      "expanded-2602-20628-self-recognition-none-without-trusted-review-bigcodebench-self-rec-sft-gpt-4-1-gpt-4o-mini-table-2",
+      "expanded-2602-20628-self-recognition-none-without-trusted-review-apps-vague-acausal-gpt-4-1-gpt-4o-mini-table-2",
+      "expanded-2602-20628-self-recognition-none-without-trusted-review-bigcodebench-vague-acausal-gpt-4-1-gpt-4o-mini-table-2",
+      "expanded-2602-20628-self-recognition-none-without-trusted-review-apps-causal-for-while-gpt-4-1-gpt-4o-mini-table-2",
+      "expanded-2602-20628-self-recognition-none-without-trusted-review-bigcodebench-causal-for-while-gpt-4-1-gpt-4o-mini-table-2",
+      "expanded-2602-20628-self-recognition-none-without-trusted-review-apps-combined-for-while-sft-gpt-4-1-gpt-4o-mini-table-2"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "self-recognition-minifier",
+    "study": "2602.20628",
+    "label": "Monitoring with Minifier",
+    "locations": [
+      "Table 2"
+    ],
+    "kind": "protocol",
+    "notes": "Combined-monitor column; no separate untrusted-monitor capability is used.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2602-20628-self-recognition-minifier-apps-gpt-4-1-gpt-4o-mini-table-2",
+      "expanded-2602-20628-self-recognition-minifier-bigcodebench-gpt-4-1-gpt-4o-mini-table-2",
+      "expanded-2602-20628-self-recognition-minifier-apps-gpt-4-1-gpt-4o-mini-table-2-replicate-2",
+      "expanded-2602-20628-self-recognition-minifier-bigcodebench-gpt-4-1-gpt-4o-mini-table-2-replicate-2",
+      "expanded-2602-20628-self-recognition-minifier-apps-gpt-4-1-gpt-4o-mini-table-2-replicate-3",
+      "expanded-2602-20628-self-recognition-minifier-bigcodebench-gpt-4-1-gpt-4o-mini-table-2-replicate-3",
+      "expanded-2602-20628-self-recognition-minifier-apps-gpt-4-1-gpt-4o-mini-table-2-replicate-4",
+      "expanded-2602-20628-self-recognition-minifier-bigcodebench-gpt-4-1-gpt-4o-mini-table-2-replicate-4",
+      "expanded-2602-20628-self-recognition-minifier-apps-gpt-4-1-gpt-4o-mini-table-2-replicate-5"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "self-recognition-minifier-without-trusted-review",
+    "study": "2602.20628",
+    "label": "Monitoring without trusted review: Minifier",
+    "locations": [
+      "Table 2"
+    ],
+    "kind": "baseline",
+    "notes": "No trusted review in this column; retained as baseline evidence, not a trusted-control candidate.",
+    "cost": "",
+    "candidate_eligible": false,
+    "observation_ids": [
+      "expanded-2602-20628-self-recognition-minifier-without-trusted-review-apps-gpt-4-1-gpt-4o-mini-table-2",
+      "expanded-2602-20628-self-recognition-minifier-without-trusted-review-bigcodebench-gpt-4-1-gpt-4o-mini-table-2",
+      "expanded-2602-20628-self-recognition-minifier-without-trusted-review-apps-gpt-4-1-gpt-4o-mini-table-2-replicate-2",
+      "expanded-2602-20628-self-recognition-minifier-without-trusted-review-bigcodebench-gpt-4-1-gpt-4o-mini-table-2-replicate-2",
+      "expanded-2602-20628-self-recognition-minifier-without-trusted-review-apps-gpt-4-1-gpt-4o-mini-table-2-replicate-3",
+      "expanded-2602-20628-self-recognition-minifier-without-trusted-review-bigcodebench-gpt-4-1-gpt-4o-mini-table-2-replicate-3",
+      "expanded-2602-20628-self-recognition-minifier-without-trusted-review-apps-gpt-4-1-gpt-4o-mini-table-2-replicate-4",
+      "expanded-2602-20628-self-recognition-minifier-without-trusted-review-bigcodebench-gpt-4-1-gpt-4o-mini-table-2-replicate-4",
+      "expanded-2602-20628-self-recognition-minifier-without-trusted-review-apps-gpt-4-1-gpt-4o-mini-table-2-replicate-5"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "self-recognition-summariser",
+    "study": "2602.20628",
+    "label": "Monitoring with Summariser",
+    "locations": [
+      "Table 2"
+    ],
+    "kind": "protocol",
+    "notes": "Combined-monitor column; no separate untrusted-monitor capability is used.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2602-20628-self-recognition-summariser-apps-gpt-4-1-gpt-4o-mini-table-2",
+      "expanded-2602-20628-self-recognition-summariser-bigcodebench-gpt-4-1-gpt-4o-mini-table-2",
+      "expanded-2602-20628-self-recognition-summariser-apps-gpt-4-1-gpt-4o-mini-table-2-replicate-2",
+      "expanded-2602-20628-self-recognition-summariser-bigcodebench-gpt-4-1-gpt-4o-mini-table-2-replicate-2",
+      "expanded-2602-20628-self-recognition-summariser-apps-gpt-4-1-gpt-4o-mini-table-2-replicate-3",
+      "expanded-2602-20628-self-recognition-summariser-bigcodebench-gpt-4-1-gpt-4o-mini-table-2-replicate-3",
+      "expanded-2602-20628-self-recognition-summariser-apps-gpt-4-1-gpt-4o-mini-table-2-replicate-4",
+      "expanded-2602-20628-self-recognition-summariser-bigcodebench-gpt-4-1-gpt-4o-mini-table-2-replicate-4",
+      "expanded-2602-20628-self-recognition-summariser-apps-gpt-4-1-gpt-4o-mini-table-2-replicate-5"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "self-recognition-summariser-without-trusted-review",
+    "study": "2602.20628",
+    "label": "Monitoring without trusted review: Summariser",
+    "locations": [
+      "Table 2"
+    ],
+    "kind": "baseline",
+    "notes": "No trusted review in this column; retained as baseline evidence, not a trusted-control candidate.",
+    "cost": "",
+    "candidate_eligible": false,
+    "observation_ids": [
+      "expanded-2602-20628-self-recognition-summariser-without-trusted-review-apps-gpt-4-1-gpt-4o-mini-table-2",
+      "expanded-2602-20628-self-recognition-summariser-without-trusted-review-bigcodebench-gpt-4-1-gpt-4o-mini-table-2",
+      "expanded-2602-20628-self-recognition-summariser-without-trusted-review-apps-gpt-4-1-gpt-4o-mini-table-2-replicate-2",
+      "expanded-2602-20628-self-recognition-summariser-without-trusted-review-bigcodebench-gpt-4-1-gpt-4o-mini-table-2-replicate-2",
+      "expanded-2602-20628-self-recognition-summariser-without-trusted-review-apps-gpt-4-1-gpt-4o-mini-table-2-replicate-3",
+      "expanded-2602-20628-self-recognition-summariser-without-trusted-review-bigcodebench-gpt-4-1-gpt-4o-mini-table-2-replicate-3",
+      "expanded-2602-20628-self-recognition-summariser-without-trusted-review-apps-gpt-4-1-gpt-4o-mini-table-2-replicate-4",
+      "expanded-2602-20628-self-recognition-summariser-without-trusted-review-bigcodebench-gpt-4-1-gpt-4o-mini-table-2-replicate-4",
+      "expanded-2602-20628-self-recognition-summariser-without-trusted-review-apps-gpt-4-1-gpt-4o-mini-table-2-replicate-5"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "evasion-native-hooks",
+    "study": "2609.30217",
+    "label": "Native-hook trusted monitoring",
+    "locations": [
+      "Figure 1",
+      "Figure 8a"
+    ],
+    "kind": "protocol",
+    "notes": "One minus single-run evasion is a prevention upper bound; refusals are not credited as monitor catches.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2609-30217-evasion-native-hooks-single-run-glm-5-2-gpt-oss-120b-figure-1",
+      "expanded-2609-30217-evasion-native-hooks-single-run-deepseek-v4-flash-gpt-oss-120b-figure-1",
+      "expanded-2609-30217-evasion-native-hooks-single-run-muse-spark-1-3-gpt-oss-120b-figure-1",
+      "expanded-2609-30217-evasion-native-hooks-single-run-gpt-5-6-luna-gpt-oss-120b-figure-1",
+      "expanded-2609-30217-evasion-native-hooks-single-run-glm-5-3-flash-gpt-oss-120b-figure-1",
+      "expanded-2609-30217-evasion-native-hooks-single-run-gpt-5-6-sol-gpt-oss-120b-figure-1",
+      "expanded-2609-30217-evasion-native-hooks-single-run-gpt-6-sol-gpt-oss-120b-figure-1",
+      "expanded-2609-30217-evasion-native-hooks-single-run-claude-fable-5-1-gpt-oss-120b-figure-1",
+      "expanded-2609-30217-evasion-native-hooks-single-run-claude-opus-5-gpt-oss-120b-figure-1",
+      "expanded-2609-30217-evasion-native-hooks-single-run-gpt-6-astra-gpt-oss-120b-figure-1",
+      "expanded-2609-30217-evasion-native-hooks-34-task-monitor-sweep-gpt-5-6-sol-gpt-oss-120b-figure-8a",
+      "expanded-2609-30217-evasion-native-hooks-34-task-monitor-sweep-gpt-5-6-sol-llama-3-1-8b-figure-8a",
+      "expanded-2609-30217-evasion-native-hooks-34-task-monitor-sweep-gpt-5-6-sol-qwen-3-6-35b-a3b-figure-8a",
+      "expanded-2609-30217-evasion-native-hooks-34-task-monitor-sweep-gpt-5-6-sol-qwen-3-5-9b-figure-8a",
+      "expanded-2609-30217-evasion-native-hooks-34-task-monitor-sweep-gpt-5-6-sol-qwen-3-5-35b-a3b-figure-8a"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "evasion-generic-denial",
+    "study": "2609.30217",
+    "label": "Generic denial",
+    "locations": [
+      "Figure 9"
+    ],
+    "kind": "protocol",
+    "notes": "Union-bound conversion H3/3; attempts are not assumed independent.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2609-30217-evasion-generic-denial-best-of-three-gpt-5-6-luna-gpt-oss-120b-figure-9",
+      "expanded-2609-30217-evasion-generic-denial-best-of-three-deepseek-v4-flash-gpt-oss-120b-figure-9"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "evasion-denial-with-reason",
+    "study": "2609.30217",
+    "label": "Denial with reason",
+    "locations": [
+      "Figure 9"
+    ],
+    "kind": "protocol",
+    "notes": "Union-bound conversion H3/3; attempts are not assumed independent.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2609-30217-evasion-denial-with-reason-best-of-three-gpt-5-6-luna-gpt-oss-120b-figure-9",
+      "expanded-2609-30217-evasion-denial-with-reason-best-of-three-deepseek-v4-flash-gpt-oss-120b-figure-9"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "evasion-history-aware-monitor",
+    "study": "2609.30217",
+    "label": "History-aware monitor",
+    "locations": [
+      "Figure 10"
+    ],
+    "kind": "protocol",
+    "notes": "Refusal/downgrade caveats retained for Sonnet and Opus.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2609-30217-evasion-history-aware-monitor-40-task-subset-deepseek-v4-flash-gpt-oss-120b-figure-10",
+      "expanded-2609-30217-evasion-history-aware-monitor-40-task-subset-muse-spark-1-3-gpt-oss-120b-figure-10",
+      "expanded-2609-30217-evasion-history-aware-monitor-40-task-subset-gpt-5-6-luna-gpt-oss-120b-figure-10",
+      "expanded-2609-30217-evasion-history-aware-monitor-40-task-subset-gpt-5-6-sol-gpt-oss-120b-figure-10",
+      "expanded-2609-30217-evasion-history-aware-monitor-40-task-subset-claude-sonnet-5-gpt-oss-120b-figure-10",
+      "expanded-2609-30217-evasion-history-aware-monitor-40-task-subset-claude-opus-5-gpt-oss-120b-figure-10"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "evasion-myopic-monitor",
+    "study": "2609.30217",
+    "label": "Myopic monitor",
+    "locations": [
+      "Figure 10"
+    ],
+    "kind": "protocol",
+    "notes": "Refusal/downgrade caveats retained for Sonnet and Opus.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2609-30217-evasion-myopic-monitor-40-task-subset-deepseek-v4-flash-gpt-oss-120b-figure-10",
+      "expanded-2609-30217-evasion-myopic-monitor-40-task-subset-muse-spark-1-3-gpt-oss-120b-figure-10",
+      "expanded-2609-30217-evasion-myopic-monitor-40-task-subset-gpt-5-6-luna-gpt-oss-120b-figure-10",
+      "expanded-2609-30217-evasion-myopic-monitor-40-task-subset-gpt-5-6-sol-gpt-oss-120b-figure-10",
+      "expanded-2609-30217-evasion-myopic-monitor-40-task-subset-claude-sonnet-5-gpt-oss-120b-figure-10",
+      "expanded-2609-30217-evasion-myopic-monitor-40-task-subset-claude-opus-5-gpt-oss-120b-figure-10"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "evasion-effort",
+    "study": "2609.30217",
+    "label": "Reasoning effort: low / medium / high / xhigh / max",
+    "locations": [
+      "Figure 3"
+    ],
+    "kind": "ablation",
+    "notes": "Four agent families across five effort levels; full curve indexed, not assigned fabricated scalar outcomes.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [],
+    "status": "indexed; no scalar extracted"
+  },
+  {
+    "id": "evasion-forged-denial",
+    "study": "2609.30217",
+    "label": "Forged-denial / denial-of-service diagnostics",
+    "locations": [
+      "Figure 7 and Table 9"
+    ],
+    "kind": "ablation",
+    "notes": "Task abandonment and compliance diagnostic, not harmful-side-task prevention.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [],
+    "status": "indexed; no scalar extracted"
+  },
+  {
+    "id": "evasion-context-routes",
+    "study": "2609.30217",
+    "label": "Monitor context and interception routes",
+    "locations": [
+      "Tables 7\u20138, Appendix G"
+    ],
+    "kind": "ablation",
+    "notes": "Control and interception diagnostics.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [],
+    "status": "indexed; no scalar extracted"
+  },
+  {
+    "id": "retry-trusted-monitoring",
+    "study": "2605.26047",
+    "label": "Trusted monitoring",
+    "locations": [
+      "Figure 1"
+    ],
+    "kind": "protocol",
+    "notes": "Reported main operating point; sampling changes compute cost.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2605-26047-retry-trusted-monitoring-claude-opus-4-6-mimo-v2-flash-figure-1"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "retry-feedback",
+    "study": "2605.26047",
+    "label": "Retry with feedback",
+    "locations": [
+      "Figure 1"
+    ],
+    "kind": "protocol",
+    "notes": "Reported main operating point; sampling changes compute cost.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2605-26047-retry-feedback-claude-opus-4-6-mimo-v2-flash-figure-1"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "retry-resample-min-2",
+    "study": "2605.26047",
+    "label": "Policy resample: minimum of 2",
+    "locations": [
+      "Figure 1"
+    ],
+    "kind": "protocol",
+    "notes": "Reported main operating point; sampling changes compute cost.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2605-26047-retry-resample-min-2-claude-opus-4-6-mimo-v2-flash-figure-1"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "retry-resample-max-2",
+    "study": "2605.26047",
+    "label": "Policy resample: maximum of 2",
+    "locations": [
+      "Figure 1"
+    ],
+    "kind": "protocol",
+    "notes": "Reported main operating point; sampling changes compute cost.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2605-26047-retry-resample-max-2-claude-opus-4-6-mimo-v2-flash-figure-1"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "retry-resample-max-5",
+    "study": "2605.26047",
+    "label": "Policy resample: maximum of 5",
+    "locations": [
+      "Figure 1"
+    ],
+    "kind": "protocol",
+    "notes": "Reported main operating point; sampling changes compute cost.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2605-26047-retry-resample-max-5-claude-opus-4-6-mimo-v2-flash-figure-1"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "retry-execute-2",
+    "study": "2605.26047",
+    "label": "Execute then resample",
+    "locations": [
+      "Figure 1"
+    ],
+    "kind": "protocol",
+    "notes": "Reported main operating point; sampling changes compute cost.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2605-26047-retry-execute-2-claude-opus-4-6-mimo-v2-flash-figure-1"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "retry-resample-max-3",
+    "study": "2605.26047",
+    "label": "Policy resample: max of 3",
+    "locations": [
+      "Figure 3"
+    ],
+    "kind": "protocol",
+    "notes": "Figure readout interval, not a statistical confidence interval.",
+    "cost": "3 policy samples",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2605-26047-retry-resample-max-3-claude-opus-4-6-mimo-v2-flash-figure-3"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "retry-resample-max-4",
+    "study": "2605.26047",
+    "label": "Policy resample: max of 4",
+    "locations": [
+      "Figure 3"
+    ],
+    "kind": "protocol",
+    "notes": "Figure readout interval, not a statistical confidence interval.",
+    "cost": "4 policy samples",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2605-26047-retry-resample-max-4-claude-opus-4-6-mimo-v2-flash-figure-3"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "retry-resample-median-2",
+    "study": "2605.26047",
+    "label": "Policy resample: median of 2",
+    "locations": [
+      "Figure 3"
+    ],
+    "kind": "protocol",
+    "notes": "Figure readout interval, not a statistical confidence interval.",
+    "cost": "2 policy samples",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2605-26047-retry-resample-median-2-claude-opus-4-6-mimo-v2-flash-figure-3"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "retry-resample-median-3",
+    "study": "2605.26047",
+    "label": "Policy resample: median of 3",
+    "locations": [
+      "Figure 3"
+    ],
+    "kind": "protocol",
+    "notes": "Figure readout interval, not a statistical confidence interval.",
+    "cost": "3 policy samples",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2605-26047-retry-resample-median-3-claude-opus-4-6-mimo-v2-flash-figure-3"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "retry-resample-median-4",
+    "study": "2605.26047",
+    "label": "Policy resample: median of 4",
+    "locations": [
+      "Figure 3"
+    ],
+    "kind": "protocol",
+    "notes": "Figure readout interval, not a statistical confidence interval.",
+    "cost": "4 policy samples",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2605-26047-retry-resample-median-4-claude-opus-4-6-mimo-v2-flash-figure-3"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "retry-resample-median-5",
+    "study": "2605.26047",
+    "label": "Policy resample: median of 5",
+    "locations": [
+      "Figure 3"
+    ],
+    "kind": "protocol",
+    "notes": "Figure readout interval, not a statistical confidence interval.",
+    "cost": "5 policy samples",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2605-26047-retry-resample-median-5-claude-opus-4-6-mimo-v2-flash-figure-3"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "retry-resample-min-3",
+    "study": "2605.26047",
+    "label": "Policy resample: min of 3",
+    "locations": [
+      "Figure 3"
+    ],
+    "kind": "protocol",
+    "notes": "Figure readout interval, not a statistical confidence interval.",
+    "cost": "3 policy samples",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2605-26047-retry-resample-min-3-claude-opus-4-6-mimo-v2-flash-figure-3"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "retry-resample-min-4",
+    "study": "2605.26047",
+    "label": "Policy resample: min of 4",
+    "locations": [
+      "Figure 3"
+    ],
+    "kind": "protocol",
+    "notes": "Figure readout interval, not a statistical confidence interval.",
+    "cost": "4 policy samples",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2605-26047-retry-resample-min-4-claude-opus-4-6-mimo-v2-flash-figure-3"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "retry-resample-min-5",
+    "study": "2605.26047",
+    "label": "Policy resample: min of 5",
+    "locations": [
+      "Figure 3"
+    ],
+    "kind": "protocol",
+    "notes": "Figure readout interval, not a statistical confidence interval.",
+    "cost": "5 policy samples",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2605-26047-retry-resample-min-5-claude-opus-4-6-mimo-v2-flash-figure-3"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "retry-2-strikes",
+    "study": "2605.26047",
+    "label": "2-strikes retry",
+    "locations": [
+      "Figure 18"
+    ],
+    "kind": "protocol",
+    "notes": "",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2605-26047-retry-2-strikes-claude-opus-4-6-mimo-v2-flash-figure-18"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "retry-3-strikes",
+    "study": "2605.26047",
+    "label": "3-strikes retry",
+    "locations": [
+      "Figure 18"
+    ],
+    "kind": "protocol",
+    "notes": "",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2605-26047-retry-3-strikes-claude-opus-4-6-mimo-v2-flash-figure-18"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "retry-4-strikes",
+    "study": "2605.26047",
+    "label": "4-strikes retry",
+    "locations": [
+      "Figure 18"
+    ],
+    "kind": "protocol",
+    "notes": "",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2605-26047-retry-4-strikes-claude-opus-4-6-mimo-v2-flash-figure-18"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "retry-5-strikes",
+    "study": "2605.26047",
+    "label": "5-strikes retry",
+    "locations": [
+      "Figure 18"
+    ],
+    "kind": "protocol",
+    "notes": "",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2605-26047-retry-5-strikes-claude-opus-4-6-mimo-v2-flash-figure-18"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "retry-monitor-aggregation",
+    "study": "2605.26047",
+    "label": "Monitor aggregation: max, mean, median, 75th and 90th percentiles; 1\u201310 samples",
+    "locations": [
+      "Figure 15"
+    ],
+    "kind": "ablation",
+    "notes": "Indexed separately; curve family retained without assigning an unsupported common scalar.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [],
+    "status": "indexed; no scalar extracted"
+  },
+  {
+    "id": "retry-two-stage",
+    "study": "2605.26047",
+    "label": "Two-stage conditional resampling; second-stage sizes 1\u20134",
+    "locations": [
+      "Figure 6"
+    ],
+    "kind": "ablation",
+    "notes": "Indexed separately; curve family retained without assigning an unsupported common scalar.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [],
+    "status": "indexed; no scalar extracted"
+  },
+  {
+    "id": "retry-incremental",
+    "study": "2605.26047",
+    "label": "Incremental resampling: flat and rising thresholds",
+    "locations": [
+      "Figure 6"
+    ],
+    "kind": "ablation",
+    "notes": "Indexed separately; curve family retained without assigning an unsupported common scalar.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [],
+    "status": "indexed; no scalar extracted"
+  },
+  {
+    "id": "retry-feedback-iid",
+    "study": "2605.26047",
+    "label": "Feedback versus IID and adaptive attackers",
+    "locations": [
+      "Figure 2"
+    ],
+    "kind": "ablation",
+    "notes": "Indexed separately; curve family retained without assigning an unsupported common scalar.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [],
+    "status": "indexed; no scalar extracted"
+  },
+  {
+    "id": "retry-selective-caution",
+    "study": "2605.26047",
+    "label": "Selective caution",
+    "locations": [
+      "Figure 2"
+    ],
+    "kind": "ablation",
+    "notes": "Indexed separately; curve family retained without assigning an unsupported common scalar.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [],
+    "status": "indexed; no scalar extracted"
+  },
+  {
+    "id": "retry-inconsistent",
+    "study": "2605.26047",
+    "label": "Inconsistent-attacker resampling",
+    "locations": [
+      "Figure 8"
+    ],
+    "kind": "ablation",
+    "notes": "Indexed separately; curve family retained without assigning an unsupported common scalar.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [],
+    "status": "indexed; no scalar extracted"
+  },
+  {
+    "id": "retry-audit-rules",
+    "study": "2605.26047",
+    "label": "Auditor context, audit-win rules and audit-budget sweep",
+    "locations": [
+      "Appendices"
+    ],
+    "kind": "ablation",
+    "notes": "Indexed separately; curve family retained without assigning an unsupported common scalar.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [],
+    "status": "indexed; no scalar extracted"
+  },
+  {
+    "id": "retry-shuffled",
+    "study": "2605.26047",
+    "label": "Synthetic shuffled-correlation and order-statistic controls",
+    "locations": [
+      "Figures 4\u20135"
+    ],
+    "kind": "ablation",
+    "notes": "Indexed separately; curve family retained without assigning an unsupported common scalar.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [],
+    "status": "indexed; no scalar extracted"
+  },
+  {
+    "id": "adaptive-trusted-monitoring",
+    "study": "2510.09462",
+    "label": "Adaptive-attack trusted monitoring",
+    "locations": [
+      "Figure 4"
+    ],
+    "kind": "protocol",
+    "notes": "",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2510-09462-adaptive-trusted-monitoring-gpt-4-targeted-injection-gpt-5-gpt-4-figure-4",
+      "expanded-2510-09462-adaptive-trusted-monitoring-gpt-4o-targeted-injection-gpt-5-gpt-4-figure-4",
+      "expanded-2510-09462-adaptive-trusted-monitoring-gpt-4-1-targeted-injection-gpt-5-gpt-4-figure-4",
+      "expanded-2510-09462-adaptive-trusted-monitoring-no-injection-gpt-5-gpt-4-figure-4",
+      "expanded-2510-09462-adaptive-trusted-monitoring-gpt-4-targeted-injection-gpt-5-gpt-4o-figure-4",
+      "expanded-2510-09462-adaptive-trusted-monitoring-gpt-4o-targeted-injection-gpt-5-gpt-4o-figure-4",
+      "expanded-2510-09462-adaptive-trusted-monitoring-gpt-4-1-targeted-injection-gpt-5-gpt-4o-figure-4",
+      "expanded-2510-09462-adaptive-trusted-monitoring-no-injection-gpt-5-gpt-4o-figure-4",
+      "expanded-2510-09462-adaptive-trusted-monitoring-gpt-4-targeted-injection-gpt-5-gpt-4-1-figure-4",
+      "expanded-2510-09462-adaptive-trusted-monitoring-gpt-4o-targeted-injection-gpt-5-gpt-4-1-figure-4",
+      "expanded-2510-09462-adaptive-trusted-monitoring-gpt-4-1-targeted-injection-gpt-5-gpt-4-1-figure-4",
+      "expanded-2510-09462-adaptive-trusted-monitoring-no-injection-gpt-5-gpt-4-1-figure-4"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "adaptive-upfront",
+    "study": "2510.09462",
+    "label": "Upfront auditing",
+    "locations": [
+      "Figure 6"
+    ],
+    "kind": "protocol",
+    "notes": "",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2510-09462-adaptive-upfront-gpt-5-gpt-4o-mini-figure-6"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "adaptive-zero-shot-injection",
+    "study": "2510.09462",
+    "label": "Trusted monitoring: zero-shot injection",
+    "locations": [
+      "Figure 6"
+    ],
+    "kind": "protocol",
+    "notes": " Attacker-context ablation: numerical evidence retained, not a distinct defender candidate.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2510-09462-adaptive-zero-shot-injection-gpt-5-gpt-4o-mini-figure-6"
+    ],
+    "leader_eligible": false,
+    "status": "quantitative"
+  },
+  {
+    "id": "adaptive-zero-shot-clean",
+    "study": "2510.09462",
+    "label": "Trusted monitoring: no injection",
+    "locations": [
+      "Figure 6"
+    ],
+    "kind": "protocol",
+    "notes": " Attacker-context ablation: numerical evidence retained, not a distinct defender candidate.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2510-09462-adaptive-zero-shot-clean-gpt-5-gpt-4o-mini-figure-6"
+    ],
+    "leader_eligible": false,
+    "status": "quantitative"
+  },
+  {
+    "id": "adaptive-dtr",
+    "study": "2510.09462",
+    "label": "Defer to resample",
+    "locations": [
+      "Figures 3,5,8,10\u201312",
+      "Figure 3"
+    ],
+    "kind": "ablation",
+    "notes": "Published safety/usefulness curves and calibration variants; indexed without selecting an arbitrary shared operating point.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2510-09462-adaptive-dtr-ordinary-gpt-5-gpt-4-figure-3",
+      "expanded-2510-09462-adaptive-dtr-injected-gpt-5-gpt-4-figure-3"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "adaptive-dtt",
+    "study": "2510.09462",
+    "label": "Defer to trusted",
+    "locations": [
+      "Figures 3,5,8,10\u201312",
+      "Figure 3"
+    ],
+    "kind": "ablation",
+    "notes": "Published safety/usefulness curves and calibration variants; indexed without selecting an arbitrary shared operating point.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2510-09462-adaptive-dtt-ordinary-gpt-5-gpt-4-figure-3",
+      "expanded-2510-09462-adaptive-dtt-injected-gpt-5-gpt-4-figure-3"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "adaptive-editing",
+    "study": "2510.09462",
+    "label": "Trusted editing",
+    "locations": [
+      "Figures 3,5,8,10\u201312",
+      "Figure 3"
+    ],
+    "kind": "ablation",
+    "notes": "Published safety/usefulness curves and calibration variants; indexed without selecting an arbitrary shared operating point.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2510-09462-adaptive-editing-ordinary-gpt-5-gpt-4-figure-3",
+      "expanded-2510-09462-adaptive-editing-injected-gpt-5-gpt-4-figure-3"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "adaptive-editing-monitor-sweep",
+    "study": "2510.09462",
+    "label": "Trusted editing across GPT-4, GPT-4o and GPT-4.1",
+    "locations": [
+      "Figures 3,5,8,10\u201312"
+    ],
+    "kind": "ablation",
+    "notes": "Published safety/usefulness curves and calibration variants; indexed without selecting an arbitrary shared operating point.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [],
+    "status": "indexed; no scalar extracted"
+  },
+  {
+    "id": "adaptive-bashbench-dtr",
+    "study": "2510.09462",
+    "label": "BashBench defer to resample",
+    "locations": [
+      "Figures 3,5,8,10\u201312",
+      "Figure 5"
+    ],
+    "kind": "ablation",
+    "notes": "Published safety/usefulness curves and calibration variants; indexed without selecting an arbitrary shared operating point.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2510-09462-adaptive-bashbench-dtr-ordinary-claude-sonnet-4-gpt-4o-figure-5",
+      "expanded-2510-09462-adaptive-bashbench-dtr-injected-claude-sonnet-4-gpt-4o-figure-5"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "adaptive-bashbench-dtt",
+    "study": "2510.09462",
+    "label": "BashBench defer to trusted",
+    "locations": [
+      "Figures 3,5,8,10\u201312",
+      "Figure 5"
+    ],
+    "kind": "ablation",
+    "notes": "Published safety/usefulness curves and calibration variants; indexed without selecting an arbitrary shared operating point.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2510-09462-adaptive-bashbench-dtt-ordinary-claude-sonnet-4-gpt-4o-figure-5",
+      "expanded-2510-09462-adaptive-bashbench-dtt-injected-claude-sonnet-4-gpt-4o-figure-5"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "adaptive-min-max",
+    "study": "2510.09462",
+    "label": "Minimum versus maximum resample score",
+    "locations": [
+      "Figures 3,5,8,10\u201312"
+    ],
+    "kind": "ablation",
+    "notes": "Published safety/usefulness curves and calibration variants; indexed without selecting an arbitrary shared operating point.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [],
+    "status": "indexed; no scalar extracted"
+  },
+  {
+    "id": "adaptive-audit-budgets",
+    "study": "2510.09462",
+    "label": "Audit budgets 1%, 2%, 4%",
+    "locations": [
+      "Figures 3,5,8,10\u201312"
+    ],
+    "kind": "ablation",
+    "notes": "Published safety/usefulness curves and calibration variants; indexed without selecting an arbitrary shared operating point.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [],
+    "status": "indexed; no scalar extracted"
+  },
+  {
+    "id": "adaptive-harm-timing",
+    "study": "2510.09462",
+    "label": "Immediate versus end-of-trajectory harm detection",
+    "locations": [
+      "Figures 3,5,8,10\u201312"
+    ],
+    "kind": "ablation",
+    "notes": "Published safety/usefulness curves and calibration variants; indexed without selecting an arbitrary shared operating point.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [],
+    "status": "indexed; no scalar extracted"
+  },
+  {
+    "id": "theory-2504.18530",
+    "study": "2504.18530",
+    "label": "Theoretical control constructions and parameter sweeps",
+    "locations": [
+      "Full paper"
+    ],
+    "kind": "theory",
+    "notes": "Analytical evidence informs structure; not treated as empirical safety measurements.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [],
+    "status": "indexed; no scalar extracted"
+  },
+  {
+    "id": "theory-2512.22154",
+    "study": "2512.22154",
+    "label": "Theoretical control constructions and parameter sweeps",
+    "locations": [
+      "Full paper"
+    ],
+    "kind": "theory",
+    "notes": "Analytical evidence informs structure; not treated as empirical safety measurements.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [],
+    "status": "indexed; no scalar extracted"
+  },
+  {
+    "id": "shade-thresholds",
+    "study": "2511.02997",
+    "label": "Suspicion thresholds and safety/usefulness sweeps",
+    "locations": [
+      "Figures 5,7\u20138"
+    ],
+    "kind": "ablation",
+    "notes": "Entire parameter sweep indexed; no invented per-cell values.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [],
+    "status": "indexed; no scalar extracted"
+  },
+  {
+    "id": "shade-resample-count",
+    "study": "2511.02997",
+    "label": "Resample count and selection-rule heatmaps",
+    "locations": [
+      "Figures 5,7\u20138"
+    ],
+    "kind": "ablation",
+    "notes": "Entire parameter sweep indexed; no invented per-cell values.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [],
+    "status": "indexed; no scalar extracted"
+  },
+  {
+    "id": "retry-monitor-max-1",
+    "study": "2605.26047",
+    "label": "Monitor sampling: max of 1",
+    "locations": [
+      "Figure 15"
+    ],
+    "kind": "protocol",
+    "notes": "Approximate published figure readout; the interval represents digitization, not a statistical confidence interval. Extra transport uncertainty retained.",
+    "cost": "1 monitor samples",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2605-26047-retry-monitor-max-1-claude-opus-4-6-mimo-v2-flash-figure-15"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "retry-monitor-max-2",
+    "study": "2605.26047",
+    "label": "Monitor sampling: max of 2",
+    "locations": [
+      "Figure 15"
+    ],
+    "kind": "protocol",
+    "notes": "Approximate published figure readout; the interval represents digitization, not a statistical confidence interval. Extra transport uncertainty retained.",
+    "cost": "2 monitor samples",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2605-26047-retry-monitor-max-2-claude-opus-4-6-mimo-v2-flash-figure-15"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "retry-monitor-max-3",
+    "study": "2605.26047",
+    "label": "Monitor sampling: max of 3",
+    "locations": [
+      "Figure 15"
+    ],
+    "kind": "protocol",
+    "notes": "Approximate published figure readout; the interval represents digitization, not a statistical confidence interval. Extra transport uncertainty retained.",
+    "cost": "3 monitor samples",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2605-26047-retry-monitor-max-3-claude-opus-4-6-mimo-v2-flash-figure-15"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "retry-monitor-max-4",
+    "study": "2605.26047",
+    "label": "Monitor sampling: max of 4",
+    "locations": [
+      "Figure 15"
+    ],
+    "kind": "protocol",
+    "notes": "Approximate published figure readout; the interval represents digitization, not a statistical confidence interval. Extra transport uncertainty retained.",
+    "cost": "4 monitor samples",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2605-26047-retry-monitor-max-4-claude-opus-4-6-mimo-v2-flash-figure-15"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "retry-monitor-max-5",
+    "study": "2605.26047",
+    "label": "Monitor sampling: max of 5",
+    "locations": [
+      "Figure 15"
+    ],
+    "kind": "protocol",
+    "notes": "Approximate published figure readout; the interval represents digitization, not a statistical confidence interval. Extra transport uncertainty retained.",
+    "cost": "5 monitor samples",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2605-26047-retry-monitor-max-5-claude-opus-4-6-mimo-v2-flash-figure-15"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "retry-monitor-max-6",
+    "study": "2605.26047",
+    "label": "Monitor sampling: max of 6",
+    "locations": [
+      "Figure 15"
+    ],
+    "kind": "protocol",
+    "notes": "Approximate published figure readout; the interval represents digitization, not a statistical confidence interval. Extra transport uncertainty retained.",
+    "cost": "6 monitor samples",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2605-26047-retry-monitor-max-6-claude-opus-4-6-mimo-v2-flash-figure-15"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "retry-monitor-max-7",
+    "study": "2605.26047",
+    "label": "Monitor sampling: max of 7",
+    "locations": [
+      "Figure 15"
+    ],
+    "kind": "protocol",
+    "notes": "Approximate published figure readout; the interval represents digitization, not a statistical confidence interval. Extra transport uncertainty retained.",
+    "cost": "7 monitor samples",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2605-26047-retry-monitor-max-7-claude-opus-4-6-mimo-v2-flash-figure-15"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "retry-monitor-max-8",
+    "study": "2605.26047",
+    "label": "Monitor sampling: max of 8",
+    "locations": [
+      "Figure 15"
+    ],
+    "kind": "protocol",
+    "notes": "Approximate published figure readout; the interval represents digitization, not a statistical confidence interval. Extra transport uncertainty retained.",
+    "cost": "8 monitor samples",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2605-26047-retry-monitor-max-8-claude-opus-4-6-mimo-v2-flash-figure-15"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "retry-monitor-max-9",
+    "study": "2605.26047",
+    "label": "Monitor sampling: max of 9",
+    "locations": [
+      "Figure 15"
+    ],
+    "kind": "protocol",
+    "notes": "Approximate published figure readout; the interval represents digitization, not a statistical confidence interval. Extra transport uncertainty retained.",
+    "cost": "9 monitor samples",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2605-26047-retry-monitor-max-9-claude-opus-4-6-mimo-v2-flash-figure-15"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "retry-monitor-max-10",
+    "study": "2605.26047",
+    "label": "Monitor sampling: max of 10",
+    "locations": [
+      "Figure 15"
+    ],
+    "kind": "protocol",
+    "notes": "Approximate published figure readout; the interval represents digitization, not a statistical confidence interval. Extra transport uncertainty retained.",
+    "cost": "10 monitor samples",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2605-26047-retry-monitor-max-10-claude-opus-4-6-mimo-v2-flash-figure-15"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "retry-monitor-p90-2",
+    "study": "2605.26047",
+    "label": "Monitor sampling: p90 of 2",
+    "locations": [
+      "Figure 15"
+    ],
+    "kind": "protocol",
+    "notes": "Approximate published figure readout; the interval represents digitization, not a statistical confidence interval. Extra transport uncertainty retained.",
+    "cost": "2 monitor samples",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2605-26047-retry-monitor-p90-2-claude-opus-4-6-mimo-v2-flash-figure-15"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "retry-monitor-p90-3",
+    "study": "2605.26047",
+    "label": "Monitor sampling: p90 of 3",
+    "locations": [
+      "Figure 15"
+    ],
+    "kind": "protocol",
+    "notes": "Approximate published figure readout; the interval represents digitization, not a statistical confidence interval. Extra transport uncertainty retained.",
+    "cost": "3 monitor samples",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2605-26047-retry-monitor-p90-3-claude-opus-4-6-mimo-v2-flash-figure-15"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "retry-monitor-p90-4",
+    "study": "2605.26047",
+    "label": "Monitor sampling: p90 of 4",
+    "locations": [
+      "Figure 15"
+    ],
+    "kind": "protocol",
+    "notes": "Approximate published figure readout; the interval represents digitization, not a statistical confidence interval. Extra transport uncertainty retained.",
+    "cost": "4 monitor samples",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2605-26047-retry-monitor-p90-4-claude-opus-4-6-mimo-v2-flash-figure-15"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "retry-monitor-p90-5",
+    "study": "2605.26047",
+    "label": "Monitor sampling: p90 of 5",
+    "locations": [
+      "Figure 15"
+    ],
+    "kind": "protocol",
+    "notes": "Approximate published figure readout; the interval represents digitization, not a statistical confidence interval. Extra transport uncertainty retained.",
+    "cost": "5 monitor samples",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2605-26047-retry-monitor-p90-5-claude-opus-4-6-mimo-v2-flash-figure-15"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "retry-monitor-p90-6",
+    "study": "2605.26047",
+    "label": "Monitor sampling: p90 of 6",
+    "locations": [
+      "Figure 15"
+    ],
+    "kind": "protocol",
+    "notes": "Approximate published figure readout; the interval represents digitization, not a statistical confidence interval. Extra transport uncertainty retained.",
+    "cost": "6 monitor samples",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2605-26047-retry-monitor-p90-6-claude-opus-4-6-mimo-v2-flash-figure-15"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "retry-monitor-p90-7",
+    "study": "2605.26047",
+    "label": "Monitor sampling: p90 of 7",
+    "locations": [
+      "Figure 15"
+    ],
+    "kind": "protocol",
+    "notes": "Approximate published figure readout; the interval represents digitization, not a statistical confidence interval. Extra transport uncertainty retained.",
+    "cost": "7 monitor samples",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2605-26047-retry-monitor-p90-7-claude-opus-4-6-mimo-v2-flash-figure-15"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "retry-monitor-p90-8",
+    "study": "2605.26047",
+    "label": "Monitor sampling: p90 of 8",
+    "locations": [
+      "Figure 15"
+    ],
+    "kind": "protocol",
+    "notes": "Approximate published figure readout; the interval represents digitization, not a statistical confidence interval. Extra transport uncertainty retained.",
+    "cost": "8 monitor samples",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2605-26047-retry-monitor-p90-8-claude-opus-4-6-mimo-v2-flash-figure-15"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "retry-monitor-p90-9",
+    "study": "2605.26047",
+    "label": "Monitor sampling: p90 of 9",
+    "locations": [
+      "Figure 15"
+    ],
+    "kind": "protocol",
+    "notes": "Approximate published figure readout; the interval represents digitization, not a statistical confidence interval. Extra transport uncertainty retained.",
+    "cost": "9 monitor samples",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2605-26047-retry-monitor-p90-9-claude-opus-4-6-mimo-v2-flash-figure-15"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "retry-monitor-p90-10",
+    "study": "2605.26047",
+    "label": "Monitor sampling: p90 of 10",
+    "locations": [
+      "Figure 15"
+    ],
+    "kind": "protocol",
+    "notes": "Approximate published figure readout; the interval represents digitization, not a statistical confidence interval. Extra transport uncertainty retained.",
+    "cost": "10 monitor samples",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2605-26047-retry-monitor-p90-10-claude-opus-4-6-mimo-v2-flash-figure-15"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "retry-monitor-p75-2",
+    "study": "2605.26047",
+    "label": "Monitor sampling: p75 of 2",
+    "locations": [
+      "Figure 15"
+    ],
+    "kind": "protocol",
+    "notes": "Approximate published figure readout; the interval represents digitization, not a statistical confidence interval. Extra transport uncertainty retained.",
+    "cost": "2 monitor samples",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2605-26047-retry-monitor-p75-2-claude-opus-4-6-mimo-v2-flash-figure-15"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "retry-monitor-p75-3",
+    "study": "2605.26047",
+    "label": "Monitor sampling: p75 of 3",
+    "locations": [
+      "Figure 15"
+    ],
+    "kind": "protocol",
+    "notes": "Approximate published figure readout; the interval represents digitization, not a statistical confidence interval. Extra transport uncertainty retained.",
+    "cost": "3 monitor samples",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2605-26047-retry-monitor-p75-3-claude-opus-4-6-mimo-v2-flash-figure-15"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "retry-monitor-p75-4",
+    "study": "2605.26047",
+    "label": "Monitor sampling: p75 of 4",
+    "locations": [
+      "Figure 15"
+    ],
+    "kind": "protocol",
+    "notes": "Approximate published figure readout; the interval represents digitization, not a statistical confidence interval. Extra transport uncertainty retained.",
+    "cost": "4 monitor samples",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2605-26047-retry-monitor-p75-4-claude-opus-4-6-mimo-v2-flash-figure-15"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "retry-monitor-p75-5",
+    "study": "2605.26047",
+    "label": "Monitor sampling: p75 of 5",
+    "locations": [
+      "Figure 15"
+    ],
+    "kind": "protocol",
+    "notes": "Approximate published figure readout; the interval represents digitization, not a statistical confidence interval. Extra transport uncertainty retained.",
+    "cost": "5 monitor samples",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2605-26047-retry-monitor-p75-5-claude-opus-4-6-mimo-v2-flash-figure-15"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "retry-monitor-p75-6",
+    "study": "2605.26047",
+    "label": "Monitor sampling: p75 of 6",
+    "locations": [
+      "Figure 15"
+    ],
+    "kind": "protocol",
+    "notes": "Approximate published figure readout; the interval represents digitization, not a statistical confidence interval. Extra transport uncertainty retained.",
+    "cost": "6 monitor samples",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2605-26047-retry-monitor-p75-6-claude-opus-4-6-mimo-v2-flash-figure-15"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "retry-monitor-p75-7",
+    "study": "2605.26047",
+    "label": "Monitor sampling: p75 of 7",
+    "locations": [
+      "Figure 15"
+    ],
+    "kind": "protocol",
+    "notes": "Approximate published figure readout; the interval represents digitization, not a statistical confidence interval. Extra transport uncertainty retained.",
+    "cost": "7 monitor samples",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2605-26047-retry-monitor-p75-7-claude-opus-4-6-mimo-v2-flash-figure-15"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "retry-monitor-p75-8",
+    "study": "2605.26047",
+    "label": "Monitor sampling: p75 of 8",
+    "locations": [
+      "Figure 15"
+    ],
+    "kind": "protocol",
+    "notes": "Approximate published figure readout; the interval represents digitization, not a statistical confidence interval. Extra transport uncertainty retained.",
+    "cost": "8 monitor samples",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2605-26047-retry-monitor-p75-8-claude-opus-4-6-mimo-v2-flash-figure-15"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "retry-monitor-p75-9",
+    "study": "2605.26047",
+    "label": "Monitor sampling: p75 of 9",
+    "locations": [
+      "Figure 15"
+    ],
+    "kind": "protocol",
+    "notes": "Approximate published figure readout; the interval represents digitization, not a statistical confidence interval. Extra transport uncertainty retained.",
+    "cost": "9 monitor samples",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2605-26047-retry-monitor-p75-9-claude-opus-4-6-mimo-v2-flash-figure-15"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "retry-monitor-p75-10",
+    "study": "2605.26047",
+    "label": "Monitor sampling: p75 of 10",
+    "locations": [
+      "Figure 15"
+    ],
+    "kind": "protocol",
+    "notes": "Approximate published figure readout; the interval represents digitization, not a statistical confidence interval. Extra transport uncertainty retained.",
+    "cost": "10 monitor samples",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2605-26047-retry-monitor-p75-10-claude-opus-4-6-mimo-v2-flash-figure-15"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "retry-monitor-median-2",
+    "study": "2605.26047",
+    "label": "Monitor sampling: median of 2",
+    "locations": [
+      "Figure 15"
+    ],
+    "kind": "protocol",
+    "notes": "Approximate published figure readout; the interval represents digitization, not a statistical confidence interval. Extra transport uncertainty retained.",
+    "cost": "2 monitor samples",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2605-26047-retry-monitor-median-2-claude-opus-4-6-mimo-v2-flash-figure-15"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "retry-monitor-median-3",
+    "study": "2605.26047",
+    "label": "Monitor sampling: median of 3",
+    "locations": [
+      "Figure 15"
+    ],
+    "kind": "protocol",
+    "notes": "Approximate published figure readout; the interval represents digitization, not a statistical confidence interval. Extra transport uncertainty retained.",
+    "cost": "3 monitor samples",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2605-26047-retry-monitor-median-3-claude-opus-4-6-mimo-v2-flash-figure-15"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "retry-monitor-median-4",
+    "study": "2605.26047",
+    "label": "Monitor sampling: median of 4",
+    "locations": [
+      "Figure 15"
+    ],
+    "kind": "protocol",
+    "notes": "Approximate published figure readout; the interval represents digitization, not a statistical confidence interval. Extra transport uncertainty retained.",
+    "cost": "4 monitor samples",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2605-26047-retry-monitor-median-4-claude-opus-4-6-mimo-v2-flash-figure-15"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "retry-monitor-median-5",
+    "study": "2605.26047",
+    "label": "Monitor sampling: median of 5",
+    "locations": [
+      "Figure 15"
+    ],
+    "kind": "protocol",
+    "notes": "Approximate published figure readout; the interval represents digitization, not a statistical confidence interval. Extra transport uncertainty retained.",
+    "cost": "5 monitor samples",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2605-26047-retry-monitor-median-5-claude-opus-4-6-mimo-v2-flash-figure-15"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "retry-monitor-median-6",
+    "study": "2605.26047",
+    "label": "Monitor sampling: median of 6",
+    "locations": [
+      "Figure 15"
+    ],
+    "kind": "protocol",
+    "notes": "Approximate published figure readout; the interval represents digitization, not a statistical confidence interval. Extra transport uncertainty retained.",
+    "cost": "6 monitor samples",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2605-26047-retry-monitor-median-6-claude-opus-4-6-mimo-v2-flash-figure-15"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "retry-monitor-median-7",
+    "study": "2605.26047",
+    "label": "Monitor sampling: median of 7",
+    "locations": [
+      "Figure 15"
+    ],
+    "kind": "protocol",
+    "notes": "Approximate published figure readout; the interval represents digitization, not a statistical confidence interval. Extra transport uncertainty retained.",
+    "cost": "7 monitor samples",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2605-26047-retry-monitor-median-7-claude-opus-4-6-mimo-v2-flash-figure-15"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "retry-monitor-median-8",
+    "study": "2605.26047",
+    "label": "Monitor sampling: median of 8",
+    "locations": [
+      "Figure 15"
+    ],
+    "kind": "protocol",
+    "notes": "Approximate published figure readout; the interval represents digitization, not a statistical confidence interval. Extra transport uncertainty retained.",
+    "cost": "8 monitor samples",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2605-26047-retry-monitor-median-8-claude-opus-4-6-mimo-v2-flash-figure-15"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "retry-monitor-median-9",
+    "study": "2605.26047",
+    "label": "Monitor sampling: median of 9",
+    "locations": [
+      "Figure 15"
+    ],
+    "kind": "protocol",
+    "notes": "Approximate published figure readout; the interval represents digitization, not a statistical confidence interval. Extra transport uncertainty retained.",
+    "cost": "9 monitor samples",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2605-26047-retry-monitor-median-9-claude-opus-4-6-mimo-v2-flash-figure-15"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "retry-monitor-median-10",
+    "study": "2605.26047",
+    "label": "Monitor sampling: median of 10",
+    "locations": [
+      "Figure 15"
+    ],
+    "kind": "protocol",
+    "notes": "Approximate published figure readout; the interval represents digitization, not a statistical confidence interval. Extra transport uncertainty retained.",
+    "cost": "10 monitor samples",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2605-26047-retry-monitor-median-10-claude-opus-4-6-mimo-v2-flash-figure-15"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "retry-monitor-mean-2",
+    "study": "2605.26047",
+    "label": "Monitor sampling: mean of 2",
+    "locations": [
+      "Figure 15"
+    ],
+    "kind": "protocol",
+    "notes": "Approximate published figure readout; the interval represents digitization, not a statistical confidence interval. Extra transport uncertainty retained.",
+    "cost": "2 monitor samples",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2605-26047-retry-monitor-mean-2-claude-opus-4-6-mimo-v2-flash-figure-15"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "retry-monitor-mean-3",
+    "study": "2605.26047",
+    "label": "Monitor sampling: mean of 3",
+    "locations": [
+      "Figure 15"
+    ],
+    "kind": "protocol",
+    "notes": "Approximate published figure readout; the interval represents digitization, not a statistical confidence interval. Extra transport uncertainty retained.",
+    "cost": "3 monitor samples",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2605-26047-retry-monitor-mean-3-claude-opus-4-6-mimo-v2-flash-figure-15"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "retry-monitor-mean-4",
+    "study": "2605.26047",
+    "label": "Monitor sampling: mean of 4",
+    "locations": [
+      "Figure 15"
+    ],
+    "kind": "protocol",
+    "notes": "Approximate published figure readout; the interval represents digitization, not a statistical confidence interval. Extra transport uncertainty retained.",
+    "cost": "4 monitor samples",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2605-26047-retry-monitor-mean-4-claude-opus-4-6-mimo-v2-flash-figure-15"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "retry-monitor-mean-5",
+    "study": "2605.26047",
+    "label": "Monitor sampling: mean of 5",
+    "locations": [
+      "Figure 15"
+    ],
+    "kind": "protocol",
+    "notes": "Approximate published figure readout; the interval represents digitization, not a statistical confidence interval. Extra transport uncertainty retained.",
+    "cost": "5 monitor samples",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2605-26047-retry-monitor-mean-5-claude-opus-4-6-mimo-v2-flash-figure-15"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "retry-monitor-mean-6",
+    "study": "2605.26047",
+    "label": "Monitor sampling: mean of 6",
+    "locations": [
+      "Figure 15"
+    ],
+    "kind": "protocol",
+    "notes": "Approximate published figure readout; the interval represents digitization, not a statistical confidence interval. Extra transport uncertainty retained.",
+    "cost": "6 monitor samples",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2605-26047-retry-monitor-mean-6-claude-opus-4-6-mimo-v2-flash-figure-15"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "retry-monitor-mean-7",
+    "study": "2605.26047",
+    "label": "Monitor sampling: mean of 7",
+    "locations": [
+      "Figure 15"
+    ],
+    "kind": "protocol",
+    "notes": "Approximate published figure readout; the interval represents digitization, not a statistical confidence interval. Extra transport uncertainty retained.",
+    "cost": "7 monitor samples",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2605-26047-retry-monitor-mean-7-claude-opus-4-6-mimo-v2-flash-figure-15"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "retry-monitor-mean-8",
+    "study": "2605.26047",
+    "label": "Monitor sampling: mean of 8",
+    "locations": [
+      "Figure 15"
+    ],
+    "kind": "protocol",
+    "notes": "Approximate published figure readout; the interval represents digitization, not a statistical confidence interval. Extra transport uncertainty retained.",
+    "cost": "8 monitor samples",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2605-26047-retry-monitor-mean-8-claude-opus-4-6-mimo-v2-flash-figure-15"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "retry-monitor-mean-9",
+    "study": "2605.26047",
+    "label": "Monitor sampling: mean of 9",
+    "locations": [
+      "Figure 15"
+    ],
+    "kind": "protocol",
+    "notes": "Approximate published figure readout; the interval represents digitization, not a statistical confidence interval. Extra transport uncertainty retained.",
+    "cost": "9 monitor samples",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2605-26047-retry-monitor-mean-9-claude-opus-4-6-mimo-v2-flash-figure-15"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "retry-monitor-mean-10",
+    "study": "2605.26047",
+    "label": "Monitor sampling: mean of 10",
+    "locations": [
+      "Figure 15"
+    ],
+    "kind": "protocol",
+    "notes": "Approximate published figure readout; the interval represents digitization, not a statistical confidence interval. Extra transport uncertainty retained.",
+    "cost": "10 monitor samples",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2605-26047-retry-monitor-mean-10-claude-opus-4-6-mimo-v2-flash-figure-15"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "retry-two-stage-1",
+    "study": "2605.26047",
+    "label": "Two-stage conditional resampling: second stage 1",
+    "locations": [
+      "Figure 6"
+    ],
+    "kind": "protocol",
+    "notes": "Approximate published figure readout; the interval represents digitization, not a statistical confidence interval. Extra transport uncertainty retained.",
+    "cost": "Worst-case policy calls approximately 2",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2605-26047-retry-two-stage-1-claude-opus-4-6-mimo-v2-flash-figure-6"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "retry-two-stage-2",
+    "study": "2605.26047",
+    "label": "Two-stage conditional resampling: second stage 2",
+    "locations": [
+      "Figure 6"
+    ],
+    "kind": "protocol",
+    "notes": "Approximate published figure readout; the interval represents digitization, not a statistical confidence interval. Extra transport uncertainty retained.",
+    "cost": "Worst-case policy calls approximately 3",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2605-26047-retry-two-stage-2-claude-opus-4-6-mimo-v2-flash-figure-6"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "retry-two-stage-3",
+    "study": "2605.26047",
+    "label": "Two-stage conditional resampling: second stage 3",
+    "locations": [
+      "Figure 6"
+    ],
+    "kind": "protocol",
+    "notes": "Approximate published figure readout; the interval represents digitization, not a statistical confidence interval. Extra transport uncertainty retained.",
+    "cost": "Worst-case policy calls approximately 4",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2605-26047-retry-two-stage-3-claude-opus-4-6-mimo-v2-flash-figure-6"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "retry-two-stage-4",
+    "study": "2605.26047",
+    "label": "Two-stage conditional resampling: second stage 4",
+    "locations": [
+      "Figure 6"
+    ],
+    "kind": "protocol",
+    "notes": "Approximate published figure readout; the interval represents digitization, not a statistical confidence interval. Extra transport uncertainty retained.",
+    "cost": "Worst-case policy calls approximately 5",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2605-26047-retry-two-stage-4-claude-opus-4-6-mimo-v2-flash-figure-6"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "retry-incremental-rising",
+    "study": "2605.26047",
+    "label": "Incremental resampling: rising",
+    "locations": [
+      "Figure 6"
+    ],
+    "kind": "protocol",
+    "notes": "Approximate published figure readout; the interval represents digitization, not a statistical confidence interval. Extra transport uncertainty retained.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2605-26047-retry-incremental-rising-claude-opus-4-6-mimo-v2-flash-figure-6"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "retry-incremental-flat",
+    "study": "2605.26047",
+    "label": "Incremental resampling: flat",
+    "locations": [
+      "Figure 6"
+    ],
+    "kind": "protocol",
+    "notes": "Approximate published figure readout; the interval represents digitization, not a statistical confidence interval. Extra transport uncertainty retained.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2605-26047-retry-incremental-flat-claude-opus-4-6-mimo-v2-flash-figure-6"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "linux-delayed-ensemble-1",
+    "study": "2604.15384",
+    "label": "Delayed-monitor ensemble: 1 samples",
+    "locations": [
+      "Figure 21"
+    ],
+    "kind": "protocol",
+    "notes": "Approximate published figure readout; the interval represents digitization, not a statistical confidence interval. Extra transport uncertainty retained. Extrapolated 64/128-sample points are indexed rather than treated as measured.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2604-15384-linux-delayed-ensemble-1-claude-haiku-4-5-gpt-5-nano-figure-21"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "linux-delayed-ensemble-2",
+    "study": "2604.15384",
+    "label": "Delayed-monitor ensemble: 2 samples",
+    "locations": [
+      "Figure 21"
+    ],
+    "kind": "protocol",
+    "notes": "Approximate published figure readout; the interval represents digitization, not a statistical confidence interval. Extra transport uncertainty retained. Extrapolated 64/128-sample points are indexed rather than treated as measured.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2604-15384-linux-delayed-ensemble-2-claude-haiku-4-5-gpt-5-nano-figure-21"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "linux-delayed-ensemble-4",
+    "study": "2604.15384",
+    "label": "Delayed-monitor ensemble: 4 samples",
+    "locations": [
+      "Figure 21"
+    ],
+    "kind": "protocol",
+    "notes": "Approximate published figure readout; the interval represents digitization, not a statistical confidence interval. Extra transport uncertainty retained. Extrapolated 64/128-sample points are indexed rather than treated as measured.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2604-15384-linux-delayed-ensemble-4-claude-haiku-4-5-gpt-5-nano-figure-21"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "linux-delayed-ensemble-8",
+    "study": "2604.15384",
+    "label": "Delayed-monitor ensemble: 8 samples",
+    "locations": [
+      "Figure 21"
+    ],
+    "kind": "protocol",
+    "notes": "Approximate published figure readout; the interval represents digitization, not a statistical confidence interval. Extra transport uncertainty retained. Extrapolated 64/128-sample points are indexed rather than treated as measured.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2604-15384-linux-delayed-ensemble-8-claude-haiku-4-5-gpt-5-nano-figure-21"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "linux-delayed-ensemble-16",
+    "study": "2604.15384",
+    "label": "Delayed-monitor ensemble: 16 samples",
+    "locations": [
+      "Figure 21"
+    ],
+    "kind": "protocol",
+    "notes": "Approximate published figure readout; the interval represents digitization, not a statistical confidence interval. Extra transport uncertainty retained. Extrapolated 64/128-sample points are indexed rather than treated as measured.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2604-15384-linux-delayed-ensemble-16-claude-haiku-4-5-gpt-5-nano-figure-21"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "linux-delayed-ensemble-32",
+    "study": "2604.15384",
+    "label": "Delayed-monitor ensemble: 32 samples",
+    "locations": [
+      "Figure 21"
+    ],
+    "kind": "protocol",
+    "notes": "Approximate published figure readout; the interval represents digitization, not a statistical confidence interval. Extra transport uncertainty retained. Extrapolated 64/128-sample points are indexed rather than treated as measured.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2604-15384-linux-delayed-ensemble-32-claude-haiku-4-5-gpt-5-nano-figure-21"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "linux-sandbox-no-network",
+    "study": "2604.15384",
+    "label": "No-network sandbox",
+    "locations": [
+      "Figure 29"
+    ],
+    "kind": "protocol",
+    "notes": "Approximate published figure readout; the interval represents digitization, not a statistical confidence interval. Extra transport uncertainty retained.",
+    "cost": "Sandbox restrictions change usefulness; no matched cost normalization available.",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2604-15384-linux-sandbox-no-network-claude-haiku-4-5-gpt-5-nano-figure-29"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "linux-sandbox-editor-only",
+    "study": "2604.15384",
+    "label": "No-network, editor-only sandbox",
+    "locations": [
+      "Figure 29"
+    ],
+    "kind": "protocol",
+    "notes": "Approximate published figure readout; the interval represents digitization, not a statistical confidence interval. Extra transport uncertainty retained.",
+    "cost": "Sandbox restrictions change usefulness; no matched cost normalization available.",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2604-15384-linux-sandbox-editor-only-claude-haiku-4-5-gpt-5-nano-figure-29"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "linux-no-scratchpad",
+    "study": "2604.15384",
+    "label": "Attacker without scratchpad",
+    "locations": [
+      "Figure 30"
+    ],
+    "kind": "protocol",
+    "notes": "Approximate published figure readout; the interval represents digitization, not a statistical confidence interval. Extra transport uncertainty retained. Attacker-context ablation: numerical evidence retained, not a distinct defender candidate.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2604-15384-linux-no-scratchpad-claude-opus-4-6-gpt-5-nano-figure-30"
+    ],
+    "leader_eligible": false,
+    "status": "quantitative"
+  },
+  {
+    "id": "linux-thinking-off",
+    "study": "2604.15384",
+    "label": "Attacker thinking: off",
+    "locations": [
+      "Figure 32"
+    ],
+    "kind": "protocol",
+    "notes": "Approximate published figure readout; the interval represents digitization, not a statistical confidence interval. Extra transport uncertainty retained. Attacker-compute ablation; no independent model capability improvement inferred. Attacker-context ablation: numerical evidence retained, not a distinct defender candidate.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2604-15384-linux-thinking-off-claude-opus-4-6-gpt-5-nano-figure-32"
+    ],
+    "leader_eligible": false,
+    "status": "quantitative"
+  },
+  {
+    "id": "linux-thinking-1k",
+    "study": "2604.15384",
+    "label": "Attacker thinking: 1k",
+    "locations": [
+      "Figure 32"
+    ],
+    "kind": "protocol",
+    "notes": "Approximate published figure readout; the interval represents digitization, not a statistical confidence interval. Extra transport uncertainty retained. Attacker-compute ablation; no independent model capability improvement inferred. Attacker-context ablation: numerical evidence retained, not a distinct defender candidate.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2604-15384-linux-thinking-1k-claude-opus-4-6-gpt-5-nano-figure-32"
+    ],
+    "leader_eligible": false,
+    "status": "quantitative"
+  },
+  {
+    "id": "linux-thinking-4k",
+    "study": "2604.15384",
+    "label": "Attacker thinking: 4k",
+    "locations": [
+      "Figure 32"
+    ],
+    "kind": "protocol",
+    "notes": "Approximate published figure readout; the interval represents digitization, not a statistical confidence interval. Extra transport uncertainty retained. Attacker-compute ablation; no independent model capability improvement inferred. Attacker-context ablation: numerical evidence retained, not a distinct defender candidate.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2604-15384-linux-thinking-4k-claude-opus-4-6-gpt-5-nano-figure-32"
+    ],
+    "leader_eligible": false,
+    "status": "quantitative"
+  },
+  {
+    "id": "linux-thinking-16k",
+    "study": "2604.15384",
+    "label": "Attacker thinking: 16k",
+    "locations": [
+      "Figure 32"
+    ],
+    "kind": "protocol",
+    "notes": "Approximate published figure readout; the interval represents digitization, not a statistical confidence interval. Extra transport uncertainty retained. Attacker-compute ablation; no independent model capability improvement inferred. Attacker-context ablation: numerical evidence retained, not a distinct defender candidate.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2604-15384-linux-thinking-16k-claude-opus-4-6-gpt-5-nano-figure-32"
+    ],
+    "leader_eligible": false,
+    "status": "quantitative"
+  },
+  {
+    "id": "linux-thinking-64k",
+    "study": "2604.15384",
+    "label": "Attacker thinking: 64k",
+    "locations": [
+      "Figure 32"
+    ],
+    "kind": "protocol",
+    "notes": "Approximate published figure readout; the interval represents digitization, not a statistical confidence interval. Extra transport uncertainty retained. Attacker-compute ablation; no independent model capability improvement inferred. Attacker-context ablation: numerical evidence retained, not a distinct defender candidate.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2604-15384-linux-thinking-64k-claude-opus-4-6-gpt-5-nano-figure-32"
+    ],
+    "leader_eligible": false,
+    "status": "quantitative"
+  },
+  {
+    "id": "linux-conditional-catch",
+    "study": "2604.15384",
+    "label": "Conditional catch of successful side-task attacks",
+    "locations": [
+      "Figure 35"
+    ],
+    "kind": "protocol",
+    "notes": "Rounded evasion labels converted to conditional catch, not deployment safety. Human attacks have no assigned METR horizon.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "expanded-2604-15384-linux-conditional-catch-human-crafted-claude-opus-4-6-gpt-4-1-nano-figure-35",
+      "expanded-2604-15384-linux-conditional-catch-matched-opus-attacks-claude-opus-4-6-gpt-4-1-nano-figure-35",
+      "expanded-2604-15384-linux-conditional-catch-human-crafted-claude-opus-4-6-gpt-5-nano-figure-35",
+      "expanded-2604-15384-linux-conditional-catch-matched-opus-attacks-claude-opus-4-6-gpt-5-nano-figure-35",
+      "expanded-2604-15384-linux-conditional-catch-human-crafted-claude-opus-4-6-gpt-oss-120b-figure-35",
+      "expanded-2604-15384-linux-conditional-catch-matched-opus-attacks-claude-opus-4-6-gpt-oss-120b-figure-35",
+      "expanded-2604-15384-linux-conditional-catch-human-crafted-claude-opus-4-6-claude-haiku-4-5-figure-35",
+      "expanded-2604-15384-linux-conditional-catch-matched-opus-attacks-claude-opus-4-6-claude-haiku-4-5-figure-35",
+      "expanded-2604-15384-linux-conditional-catch-human-crafted-claude-opus-4-6-gpt-5-mini-figure-35",
+      "expanded-2604-15384-linux-conditional-catch-matched-opus-attacks-claude-opus-4-6-gpt-5-mini-figure-35",
+      "expanded-2604-15384-linux-conditional-catch-human-crafted-claude-opus-4-6-claude-sonnet-4-6-figure-35",
+      "expanded-2604-15384-linux-conditional-catch-matched-opus-attacks-claude-opus-4-6-claude-sonnet-4-6-figure-35",
+      "expanded-2604-15384-linux-conditional-catch-human-crafted-claude-opus-4-6-gpt-5-4-figure-35",
+      "expanded-2604-15384-linux-conditional-catch-matched-opus-attacks-claude-opus-4-6-gpt-5-4-figure-35",
+      "expanded-2604-15384-linux-conditional-catch-human-crafted-claude-opus-4-6-kimi-k2-5-figure-35",
+      "expanded-2604-15384-linux-conditional-catch-matched-opus-attacks-claude-opus-4-6-kimi-k2-5-figure-35",
+      "expanded-2604-15384-linux-conditional-catch-human-crafted-claude-opus-4-6-gemini-3-flash-figure-35",
+      "expanded-2604-15384-linux-conditional-catch-matched-opus-attacks-claude-opus-4-6-gemini-3-flash-figure-35",
+      "expanded-2604-15384-linux-conditional-catch-human-crafted-claude-opus-4-6-glm-5-figure-35",
+      "expanded-2604-15384-linux-conditional-catch-matched-opus-attacks-claude-opus-4-6-glm-5-figure-35",
+      "expanded-2604-15384-linux-conditional-catch-human-crafted-claude-opus-4-6-gemini-3-1-pro-figure-35",
+      "expanded-2604-15384-linux-conditional-catch-matched-opus-attacks-claude-opus-4-6-gemini-3-1-pro-figure-35",
+      "expanded-2604-15384-linux-conditional-catch-human-crafted-claude-opus-4-6-claude-opus-4-6-figure-35",
+      "expanded-2604-15384-linux-conditional-catch-matched-opus-attacks-claude-opus-4-6-claude-opus-4-6-figure-35"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "practical-synchronous",
+    "study": "2512.22154",
+    "label": "Fully synchronous monitoring",
+    "locations": [
+      "Monitoring taxonomy and case studies"
+    ],
+    "kind": "conceptual protocol",
+    "notes": "Conceptual latency, parallelism and recovery analysis; no fabricated historical safety datapoint.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [],
+    "status": "indexed; no scalar extracted"
+  },
+  {
+    "id": "practical-semi-synchronous",
+    "study": "2512.22154",
+    "label": "Semi-synchronous monitoring",
+    "locations": [
+      "Monitoring taxonomy and case studies"
+    ],
+    "kind": "conceptual protocol",
+    "notes": "Conceptual latency, parallelism and recovery analysis; no fabricated historical safety datapoint.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [],
+    "status": "indexed; no scalar extracted"
+  },
+  {
+    "id": "practical-asynchronous",
+    "study": "2512.22154",
+    "label": "Asynchronous monitoring",
+    "locations": [
+      "Monitoring taxonomy and case studies"
+    ],
+    "kind": "conceptual protocol",
+    "notes": "Conceptual latency, parallelism and recovery analysis; no fabricated historical safety datapoint.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [],
+    "status": "indexed; no scalar extracted"
+  },
+  {
+    "id": "scaling-mafia",
+    "study": "2504.18530",
+    "label": "Mafia auditing",
+    "locations": [
+      "Game-specific scaling and nested oversight analysis"
+    ],
+    "kind": "structural evidence",
+    "notes": "Domain-specific game outcomes and analytical scaling constraints do not directly measure deployment control safety.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [],
+    "status": "indexed; no scalar extracted"
+  },
+  {
+    "id": "scaling-backdoor-code",
+    "study": "2504.18530",
+    "label": "Backdoor-code auditing",
+    "locations": [
+      "Game-specific scaling and nested oversight analysis"
+    ],
+    "kind": "structural evidence",
+    "notes": "Domain-specific game outcomes and analytical scaling constraints do not directly measure deployment control safety.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [],
+    "status": "indexed; no scalar extracted"
+  },
+  {
+    "id": "scaling-debate",
+    "study": "2504.18530",
+    "label": "Adversarial debate",
+    "locations": [
+      "Game-specific scaling and nested oversight analysis"
+    ],
+    "kind": "structural evidence",
+    "notes": "Domain-specific game outcomes and analytical scaling constraints do not directly measure deployment control safety.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [],
+    "status": "indexed; no scalar extracted"
+  },
+  {
+    "id": "scaling-wargames",
+    "study": "2504.18530",
+    "label": "Wargame containment",
+    "locations": [
+      "Game-specific scaling and nested oversight analysis"
+    ],
+    "kind": "structural evidence",
+    "notes": "Domain-specific game outcomes and analytical scaling constraints do not directly measure deployment control safety.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [],
+    "status": "indexed; no scalar extracted"
+  },
+  {
+    "id": "scaling-nested",
+    "study": "2504.18530",
+    "label": "Nested scalable oversight",
+    "locations": [
+      "Game-specific scaling and nested oversight analysis"
+    ],
+    "kind": "structural evidence",
+    "notes": "Domain-specific game outcomes and analytical scaling constraints do not directly measure deployment control safety.",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [],
+    "status": "indexed; no scalar extracted"
+  },
+  {
+    "id": "OpenAI Codex auto-review (OpenAI's own evaluation)",
+    "study": "openai-auto-review",
+    "label": "OpenAI Codex auto-review (OpenAI's own evaluation)",
+    "locations": [
+      "Original ledger"
+    ],
+    "kind": "protocol",
+    "notes": "",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "page-11-ordinary"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "bootstrap-trusted-only",
+    "study": "2606.11998",
+    "label": "bootstrap-trusted-only",
+    "locations": [
+      "Original ledger"
+    ],
+    "kind": "protocol",
+    "notes": "",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "bootstrap-trusted-GPT-5.4-Qwen3-8B",
+      "bootstrap-trusted-GPT-5.4-GPT-4.1 Mini",
+      "bootstrap-trusted-Gemini 3.1 Pro-Qwen3-8B",
+      "bootstrap-trusted-Gemini 3.1 Pro-GPT-4.1 Mini",
+      "bootstrap-trusted-Kimi K2.5-Qwen3-8B",
+      "bootstrap-trusted-Kimi K2.5-GPT-4.1 Mini"
+    ],
+    "status": "quantitative"
+  },
+  {
+    "id": "bootstrap-direct-monitor",
+    "study": "2606.11998",
+    "label": "Direct monitoring (bootstrapping study)",
+    "locations": [
+      "Original ledger"
+    ],
+    "kind": "protocol",
+    "notes": "",
+    "cost": "",
+    "candidate_eligible": true,
+    "observation_ids": [
+      "bootstrap-helperonly-GPT-5.4-GLM-5",
+      "bootstrap-helperonly-Gemini 3.1 Pro-GLM-5",
+      "bootstrap-helperonly-Kimi K2.5-GLM-5",
+      "bootstrap-helperonly-GPT-5.4-Kimi K2.5",
+      "bootstrap-helperonly-Gemini 3.1 Pro-Kimi K2.5",
+      "bootstrap-helperonly-Kimi K2.5-Kimi K2.5",
+      "bootstrap-helperonly-GPT-5.4-DeepSeek",
+      "bootstrap-helperonly-Gemini 3.1 Pro-DeepSeek",
+      "bootstrap-helperonly-Kimi K2.5-DeepSeek",
+      "bootstrap-helperonly-GPT-5.4-GPT-5.4",
+      "bootstrap-helperonly-Gemini 3.1 Pro-GPT-5.4",
+      "bootstrap-helperonly-Kimi K2.5-GPT-5.4"
+    ],
+    "status": "quantitative"
+  }
+]
