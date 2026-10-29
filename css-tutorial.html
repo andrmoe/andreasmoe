@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="page" content="css-tutorial">
-    <meta name="description" content="A hands-on CSS workshop from first selectors to container queries, cascade layers, print styles, and repair missions for every page on this site. Assumes familiarity with HTML.">
+    <meta name="description" content="A hands-on CSS workshop from first selectors to container queries, cascade layers, print styles, and repair missions using the site’s pages without AI-generated banners. Assumes familiarity with HTML.">
     <title>CSS tutorial — Andreas Moe</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="tutorials/tutorial.css">
@@ -18,7 +18,7 @@
 <div class="ctl-ai-notice">Everything on this page is AI generated</div>
 <h1>Learn CSS by improving Andreas Moe’s site</h1>
 <nav class="tutorial-contents" aria-label="Tutorial lessons"><details><summary>Choose your next mission · 20 lessons</summary><p>First build the baseline, then tackle the advanced experiments and the page repair map.</p>
-<ol><li><a href="#lesson-1">1. Set up a short feedback loop</a></li><li><a href="#lesson-2">2. Read your first CSS rule</a></li><li><a href="#lesson-3">3. Understand the box model and page width</a></li><li><a href="#lesson-4">4. Learn the cascade while improving headings</a></li><li><a href="#lesson-5">5. Make links and keyboard focus intentional</a></li><li><a href="#lesson-6">6. Give your existing header structure</a></li><li><a href="#lesson-7">7. Replace fixed-width project cards with a grid</a></li><li><a href="#lesson-8">8. Make the finishing adjustments for phones</a></li><li><a href="#lesson-9">9. Save your first finished version</a></li><li><a href="#lesson-10">10. Design tokens: stop hunting down hex codes</a></li><li><a href="#lesson-11">11. Editorial layout: rhythm, long titles, and logical spacing</a></li><li><a href="#lesson-12">12. Overflow clinic: images, code, math, and tables</a></li><li><a href="#lesson-13">13. Inline-style escape room: tame the embedded demos</a></li><li><a href="#lesson-14">14. Container queries: a card should know its own space</a></li><li><a href="#lesson-15">15. UI states: attribute selectors, :has(), and honest feedback</a></li><li><a href="#lesson-16">16. Cascade architecture: win without escalating selectors</a></li><li><a href="#lesson-17">17. Dashboard triage: preserve the chart, shrink the chrome</a></li><li><a href="#lesson-18">18. Motion, preferences, and a theme that earns its keep</a></li><li><a href="#lesson-19">19. Print styles: your CV has a second screen</a></li><li><a href="#lesson-20">20. The final repair expedition</a></li></ol>
+<ol><li><a href="#lesson-1">1. Set up a short feedback loop</a></li><li><a href="#lesson-2">2. Read your first CSS rule</a></li><li><a href="#lesson-3">3. Understand the box model and page width</a></li><li><a href="#lesson-4">4. Learn the cascade while improving headings</a></li><li><a href="#lesson-5">5. Make links and keyboard focus intentional</a></li><li><a href="#lesson-6">6. Give your existing header structure</a></li><li><a href="#lesson-7">7. Replace fixed-width project cards with a grid</a></li><li><a href="#lesson-8">8. Make the finishing adjustments for phones</a></li><li><a href="#lesson-9">9. Save your first finished version</a></li><li><a href="#lesson-10">10. Design tokens: stop hunting down hex codes</a></li><li><a href="#lesson-11">11. Editorial layout: rhythm, long titles, and logical spacing</a></li><li><a href="#lesson-12">12. Overflow clinic: images, code, math, and tables</a></li><li><a href="#lesson-13">13. Inline-style escape room: tame the embedded demos</a></li><li><a href="#lesson-14">14. Container queries: a card should know its own space</a></li><li><a href="#lesson-15">15. UI states: attribute selectors, :has(), and honest feedback</a></li><li><a href="#lesson-16">16. Cascade architecture: win without escalating selectors</a></li><li><a href="#lesson-17">17. Figure clinic: layout, positioning, and readable evidence</a></li><li><a href="#lesson-18">18. Motion, preferences, and a theme that earns its keep</a></li><li><a href="#lesson-19">19. Print styles: your CV has a second screen</a></li><li><a href="#lesson-20">20. The final repair expedition</a></li></ol>
 <p><a href="#repair-map">Open the complete page repair map</a></p>
 </details>
 </nav>
@@ -26,7 +26,7 @@
 <p>Treat this as a workshop over several sessions: about 90 minutes for the first eight lessons, then 2–4 hours for the advanced labs and as much time as you want for the page repair missions. No framework, build tool, or external font is needed. The live lab uses a little JavaScript; the styling exercises teach CSS.</p>
 <aside class="tutorial-route"><p class="tutorial-eyebrow">Your website is the practice ground</p>
 <p><strong>How to play:</strong> predict → edit → inspect → explain. Try each mission before opening its solution. A fix counts when you can explain why it works at both 320px and desktop widths.</p>
-<p>Lessons 1–8 build one cumulative baseline in <code>styles.css</code>. Lessons 10–19 are separate experiments: their placement notes tell you which file or markup to change. Keep only the experiments you like. <a href="#repair-map">The repair map</a> gives every HTML file a specific assignment, including the standalone dashboards.</p>
+<p>Lessons 1–8 build one cumulative baseline in <code>styles.css</code>. Lessons 10–19 are separate experiments: their placement notes tell you which file or markup to change. Keep only the experiments you like. <a href="#repair-map">The repair map</a> gives each eligible page a specific assignment; pages marked as AI generated are excluded.</p>
 <p>Keep <code>header.html</code> as it is. Navigation exercises change CSS only. Use the browser’s Styles, Computed, Layout, and Network panels as your instruments.</p>
 </aside>
 <h2 id="lesson-1">1. Set up a short feedback loop</h2>
@@ -388,7 +388,7 @@ a:focus-visible {
 <p>To undo the tutorial changes, restore your backup of <code>styles.css</code> and remove the viewport lines you added. The tutorial itself doesn’t change your other pages; you make each improvement as you learn it. Save this first version before trying the advanced missions below.</p>
 
 <section class="tutorial-lesson" aria-labelledby="lesson-10"><h2 id="lesson-10">10. Design tokens: stop hunting down hex codes</h2>
-<p>You have repeated colors in the shared stylesheet, the tutorial, and several dashboards. A <strong>custom property</strong> names a reusable value. Think of it as a named CSS setting, not a JavaScript variable: it participates in inheritance and can have different values in different subtrees.</p>
+<p>Books, Contact, and the project cards use colors from the same shared stylesheet. A <strong>custom property</strong> names a reusable value. Think of it as a named CSS setting, not a JavaScript variable: it participates in inheritance and can have different values in different subtrees.</p>
 <p><strong>Placement:</strong> append this to <code>styles.css</code> after the baseline. Then replace repeated values in the earlier rules with their matching <code>var(...)</code> expressions.</p>
 <pre><code class="language-css">:root {
     --site-paper: #f8f7f3;
@@ -404,10 +404,10 @@ body {
 a { color: var(--site-accent); }
 .bookauthor { color: var(--site-muted, #58675e); }
 </code></pre>
-<p><code>:root</code> matches the document’s root element. The second argument of <code>var()</code> is a fallback when that custom property isn’t available. Prefixing these names avoids colliding with dashboards that already define <code>--ink</code> or <code>--paper</code>.</p>
+<p><code>:root</code> matches the document’s root element. The second argument of <code>var()</code> is a fallback when that custom property isn’t available. Prefixing these names makes their shared purpose clear when you later add component-specific settings.</p>
 <div class="tutorial-drill"><h3>One edit, many pages</h3>
-<p>Change the accent once. Verify Home, Books, and Contact. Why doesn’t this automatically recolor every chart on the AI Control page?</p>
-<details class="tutorial-answer"><summary>Show a possible solution</summary><p>A custom property affects only declarations that use it. The dashboards already have local variables and explicit colors; mapping them is a separate choice. Keep chart colors meaningful and their legends consistent.</p>
+<p>Change the accent once. Verify Home, Books, and Contact. Why doesn’t this automatically recolor a book title that still has its own explicit color?</p>
+<details class="tutorial-answer"><summary>Show a possible solution</summary><p>A custom property affects only declarations that use it. The original .booktitle rule sets its own color, so changing a token alone does not affect that declaration. Replace the owned explicit value with a var() expression if the title should follow the shared palette.</p>
 </details>
 </div>
 <div class="tutorial-drill"><h3>A local exception</h3>
@@ -566,22 +566,26 @@ a { color: var(--site-accent); }
 </div>
 </section>
 <section class="tutorial-lesson" aria-labelledby="lesson-15"><h2 id="lesson-15">15. UI states: attribute selectors, :has(), and honest feedback</h2>
-<p>The AI Control, Compute Thresholds, and Foreclosed Proposals dashboards already use <code>aria-pressed</code> for filter buttons. Style the actual state instead of inventing a second “selected” class that can drift out of sync.</p>
-<p><strong>Placement:</strong> edit the dashboard’s own style block. These rules are examples for <code>compute_thresholds.html</code>; adapt the component prefix when working on the others.</p>
-<pre><code class="language-css">.cth-controls button[aria-pressed=&quot;true&quot;] {
-    border-width: 2px;
-    font-weight: 700;
+<p>The Ideas list gives you short titles but little explanation. Try a native disclosure for one idea: the browser supplies opening, closing, and keyboard behavior, while CSS makes the open state visible.</p>
+<p><strong>Placement:</strong> in <code>ideas.html</code>, replace one idea’s title div with the following structure inside its existing list item. Write your own explanation in the paragraph. Add the CSS to <code>styles.css</code>.</p>
+<pre><code class="language-html">&lt;details class=&quot;idea-note&quot;&gt;
+    &lt;summary&gt;Chess quantilizer&lt;/summary&gt;
+    &lt;p&gt;Add your own explanation of this idea here.&lt;/p&gt;
+&lt;/details&gt;
+</code></pre>
+<pre><code class="language-css">.idea-note {
+    border: 1px solid var(--site-line, #d7ded7);
+    padding: 0.75rem;
 }
-.cth-controls button:focus-visible {
-    outline: 3px solid #183d35;
+.idea-note[open] { border-color: var(--site-accent, #146653); }
+.idea-note[open] &gt; summary { font-weight: 700; }
+.idea-note &gt; summary { cursor: pointer; }
+.idea-note &gt; summary:focus-visible {
+    outline: 3px solid var(--site-accent, #146653);
     outline-offset: 3px;
 }
-.cth-controls button:disabled {
-    cursor: not-allowed;
-    opacity: 0.65;
-}
 </code></pre>
-<p>A border and weight change supplement color. CSS reflects state; JavaScript must still update the attribute. A CSS disabled appearance alone does not disable a button: use the real <code>disabled</code> attribute when behavior requires it.</p>
+<p><code>[open]</code> is an attribute selector. It matches the state the browser actually changes, so no second “expanded” class or JavaScript is needed. Keep the summary’s disclosure marker and a visible focus indicator. CSS reflects state; it does not supply the missing explanation.</p>
 <p>For a relation-based enhancement, Books’ list items contain <code>.bookrating</code>. With <code>:has()</code>, you can style a parent based on its children:</p>
 <pre><code class="language-css">@supports selector(li:has(.bookrating)) {
     li:has(&gt; .bookrating) {
@@ -591,11 +595,11 @@ a { color: var(--site-accent); }
 }
 </code></pre>
 <p><code>@supports</code> tests whether a browser understands a CSS feature. The list remains readable without this enhancement. <code>:has()</code> tests structure, not arbitrary text content; it cannot select “books with exactly three stars” by reading the star characters. Add real rating metadata in HTML if you need that. Read <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Selectors/:has">MDN on :has()</a> and <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@supports">feature queries</a>.</p>
-<div class="tutorial-drill"><h3>Filter roulette</h3>
-<p>On each dashboard, press a filter with the keyboard. Check that the visible selection matches its <code>aria-pressed</code> value. Explain why hover is not selection.</p>
-<details class="tutorial-answer"><summary>Show a possible solution</summary><p>Hover is temporary pointer position. Pressed state persists until the application changes it. Test a selected button after moving the pointer away and after tabbing to a different control.</p>
-</details>
+<div class="tutorial-drill"><h3>The mouse-free notebook</h3>
+<p>Open and close the new idea disclosure using Tab and Enter or Space. Does its open-state styling persist when you move focus elsewhere? Explain why hover is not open state.</p>
+<details class="tutorial-answer"><summary>Show a possible solution</summary><p>Hover follows pointer position; the open attribute records disclosure state. The summary should remain readable in both states, and the keyboard focus outline should identify the active control. Test the browser’s native behavior before adding JavaScript.</p></details>
 </div>
+
 <div class="tutorial-drill"><h3>An empty link is not a styling challenge</h3>
 <p>Blog creates titles and date paragraphs after fetching other pages. Disable JavaScript: what is left? Can a pseudo-element safely supply the missing real titles?</p>
 <details class="tutorial-answer"><summary>Show a possible solution</summary><p>The initial links are empty. Put meaningful fallback title text in the HTML and let the existing script enhance it. Use CSS for the list spacing and date hierarchy; don’t manufacture essential titles with generated content.</p>
@@ -603,7 +607,7 @@ a { color: var(--site-accent); }
 </div>
 </section>
 <section class="tutorial-lesson" aria-labelledby="lesson-16"><h2 id="lesson-16">16. Cascade architecture: win without escalating selectors</h2>
-<p>The dashboards put component CSS in inline <code>&lt;style&gt;</code> blocks after the shared stylesheet; the METR explorer does not load <code>styles.css</code> at all. There is no single file whose edits automatically control the whole site.</p>
+<p>The project and article pages share <code>styles.css</code>, but the report and Todo pages also set iframe properties in inline style attributes. The exported literature review has inline table-cell styling. Inspect where a value comes from before deciding which file to edit.</p>
 <p>Normal inline style attributes outrank normal stylesheet rules. Among ordinary rules in the same origin, importance, and layer, specificity matters before source order. Stylesheet blocks in the HTML still use normal selector specificity; they are not the same as a <code>style="..."</code> attribute.</p>
 <p><strong>Optional refactor, not another append-only patch:</strong> after saving your baseline, move all existing shared declarations into a named layer and place new component rules in another. The schematic below shows the structure, not a replacement file with every existing rule included.</p>
 <pre><code class="language-css">@layer legacy, components;
@@ -614,44 +618,60 @@ a { color: var(--site-accent); }
     .booktitle { color: #183d35; }
 }
 </code></pre>
-<p>For normal author declarations, later layers beat earlier layers before specificity is compared. <strong>Unlayered normal rules beat normal layered rules</strong>, so simply wrapping new overrides in a layer while leaving the old rules outside it can make your overrides lose. Existing dashboard style blocks remain unlayered unless you deliberately migrate them too. Important declarations reverse layer priority; avoid using them as a routine repair tool. See <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/Cascade_layers">MDN’s cascade-layer guide</a>.</p>
+<p>For normal author declarations, later layers beat earlier layers before specificity is compared. <strong>Unlayered normal rules beat normal layered rules</strong>, so simply wrapping new overrides in a layer while leaving the old rules outside it can make your overrides lose. Inline style attributes on the iframes and exported table cells still take precedence over normal stylesheet rules; moving stylesheet rules into layers does not remove those attributes. Important declarations reverse layer priority; avoid using them as a routine repair tool. See <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/Cascade_layers">MDN’s cascade-layer guide</a>.</p>
 <div class="tutorial-drill"><h3>Trace the losing declaration</h3>
 <p>In the literature review, a table cell sets <code>text-align</code> in its style attribute. Try a class-based text alignment rule. Explain why it loses, then remove or move the owned inline declaration.</p>
 <details class="tutorial-answer"><summary>Show a possible solution</summary><p>Moving the value into a class makes it part of the maintainable stylesheet cascade. Don’t add more IDs or an important flag to every table cell. Preserve the exported math and citation anchors during cleanup.</p>
 </details>
 </div>
-<div class="tutorial-drill"><h3>Two islands, one visual language</h3>
-<p>Compare <code>metr_token_usage.html</code> with <code>ai_control.html</code>. Locate each page’s own style block, then map just its paper, ink, and border colors to your chosen palette. The explorer has no shared stylesheet; AI Control combines shared styles with local component rules. Inspect both cascades before changing them.</p>
-<details class="tutorial-answer"><summary>Show a possible solution</summary><p>Shared visual values do not require shared global layout rules. The explorer uses a canvas workspace, while AI Control uses an SVG inside a scrolling chart panel. Keep those layout differences while aligning surface and text colors. Verify populated charts and usable controls on both pages after the refactor.</p>
+<div class="tutorial-drill"><h3>Two projects, one visual language</h3>
+<p>Compare <code>todo_list_in_react.html</code> with <code>using_python_to_automate_content_for_a_LaTeX_report.html</code>. Both use the shared text-and-demo layout but set iframe sizing inline. Move the owned sizing declarations into the shared embedded-demo class from lesson 13, then use one border token for both frames.</p>
+<details class="tutorial-answer"><summary>Show a possible solution</summary><p>Use a common class for the frame border and width, with a separate modifier if the Todo app and PDF viewer need different heights. Inspect Computed styles on both frames to confirm the old inline values are gone. The shared class styles the frames, not the separate documents inside them.</p>
 </details>
 </div>
 </section>
-<section class="tutorial-lesson" aria-labelledby="lesson-17"><h2 id="lesson-17">17. Dashboard triage: preserve the chart, shrink the chrome</h2>
-<p>Charts are a good test of judgment. AI Control intentionally keeps its SVG at least 800px wide inside a scrolling panel. Squeezing it to 280px can make its labels useless. Pre-Deployment Testing has 260px and 340px minimum grid tracks; those are different problems.</p>
-<p><strong>Placement:</strong> edit the existing corresponding rule in each page’s own style block rather than creating an unrelated global override.</p>
-<pre><code class="language-css">/* pre_deployment_testing.html */
-.pdt-multiples {
-    grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
+<section class="tutorial-lesson" aria-labelledby="lesson-17"><h2 id="lesson-17">17. Figure clinic: layout, positioning, and readable evidence</h2>
+<p>Homelab has two different pictures: a Proxmox interface screenshot and a photo of the machines. Noise WSC pairs a photograph with an SVG chart. Give related figures a responsive layout without treating a photo and a plot as interchangeable decoration.</p>
+<p><strong>Placement:</strong> in <code>homelab.html</code>, group the two existing images in a <code>&lt;div class="figure-grid"&gt;</code>, each inside its own <code>figure</code> with a real <code>figcaption</code>. Preserve the image paths, add descriptive alt text, and remove fixed height attributes. Add these rules to <code>styles.css</code>.</p>
+<pre><code class="language-css">.figure-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+    gap: 1.5rem;
 }
-.pdt-cols {
-    grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr));
+.figure-grid figure { min-inline-size: 0; margin: 0; }
+.figure-grid img {
+    display: block;
+    max-inline-size: 100%;
+    block-size: auto;
 }
-/* foreclosed_proposals.html */
-.fcl-controls div { flex-wrap: wrap; }
-/* ai_control.html: keep the chart&#x27;s internal minimum width. */
-.ctl-chart { max-inline-size: 100%; overflow-x: auto; }
+.figure-grid figcaption {
+    margin-block-start: 0.5rem;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
 </code></pre>
-<p>The nested <code>min()</code> lets a track get smaller than its usual minimum when its container is narrower. It doesn’t make the content inside automatically fit: check tables, formulas, and axis labels separately.</p>
-<p>Compute Thresholds and Foreclosed Proposals draw SVG charts; the METR explorer draws a canvas. Changing a canvas’s CSS size alone can stretch its bitmap. METR already has a <code>ResizeObserver</code> that redraws its chart; preserve that behavior. Inspect labels at normal zoom after changing the workspace.</p>
-<div class="tutorial-drill"><h3>The tooltip falls off the map</h3>
-<p>Inspect <code>.fcl-tooltip</code> and <code>.cth-tooltip</code>, then the relative chart wrapper. Explain what establishes their positioning reference. Test a point at the right edge.</p>
-<details class="tutorial-answer"><summary>Show a possible solution</summary><p>An absolutely positioned tooltip uses its containing block, here established by the positioned wrapper. Use a maximum inline size such as <code>min(20rem, calc(100% - 1rem))</code> and wrapping for long text, then inspect the positioning code: CSS size constraints alone cannot correct every JavaScript coordinate or add keyboard behavior.</p>
-</details>
+<p>The nested <code>min()</code> lets a track get smaller than its usual 20rem minimum when its container is narrower. It does not guarantee that the screenshot’s labels remain readable: inspect those separately. Avoid forcing the photo’s aspect ratio onto the interface screenshot.</p>
+<p>To learn positioning, add an optional <code>&lt;span class="figure-label"&gt;Homelab&lt;/span&gt;</code> inside the photo’s figure. Use this only on the photo, where it won’t obscure chart labels. Add the <code>photo-figure</code> class to that figure.</p>
+<pre><code class="language-css">.photo-figure { position: relative; }
+.photo-figure .figure-label {
+    position: absolute;
+    inset-block-start: 0.75rem;
+    inset-inline-start: 0.75rem;
+    max-inline-size: calc(100% - 1.5rem);
+    padding: 0.25rem 0.5rem;
+    background: white;
+    color: #183d35;
+    border: 1px solid #183d35;
+}
+</code></pre>
+<p><code>position: relative</code> establishes a positioning reference while the figure stays in normal flow. The absolutely positioned label leaves normal flow and uses offsets from that reference. It doesn’t reserve space for itself, so overlap is your responsibility. Keep the real caption below the image.</p>
+<div class="tutorial-drill"><h3>The label has escaped</h3>
+<p>Temporarily remove position: relative from the photo figure. Where does the label go? Restore the rule, then test a long label and 200% zoom.</p>
+<details class="tutorial-answer"><summary>Show a possible solution</summary><p>Without that positioned ancestor, the label uses another qualifying containing block, often the initial containing block. Restore the reference, allow label text to wrap, and remove the decorative label if it covers important content. A caption in normal flow is often the better choice.</p></details>
 </div>
-<div class="tutorial-drill"><h3>Small text is not free space</h3>
-<p>On METR, several labels use 10–12px type. Increase one control group to 0.875rem or 1rem in its local style block. Let it wrap rather than shrinking it back. Confirm the chart redraws and controls remain reachable.</p>
-<details class="tutorial-answer"><summary>Show a possible solution</summary><p>Reflow the surrounding grid or flex row, keep min-inline-size: 0 on shrinkable grid children, and test at 200% zoom. Improve DOM labels with CSS; canvas-drawn text requires a change to the drawing code if it also needs to grow.</p>
-</details>
+<div class="tutorial-drill"><h3>Read the axes, not just the layout</h3>
+<p>On Noise WSC, inspect LAeq_edited.svg at 320px. Can you read its axes after fitting it to the page? Give readers a link to open the full-size plot. Can a parent-page selector change text inside an SVG loaded through img?</p>
+<details class="tutorial-answer"><summary>Show a possible solution</summary><p>No: the SVG is a separate image resource. Parent-page CSS controls the image box, not its internal text. Keep the whole plot visible with proportional sizing, add a full-size link in HTML, and consider a local scrolling region if the labels need more space. Do not crop evidence to match a photo thumbnail.</p></details>
 </div>
 </section>
 <section class="tutorial-lesson" aria-labelledby="lesson-18"><h2 id="lesson-18">18. Motion, preferences, and a theme that earns its keep</h2>
@@ -689,13 +709,13 @@ a { color: var(--site-accent); }
 </details>
 </div>
 <div class="tutorial-drill"><h3>The dark-theme trap</h3>
-<p>Why is <code>filter: invert(1)</code> on the whole page a bad shortcut for Noise WSC or a chart dashboard?</p>
-<details class="tutorial-answer"><summary>Show a possible solution</summary><p>It changes photo and data colors too, potentially breaking the meaning of legends. Theme surfaces, text, focus indicators, controls, and chart palettes intentionally. Use a contrast checker: aim for at least 4.5:1 for normal text, 3:1 for large text, and check control boundaries and focus indicators as well.</p>
+<p>Why is <code>filter: invert(1)</code> on the whole Noise WSC or Homelab page a bad shortcut?</p>
+<details class="tutorial-answer"><summary>Show a possible solution</summary><p>It changes photo and data colors too, potentially breaking the meaning of legends. Theme surfaces, text, focus indicators, and controls intentionally; preserve the meaning of the noise plot’s colors. Use a contrast checker: aim for at least 4.5:1 for normal text, 3:1 for large text, and check control boundaries and focus indicators as well.</p>
 </details>
 </div>
 </section>
 <section class="tutorial-lesson" aria-labelledby="lesson-19"><h2 id="lesson-19">19. Print styles: your CV has a second screen</h2>
-<p><code>cv_for_export.html</code> fetches the body of <code>cv.html</code>, including an empty header placeholder. It has its own title. This tutorial has its own print rules in <code>tutorials/tutorial.css</code>: they hide the live lab’s controls and wrap long code lines for paper. Compare those needs with the CV before adding a global print rule.</p>
+<p><code>cv_for_export.html</code> fetches the body of <code>cv.html</code>, including an empty header placeholder. It has its own title. Compare its print needs with <code>cv.html</code> and the code-heavy report automation article before adding a global print rule.</p>
 <p><strong>Placement:</strong> add <code>class="cv-export"</code> to the export page’s body, then append these rules to <code>styles.css</code>. Wait for the fetched CV content to load before opening Print Preview.</p>
 <pre><code class="language-css">@media print {
     body.cv-export {
@@ -721,19 +741,19 @@ a { color: var(--site-accent); }
 </details>
 </div>
 <div class="tutorial-drill"><h3>Two pages, two paper layouts</h3>
-<p>Open Print Preview for this tutorial and for <code>cv_for_export.html</code>. Find the tutorial’s rules for <code>pre</code> and <code>#box-lab-controls</code>. Why should the CV’s compact type and pagination rules be scoped to its own body class?</p>
-<details class="tutorial-answer"><summary>Show a possible solution</summary><p>The tutorial needs printable code: its print query uses <code>white-space: pre-wrap</code> and hides only the lab controls. The CV needs compact type and sensible breaks between jobs. Keep CV rules under <code>.cv-export</code> so they do not shrink the tutorial’s explanations or impose CV pagination on its code examples. Check that long code remains visible and the CV content has loaded in both previews.</p>
+<p>Open Print Preview for <code>using_python_to_automate_content_for_a_LaTeX_report.html</code> and <code>cv_for_export.html</code>. The article has long Python code; the CV has job entries. Why should the CV’s compact type and pagination rules be scoped to its own body class?</p>
+<details class="tutorial-answer"><summary>Show a possible solution</summary><p>The article needs printable code: experiment with a print-only rule such as .reading pre { white-space: pre-wrap; overflow-wrap: anywhere; } after applying lesson 11’s wrapper. The CV needs compact type and sensible breaks between jobs. Keep CV rules under .cv-export so they do not shrink the article or impose CV pagination on code examples. Check long lines in Print Preview and wait for the exported CV to load.</p>
 </details>
 </div>
 </section>
 <section class="tutorial-lesson" aria-labelledby="lesson-20"><h2 id="lesson-20">20. The final repair expedition</h2>
-<p>Pick three pages with different jobs: one essay, one visual project, and one interactive dashboard. Give them a coherent type scale and palette while preserving what each needs. Then use the complete map below to reach the rest of the site.</p>
+<p>Pick three pages with different jobs: one essay, one visual project, and one page with a reference table or embedded demo. Give them a coherent type scale and palette while preserving what each needs. Then use the complete map below to reach the rest of the site.</p>
 <ol><li><strong>Observe:</strong> record the element, selector, viewport width, and visible problem before editing.</li><li><strong>Predict:</strong> name the property you expect to fix it. If the issue is content, semantics, data loading, or JavaScript, say so.</li><li><strong>Repair:</strong> make the smallest useful change in the correct stylesheet or markup.</li><li><strong>Prove:</strong> test at 320px, 768px, and a wide desktop; test 200% zoom and keyboard navigation. Use Print Preview where relevant.</li><li><strong>Explain:</strong> write one sentence about why it worked. Remove temporary debugging styles and consolidate duplicate rules.</li></ol>
 <p><strong>Hard mode:</strong> repeat one repair without looking at its solution. <strong>Design mode:</strong> give the same page a different mood by changing only typography, spacing, and tokens. <strong>Restraint mode:</strong> remove a decoration that doesn’t help a reader.</p>
 <p>Finish when pages are easier to read and use, not when you have used every CSS feature. A page with missing content needs content; CSS should never invent research results, load-state messages, or essential labels.</p>
 </section>
-<section aria-labelledby="repair-map"><h2 id="repair-map">The repair map · every page has a mission</h2>
-<p>These assignments come from the markup and styles currently in this repository. They distinguish observed constraints from things you still need to verify visually. Use the links to inspect the real page; then make your repair in its source. The header fragment is included for inspection, but stays unchanged.</p>
+<section aria-labelledby="repair-map"><h2 id="repair-map">The repair map · original-site practice missions</h2>
+<p>These assignments use the site’s pages without AI-generated banners. The AI-generated pages and this tutorial are excluded as teaching examples. The missions distinguish observed constraints from things you still need to verify visually. Use the links to inspect the real page; then make your repair in its source. The header fragment is included for inspection, but stays unchanged.</p>
 <div class="tutorial-missions"><article class="tutorial-mission"><h3>The unframed introduction</h3>
 <p><a href="index.html"><code>index.html</code></a></p>
 <p>No viewport metadata; the intro is made of direct body paragraphs. Apply the baseline, cap paragraph measure, and compare 320px with desktop.</p>
@@ -868,36 +888,6 @@ a { color: var(--site-accent); }
 <p><a href="using_python_to_automate_content_for_a_LaTeX_report.html"><code>using_python_to_automate_content_for_a_LaTeX_report.html</code></a></p>
 <p>Inspect .codediv padding, .lefttext minimum width, and the percentage-height PDF iframe. Separate container sizing, code scrolling, and viewer height into distinct fixes.</p>
 <p class="tutorial-mission-link">Start with <a href="#lesson-13">lesson 13</a>. Pass when you can show the before/after and explain the cause.</p>
-</article>
-<article class="tutorial-mission"><h3>A chart needs elbow room</h3>
-<p><a href="ai_control.html"><code>ai_control.html</code></a></p>
-<p>The .ctl-chart SVG has an intentional 800px minimum inside a scrolling wrapper. Preserve useful chart scale, improve control focus, and test selection without hover. Keep the AI disclosure readable.</p>
-<p class="tutorial-mission-link">Start with <a href="#lesson-17">lesson 17</a>. Pass when you can show the before/after and explain the cause.</p>
-</article>
-<article class="tutorial-mission"><h3>The controls and tooltip patrol</h3>
-<p><a href="compute_thresholds.html"><code>compute_thresholds.html</code></a></p>
-<p>Its local .cth rules follow the shared CSS, and .cth-controls buttons use aria-pressed. Style real selection state and test tooltips near chart edges without changing data or policy labels.</p>
-<p class="tutorial-mission-link">Start with <a href="#lesson-15">lesson 15</a>. Pass when you can show the before/after and explain the cause.</p>
-</article>
-<article class="tutorial-mission"><h3>The filter pile-up</h3>
-<p><a href="foreclosed_proposals.html"><code>foreclosed_proposals.html</code></a></p>
-<p>The outer .fcl-controls wraps, but its inner divs use flex without wrapping. Test a narrow width and let groups wrap. Inspect the absolutely positioned tooltip against its chart wrapper.</p>
-<p class="tutorial-mission-link">Start with <a href="#lesson-17">lesson 17</a>. Pass when you can show the before/after and explain the cause.</p>
-</article>
-<article class="tutorial-mission"><h3>The stubborn grid tracks</h3>
-<p><a href="pre_deployment_testing.html"><code>pre_deployment_testing.html</code></a></p>
-<p>The local grids use 260px and 340px minimum tracks. Use min(100%, minimum) to let tracks fit smaller containers, then inspect formulas and wide charts independently.</p>
-<p class="tutorial-mission-link">Start with <a href="#lesson-17">lesson 17</a>. Pass when you can show the before/after and explain the cause.</p>
-</article>
-<article class="tutorial-mission"><h3>The standalone observatory</h3>
-<p><a href="metr_token_usage.html"><code>metr_token_usage.html</code></a></p>
-<p>It has its own inline stylesheet and no styles.css link. Improve small DOM control labels in that local CSS, preserve the canvas ResizeObserver redraw, and test model names and filter wrapping.</p>
-<p class="tutorial-mission-link">Start with <a href="#lesson-16">lesson 16</a>. Pass when you can show the before/after and explain the cause.</p>
-</article>
-<article class="tutorial-mission"><h3>The teacher takes the exam</h3>
-<p><a href="css-tutorial.html"><code>css-tutorial.html</code></a></p>
-<p>This page has long code blocks, a contents list, a live lab, and many disclosures. Test every control using the keyboard, scan the page at 320px, and keep code overflow local. Critique the teaching layout using what you learned.</p>
-<p class="tutorial-mission-link">Start with <a href="#lesson-20">lesson 20</a>. Pass when you can show the before/after and explain the cause.</p>
 </article>
 </div>
 </section>
