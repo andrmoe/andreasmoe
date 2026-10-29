@@ -18,7 +18,7 @@
 <div class="ctl-ai-notice">Everything on this page is AI generated</div>
 <h1>Learn CSS by improving Andreas Moe’s site</h1>
 <nav class="tutorial-contents" aria-label="Tutorial lessons"><details><summary>Choose your next mission · 20 lessons</summary><p>First build the baseline, then tackle the advanced experiments and the page repair map.</p>
-<ol><li><a href="#lesson-1">1. Set up a short feedback loop</a></li><li><a href="#lesson-2">2. Read your first CSS rule</a></li><li><a href="#lesson-3">3. Understand the box model and page width</a></li><li><a href="#lesson-4">4. Learn the cascade while improving headings</a></li><li><a href="#lesson-5">5. Make links and keyboard focus intentional</a></li><li><a href="#lesson-6">6. Give your existing header structure</a></li><li><a href="#lesson-7">7. Replace fixed-width project cards with a grid</a></li><li><a href="#lesson-8">8. Make the finishing adjustments for phones</a></li><li><a href="#lesson-9">9. Save your first finished version</a></li><li><a href="#lesson-10">10. Design tokens: stop hunting down hex codes</a></li><li><a href="#lesson-11">11. Editorial layout: rhythm, long titles, and logical spacing</a></li><li><a href="#lesson-12">12. Overflow clinic: images, code, math, and tables</a></li><li><a href="#lesson-13">13. Inline-style escape room: tame the embedded demos</a></li><li><a href="#lesson-14">14. Container queries: a card should know its own space</a></li><li><a href="#lesson-15">15. UI states: attribute selectors, :has(), and honest feedback</a></li><li><a href="#lesson-16">16. Cascade architecture: win without escalating selectors</a></li><li><a href="#lesson-17">17. Figure clinic: layout, positioning, and readable evidence</a></li><li><a href="#lesson-18">18. Motion, preferences, and a theme that earns its keep</a></li><li><a href="#lesson-19">19. Print styles: your CV has a second screen</a></li><li><a href="#lesson-20">20. The final repair expedition</a></li></ol>
+<ol><li><a href="#lesson-1">1. Set up a short feedback loop</a></li><li><a href="#lesson-2">2. Read your first CSS rule</a></li><li><a href="#lesson-3">3. Understand the box model and page width</a></li><li><a href="#lesson-4">4. Learn the cascade while improving headings</a></li><li><a href="#lesson-5">5. Make links and keyboard focus intentional</a></li><li><a href="#lesson-6">6. Give your existing header structure</a></li><li><a href="#lesson-7">7. Build the Projects page from an empty stylesheet</a></li><li><a href="#lesson-8">8. Make the finishing adjustments for phones</a></li><li><a href="#lesson-9">9. Save your first finished version</a></li><li><a href="#lesson-10">10. Design tokens: stop hunting down hex codes</a></li><li><a href="#lesson-11">11. Editorial layout: rhythm, long titles, and logical spacing</a></li><li><a href="#lesson-12">12. Overflow clinic: images, code, math, and tables</a></li><li><a href="#lesson-13">13. Inline-style escape room: tame the embedded demos</a></li><li><a href="#lesson-14">14. Container queries: a card should know its own space</a></li><li><a href="#lesson-15">15. UI states: attribute selectors, :has(), and honest feedback</a></li><li><a href="#lesson-16">16. Cascade architecture: win without escalating selectors</a></li><li><a href="#lesson-17">17. Figure clinic: layout, positioning, and readable evidence</a></li><li><a href="#lesson-18">18. Motion, preferences, and a theme that earns its keep</a></li><li><a href="#lesson-19">19. Print styles: your CV has a second screen</a></li><li><a href="#lesson-20">20. The final repair expedition</a></li></ol>
 <p><a href="#repair-map">Open the complete page repair map</a></p>
 </details>
 </nav>
@@ -26,7 +26,7 @@
 <p>Treat this as a workshop over several sessions: about 90 minutes for the first eight lessons, then 2–4 hours for the advanced labs and as much time as you want for the page repair missions. No framework, build tool, or external font is needed. The live lab uses a little JavaScript; the styling exercises teach CSS.</p>
 <aside class="tutorial-route"><p class="tutorial-eyebrow">Your website is the practice ground</p>
 <p><strong>How to play:</strong> predict → edit → inspect → explain. Try each mission before opening its solution. A fix counts when you can explain why it works at both 320px and desktop widths.</p>
-<p>Lessons 1–8 build one cumulative baseline in <code>styles.css</code>. Lessons 10–19 are separate experiments: their placement notes tell you which file or markup to change. Keep only the experiments you like. <a href="#repair-map">The repair map</a> gives each eligible page a specific assignment; pages marked as AI generated are excluded.</p>
+<p>Lessons 1–8 build a shared baseline in <code>styles.css</code>, with lesson 7 taking a self-contained detour into an unstyled Projects practice copy before transferring the finished card rules back. Lessons 10–19 are separate experiments: their placement notes tell you which file or markup to change. Keep only the experiments you like. <a href="#repair-map">The repair map</a> gives each eligible page a specific assignment; pages marked as AI generated are excluded.</p>
 <p>Keep <code>header.html</code> as it is. Navigation exercises change CSS only. Use the browser’s Styles, Computed, Layout, and Network panels as your instruments.</p>
 </aside>
 <h2 id="lesson-1">1. Set up a short feedback loop</h2>
@@ -274,29 +274,58 @@ a:focus-visible {
 <details class="tutorial-answer"><summary>Show a possible solution</summary><p>The injected header has an extra wrapping <code>&lt;div&gt;</code>; flex layout affects direct children. Its heading, text separator, and current-page <code>&lt;b&gt;</code> wrapper also matter. The inline-block approach in this lesson works with that existing structure. Inspect the DOM before choosing a layout tool.</p>
 </details>
 </div>
-<h2 id="lesson-7">7. Replace fixed-width project cards with a grid</h2>
-<p>Your <code>.project-list</code> currently uses flexbox with 300px-wide cards. Flexbox is useful for arranging items along a row or column. Here we’ll use <strong>Grid</strong>, which lays items out in rows and columns and can calculate how many columns fit.</p>
-<p>Append:</p>
-<pre><code class="language-css">.project-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
-    gap: 1.5rem;
-    padding: 0;
-}
+<h2 id="lesson-7">7. Build the Projects page from an empty stylesheet</h2>
+<p>This is a fresh start. You need HTML familiarity, but no CSS knowledge and no familiarity with the old Projects styling. We’ll use the real project content, observe it with browser defaults, and introduce every CSS rule we need. You can do this lesson on its own.</p>
+<h3>7.1 · Start with content, not a design</h3>
+<p>Copy <code>projects.html</code> to <code>projects-practice.html</code> in the repository root so its relative image paths still work. In the copy only, remove every stylesheet link, any style blocks or style attributes, the <code>header.js</code> script tag, and the empty <code>&lt;div id="header"&gt;&lt;/div&gt;</code>. Keep the project list and its class names. Add <code>&lt;h1&gt;Projects&lt;/h1&gt;</code> just before the list. Leave the original Projects page and shared header alone while practicing.</p>
+<p>Check that the head contains this mobile viewport instruction:</p>
+<pre><code class="language-html">&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+</code></pre>
+<p>This makes mobile browsers use the device’s width for layout. From the repository root, run <code>python3 -m http.server 8000</code> if your local server isn’t already running. Open <code>http://localhost:8000/projects-practice.html</code>.</p>
+<p><strong>Before adding CSS:</strong> you should see browser-default text and links, with images at their natural sizes. Large images may overflow. Take a screenshot. The exercise starts here, with no custom styling at all.</p>
+<p>Create an empty <code>projects-practice.css</code> beside the practice HTML. Add this line inside the copy’s head:</p>
+<pre><code class="language-html">&lt;link rel=&quot;stylesheet&quot; href=&quot;projects-practice.css&quot;&gt;
+</code></pre>
+<p>The HTML now loads your empty CSS file. Class names are labels, not built-in designs: <code>class="project-item"</code> does nothing visually until a stylesheet selects it.</p>
+<h3>7.2 · Your first rules: give the page room</h3>
+<p>A CSS rule has a selector followed by declarations inside braces. In <code>body { color: #26332f; }</code>, <code>body</code> chooses the body element, <code>color</code> is a property, and <code>#26332f</code> is its hexadecimal color value. A colon separates property and value; a semicolon ends the declaration. Put this first block in the empty practice CSS file:</p>
+<pre><code class="language-css">* { box-sizing: border-box; }
 
-.project-item {
-    width: auto;
-    background: #fff;
+body {
+    max-width: 72rem;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+    font-family: system-ui, sans-serif;
+    line-height: 1.6;
+    color: #26332f;
+    background: #f8f7f3;
+}
+</code></pre>
+<p>Every element has a box: content inside padding, then a border, then outside margin. <code>*</code> selects every element. <code>box-sizing: border-box</code> makes declared widths include padding and borders, helping boxes fit their assigned space.</p>
+<p><code>max-width</code> caps page width while letting it shrink. <code>rem</code> is relative to the root font size: commonly 1rem is 16px, but readers can change that. <code>margin: 0 auto</code> sets top/bottom margins to zero and divides spare horizontal space equally to center the page. <code>padding: 2rem 1rem</code> adds 2rem inside at top/bottom and 1rem at left/right.</p>
+<p><code>font-family</code> uses the operating system’s interface font with a generic sans-serif fallback. Unitless <code>line-height: 1.6</code> makes lines 1.6 times the text size. <code>color</code> sets text color; <code>background</code> paints the page behind it. Text settings normally pass down to children, called inheritance, although links may have their own browser-default color.</p>
+<p><strong>Predict and test:</strong> change the horizontal padding to 3rem, reload, then restore 1rem. Which space changes? The images still need their own sizing rules; fixing the page box does not automatically fix its contents.</p>
+<h3>7.3 · Make one understandable card</h3>
+<p>The existing HTML groups each project with these labels: <code>.project-item</code> is the outer div, <code>.project-link</code> is its link, <code>.project-image</code> is the image, and <code>.project-title</code> is the heading. A dot in a selector matches a class. Add these rules below the first block:</p>
+<pre><code class="language-css">.project-item {
+    min-width: 0;
+    margin-bottom: 1.5rem;
+    background: white;
     border: 1px solid #d7ded7;
     border-radius: 0.75rem;
-    box-shadow: 0 3px 12px rgb(24 61 53 / 6%);
+    overflow: hidden;
 }
 
 .project-link {
+    display: block;
     height: 100%;
+    color: inherit;
+    text-decoration: none;
 }
 
 .project-image {
+    display: block;
+    width: 100%;
     height: auto;
     aspect-ratio: 3 / 2;
     object-fit: cover;
@@ -305,40 +334,58 @@ a:focus-visible {
 .project-title {
     margin: 0;
     padding: 1.25rem;
-    color: #183d35;
     font-size: 1.15rem;
+    line-height: 1.3;
+    color: #183d35;
+    overflow-wrap: anywhere;
+}
+</code></pre>
+<p><code>border</code> combines thickness, line style, and color; a pixel (<code>px</code>) is a CSS length unit. <code>border-radius</code> rounds corners. <code>overflow: hidden</code> clips content that extends outside the card, including image corners. <code>margin-bottom</code> separates the stacked cards. <code>min-width: 0</code> lets a card shrink below its content’s natural minimum width when we put it in a grid.</p>
+<p><code>display: block</code> gives the link a rectangular layout box spanning the available width; its contents are still clickable. <code>height: 100%</code> lets that link fill a card once the grid sizes it. <code>color: inherit</code> uses the parent’s text color, and <code>text-decoration: none</code> removes the link underline. We’ll add a clear keyboard focus outline in step 7.5.</p>
+<p>For images, <code>width: 100%</code> fills their container. <code>height: auto</code> allows the height to be calculated, while <code>aspect-ratio: 3 / 2</code> requests a consistent frame that is three units wide for every two high. <code>object-fit: cover</code> fills that frame, cropping edges if the original image has different proportions. Image <code>display: block</code> also removes the baseline gap that inline images can leave beneath them.</p>
+<p>The heading’s <code>margin: 0</code> removes browser-default outside spacing. Its padding creates inside space instead. <code>font-size</code> sets its text size; <code>overflow-wrap: anywhere</code> lets an unusually long word break rather than widen the card.</p>
+<p><strong>Checkpoint:</strong> cards should now be stacked full-width boxes with consistently shaped images. Compare <code>cover</code> with <code>contain</code> on the Transformer screenshot. Contain preserves the whole image inside the frame but can leave empty space. Decide which tradeoff suits each image.</p>
+<h3>7.4 · Let the gallery choose its columns</h3>
+<p>Grid arranges direct children in rows and columns. Start with a single column: append this block, reload, and inspect the Layout panel in Developer Tools.</p>
+<pre><code class="language-css">.project-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
 }
 
-.project-item:hover,
+.project-item { margin-bottom: 0; }
+</code></pre>
+<p><code>display: grid</code> makes the list a grid container and its project divs grid items. <code>grid-template-columns</code> defines the columns. One <code>1fr</code> track takes one share of the available space. <code>gap</code> separates rows and columns without adding outside gutters. The later <code>.project-item</code> rule removes the old bottom margin so margin and gap do not both add spacing. With equal selectors in this stylesheet, the later declaration wins for that property.</p>
+<p><strong>Try before reading on:</strong> replace <code>1fr</code> with <code>1fr 1fr</code>. You get two equal columns, even when that is too cramped. Now replace just that columns declaration with:</p>
+<pre><code class="language-css">grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+</code></pre>
+<p>Read the nested functions from the inside out:</p>
+<ol><li><code>min(100%, 18rem)</code> picks the smaller of the container width and 18rem. This lets a column fit on a narrow phone.</li><li><code>minmax(..., 1fr)</code> lets each column grow from that minimum to a share of the available space.</li><li><code>repeat(auto-fit, ...)</code> creates as many of those columns as fit and shares leftover space among them.</li></ol>
+<p><strong>Checkpoint:</strong> the gallery should move between one and several columns as you resize. Change 18rem to 22rem, predict whether fewer or more columns will fit, then reload. There is no fixed 300px width to override: you created these rules yourself.</p>
+<h3>7.5 · Show where the keyboard is</h3>
+<p><code>:hover</code>, <code>:focus-within</code>, and <code>:focus-visible</code> are state selectors, called pseudo-classes. Hover matches pointer position. Focus-within matches a card when something inside it, such as its link, has focus. Focus-visible lets the browser show an indicator when keyboard focus needs to be visible. Append:</p>
+<pre><code class="language-css">.project-item:hover,
 .project-item:focus-within {
     border-color: #146653;
 }
 
 .project-link:focus-visible {
+    outline: 3px solid #146653;
     outline-offset: -4px;
 }
 </code></pre>
-<p>Read the long grid declaration from the inside out:</p>
-<ol>
-<li><code>min(100%, 18rem)</code> chooses the smaller of the container width and 18rem, so a column can fit a narrow phone.</li>
-<li><code>minmax(..., 1fr)</code> lets a column grow from that minimum and take a share of the available space. <code>fr</code> means a fraction of leftover grid space.</li>
-<li><code>repeat(auto-fit, ...)</code> creates as many of those columns as fit.</li>
-</ol>
-<p><code>width: auto</code> overrides the old 300px width so the grid controls card sizing. <code>aspect-ratio</code> gives images consistent proportions; <code>object-fit: cover</code> fills the image box by cropping edges when necessary. Your old <code>overflow: hidden</code> still applies to cards, clipping images to the rounded corners. The inward link outline keeps keyboard focus visible inside those clipped cards. <code>:focus-within</code> matches a card when its link has focus.</p>
-<p><strong>Try it:</strong> change <code>18rem</code> to <code>22rem</code>. Predict whether you’ll get more or fewer columns before you reload. Restore whichever size you prefer.</p>
-<p><strong>Checkpoint:</strong> Projects should move from several columns to one as you narrow the window. Some project images contain diagrams: check that the cropping is acceptable. If you need the whole diagram visible, change <code>object-fit: cover</code> to <code>contain</code>; this can leave unused space around it. CSS won’t fix an image that fails to download.</p>
-<div class="tutorial-drill"><h3>The gallery stress test</h3>
-<p>Give one project a very long title in a local experiment. Set the viewport to 320px. Do the cards still fit? Compare <code>object-fit: cover</code> and <code>contain</code> on the Transformer screenshot.</p>
-<details class="tutorial-answer"><summary>Show a possible solution</summary><p>Let the title wrap and let Grid set the width. Cover fills the frame with possible cropping; contain preserves the entire diagram. Choose intentionally by content type. Restore your temporary title when finished.</p>
-</details>
-</div>
-<div class="tutorial-drill"><h3>Choose your layout tool</h3>
-<p>Explain why the project gallery suits Grid, while a row of filter buttons suits wrapping Flexbox. Then give the cards a 2rem gap without adding margins to each card.</p>
-<details class="tutorial-answer"><summary>Show a possible solution</summary><pre><code class="language-css">.project-list { gap: 2rem; }
+<p>A comma groups selectors that share declarations. <code>border-color</code> changes the existing border’s color. <code>outline</code> draws a focus marker without moving surrounding boxes. The negative offset brings it inside the link so the card’s clipping does not hide it. Ordinary links with href already support Tab and Enter; no JavaScript or tabindex is needed.</p>
+<p><strong>Checkpoint:</strong> use Tab, Shift+Tab, and Enter. Every card should be reachable, visibly focused, and activatable. In Vivaldi, if Tab skips links, enable <strong>Settings → Webpages → Webpage Focus → Focus All Controls and Links</strong>.</p>
+<div class="tutorial-drill"><h3>The gallery stress test</h3><p>In the practice copy, give one project a very long title. Set the viewport to 320px. Do the cards still fit? Compare cover and contain on its technical screenshot, then remove the focus rule temporarily. What is lost?</p><details class="tutorial-answer"><summary>Show a possible solution</summary><p>Grid determines the width; the title wraps within it. Contain preserves the full diagram, while cover may crop it. Restore the visible focus outline: removing underlines from card links makes a clear keyboard indicator especially useful. Restore the real title after testing.</p></details></div>
+<div class="tutorial-drill"><h3>Rebuild it from memory</h3><p>Hide your practice CSS. Explain which class needs the grid, which needs the border, and which needs the image sizing. Then rebuild a single-column version before looking at the answer.</p><details class="tutorial-answer"><summary>Show a possible solution</summary><pre><code class="language-css">.project-list { display: grid; gap: 1.5rem; }
+.project-item { border: 1px solid #d7ded7; }
+.project-image { display: block; max-width: 100%; height: auto; }
 </code></pre>
-<p>Grid coordinates tracks across rows and columns. Flexbox distributes items along one axis, then can wrap them. Gap puts space between items without adding extra outer gutters.</p>
-</details>
-</div>
+<p>The list owns the layout, each item owns its frame, and each image owns its sizing. This minimal sketch is practice, not the full finished design; bring back the link focus rule and your other declarations afterward.</p></details></div>
+<h3>7.6 · Bring the finished cards back to your site</h3>
+<p>When you like the practice gallery, open <code>styles.css</code> and remove its original rules for <code>.project-list</code>, <code>.project-item</code>, <code>.project-link</code>, <code>.project-image</code>, and <code>.project-title</code>, plus any old project-specific hover/focus overrides you added. Copy your finished project-class rules from the practice stylesheet into their place. Keep only the final columns declaration and remove the now-unnecessary margin-bottom declarations.</p>
+<p>Do not copy the practice body rule or universal box-sizing rule over the shared page foundation you built earlier. If you took this lesson on its own, also copy its universal box-sizing rule so project widths include their borders; review the practice body settings separately before choosing any shared page styling. Open the original <code>projects.html</code> and verify the cards with its shared header. The later container-query and motion lessons build on these complete card rules.</p>
+<p>Your practice copy is a local learning file: remove it and its CSS once you have transferred the work. No part of this lesson relies on a hidden rule left over from the old gallery.</p>
 <h2 id="lesson-8">8. Make the finishing adjustments for phones</h2>
 <p>A <strong>media query</strong> applies rules only when a condition matches. Append:</p>
 <pre><code class="language-css">@media (max-width: 40rem) {
@@ -540,7 +587,7 @@ a { color: var(--site-accent); }
 </section>
 <section class="tutorial-lesson" aria-labelledby="lesson-14"><h2 id="lesson-14">14. Container queries: a card should know its own space</h2>
 <p>A viewport query asks how wide the browser is. A <strong>container query</strong> asks how much room a component has. A project card might live in a wide gallery or a narrow sidebar on the same screen.</p>
-<p><strong>Placement:</strong> experiment in <code>styles.css</code> after the gallery rules. The ordinary stacked card is the fallback. The query changes descendants of each card, not the card that establishes the container.</p>
+<p><strong>Placement:</strong> experiment in <code>styles.css</code> after the gallery rules. First complete lesson 7 and transfer its finished card rules into the shared stylesheet. The ordinary stacked card is the fallback. The query changes descendants of each card, not the card that establishes the container.</p>
 <pre><code class="language-css">.project-item { container-type: inline-size; }
 @container (min-width: 30rem) {
     .project-link {
@@ -771,7 +818,7 @@ a { color: var(--site-accent); }
 </article>
 <article class="tutorial-mission"><h3>The thumbnail identity crisis</h3>
 <p><a href="projects.html"><code>projects.html</code></a></p>
-<p>Cards have fixed 300px widths and cover-cropped images. Use the responsive grid, stress-test long titles, and decide which technical thumbnails need contain instead. Missing image alt text and remote image loading need HTML or URL fixes.</p>
+<p>Start from lesson 7’s unstyled practice copy and empty stylesheet. Build the card boxes, image sizing, grid, and focus states yourself; stress-test long titles and decide which technical thumbnails need contain instead. Missing image alt text and remote image loading need HTML or URL fixes.</p>
 <p class="tutorial-mission-link">Start with <a href="#lesson-7">lesson 7</a>. Pass when you can show the before/after and explain the cause.</p>
 </article>
 <article class="tutorial-mission"><h3>The endless bookshelf</h3>
