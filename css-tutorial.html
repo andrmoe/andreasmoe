@@ -4,21 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="page" content="css-tutorial">
-    <meta name="description" content="Learn CSS from scratch by improving this site's typography, navigation, project cards, and mobile layout. Assumes familiarity with HTML.">
+    <meta name="description" content="A hands-on CSS workshop from first selectors to container queries, cascade layers, print styles, and repair missions for every page on this site. Assumes familiarity with HTML.">
     <title>CSS tutorial — Andreas Moe</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="tutorials/tutorial.css">
     <link rel="icon" href="favicon.png">
     <script src="header.js"></script>
+    <script defer src="tutorials/tutorial.js"></script>
 </head>
 <body class="css-tutorial">
     <div id="header"></div>
     <main>
 <div class="ctl-ai-notice">Everything on this page is AI generated</div>
 <h1>Learn CSS by improving Andreas Moe’s site</h1>
-<nav class="tutorial-contents" aria-label="Tutorial lessons"><h2>In this tutorial</h2><ol><li><a href="#lesson-1">1. Set up a short feedback loop</a></li><li><a href="#lesson-2">2. Read your first CSS rule</a></li><li><a href="#lesson-3">3. Understand the box model and page width</a></li><li><a href="#lesson-4">4. Learn the cascade while improving headings</a></li><li><a href="#lesson-5">5. Make links and keyboard focus intentional</a></li><li><a href="#lesson-6">6. Give your existing header structure</a></li><li><a href="#lesson-7">7. Replace fixed-width project cards with a grid</a></li><li><a href="#lesson-8">8. Make the finishing adjustments for phones</a></li><li><a href="#lesson-9">9. Finish, verify, and make it yours</a></li></ol></nav>
+<nav class="tutorial-contents" aria-label="Tutorial lessons"><details><summary>Choose your next mission · 20 lessons</summary><p>First build the baseline, then tackle the advanced experiments and the page repair map.</p>
+<ol><li><a href="#lesson-1">1. Set up a short feedback loop</a></li><li><a href="#lesson-2">2. Read your first CSS rule</a></li><li><a href="#lesson-3">3. Understand the box model and page width</a></li><li><a href="#lesson-4">4. Learn the cascade while improving headings</a></li><li><a href="#lesson-5">5. Make links and keyboard focus intentional</a></li><li><a href="#lesson-6">6. Give your existing header structure</a></li><li><a href="#lesson-7">7. Replace fixed-width project cards with a grid</a></li><li><a href="#lesson-8">8. Make the finishing adjustments for phones</a></li><li><a href="#lesson-9">9. Save your first finished version</a></li><li><a href="#lesson-10">10. Design tokens: stop hunting down hex codes</a></li><li><a href="#lesson-11">11. Editorial layout: rhythm, long titles, and logical spacing</a></li><li><a href="#lesson-12">12. Overflow clinic: images, code, math, and tables</a></li><li><a href="#lesson-13">13. Inline-style escape room: tame the embedded demos</a></li><li><a href="#lesson-14">14. Container queries: a card should know its own space</a></li><li><a href="#lesson-15">15. UI states: attribute selectors, :has(), and honest feedback</a></li><li><a href="#lesson-16">16. Cascade architecture: win without escalating selectors</a></li><li><a href="#lesson-17">17. Dashboard triage: preserve the chart, shrink the chrome</a></li><li><a href="#lesson-18">18. Motion, preferences, and a theme that earns its keep</a></li><li><a href="#lesson-19">19. Print styles: your CV has a second screen</a></li><li><a href="#lesson-20">20. The final repair expedition</a></li></ol>
+<p><a href="#repair-map">Open the complete page repair map</a></p>
+</details>
+</nav>
 <p>You know HTML and a little JavaScript. This tutorial assumes <strong>no CSS knowledge</strong>. You’ll use your actual pages to turn a browser-default-looking site into a restrained personal site: warm background, readable text, teal links, comfortable navigation, and responsive project cards.</p>
-<p>Allow roughly 60–90 minutes. Work through the lessons in order; each gives you something visible to check. No framework, build tool, external font, or JavaScript change is needed.</p>
+<p>Treat this as a workshop over several sessions: about 90 minutes for the first eight lessons, then 2–4 hours for the advanced labs and as much time as you want for the page repair missions. No framework, build tool, or external font is needed. The live lab uses a little JavaScript; the styling exercises teach CSS.</p>
+<aside class="tutorial-route"><p class="tutorial-eyebrow">Your website is the practice ground</p>
+<p><strong>How to play:</strong> predict → edit → inspect → explain. Try each mission before opening its solution. A fix counts when you can explain why it works at both 320px and desktop widths.</p>
+<p>Lessons 1–8 build one cumulative baseline in <code>styles.css</code>. Lessons 10–19 are separate experiments: their placement notes tell you which file or markup to change. Keep only the experiments you like. <a href="#repair-map">The repair map</a> gives every HTML file a specific assignment, including the standalone dashboards.</p>
+<p>Keep <code>header.html</code> as it is. Navigation exercises change CSS only. Use the browser’s Styles, Computed, Layout, and Network panels as your instruments.</p>
+</aside>
 <h2 id="lesson-1">1. Set up a short feedback loop</h2>
 <p>From the repository root, run:</p>
 <pre><code class="language-sh">python3 -m http.server 8000
@@ -30,6 +40,11 @@
 </code></pre>
 <p>This tells mobile browsers to use the device’s actual width for layout. Later, add it to the other full HTML pages that share your stylesheet. Don’t add it to <code>header.html</code>: that file is a fragment loaded into other pages, not a full document.</p>
 <p><strong>Checkpoint:</strong> the local homepage loads with its navigation. Take a screenshot so you can compare the result at the end.</p>
+<div class="tutorial-drill"><h3>Mission 1 · Find the wire</h3>
+<p>In Developer Tools, locate the stylesheet request. Then temporarily rename <code>styles.css</code> in the link on the homepage. Predict what survives. Restore the link afterward.</p>
+<details class="tutorial-answer"><summary>Show a possible solution</summary><p>The HTML and default browser styles survive; your custom styling disappears. A missing stylesheet is a loading problem before it is a selector problem. Check Network for a failed request and confirm the path is relative to the HTML page.</p>
+</details>
+</div>
 <h2 id="lesson-2">2. Read your first CSS rule</h2>
 <p>HTML describes elements. CSS chooses elements and gives them visual properties:</p>
 <pre><code class="language-css">p {
@@ -76,6 +91,20 @@ body {
 <p><code>background</code> paints the page. <code>font-family</code> asks for the operating system’s interface font, with a generic sans-serif fallback. <code>rem</code> is a unit relative to the root element’s font size: with the common 16px default, <code>1.0625rem</code> is 17px. It also respects the reader’s font preferences. Unitless <code>line-height: 1.7</code> makes each line 1.7 times the text size.</p>
 <p>Text properties such as color and font usually <strong>inherit</strong>: descendants use their parent’s value unless another rule sets their own. Your existing <code>h1</code> rule sets its own font and color, so we’ll change those explicitly later.</p>
 <p><strong>Try it:</strong> change <code>line-height</code> to <code>1.2</code>, reload, then restore <code>1.7</code>. Notice how reading comfort changes without touching the HTML.</p>
+<div class="tutorial-drill"><h3>Selector scavenger hunt</h3>
+<p>On Books, color only authors, then only book titles. On Ideas, make only idea titles bold. Finally, predict whether <code>.ideas li</code> also matches a nested list item.</p>
+<details class="tutorial-answer"><summary>Show a possible solution</summary><pre><code class="language-css">.bookauthor { color: #58675e; }
+.booktitle { font-weight: 650; }
+.ideatitle { font-weight: 650; }
+</code></pre>
+<p><code>.ideas li</code> matches all descendant list items; <code>.ideas &gt; li</code> matches direct children only. Change the selectors in DevTools and compare the highlighted nodes.</p>
+</details>
+</div>
+<div class="tutorial-drill"><h3>Break the rule on purpose</h3>
+<p>Delete a colon, then restore it. Delete the semicolon between two declarations, then restore it. Which properties stop applying?</p>
+<details class="tutorial-answer"><summary>Show a possible solution</summary><p>An invalid declaration is usually discarded. A missing separator can make two declarations parse as one invalid declaration. Inspect the crossed-out or warning-marked declaration rather than rewriting the whole stylesheet.</p>
+</details>
+</div>
 <h2 id="lesson-3">3. Understand the box model and page width</h2>
 <p>Every element occupies a box. From the inside out, it has <strong>content → padding → border → margin</strong>. Padding creates room inside the border. Margin separates the box from its neighbors.</p>
 <p>Append:</p>
@@ -104,6 +133,33 @@ img {
 <p><code>body &gt; p</code> matches only paragraphs directly inside the body; <code>&gt;</code> means “direct child.” This caps your homepage introduction at about 65 characters per line, using <code>ch</code>, the width of the font’s “0” character. Your projects can still use the wider page. It doesn’t cap every nested article paragraph; later you can give article content its own wrapper if you want a separate reading width.</p>
 <p>The image rule lets large images shrink with their container while preserving their proportions. Your existing <code>.project-image</code> selector is more specific than <code>img</code>, so its fixed height still wins until lesson 7.</p>
 <p><strong>Checkpoint:</strong> on a wide screen the page is centered, with breathing room around it. Narrow the browser: the page should shrink without the introduction spilling sideways.</p>
+<div class="tutorial-drill"><h3>The 244px mystery</h3>
+<p>A box has <code>width: 200px; padding: 20px; border: 2px solid;</code>. Predict its border-to-border width under <code>content-box</code> and <code>border-box</code>. Do margins count?</p>
+<details class="tutorial-answer"><summary>Show a possible solution</summary><p>Content-box: 200 + 40 + 4 = <strong>244px</strong>. Border-box: <strong>200px</strong>, leaving 156px for content. Margins sit outside both measurements. Use the lab below to test the same arithmetic.</p>
+</details>
+</div>
+<div class="tutorial-drill"><h3>Margin or padding?</h3>
+<p>Give Contact more space around its email link. First use margin, then padding. Add a temporary background to the link. Which version expands the colored, clickable area?</p>
+<details class="tutorial-answer"><summary>Show a possible solution</summary><p>Padding expands the painted and clickable area inside the link box; margin creates separation outside it. Try <code>display: inline-block; padding: 0.5rem;</code> on the email link. Remove the experimental background when finished.</p>
+</details>
+</div>
+<section class="tutorial-lab" aria-labelledby="lab-title">
+<h3 id="lab-title">Live lab · The box that ate the gutter</h3>
+<p>Predict the card’s outer width before moving each control. The striped area is its container. Only this sample changes; your site files stay untouched.</p>
+<form id="box-lab-controls">
+<label for="lab-width">Declared width <output id="lab-width-value" for="lab-width">200px</output></label><input id="lab-width" type="range" min="100" max="280" value="200" step="10">
+<label for="lab-padding">Padding per side <output id="lab-padding-value" for="lab-padding">20px</output></label><input id="lab-padding" type="range" min="0" max="40" value="20" step="2">
+<label for="lab-sizing">Sizing model</label><select id="lab-sizing"><option value="content-box">content-box</option><option value="border-box">border-box</option></select>
+<button type="reset">Reset experiment</button>
+</form>
+<div class="tutorial-lab-stage" tabindex="0" role="region" aria-label="Box model experiment preview"><div id="lab-card">An idea needs some room.<br>Border: 2px per side.</div>
+</div>
+<p id="lab-measurement" role="status" aria-live="polite"></p>
+<pre><code id="lab-css"></code></pre>
+<p><strong>Challenge:</strong> make the declared width equal the measured width, then increase padding without changing that outer width. What happens to the text?</p>
+<noscript><p>This lab needs JavaScript. You can run the same experiment in Developer Tools using the CSS in the “244px mystery” exercise.</p>
+</noscript>
+</section>
 <h2 id="lesson-4">4. Learn the cascade while improving headings</h2>
 <p>Multiple rules can match the same element. The browser resolves them through the <strong>cascade</strong>. For the normal rules in your stylesheet, a more specific selector beats a less specific selector. When specificity is equal, the declaration written later wins. Rules combine property by property; a later rule doesn’t erase properties it never mentions.</p>
 <p>For example, <code>.project-image</code> is more specific than <code>img</code>. Two <code>h1</code> rules have equal specificity, so the later one wins for any properties both set. Inheritance supplies a value only when the element has no applicable value of its own.</p>
@@ -130,6 +186,22 @@ p {
 </code></pre>
 <p>Commas group selectors that share declarations. <code>clamp(minimum, preferred, maximum)</code> makes the heading grow with the browser width while staying between two limits. <code>vw</code> means hundredths of viewport width: <code>5vw</code> is 5% of the viewport. <code>em</code> is relative to the element’s own font size here, so letter spacing scales with the heading.</p>
 <p><strong>Try it:</strong> right-click your name, choose Inspect, and find its styles. You should see the old <code>h1</code> font size crossed out. Temporarily untick the new font size in Developer Tools. These browser experiments are temporary; save permanent changes in the file.</p>
+<div class="tutorial-drill"><h3>Cascade courtroom</h3>
+<p>Which wins: <code>.project-title { color: red; }</code> followed by <code>h3 { color: blue; }</code>? What changes if the first selector is also <code>h3</code>?</p>
+<details class="tutorial-answer"><summary>Show a possible solution</summary><p>The class selector wins over the element selector. With two <code>h3</code> rules in the same cascade context, the later rule wins. Find the actual winning declaration in the Computed panel; don’t use <code>!important</code> to skip the investigation.</p>
+</details>
+</div>
+<div class="tutorial-drill"><h3>Make the long title behave</h3>
+<p>Open the alignment-faking article. Give its long <code>#blogtitle</code> a readable line height and a maximum width in <code>ch</code>. Try 22ch, then 38ch. Keep the heading’s full text.</p>
+<details class="tutorial-answer"><summary>Show a possible solution</summary><pre><code class="language-css">#blogtitle {
+    max-width: 32ch;
+    line-height: 1.2;
+    overflow-wrap: anywhere;
+}
+</code></pre>
+<p>Choose where it wraps by reading it aloud. Don’t insert manual line breaks just to fit your current monitor.</p>
+</details>
+</div>
 <h2 id="lesson-5">5. Make links and keyboard focus intentional</h2>
 <p>Append:</p>
 <pre><code class="language-css">a {
@@ -150,6 +222,22 @@ a:focus-visible {
 </code></pre>
 <p><code>:hover</code> and <code>:focus-visible</code> are <strong>pseudo-classes</strong>: they match an element in a particular state. Hover responds to a pointer. Focus-visible gives keyboard users a clear marker as they Tab through links. An outline doesn’t consume layout space, so it won’t move neighboring text.</p>
 <p><strong>Checkpoint:</strong> hover over a link, then use Tab to move through the page. You should always be able to see which link has keyboard focus.</p>
+<div class="tutorial-drill"><h3>The mouse has disappeared</h3>
+<p>Navigate Contact and Projects using only Tab, Shift+Tab, and Enter. Then disable the hover rule. Is every link still understandable and its focus visible?</p>
+<details class="tutorial-answer"><summary>Show a possible solution</summary><p>Keep the underline on body links, keep a visible focus outline, and give keyboard focus the same meaningful card treatment as hover. A color change alone should not be the only sign that text is a link.</p>
+</details>
+</div>
+<div class="tutorial-drill"><h3>Style an address without collateral damage</h3>
+<p>Use an attribute selector to add padding only to email links on Contact. Do external web links change?</p>
+<details class="tutorial-answer"><summary>Show a possible solution</summary><pre><code class="language-css">a[href^=&quot;mailto:&quot;] {
+    display: inline-block;
+    padding-block: 0.5rem;
+    overflow-wrap: anywhere;
+}
+</code></pre>
+<p><code>^=</code> means “starts with.” <code>padding-block</code> controls spacing along the text’s block axis; lesson 11 explores logical properties.</p>
+</details>
+</div>
 <h2 id="lesson-6">6. Give your existing header structure</h2>
 <p>Your <code>header.html</code> has a heading followed by links. <code>header.js</code> wraps the current page’s link in <code>&lt;b&gt;</code>. We can style that exact structure without changing the script.</p>
 <p>Append:</p>
@@ -181,6 +269,11 @@ a:focus-visible {
 <p><code>inherit</code> explicitly takes the parent’s color. <code>:not(#index)</code> excludes the link containing your name. <code>inline-block</code> lets links sit next to one another while accepting box spacing; they wrap when the row fills up. Four margin values mean top, right, bottom, left, clockwise.</p>
 <p>We hide the old horizontal rule because the header now draws its own bottom border. The current page’s navigation underline becomes thicker. Since the name link deliberately has no underline, this current-page treatment is visible on the other navigation links.</p>
 <p><strong>Checkpoint:</strong> visit the Blog and Projects pages and check their active links. Narrow the browser and confirm the navigation wraps comfortably.</p>
+<div class="tutorial-drill"><h3>Navigation Tetris</h3>
+<p>Keep <code>header.html</code> untouched. In a 320px viewport, use only stylesheet rules to improve link spacing and wrapping. Explain why setting <code>display: flex</code> on <code>#header</code> alone does not distribute every link.</p>
+<details class="tutorial-answer"><summary>Show a possible solution</summary><p>The injected header has an extra wrapping <code>&lt;div&gt;</code>; flex layout affects direct children. Its heading, text separator, and current-page <code>&lt;b&gt;</code> wrapper also matter. The inline-block approach in this lesson works with that existing structure. Inspect the DOM before choosing a layout tool.</p>
+</details>
+</div>
 <h2 id="lesson-7">7. Replace fixed-width project cards with a grid</h2>
 <p>Your <code>.project-list</code> currently uses flexbox with 300px-wide cards. Flexbox is useful for arranging items along a row or column. Here we’ll use <strong>Grid</strong>, which lays items out in rows and columns and can calculate how many columns fit.</p>
 <p>Append:</p>
@@ -234,6 +327,18 @@ a:focus-visible {
 <p><code>width: auto</code> overrides the old 300px width so the grid controls card sizing. <code>aspect-ratio</code> gives images consistent proportions; <code>object-fit: cover</code> fills the image box by cropping edges when necessary. Your old <code>overflow: hidden</code> still applies to cards, clipping images to the rounded corners. The inward link outline keeps keyboard focus visible inside those clipped cards. <code>:focus-within</code> matches a card when its link has focus.</p>
 <p><strong>Try it:</strong> change <code>18rem</code> to <code>22rem</code>. Predict whether you’ll get more or fewer columns before you reload. Restore whichever size you prefer.</p>
 <p><strong>Checkpoint:</strong> Projects should move from several columns to one as you narrow the window. Some project images contain diagrams: check that the cropping is acceptable. If you need the whole diagram visible, change <code>object-fit: cover</code> to <code>contain</code>; this can leave unused space around it. CSS won’t fix an image that fails to download.</p>
+<div class="tutorial-drill"><h3>The gallery stress test</h3>
+<p>Give one project a very long title in a local experiment. Set the viewport to 320px. Do the cards still fit? Compare <code>object-fit: cover</code> and <code>contain</code> on the Transformer screenshot.</p>
+<details class="tutorial-answer"><summary>Show a possible solution</summary><p>Let the title wrap and let Grid set the width. Cover fills the frame with possible cropping; contain preserves the entire diagram. Choose intentionally by content type. Restore your temporary title when finished.</p>
+</details>
+</div>
+<div class="tutorial-drill"><h3>Choose your layout tool</h3>
+<p>Explain why the project gallery suits Grid, while a row of filter buttons suits wrapping Flexbox. Then give the cards a 2rem gap without adding margins to each card.</p>
+<details class="tutorial-answer"><summary>Show a possible solution</summary><pre><code class="language-css">.project-list { gap: 2rem; }
+</code></pre>
+<p>Grid coordinates tracks across rows and columns. Flexbox distributes items along one axis, then can wrap them. Gap puts space between items without adding extra outer gutters.</p>
+</details>
+</div>
 <h2 id="lesson-8">8. Make the finishing adjustments for phones</h2>
 <p>A <strong>media query</strong> applies rules only when a condition matches. Append:</p>
 <pre><code class="language-css">@media (max-width: 40rem) {
@@ -257,8 +362,18 @@ a:focus-visible {
 }
 </code></pre>
 <p>Below 40rem, the outer spacing gets smaller. Your existing <code>.textanddemo</code> uses a wrapping flex layout. <code>flex-basis: 100%</code> makes its text and demo children each request a full row on small screens. Removing the existing 300px text minimum lets the text fit even when the available space is smaller.</p>
-<p><strong>Checkpoint:</strong> check the homepage and Projects at 375px in your browser’s responsive mode. Also inspect an interactive article such as <code>rlhf.html</code>. Widgets and inline styles may need their own adjustments; a shared stylesheet can’t guarantee every embedded demo fits.</p>
-<h2 id="lesson-9">9. Finish, verify, and make it yours</h2>
+<p><strong>Checkpoint:</strong> check the homepage and Projects at 375px in your browser’s responsive mode. Also inspect the screenshot in <code>rlhf.html</code> and the embedded demo in <code>todo_list_in_react.html</code>. Widgets and inline styles may need their own adjustments; a shared stylesheet can’t guarantee every embedded demo fits.</p>
+<div class="tutorial-drill"><h3>Hunt the sideways scrollbar</h3>
+<p>In the report automation page, inspect <code>.codediv</code>, <code>.lefttext</code>, and the iframe. At 320px, identify which box is too wide. Fix the box itself; don’t hide overflow on the body.</p>
+<details class="tutorial-answer"><summary>Show a possible solution</summary><p>The original <code>.lefttext</code> has a 300px minimum; <code>.codediv</code> has 100% width plus padding under content-box sizing. The earlier border-box rule and lesson 8’s minimum reset address those causes. Inline iframe sizing is a separate cascade problem in lesson 13.</p>
+</details>
+</div>
+<div class="tutorial-drill"><h3>A breakpoint is a hypothesis</h3>
+<p>Slowly resize the browser. Record the first width where navigation, cards, or text become awkward. Pick a breakpoint based on that failure, then test just above and just below it.</p>
+<details class="tutorial-answer"><summary>Show a possible solution</summary><p>There is no universal “phone breakpoint.” A breakpoint marks where this content needs another arrangement. Also zoom to 200%: less available layout width should trigger useful reflow.</p>
+</details>
+</div>
+<h2 id="lesson-9">9. Save your first finished version</h2>
 <p>Compare your initial screenshot with the current homepage. You’ve changed page composition, reading rhythm, visual hierarchy, navigation, and the project layout using CSS alone, plus the mobile viewport metadata.</p>
 <p>Before calling it finished:</p>
 <ul>
@@ -268,10 +383,529 @@ a:focus-visible {
 <li>Check a long technical article with code, tables, math, and images. Wide tables or fixed-size widgets may need a separate improvement.</li>
 <li>Add the viewport metadata to the remaining full pages using <code>styles.css</code>.</li>
 </ul>
-<p><strong>Final exercise:</strong> choose one change: a different link color, a slightly narrower page, or larger card spacing. Find the declaration responsible, predict its effect, then edit and reload. Change one variable at a time so you learn what it controls.</p>
+<p><strong>Checkpoint exercise:</strong> choose one change: a different link color, a slightly narrower page, or larger card spacing. Find the declaration responsible, predict its effect, then edit and reload. Change one variable at a time so you learn what it controls.</p>
 <p>You can keep the appended rules while learning. Once comfortable, move each final declaration into its original matching rule and remove superseded declarations. Keep the specialized math, table, and demo rules. Repeat your visual checks after this cleanup: rearranging selectors can change which rule wins.</p>
-<p>To undo the tutorial changes, restore your backup of <code>styles.css</code> and remove the viewport lines you added. The tutorial itself doesn’t change your live pages; you make each improvement as you learn it.</p>
+<p>To undo the tutorial changes, restore your backup of <code>styles.css</code> and remove the viewport lines you added. The tutorial itself doesn’t change your other pages; you make each improvement as you learn it. Save this first version before trying the advanced missions below.</p>
 
+<section class="tutorial-lesson" aria-labelledby="lesson-10"><h2 id="lesson-10">10. Design tokens: stop hunting down hex codes</h2>
+<p>You have repeated colors in the shared stylesheet, the tutorial, and several dashboards. A <strong>custom property</strong> names a reusable value. Think of it as a named CSS setting, not a JavaScript variable: it participates in inheritance and can have different values in different subtrees.</p>
+<p><strong>Placement:</strong> append this to <code>styles.css</code> after the baseline. Then replace repeated values in the earlier rules with their matching <code>var(...)</code> expressions.</p>
+<pre><code class="language-css">:root {
+    --site-paper: #f8f7f3;
+    --site-ink: #26332f;
+    --site-accent: #146653;
+    --site-line: #d7ded7;
+    --site-space: 1.25rem;
+}
+body {
+    background: var(--site-paper);
+    color: var(--site-ink);
+}
+a { color: var(--site-accent); }
+.bookauthor { color: var(--site-muted, #58675e); }
+</code></pre>
+<p><code>:root</code> matches the document’s root element. The second argument of <code>var()</code> is a fallback when that custom property isn’t available. Prefixing these names avoids colliding with dashboards that already define <code>--ink</code> or <code>--paper</code>.</p>
+<div class="tutorial-drill"><h3>One edit, many pages</h3>
+<p>Change the accent once. Verify Home, Books, and Contact. Why doesn’t this automatically recolor every chart on the AI Control page?</p>
+<details class="tutorial-answer"><summary>Show a possible solution</summary><p>A custom property affects only declarations that use it. The dashboards already have local variables and explicit colors; mapping them is a separate choice. Keep chart colors meaningful and their legends consistent.</p>
+</details>
+</div>
+<div class="tutorial-drill"><h3>A local exception</h3>
+<p>Give only the Ideas list a different accent without changing Contact. Use a local custom property and consume it in the title rule.</p>
+<details class="tutorial-answer"><summary>Show a possible solution</summary><pre><code class="language-css">.ideas { --site-accent: #70458a; }
+.ideas .ideatitle { color: var(--site-accent); }
+</code></pre>
+</details>
+</div>
+</section>
+<section class="tutorial-lesson" aria-labelledby="lesson-11"><h2 id="lesson-11">11. Editorial layout: rhythm, long titles, and logical spacing</h2>
+<p>The alignment-faking and representative-democracy essays have long titles; the literature review has exported classes such as <code>.sectionHead</code>. A single global paragraph rule cannot express every reading layout. Introduce a wrapper for article content, leaving the shared header outside it.</p>
+<p><strong>Placement:</strong> in an article, put <code>&lt;main class="reading"&gt;</code> after <code>&lt;div id="header"&gt;&lt;/div&gt;</code> and close it before the scripts or closing body. Do not wrap the header. Add this CSS to <code>styles.css</code>.</p>
+<pre><code class="language-css">.reading {
+    max-inline-size: 68ch;
+    margin-inline: auto;
+}
+.reading &gt; * + * { margin-block-start: 1.25rem; }
+.reading :where(h2, h3, h4) {
+    line-height: 1.2;
+    scroll-margin-block-start: 1.5rem;
+}
+.reading :where(blockquote, .callout) {
+    border-inline-start: 4px solid var(--site-accent, #146653);
+    padding-inline-start: 1rem;
+    margin-inline: 0;
+}
+.reading #blogtitle { text-wrap: balance; }
+</code></pre>
+<p><code>inline</code> follows the direction of text; <code>block</code> follows the stacking direction of paragraphs. In English, max-inline-size acts like max-width and margin-inline controls left/right. These logical properties adapt to other writing directions. <code>* + *</code> matches an element with a preceding sibling: useful for a consistent vertical rhythm. Vertical margins can collapse rather than add; use the box-model panel to see the actual gap.</p>
+<p><code>:where()</code> groups selectors without adding specificity of its own, making component defaults easier to override. Balancing a heading is an enhancement; normal wrapping remains usable if unsupported.</p>
+<div class="tutorial-drill"><h3>The quotation rescue</h3>
+<p>In “Can Humanity Last Forever?”, turn the opening quoted definition’s generic div into a <code>blockquote</code>. Keep the attribution and link. Style the quote without changing every bold sentence.</p>
+<details class="tutorial-answer"><summary>Show a possible solution</summary><p>Choose semantic HTML first, then use the wrapper rule above. Preserve the MathML and its readable size. A quote treatment should identify the quote, not all emphasized text.</p>
+</details>
+</div>
+<div class="tutorial-drill"><h3>Generated output needs a frame</h3>
+<p>In Transformer, the sample output sits inside a div nested in a paragraph, which is invalid HTML. Replace the whole sample region with a named block outside the paragraph, then give it a subtle border and padding.</p>
+<details class="tutorial-answer"><summary>Show a possible solution</summary><pre><code class="language-html">&lt;div class=&quot;model-output&quot;&gt;
+  &lt;p&gt;&lt;strong&gt;Prompt:&lt;/strong&gt; He&lt;/p&gt;
+  &lt;p&gt;Keep the existing generated sample here.&lt;/p&gt;
+&lt;/div&gt;
+</code></pre>
+<pre><code class="language-css">.reading .model-output {
+    padding: 1rem;
+    border: 1px solid var(--site-line, #d7ded7);
+    border-radius: 0.5rem;
+}
+</code></pre>
+<p>The browser may have repaired the original invalid nesting before CSS saw it. Inspect the rendered DOM, not only View Source.</p>
+</details>
+</div>
+</section>
+<section class="tutorial-lesson" aria-labelledby="lesson-12"><h2 id="lesson-12">12. Overflow clinic: images, code, math, and tables</h2>
+<p>Some content should shrink; some needs a local scroll area. A photo can shrink. A wide comparison table or equation may need to keep its internal geometry. Hiding the whole page’s overflow loses content and conceals the cause.</p>
+<p><strong>Placement:</strong> use the <code>.reading</code> wrapper from lesson 11. Add the following to <code>styles.css</code>. Wrap a wide table or display equation with the HTML shown, keeping the original table or MathML intact.</p>
+<pre><code class="language-html">&lt;div class=&quot;scroll-region&quot; tabindex=&quot;0&quot; role=&quot;region&quot; aria-label=&quot;Comparison table&quot;&gt;
+  &lt;!-- Move the existing table here, unchanged. --&gt;
+&lt;/div&gt;
+</code></pre>
+<pre><code class="language-css">.reading img:not(.math) {
+    display: block;
+    max-inline-size: 100%;
+    block-size: auto;
+}
+.reading img.math { max-inline-size: 100%; }
+.reading pre,
+.scroll-region {
+    max-inline-size: 100%;
+    overflow-x: auto;
+}
+.reading pre {
+    white-space: pre;
+    overflow-wrap: normal;
+    word-wrap: normal;
+}
+.scroll-region:focus-visible {
+    outline: 3px solid var(--site-accent, #146653);
+    outline-offset: 3px;
+}
+.scroll-region table { min-inline-size: 100%; }
+</code></pre>
+<p>The literature review includes tiny exported <code>img.math</code> images. A blanket “every image is a full-width block” rule would damage inline equations, so exclude them. <code>white-space: pre</code> preserves code line breaks and indentation; the local scrollbar preserves long lines without forcing the page wider. Don’t shrink all MathML to make an equation fit.</p>
+<div class="tutorial-drill"><h3>Photo or instrument panel?</h3>
+<p>Test the 1200px-wide Deepstack screenshot, Homelab’s 500px-high images, and the two 700px-high images on Noise WSC. Let them fit without distortion. Put captions in real <code>figure</code>/<code>figcaption</code> elements.</p>
+<details class="tutorial-answer"><summary>Show a possible solution</summary><p>Use max-inline-size plus automatic height for article images. Reserve object-fit cropping for thumbnails. Compare the noise plot’s axis labels before and after: a plot that fits but becomes unreadable needs an enlarged view or local scrolling.</p>
+</details>
+</div>
+<div class="tutorial-drill"><h3>The calendar must remain a table</h3>
+<p>On Calendar Memorization, wrap the table in a named scroll region. On the literature review, do the same for <code>#TBL-4</code>. Can keyboard users reach the clipped columns?</p>
+<details class="tutorial-answer"><summary>Show a possible solution</summary><p>Use a focusable named region as above, then test arrow-key scrolling while it has focus. Don’t change rows into generic blocks or remove table semantics. Use a different, descriptive aria-label for each region.</p>
+</details>
+</div>
+</section>
+<section class="tutorial-lesson" aria-labelledby="lesson-13"><h2 id="lesson-13">13. Inline-style escape room: tame the embedded demos</h2>
+<p>The report automation page’s iframe has inline <code>width: 100%; height: 100%; border: none;</code>. The React Todo iframe also has <code>min-height: 800px</code>. Percentage heights need a definite containing height to resolve as expected; they are not a reliable “fill the remaining screen” command.</p>
+<p><strong>Placement:</strong> in those two HTML files, remove the iframe’s <code>style</code> attribute and add <code>class="embedded-demo"</code>. Preserve its existing src and give it a descriptive title. Then add:</p>
+<pre><code class="language-css">.textanddemo &gt; * { min-inline-size: 0; }
+.embedded-demo {
+    display: block;
+    inline-size: 100%;
+    block-size: 36rem;
+    max-block-size: 80svh;
+    border: 1px solid var(--site-line, #d7ded7);
+    border-radius: 0.5rem;
+}
+</code></pre>
+<p>For the Todo app, choose the demo height based on whether its internal controls remain usable; the PDF viewer can use another height. <code>svh</code> uses the small viewport height, useful around mobile browser chrome. A CSS stylesheet rule normally loses to an inline style setting the same property, so moving the owned inline declarations is cleaner than fighting them.</p>
+<p>The parent page’s CSS styles the iframe box. It does not style the document inside it. If the embedded app needs larger buttons or a different background, edit that app’s own stylesheet. PDF viewer behavior can vary by browser.</p>
+<div class="tutorial-drill"><h3>Find the actual demo</h3>
+<p>RLHF describes an interactive project, but is its page showing a live app or a screenshot? Inspect the HTML, then find the two pages that actually have iframes.</p>
+<details class="tutorial-answer"><summary>Show a possible solution</summary><p>The Todo List and Python-to-LaTeX report pages contain iframes. RLHF is a useful image-scaling test. Inspection beats guessing from the project’s topic.</p>
+</details>
+</div>
+<div class="tutorial-drill"><h3>Make room without magic numbers everywhere</h3>
+<p>Replace the two separate flex bases on <code>.lefttext</code> and <code>.rightdemo</code> with a grid experiment on <code>.textanddemo</code>. Use <code>minmax(0, 1fr)</code> for each column and collapse below a content-driven breakpoint.</p>
+<details class="tutorial-answer"><summary>Show a possible solution</summary><pre><code class="language-css">.textanddemo {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+}
+.lefttext { min-width: 0; }
+@media (max-width: 48rem) {
+    .textanddemo { grid-template-columns: 1fr; }
+}
+</code></pre>
+<p>The zero minimum allows tracks to shrink below their content’s natural minimum width. The iframe still needs a usable height and its own overflow behavior.</p>
+</details>
+</div>
+</section>
+<section class="tutorial-lesson" aria-labelledby="lesson-14"><h2 id="lesson-14">14. Container queries: a card should know its own space</h2>
+<p>A viewport query asks how wide the browser is. A <strong>container query</strong> asks how much room a component has. A project card might live in a wide gallery or a narrow sidebar on the same screen.</p>
+<p><strong>Placement:</strong> experiment in <code>styles.css</code> after the gallery rules. The ordinary stacked card is the fallback. The query changes descendants of each card, not the card that establishes the container.</p>
+<pre><code class="language-css">.project-item { container-type: inline-size; }
+@container (min-width: 30rem) {
+    .project-link {
+        display: grid;
+        grid-template-columns: 2fr 3fr;
+        align-items: center;
+    }
+    .project-image { block-size: 100%; }
+}
+</code></pre>
+<p><code>container-type: inline-size</code> enables queries about the card’s inline size. Size containment changes how intrinsic sizing is calculated, so let the parent grid give cards their width. A descendant cannot use this query to restyle its own query container. See <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/container-type">MDN’s container-type reference</a>.</p>
+<div class="tutorial-drill"><h3>Same viewport, different card</h3>
+<p>With the viewport held still, temporarily force the gallery to one column. Does a card switch to the horizontal layout? Restore the gallery afterward.</p>
+<details class="tutorial-answer"><summary>Show a possible solution</summary><pre><code class="language-css">.project-list { grid-template-columns: 1fr; }
+</code></pre>
+<p>A card wider than 30rem switches; a narrower card stays stacked. If nothing changes, inspect its computed width before changing the breakpoint. Test both sides of 30rem, not only “phone versus desktop.”</p>
+</details>
+</div>
+<div class="tutorial-drill"><h3>Bring the idea notebook to life</h3>
+<p>Create a reusable idea card in Ideas using its existing <code>.ideas &gt; li</code>. Make the list a grid with a one-column fallback; use container queries only if a card’s internal layout actually needs to change.</p>
+<details class="tutorial-answer"><summary>Show a possible solution</summary><p>A plain responsive grid may be all this list needs. Advanced CSS earns its place by solving a layout problem. Don’t add a container query just because the previous exercise used one.</p>
+</details>
+</div>
+</section>
+<section class="tutorial-lesson" aria-labelledby="lesson-15"><h2 id="lesson-15">15. UI states: attribute selectors, :has(), and honest feedback</h2>
+<p>The AI Control, Compute Thresholds, and Foreclosed Proposals dashboards already use <code>aria-pressed</code> for filter buttons. Style the actual state instead of inventing a second “selected” class that can drift out of sync.</p>
+<p><strong>Placement:</strong> edit the dashboard’s own style block. These rules are examples for <code>compute_thresholds.html</code>; adapt the component prefix when working on the others.</p>
+<pre><code class="language-css">.cth-controls button[aria-pressed=&quot;true&quot;] {
+    border-width: 2px;
+    font-weight: 700;
+}
+.cth-controls button:focus-visible {
+    outline: 3px solid #183d35;
+    outline-offset: 3px;
+}
+.cth-controls button:disabled {
+    cursor: not-allowed;
+    opacity: 0.65;
+}
+</code></pre>
+<p>A border and weight change supplement color. CSS reflects state; JavaScript must still update the attribute. A CSS disabled appearance alone does not disable a button: use the real <code>disabled</code> attribute when behavior requires it.</p>
+<p>For a relation-based enhancement, Books’ list items contain <code>.bookrating</code>. With <code>:has()</code>, you can style a parent based on its children:</p>
+<pre><code class="language-css">@supports selector(li:has(.bookrating)) {
+    li:has(&gt; .bookrating) {
+        border-block-end: 1px solid var(--site-line, #d7ded7);
+        padding-block-end: 1rem;
+    }
+}
+</code></pre>
+<p><code>@supports</code> tests whether a browser understands a CSS feature. The list remains readable without this enhancement. <code>:has()</code> tests structure, not arbitrary text content; it cannot select “books with exactly three stars” by reading the star characters. Add real rating metadata in HTML if you need that. Read <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Selectors/:has">MDN on :has()</a> and <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@supports">feature queries</a>.</p>
+<div class="tutorial-drill"><h3>Filter roulette</h3>
+<p>On each dashboard, press a filter with the keyboard. Check that the visible selection matches its <code>aria-pressed</code> value. Explain why hover is not selection.</p>
+<details class="tutorial-answer"><summary>Show a possible solution</summary><p>Hover is temporary pointer position. Pressed state persists until the application changes it. Test a selected button after moving the pointer away and after tabbing to a different control.</p>
+</details>
+</div>
+<div class="tutorial-drill"><h3>An empty link is not a styling challenge</h3>
+<p>Blog creates titles and date paragraphs after fetching other pages. Disable JavaScript: what is left? Can a pseudo-element safely supply the missing real titles?</p>
+<details class="tutorial-answer"><summary>Show a possible solution</summary><p>The initial links are empty. Put meaningful fallback title text in the HTML and let the existing script enhance it. Use CSS for the list spacing and date hierarchy; don’t manufacture essential titles with generated content.</p>
+</details>
+</div>
+</section>
+<section class="tutorial-lesson" aria-labelledby="lesson-16"><h2 id="lesson-16">16. Cascade architecture: win without escalating selectors</h2>
+<p>The dashboards put component CSS in inline <code>&lt;style&gt;</code> blocks after the shared stylesheet; the METR explorer and prioritization deck do not load <code>styles.css</code> at all. There is no single file whose edits automatically control the whole site.</p>
+<p>Normal inline style attributes outrank normal stylesheet rules. Among ordinary rules in the same origin, importance, and layer, specificity matters before source order. Stylesheet blocks in the HTML still use normal selector specificity; they are not the same as a <code>style="..."</code> attribute.</p>
+<p><strong>Optional refactor, not another append-only patch:</strong> after saving your baseline, move all existing shared declarations into a named layer and place new component rules in another. The schematic below shows the structure, not a replacement file with every existing rule included.</p>
+<pre><code class="language-css">@layer legacy, components;
+@layer legacy {
+    /* Move the existing shared declarations here. */
+}
+@layer components {
+    .booktitle { color: #183d35; }
+}
+</code></pre>
+<p>For normal author declarations, later layers beat earlier layers before specificity is compared. <strong>Unlayered normal rules beat normal layered rules</strong>, so simply wrapping new overrides in a layer while leaving the old rules outside it can make your overrides lose. Existing dashboard style blocks remain unlayered unless you deliberately migrate them too. Important declarations reverse layer priority; avoid using them as a routine repair tool. See <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/Cascade_layers">MDN’s cascade-layer guide</a>.</p>
+<div class="tutorial-drill"><h3>Trace the losing declaration</h3>
+<p>In the literature review, a table cell sets <code>text-align</code> in its style attribute. Try a class-based text alignment rule. Explain why it loses, then remove or move the owned inline declaration.</p>
+<details class="tutorial-answer"><summary>Show a possible solution</summary><p>Moving the value into a class makes it part of the maintainable stylesheet cascade. Don’t add more IDs or an important flag to every table cell. Preserve the exported math and citation anchors during cleanup.</p>
+</details>
+</div>
+<div class="tutorial-drill"><h3>Two islands, one visual language</h3>
+<p>Choose the METR explorer or prioritization deck. Locate its own style block, then map just its paper, ink, and border tokens to your chosen palette. Do not add all of <code>styles.css</code> without reviewing the global heading and list rules.</p>
+<details class="tutorial-answer"><summary>Show a possible solution</summary><p>Shared visual values do not require shared global layout rules. The deck’s large headings and the explorer’s chart workspace have different jobs. Verify a real slide and a populated chart after any refactor.</p>
+</details>
+</div>
+</section>
+<section class="tutorial-lesson" aria-labelledby="lesson-17"><h2 id="lesson-17">17. Dashboard triage: preserve the chart, shrink the chrome</h2>
+<p>Charts are a good test of judgment. AI Control intentionally keeps its SVG at least 800px wide inside a scrolling panel. Squeezing it to 280px can make its labels useless. Pre-Deployment Testing has 260px and 340px minimum grid tracks; those are different problems.</p>
+<p><strong>Placement:</strong> edit the existing corresponding rule in each page’s own style block rather than creating an unrelated global override.</p>
+<pre><code class="language-css">/* pre_deployment_testing.html */
+.pdt-multiples {
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
+}
+.pdt-cols {
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr));
+}
+/* foreclosed_proposals.html */
+.fcl-controls div { flex-wrap: wrap; }
+/* ai_control.html: keep the chart&#x27;s internal minimum width. */
+.ctl-chart { max-inline-size: 100%; overflow-x: auto; }
+</code></pre>
+<p>The nested <code>min()</code> lets a track get smaller than its usual minimum when its container is narrower. It doesn’t make the content inside automatically fit: check tables, formulas, and axis labels separately.</p>
+<p>Compute Thresholds and Foreclosed Proposals draw SVG charts; the METR explorer draws a canvas. Changing a canvas’s CSS size alone can stretch its bitmap. METR already has a <code>ResizeObserver</code> that redraws its chart; preserve that behavior. Inspect labels at normal zoom after changing the workspace.</p>
+<div class="tutorial-drill"><h3>The tooltip falls off the map</h3>
+<p>Inspect <code>.fcl-tooltip</code> and <code>.cth-tooltip</code>, then the relative chart wrapper. Explain what establishes their positioning reference. Test a point at the right edge.</p>
+<details class="tutorial-answer"><summary>Show a possible solution</summary><p>An absolutely positioned tooltip uses its containing block, here established by the positioned wrapper. Use a maximum inline size such as <code>min(20rem, calc(100% - 1rem))</code> and wrapping for long text, then inspect the positioning code: CSS size constraints alone cannot correct every JavaScript coordinate or add keyboard behavior.</p>
+</details>
+</div>
+<div class="tutorial-drill"><h3>Small text is not free space</h3>
+<p>On METR, several labels use 10–12px type. Increase one control group to 0.875rem or 1rem in its local style block. Let it wrap rather than shrinking it back. Confirm the chart redraws and controls remain reachable.</p>
+<details class="tutorial-answer"><summary>Show a possible solution</summary><p>Reflow the surrounding grid or flex row, keep min-inline-size: 0 on shrinkable grid children, and test at 200% zoom. Improve DOM labels with CSS; canvas-drawn text requires a change to the drawing code if it also needs to grow.</p>
+</details>
+</div>
+</section>
+<section class="tutorial-lesson" aria-labelledby="lesson-18"><h2 id="lesson-18">18. Motion, preferences, and a theme that earns its keep</h2>
+<p>Subtle transitions can connect a state change to its cause. Start with a working static state, then add optional motion for people who have not asked for reduced motion.</p>
+<p><strong>Placement:</strong> append to <code>styles.css</code> after the card rules.</p>
+<pre><code class="language-css">@media (prefers-reduced-motion: no-preference) {
+    .project-item {
+        transition: border-color 160ms ease, box-shadow 160ms ease;
+    }
+    .project-item:hover,
+    .project-item:focus-within {
+        box-shadow: 0 6px 18px rgb(24 61 53 / 14%);
+    }
+}
+</code></pre>
+<p>Here motion is opt-in through the preference query. The earlier border and focus states still work without it. Avoid <code>transition: all</code>: width, height, and layout changes are rarely what you intended. See <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@media/prefers-reduced-motion">MDN’s reduced-motion reference</a>.</p>
+<p><strong>Optional theme experiment:</strong> add <code>class="themed-page"</code> to Contact’s body and append the following to <code>styles.css</code>. This deliberately limits the experiment to a simple page whose contrast you can inspect.</p>
+<pre><code class="language-css">@media (prefers-color-scheme: dark) {
+    body.themed-page {
+        color-scheme: dark;
+        --site-paper: #14241f;
+        --site-ink: #edf3ee;
+        --site-accent: #91ddc4;
+        background: var(--site-paper);
+        color: var(--site-ink);
+    }
+    .themed-page a { color: var(--site-accent); }
+    .themed-page #header h1 { color: var(--site-ink); }
+    .themed-page #header { border-color: #496054; }
+}
+</code></pre>
+<div class="tutorial-drill"><h3>Freeze time</h3>
+<p>Emulate reduced motion in Developer Tools. Does the card still expose hover and keyboard focus without animated feedback?</p>
+<details class="tutorial-answer"><summary>Show a possible solution</summary><p>It should. The transition is optional decoration; the static border and focus outline communicate the state. Preference queries do not change the application’s underlying behavior.</p>
+</details>
+</div>
+<div class="tutorial-drill"><h3>The dark-theme trap</h3>
+<p>Why is <code>filter: invert(1)</code> on the whole page a bad shortcut for Noise WSC or a chart dashboard?</p>
+<details class="tutorial-answer"><summary>Show a possible solution</summary><p>It changes photo and data colors too, potentially breaking the meaning of legends. Theme surfaces, text, focus indicators, controls, and chart palettes intentionally. Use a contrast checker: aim for at least 4.5:1 for normal text, 3:1 for large text, and check control boundaries and focus indicators as well.</p>
+</details>
+</div>
+</section>
+<section class="tutorial-lesson" aria-labelledby="lesson-19"><h2 id="lesson-19">19. Print styles: your CV has a second screen</h2>
+<p><code>cv_for_export.html</code> fetches the body of <code>cv.html</code>, including an empty header placeholder. It has its own title. Meanwhile the prioritization deck already has print rules that reveal hidden slides. Inspect those before adding another global print rule.</p>
+<p><strong>Placement:</strong> add <code>class="cv-export"</code> to the export page’s body, then append these rules to <code>styles.css</code>. Wait for the fetched CV content to load before opening Print Preview.</p>
+<pre><code class="language-css">@media print {
+    body.cv-export {
+        max-width: none;
+        margin: 0;
+        padding: 0;
+        color: black;
+        background: white;
+        font-size: 11pt;
+        line-height: 1.4;
+    }
+    .cv-export #header { display: none; }
+    .cv-export a { color: black; }
+    .cv-export h2,
+    .cv-export h4 { break-after: avoid; }
+    .cv-export .cvsection &gt; div { break-inside: avoid; }
+}
+</code></pre>
+<p><code>pt</code> is useful for print sizing. Break rules are requests to the pagination algorithm; an item taller than a page still has to break. Avoid making an entire long CV section unbreakable.</p>
+<div class="tutorial-drill"><h3>The three-page surprise</h3>
+<p>Print-preview the CV with A4 and Letter paper sizes. Find one awkward break. Adjust the smallest relevant block instead of shrinking all text.</p>
+<details class="tutorial-answer"><summary>Show a possible solution</summary><p>Keep a job heading with its bullet list using a wrapper and break-inside where appropriate. Page settings and browser pagination differ, so inspect the actual preview. Don’t promise a universal page count.</p>
+</details>
+</div>
+<div class="tutorial-drill"><h3>The deck already has an answer</h3>
+<p>Open Print Preview for Project Prioritization. Find the existing selector that reveals hidden slides. Why must the new CV rules be scoped?</p>
+<details class="tutorial-answer"><summary>Show a possible solution</summary><p>The deck uses <code>.slide, .slide[hidden]</code> in its print media query. Its screen navigation can hide while all slides print. A broad rule hiding all navigation or all hidden elements could conflict with that intentional behavior.</p>
+</details>
+</div>
+</section>
+<section class="tutorial-lesson" aria-labelledby="lesson-20"><h2 id="lesson-20">20. The final repair expedition</h2>
+<p>Pick three pages with different jobs: one essay, one visual project, and one interactive dashboard. Give them a coherent type scale and palette while preserving what each needs. Then use the complete map below to reach the rest of the site.</p>
+<ol><li><strong>Observe:</strong> record the element, selector, viewport width, and visible problem before editing.</li><li><strong>Predict:</strong> name the property you expect to fix it. If the issue is content, semantics, data loading, or JavaScript, say so.</li><li><strong>Repair:</strong> make the smallest useful change in the correct stylesheet or markup.</li><li><strong>Prove:</strong> test at 320px, 768px, and a wide desktop; test 200% zoom and keyboard navigation. Use Print Preview where relevant.</li><li><strong>Explain:</strong> write one sentence about why it worked. Remove temporary debugging styles and consolidate duplicate rules.</li></ol>
+<p><strong>Hard mode:</strong> repeat one repair without looking at its solution. <strong>Design mode:</strong> give the same page a different mood by changing only typography, spacing, and tokens. <strong>Restraint mode:</strong> remove a decoration that doesn’t help a reader.</p>
+<p>Finish when pages are easier to read and use, not when you have used every CSS feature. A page with missing content needs content; CSS should never invent research results, load-state messages, or essential labels.</p>
+</section>
+<section aria-labelledby="repair-map"><h2 id="repair-map">The repair map · every page has a mission</h2>
+<p>These assignments come from the markup and styles currently in this repository. They distinguish observed constraints from things you still need to verify visually. Use the links to inspect the real page; then make your repair in its source. The header fragment is included for inspection, but stays unchanged.</p>
+<div class="tutorial-missions"><article class="tutorial-mission"><h3>The unframed introduction</h3>
+<p><a href="index.html"><code>index.html</code></a></p>
+<p>No viewport metadata; the intro is made of direct body paragraphs. Apply the baseline, cap paragraph measure, and compare 320px with desktop.</p>
+<p class="tutorial-mission-link">Start with <a href="#lesson-3">lesson 3</a>. Pass when you can show the before/after and explain the cause.</p>
+</article>
+<article class="tutorial-mission"><h3>Read-only navigation puzzle</h3>
+<p><a href="header.html"><code>header.html</code></a></p>
+<p>The fragment has a wrapping div, an h1, loose links, a text separator, and a current-page b wrapper added by JS. Improve wrapping with CSS only; leave this file unchanged.</p>
+<p class="tutorial-mission-link">Start with <a href="#lesson-6">lesson 6</a>. Pass when you can show the before/after and explain the cause.</p>
+</article>
+<article class="tutorial-mission"><h3>The vanishing index</h3>
+<p><a href="blog.html"><code>blog.html</code></a></p>
+<p>Links start empty; JS appends a title and a date paragraph. Give links fallback HTML text, then style #posts &gt; li and #posts p as two levels of information. Disable JS to test the fallback.</p>
+<p class="tutorial-mission-link">Start with <a href="#lesson-15">lesson 15</a>. Pass when you can show the before/after and explain the cause.</p>
+</article>
+<article class="tutorial-mission"><h3>The thumbnail identity crisis</h3>
+<p><a href="projects.html"><code>projects.html</code></a></p>
+<p>Cards have fixed 300px widths and cover-cropped images. Use the responsive grid, stress-test long titles, and decide which technical thumbnails need contain instead. Missing image alt text and remote image loading need HTML or URL fixes.</p>
+<p class="tutorial-mission-link">Start with <a href="#lesson-7">lesson 7</a>. Pass when you can show the before/after and explain the cause.</p>
+</article>
+<article class="tutorial-mission"><h3>The endless bookshelf</h3>
+<p><a href="books.html"><code>books.html</code></a></p>
+<p>Titles, authors, and stars already have separate classes but weak grouping. Add rhythm and separators to rated items. Keep titles readable and don’t encode a rating only through color.</p>
+<p class="tutorial-mission-link">Start with <a href="#lesson-15">lesson 15</a>. Pass when you can show the before/after and explain the cause.</p>
+</article>
+<article class="tutorial-mission"><h3>The idea notebook</h3>
+<p><a href="ideas.html"><code>ideas.html</code></a></p>
+<p>The long .ideas list has .ideatitle labels. Build a responsive notebook grid, retain document order, and try a local accent token. Avoid fixed heights that clip long ideas.</p>
+<p class="tutorial-mission-link">Start with <a href="#lesson-14">lesson 14</a>. Pass when you can show the before/after and explain the cause.</p>
+</article>
+<article class="tutorial-mission"><h3>A tiny page deserves intention</h3>
+<p><a href="contact.html"><code>contact.html</code></a></p>
+<p>One mailto paragraph makes a useful clean test of measure, link padding, wrapping, focus, and the optional scoped dark theme. Test keyboard activation.</p>
+<p class="tutorial-mission-link">Start with <a href="#lesson-18">lesson 18</a>. Pass when you can show the before/after and explain the cause.</p>
+</article>
+<article class="tutorial-mission"><h3>The recruiter’s scan</h3>
+<p><a href="cv.html"><code>cv.html</code></a></p>
+<p>Work, education, and skills use .cvsection and nested divs. Improve section spacing and heading hierarchy; ensure the nested lists remain compact without crushing line height.</p>
+<p class="tutorial-mission-link">Start with <a href="#lesson-11">lesson 11</a>. Pass when you can show the before/after and explain the cause.</p>
+</article>
+<article class="tutorial-mission"><h3>The paper screen</h3>
+<p><a href="cv_for_export.html"><code>cv_for_export.html</code></a></p>
+<p>A fetch fills #cvcontent from the CV page. Wait for loading, scope print rules, and test both A4 and Letter; avoid styling an unrendered empty preview.</p>
+<p class="tutorial-mission-link">Start with <a href="#lesson-19">lesson 19</a>. Pass when you can show the before/after and explain the cause.</p>
+</article>
+<article class="tutorial-mission"><h3>The dead end</h3>
+<p><a href="404.html"><code>404.html</code></a></p>
+<p>It currently has an h3 and no recovery link. Add an honest page heading and links back to Home or Blog in HTML, then style the short recovery panel; CSS cannot create a useful destination by itself.</p>
+<p class="tutorial-mission-link">Start with <a href="#lesson-5">lesson 5</a>. Pass when you can show the before/after and explain the cause.</p>
+</article>
+<article class="tutorial-mission"><h3>The long-title test</h3>
+<p><a href="alignmentfakingllm.html"><code>alignmentfakingllm.html</code></a></p>
+<p>The #blogtitle is long and the body is an essay. Apply the reading wrapper and balanced heading; test a narrow viewport without manual line breaks.</p>
+<p class="tutorial-mission-link">Start with <a href="#lesson-11">lesson 11</a>. Pass when you can show the before/after and explain the cause.</p>
+</article>
+<article class="tutorial-mission"><h3>The subsection maze</h3>
+<p><a href="alternativemethodfordecidingbudgetsinrepresentativedemocracy.html"><code>alternativemethodfordecidingbudgetsinrepresentativedemocracy.html</code></a></p>
+<p>The article uses h4 subsection labels beneath its title. Review the semantic heading levels in HTML, then make the resulting hierarchy distinguishable by size and spacing.</p>
+<p class="tutorial-mission-link">Start with <a href="#lesson-11">lesson 11</a>. Pass when you can show the before/after and explain the cause.</p>
+</article>
+<article class="tutorial-mission"><h3>The exported-document expedition</h3>
+<p><a href="autoreproducelitreview.html"><code>autoreproducelitreview.html</code></a></p>
+<p>Inspect .sectionHead, #TBL-4, inline table-cell styles, and img.math. Improve reading width and table overflow without turning tiny equation images into full-width figures or breaking citation anchors.</p>
+<p class="tutorial-mission-link">Start with <a href="#lesson-12">lesson 12</a>. Pass when you can show the before/after and explain the cause.</p>
+</article>
+<article class="tutorial-mission"><h3>The calendar on a phone</h3>
+<p><a href="calendarmemorization.html"><code>calendarmemorization.html</code></a></p>
+<p>The article contains a reference table. Give the table a named scroll wrapper and distinguish row/column headings; verify keyboard access to every column.</p>
+<p class="tutorial-mission-link">Start with <a href="#lesson-12">lesson 12</a>. Pass when you can show the before/after and explain the cause.</p>
+</article>
+<article class="tutorial-mission"><h3>The equation marathon</h3>
+<p><a href="can_humanity_last_forever.html"><code>can_humanity_last_forever.html</code></a></p>
+<p>It mixes an opening quotation with long MathML expressions. Use a semantic blockquote, comfortable reading measure, and local equation scrolling rather than globally shrinking math.</p>
+<p class="tutorial-mission-link">Start with <a href="#lesson-12">lesson 12</a>. Pass when you can show the before/after and explain the cause.</p>
+</article>
+<article class="tutorial-mission"><h3>Diagrams meet equations</h3>
+<p><a href="simple_experiments_with_deceptive_alignment.html"><code>simple_experiments_with_deceptive_alignment.html</code></a></p>
+<p>The opening screenshot has a fixed height attribute and there are more experiment images plus MathML. Preserve image proportions, add useful captions, and inspect the equation widths separately.</p>
+<p class="tutorial-mission-link">Start with <a href="#lesson-12">lesson 12</a>. Pass when you can show the before/after and explain the cause.</p>
+</article>
+<article class="tutorial-mission"><h3>The unfinished room</h3>
+<p><a href="situationally_aware_mesa-optimisers_will_have_long_term_objectives.html"><code>situationally_aware_mesa-optimisers_will_have_long_term_objectives.html</code></a></p>
+<p>The body says “I’ll write this later.” Give the draft a clear status in real HTML and a calm short-page layout; never hide the status or fabricate the missing article with CSS.</p>
+<p class="tutorial-mission-link">Start with <a href="#lesson-11">lesson 11</a>. Pass when you can show the before/after and explain the cause.</p>
+</article>
+<article class="tutorial-mission"><h3>The formula in a paragraph</h3>
+<p><a href="measure_ai_control.html"><code>measure_ai_control.html</code></a></p>
+<p>An ordered list defines quantities, while the long Cc = Ct * R expression is plain paragraph text. Move that expression into a named formula block or semantic math markup, then handle its width locally.</p>
+<p class="tutorial-mission-link">Start with <a href="#lesson-12">lesson 12</a>. Pass when you can show the before/after and explain the cause.</p>
+</article>
+<article class="tutorial-mission"><h3>The ranked briefing</h3>
+<p><a href="opinion_on_ai_safety_priorities.html"><code>opinion_on_ai_safety_priorities.html</code></a></p>
+<p>A date span and an ordered list carry the content. Make the date secondary and give the list a readable measure; preserve numbering and the author’s qualifications and uncertainty.</p>
+<p class="tutorial-mission-link">Start with <a href="#lesson-11">lesson 11</a>. Pass when you can show the before/after and explain the cause.</p>
+</article>
+<article class="tutorial-mission"><h3>The short project dispatch</h3>
+<p><a href="aictrlhack.html"><code>aictrlhack.html</code></a></p>
+<p>A brief project description uses line breaks for separation. Group distinct metadata in HTML if helpful, then improve spacing without applying a giant hero layout to a small note.</p>
+<p class="tutorial-mission-link">Start with <a href="#lesson-11">lesson 11</a>. Pass when you can show the before/after and explain the cause.</p>
+</article>
+<article class="tutorial-mission"><h3>Two very different pictures</h3>
+<p><a href="homelab.html"><code>homelab.html</code></a></p>
+<p>Both the Proxmox screenshot and laptop photo specify height=500. Scale proportionally, add captions, and check that interface text remains readable.</p>
+<p class="tutorial-mission-link">Start with <a href="#lesson-12">lesson 12</a>. Pass when you can show the before/after and explain the cause.</p>
+</article>
+<article class="tutorial-mission"><h3>The 1200px visitor</h3>
+<p><a href="deepstack.html"><code>deepstack.html</code></a></p>
+<p>The image declares width=1200. Constrain its display width on phones while preserving its proportions and access to the full-resolution screenshot.</p>
+<p class="tutorial-mission-link">Start with <a href="#lesson-12">lesson 12</a>. Pass when you can show the before/after and explain the cause.</p>
+</article>
+<article class="tutorial-mission"><h3>The model-output specimen</h3>
+<p><a href="transformer.html"><code>transformer.html</code></a></p>
+<p>A generated text sample is inside an invalid paragraph/div nesting, followed by a screenshot. Repair the sample’s HTML and use a named output block; inspect the DOM the browser actually constructs.</p>
+<p class="tutorial-mission-link">Start with <a href="#lesson-11">lesson 11</a>. Pass when you can show the before/after and explain the cause.</p>
+</article>
+<article class="tutorial-mission"><h3>The demo that is a picture</h3>
+<p><a href="rlhf.html"><code>rlhf.html</code></a></p>
+<p>The page shows rlhf_demo.png, not a live embedded app. Treat it as a technical figure, keep labels readable, and improve the three-component list’s spacing.</p>
+<p class="tutorial-mission-link">Start with <a href="#lesson-13">lesson 13</a>. Pass when you can show the before/after and explain the cause.</p>
+</article>
+<article class="tutorial-mission"><h3>Photo versus evidence</h3>
+<p><a href="noisewsc.html"><code>noisewsc.html</code></a></p>
+<p>A photograph and LAeq_edited.svg both use height=700. Give each an appropriate figure treatment; shrinking a chart until its axes vanish does not solve readability.</p>
+<p class="tutorial-mission-link">Start with <a href="#lesson-12">lesson 12</a>. Pass when you can show the before/after and explain the cause.</p>
+</article>
+<article class="tutorial-mission"><h3>The 800px iframe</h3>
+<p><a href="todo_list_in_react.html"><code>todo_list_in_react.html</code></a></p>
+<p>The .textanddemo layout combines a 300px minimum text column with an iframe styled inline, including min-height=800px. Move owned iframe styles to a class and test the actual app controls.</p>
+<p class="tutorial-mission-link">Start with <a href="#lesson-13">lesson 13</a>. Pass when you can show the before/after and explain the cause.</p>
+</article>
+<article class="tutorial-mission"><h3>Code and PDF share a room</h3>
+<p><a href="using_python_to_automate_content_for_a_LaTeX_report.html"><code>using_python_to_automate_content_for_a_LaTeX_report.html</code></a></p>
+<p>Inspect .codediv padding, .lefttext minimum width, and the percentage-height PDF iframe. Separate container sizing, code scrolling, and viewer height into distinct fixes.</p>
+<p class="tutorial-mission-link">Start with <a href="#lesson-13">lesson 13</a>. Pass when you can show the before/after and explain the cause.</p>
+</article>
+<article class="tutorial-mission"><h3>A chart needs elbow room</h3>
+<p><a href="ai_control.html"><code>ai_control.html</code></a></p>
+<p>The .ctl-chart SVG has an intentional 800px minimum inside a scrolling wrapper. Preserve useful chart scale, improve control focus, and test selection without hover. Keep the AI disclosure readable.</p>
+<p class="tutorial-mission-link">Start with <a href="#lesson-17">lesson 17</a>. Pass when you can show the before/after and explain the cause.</p>
+</article>
+<article class="tutorial-mission"><h3>The controls and tooltip patrol</h3>
+<p><a href="compute_thresholds.html"><code>compute_thresholds.html</code></a></p>
+<p>Its local .cth rules follow the shared CSS, and .cth-controls buttons use aria-pressed. Style real selection state and test tooltips near chart edges without changing data or policy labels.</p>
+<p class="tutorial-mission-link">Start with <a href="#lesson-15">lesson 15</a>. Pass when you can show the before/after and explain the cause.</p>
+</article>
+<article class="tutorial-mission"><h3>The filter pile-up</h3>
+<p><a href="foreclosed_proposals.html"><code>foreclosed_proposals.html</code></a></p>
+<p>The outer .fcl-controls wraps, but its inner divs use flex without wrapping. Test a narrow width and let groups wrap. Inspect the absolutely positioned tooltip against its chart wrapper.</p>
+<p class="tutorial-mission-link">Start with <a href="#lesson-17">lesson 17</a>. Pass when you can show the before/after and explain the cause.</p>
+</article>
+<article class="tutorial-mission"><h3>The stubborn grid tracks</h3>
+<p><a href="pre_deployment_testing.html"><code>pre_deployment_testing.html</code></a></p>
+<p>The local grids use 260px and 340px minimum tracks. Use min(100%, minimum) to let tracks fit smaller containers, then inspect formulas and wide charts independently.</p>
+<p class="tutorial-mission-link">Start with <a href="#lesson-17">lesson 17</a>. Pass when you can show the before/after and explain the cause.</p>
+</article>
+<article class="tutorial-mission"><h3>The standalone observatory</h3>
+<p><a href="metr_token_usage.html"><code>metr_token_usage.html</code></a></p>
+<p>It has its own inline stylesheet and no styles.css link. Improve small DOM control labels in that local CSS, preserve the canvas ResizeObserver redraw, and test model names and filter wrapping.</p>
+<p class="tutorial-mission-link">Start with <a href="#lesson-16">lesson 16</a>. Pass when you can show the before/after and explain the cause.</p>
+</article>
+<article class="tutorial-mission"><h3>The slide-deck exception</h3>
+<p><a href="project_prioritization.html"><code>project_prioritization.html</code></a></p>
+<p>This standalone page already has responsive evaluation layout and print rules revealing hidden slides. Stress-test the .timing-table and .equation rows at 320px and 200% zoom; preserve the deck’s working print behavior.</p>
+<p class="tutorial-mission-link">Start with <a href="#lesson-19">lesson 19</a>. Pass when you can show the before/after and explain the cause.</p>
+</article>
+<article class="tutorial-mission"><h3>The teacher takes the exam</h3>
+<p><a href="css-tutorial.html"><code>css-tutorial.html</code></a></p>
+<p>This page has long code blocks, a contents list, a live lab, and many disclosures. Test every control using the keyboard, scan the page at 320px, and keep code overflow local. Critique the teaching layout using what you learned.</p>
+<p class="tutorial-mission-link">Start with <a href="#lesson-20">lesson 20</a>. Pass when you can show the before/after and explain the cause.</p>
+</article>
+</div>
+</section>
     </main>
 </body>
 </html>
