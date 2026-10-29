@@ -603,7 +603,7 @@ a { color: var(--site-accent); }
 </div>
 </section>
 <section class="tutorial-lesson" aria-labelledby="lesson-16"><h2 id="lesson-16">16. Cascade architecture: win without escalating selectors</h2>
-<p>The dashboards put component CSS in inline <code>&lt;style&gt;</code> blocks after the shared stylesheet; the METR explorer and prioritization deck do not load <code>styles.css</code> at all. There is no single file whose edits automatically control the whole site.</p>
+<p>The dashboards put component CSS in inline <code>&lt;style&gt;</code> blocks after the shared stylesheet; the METR explorer does not load <code>styles.css</code> at all. There is no single file whose edits automatically control the whole site.</p>
 <p>Normal inline style attributes outrank normal stylesheet rules. Among ordinary rules in the same origin, importance, and layer, specificity matters before source order. Stylesheet blocks in the HTML still use normal selector specificity; they are not the same as a <code>style="..."</code> attribute.</p>
 <p><strong>Optional refactor, not another append-only patch:</strong> after saving your baseline, move all existing shared declarations into a named layer and place new component rules in another. The schematic below shows the structure, not a replacement file with every existing rule included.</p>
 <pre><code class="language-css">@layer legacy, components;
@@ -621,8 +621,8 @@ a { color: var(--site-accent); }
 </details>
 </div>
 <div class="tutorial-drill"><h3>Two islands, one visual language</h3>
-<p>Choose the METR explorer or prioritization deck. Locate its own style block, then map just its paper, ink, and border tokens to your chosen palette. Do not add all of <code>styles.css</code> without reviewing the global heading and list rules.</p>
-<details class="tutorial-answer"><summary>Show a possible solution</summary><p>Shared visual values do not require shared global layout rules. The deck’s large headings and the explorer’s chart workspace have different jobs. Verify a real slide and a populated chart after any refactor.</p>
+<p>Compare <code>metr_token_usage.html</code> with <code>ai_control.html</code>. Locate each page’s own style block, then map just its paper, ink, and border colors to your chosen palette. The explorer has no shared stylesheet; AI Control combines shared styles with local component rules. Inspect both cascades before changing them.</p>
+<details class="tutorial-answer"><summary>Show a possible solution</summary><p>Shared visual values do not require shared global layout rules. The explorer uses a canvas workspace, while AI Control uses an SVG inside a scrolling chart panel. Keep those layout differences while aligning surface and text colors. Verify populated charts and usable controls on both pages after the refactor.</p>
 </details>
 </div>
 </section>
@@ -695,7 +695,7 @@ a { color: var(--site-accent); }
 </div>
 </section>
 <section class="tutorial-lesson" aria-labelledby="lesson-19"><h2 id="lesson-19">19. Print styles: your CV has a second screen</h2>
-<p><code>cv_for_export.html</code> fetches the body of <code>cv.html</code>, including an empty header placeholder. It has its own title. Meanwhile the prioritization deck already has print rules that reveal hidden slides. Inspect those before adding another global print rule.</p>
+<p><code>cv_for_export.html</code> fetches the body of <code>cv.html</code>, including an empty header placeholder. It has its own title. This tutorial has its own print rules in <code>tutorials/tutorial.css</code>: they hide the live lab’s controls and wrap long code lines for paper. Compare those needs with the CV before adding a global print rule.</p>
 <p><strong>Placement:</strong> add <code>class="cv-export"</code> to the export page’s body, then append these rules to <code>styles.css</code>. Wait for the fetched CV content to load before opening Print Preview.</p>
 <pre><code class="language-css">@media print {
     body.cv-export {
@@ -720,9 +720,9 @@ a { color: var(--site-accent); }
 <details class="tutorial-answer"><summary>Show a possible solution</summary><p>Keep a job heading with its bullet list using a wrapper and break-inside where appropriate. Page settings and browser pagination differ, so inspect the actual preview. Don’t promise a universal page count.</p>
 </details>
 </div>
-<div class="tutorial-drill"><h3>The deck already has an answer</h3>
-<p>Open Print Preview for Project Prioritization. Find the existing selector that reveals hidden slides. Why must the new CV rules be scoped?</p>
-<details class="tutorial-answer"><summary>Show a possible solution</summary><p>The deck uses <code>.slide, .slide[hidden]</code> in its print media query. Its screen navigation can hide while all slides print. A broad rule hiding all navigation or all hidden elements could conflict with that intentional behavior.</p>
+<div class="tutorial-drill"><h3>Two pages, two paper layouts</h3>
+<p>Open Print Preview for this tutorial and for <code>cv_for_export.html</code>. Find the tutorial’s rules for <code>pre</code> and <code>#box-lab-controls</code>. Why should the CV’s compact type and pagination rules be scoped to its own body class?</p>
+<details class="tutorial-answer"><summary>Show a possible solution</summary><p>The tutorial needs printable code: its print query uses <code>white-space: pre-wrap</code> and hides only the lab controls. The CV needs compact type and sensible breaks between jobs. Keep CV rules under <code>.cv-export</code> so they do not shrink the tutorial’s explanations or impose CV pagination on its code examples. Check that long code remains visible and the CV content has loaded in both previews.</p>
 </details>
 </div>
 </section>
@@ -893,11 +893,6 @@ a { color: var(--site-accent); }
 <p><a href="metr_token_usage.html"><code>metr_token_usage.html</code></a></p>
 <p>It has its own inline stylesheet and no styles.css link. Improve small DOM control labels in that local CSS, preserve the canvas ResizeObserver redraw, and test model names and filter wrapping.</p>
 <p class="tutorial-mission-link">Start with <a href="#lesson-16">lesson 16</a>. Pass when you can show the before/after and explain the cause.</p>
-</article>
-<article class="tutorial-mission"><h3>The slide-deck exception</h3>
-<p><a href="project_prioritization.html"><code>project_prioritization.html</code></a></p>
-<p>This standalone page already has responsive evaluation layout and print rules revealing hidden slides. Stress-test the .timing-table and .equation rows at 320px and 200% zoom; preserve the deck’s working print behavior.</p>
-<p class="tutorial-mission-link">Start with <a href="#lesson-19">lesson 19</a>. Pass when you can show the before/after and explain the cause.</p>
 </article>
 <article class="tutorial-mission"><h3>The teacher takes the exam</h3>
 <p><a href="css-tutorial.html"><code>css-tutorial.html</code></a></p>
