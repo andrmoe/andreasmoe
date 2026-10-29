@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="page" content="css-tutorial">
+    <meta name="description" content="Learn CSS from scratch by improving this site's typography, navigation, project cards, and mobile layout. Assumes familiarity with HTML.">
+    <title>CSS tutorial — Andreas Moe</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="tutorials/tutorial.css">
+    <link rel="icon" href="favicon.png">
+    <script src="header.js"></script>
+</head>
+<body class="css-tutorial">
+    <div id="header"></div>
+    <main>
+<div class="ctl-ai-notice">Everything on this page is AI generated</div>
+<h1>Learn CSS by improving Andreas Moe’s site</h1>
+<nav class="tutorial-contents" aria-label="Tutorial lessons"><h2>In this tutorial</h2><ol><li><a href="#lesson-1">1. Set up a short feedback loop</a></li><li><a href="#lesson-2">2. Read your first CSS rule</a></li><li><a href="#lesson-3">3. Understand the box model and page width</a></li><li><a href="#lesson-4">4. Learn the cascade while improving headings</a></li><li><a href="#lesson-5">5. Make links and keyboard focus intentional</a></li><li><a href="#lesson-6">6. Give your existing header structure</a></li><li><a href="#lesson-7">7. Replace fixed-width project cards with a grid</a></li><li><a href="#lesson-8">8. Make the finishing adjustments for phones</a></li><li><a href="#lesson-9">9. Finish, verify, and make it yours</a></li></ol></nav>
+<p>You know HTML and a little JavaScript. This tutorial assumes <strong>no CSS knowledge</strong>. You’ll use your actual pages to turn a browser-default-looking site into a restrained personal site: warm background, readable text, teal links, comfortable navigation, and responsive project cards.</p>
+<p>Allow roughly 60–90 minutes. Work through the lessons in order; each gives you something visible to check. No framework, build tool, external font, or JavaScript change is needed.</p>
+<h2 id="lesson-1">1. Set up a short feedback loop</h2>
+<p>From the repository root, run:</p>
+<pre><code class="language-sh">python3 -m http.server 8000
+</code></pre>
+<p>Open <code>http://localhost:8000</code>. Keep your editor beside the browser. Your header uses <code>fetch()</code> to load <code>header.html</code>, so use this local server instead of opening HTML files directly. Stop the server with Ctrl+C when finished.</p>
+<p>Make a copy of <code>styles.css</code> outside the repository as a backup. Keep the existing file’s contents: we’ll <strong>append</strong> the lesson snippets to the bottom of it, in order. This preserves your math and demo styles while letting you see how later rules change earlier ones.</p>
+<p>First, add this inside <code>&lt;head&gt;</code> in <code>index.html</code>, <code>projects.html</code>, <code>blog.html</code>, <code>books.html</code>, and <code>cv.html</code>, unless it’s already there:</p>
+<pre><code class="language-html">&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+</code></pre>
+<p>This tells mobile browsers to use the device’s actual width for layout. Later, add it to the other full HTML pages that share your stylesheet. Don’t add it to <code>header.html</code>: that file is a fragment loaded into other pages, not a full document.</p>
+<p><strong>Checkpoint:</strong> the local homepage loads with its navigation. Take a screenshot so you can compare the result at the end.</p>
+<h2 id="lesson-2">2. Read your first CSS rule</h2>
+<p>HTML describes elements. CSS chooses elements and gives them visual properties:</p>
+<pre><code class="language-css">p {
+    color: #26332f;
+}
+</code></pre>
+<p><code>p</code> is a <strong>selector</strong>: it matches every paragraph. Inside the braces is a <strong>declaration</strong>. <code>color</code> is a property; <code>#26332f</code> is its value, a hexadecimal color. The colon separates the property from its value; the semicolon ends the declaration. CSS comments use <code>/* comment */</code>.</p>
+<p>Some selectors already used in your site:</p>
+<div class="tutorial-table"><table>
+<thead>
+<tr>
+<th>Selector</th>
+<th>Matches</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>h1</code></td>
+<td>Every <code>&lt;h1&gt;</code></td>
+</tr>
+<tr>
+<td><code>.project-item</code></td>
+<td>Elements with <code>class=&quot;project-item&quot;</code></td>
+</tr>
+<tr>
+<td><code>#header</code></td>
+<td>The element with <code>id=&quot;header&quot;</code></td>
+</tr>
+<tr>
+<td><code>.project-item a</code></td>
+<td>Links anywhere inside a project item</td>
+</tr>
+</tbody></table></div>
+<p>A class can label multiple elements. An ID should identify one element on a page. A space between selectors means “inside.”</p>
+<p>Append this to <code>styles.css</code>:</p>
+<pre><code class="language-css">/* Tutorial: page foundation */
+body {
+    background: #f8f7f3;
+    color: #26332f;
+    font-family: system-ui, sans-serif;
+    font-size: 1.0625rem;
+    line-height: 1.7;
+}
+</code></pre>
+<p><code>background</code> paints the page. <code>font-family</code> asks for the operating system’s interface font, with a generic sans-serif fallback. <code>rem</code> is a unit relative to the root element’s font size: with the common 16px default, <code>1.0625rem</code> is 17px. It also respects the reader’s font preferences. Unitless <code>line-height: 1.7</code> makes each line 1.7 times the text size.</p>
+<p>Text properties such as color and font usually <strong>inherit</strong>: descendants use their parent’s value unless another rule sets their own. Your existing <code>h1</code> rule sets its own font and color, so we’ll change those explicitly later.</p>
+<p><strong>Try it:</strong> change <code>line-height</code> to <code>1.2</code>, reload, then restore <code>1.7</code>. Notice how reading comfort changes without touching the HTML.</p>
+<h2 id="lesson-3">3. Understand the box model and page width</h2>
+<p>Every element occupies a box. From the inside out, it has <strong>content → padding → border → margin</strong>. Padding creates room inside the border. Margin separates the box from its neighbors.</p>
+<p>Append:</p>
+<pre><code class="language-css">/* Include padding and borders in declared widths. */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+body {
+    max-width: 72rem;
+    margin: 0 auto;
+    padding: 3rem 1.5rem 5rem;
+}
+
+body &gt; p {
+    max-width: 65ch;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+</code></pre>
+<p><code>*</code> matches every element. <code>::before</code> and <code>::after</code> are generated boxes that CSS can create; including them makes this sizing rule consistent if you use them later.</p>
+<p><code>max-width</code> caps the page width but still allows it to shrink. In <code>margin: 0 auto</code>, the first value sets top/bottom margins to zero and the second splits leftover horizontal space evenly, centering the page. Three-value <code>padding</code> means top, left/right, bottom. These shortened forms are called <strong>shorthand properties</strong>.</p>
+<p><code>body &gt; p</code> matches only paragraphs directly inside the body; <code>&gt;</code> means “direct child.” This caps your homepage introduction at about 65 characters per line, using <code>ch</code>, the width of the font’s “0” character. Your projects can still use the wider page. It doesn’t cap every nested article paragraph; later you can give article content its own wrapper if you want a separate reading width.</p>
+<p>The image rule lets large images shrink with their container while preserving their proportions. Your existing <code>.project-image</code> selector is more specific than <code>img</code>, so its fixed height still wins until lesson 7.</p>
+<p><strong>Checkpoint:</strong> on a wide screen the page is centered, with breathing room around it. Narrow the browser: the page should shrink without the introduction spilling sideways.</p>
+<h2 id="lesson-4">4. Learn the cascade while improving headings</h2>
+<p>Multiple rules can match the same element. The browser resolves them through the <strong>cascade</strong>. For the normal rules in your stylesheet, a more specific selector beats a less specific selector. When specificity is equal, the declaration written later wins. Rules combine property by property; a later rule doesn’t erase properties it never mentions.</p>
+<p>For example, <code>.project-image</code> is more specific than <code>img</code>. Two <code>h1</code> rules have equal specificity, so the later one wins for any properties both set. Inheritance supplies a value only when the element has no applicable value of its own.</p>
+<p>Append:</p>
+<pre><code class="language-css">h1, h2, h3, h4 {
+    color: #183d35;
+    font-family: system-ui, sans-serif;
+    line-height: 1.2;
+}
+
+h1 {
+    font-size: clamp(2rem, 5vw, 3.25rem);
+    letter-spacing: -0.035em;
+    margin: 0 0 1rem;
+}
+
+h2 {
+    margin-top: 2.5rem;
+}
+
+p {
+    margin: 0 0 1.25rem;
+}
+</code></pre>
+<p>Commas group selectors that share declarations. <code>clamp(minimum, preferred, maximum)</code> makes the heading grow with the browser width while staying between two limits. <code>vw</code> means hundredths of viewport width: <code>5vw</code> is 5% of the viewport. <code>em</code> is relative to the element’s own font size here, so letter spacing scales with the heading.</p>
+<p><strong>Try it:</strong> right-click your name, choose Inspect, and find its styles. You should see the old <code>h1</code> font size crossed out. Temporarily untick the new font size in Developer Tools. These browser experiments are temporary; save permanent changes in the file.</p>
+<h2 id="lesson-5">5. Make links and keyboard focus intentional</h2>
+<p>Append:</p>
+<pre><code class="language-css">a {
+    color: #146653;
+    text-underline-offset: 0.2em;
+    text-decoration-thickness: 0.08em;
+}
+
+a:hover {
+    color: #0b4437;
+}
+
+a:focus-visible {
+    outline: 3px solid #146653;
+    outline-offset: 4px;
+    border-radius: 2px;
+}
+</code></pre>
+<p><code>:hover</code> and <code>:focus-visible</code> are <strong>pseudo-classes</strong>: they match an element in a particular state. Hover responds to a pointer. Focus-visible gives keyboard users a clear marker as they Tab through links. An outline doesn’t consume layout space, so it won’t move neighboring text.</p>
+<p><strong>Checkpoint:</strong> hover over a link, then use Tab to move through the page. You should always be able to see which link has keyboard focus.</p>
+<h2 id="lesson-6">6. Give your existing header structure</h2>
+<p>Your <code>header.html</code> has a heading followed by links. <code>header.js</code> wraps the current page’s link in <code>&lt;b&gt;</code>. We can style that exact structure without changing the script.</p>
+<p>Append:</p>
+<pre><code class="language-css">#header {
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid #d7ded7;
+}
+
+#header h1 a {
+    color: inherit;
+    text-decoration: none;
+}
+
+#header a:not(#index) {
+    display: inline-block;
+    margin: 0.25rem 0.65rem 0.25rem 0;
+    padding: 0.25rem 0;
+}
+
+#header b &gt; a {
+    text-decoration-thickness: 0.16em;
+}
+
+#header hr {
+    display: none;
+}
+</code></pre>
+<p><code>inherit</code> explicitly takes the parent’s color. <code>:not(#index)</code> excludes the link containing your name. <code>inline-block</code> lets links sit next to one another while accepting box spacing; they wrap when the row fills up. Four margin values mean top, right, bottom, left, clockwise.</p>
+<p>We hide the old horizontal rule because the header now draws its own bottom border. The current page’s navigation underline becomes thicker. Since the name link deliberately has no underline, this current-page treatment is visible on the other navigation links.</p>
+<p><strong>Checkpoint:</strong> visit the Blog and Projects pages and check their active links. Narrow the browser and confirm the navigation wraps comfortably.</p>
+<h2 id="lesson-7">7. Replace fixed-width project cards with a grid</h2>
+<p>Your <code>.project-list</code> currently uses flexbox with 300px-wide cards. Flexbox is useful for arranging items along a row or column. Here we’ll use <strong>Grid</strong>, which lays items out in rows and columns and can calculate how many columns fit.</p>
+<p>Append:</p>
+<pre><code class="language-css">.project-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+    gap: 1.5rem;
+    padding: 0;
+}
+
+.project-item {
+    width: auto;
+    background: #fff;
+    border: 1px solid #d7ded7;
+    border-radius: 0.75rem;
+    box-shadow: 0 3px 12px rgb(24 61 53 / 6%);
+}
+
+.project-link {
+    height: 100%;
+}
+
+.project-image {
+    height: auto;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+}
+
+.project-title {
+    margin: 0;
+    padding: 1.25rem;
+    color: #183d35;
+    font-size: 1.15rem;
+}
+
+.project-item:hover,
+.project-item:focus-within {
+    border-color: #146653;
+}
+
+.project-link:focus-visible {
+    outline-offset: -4px;
+}
+</code></pre>
+<p>Read the long grid declaration from the inside out:</p>
+<ol>
+<li><code>min(100%, 18rem)</code> chooses the smaller of the container width and 18rem, so a column can fit a narrow phone.</li>
+<li><code>minmax(..., 1fr)</code> lets a column grow from that minimum and take a share of the available space. <code>fr</code> means a fraction of leftover grid space.</li>
+<li><code>repeat(auto-fit, ...)</code> creates as many of those columns as fit.</li>
+</ol>
+<p><code>width: auto</code> overrides the old 300px width so the grid controls card sizing. <code>aspect-ratio</code> gives images consistent proportions; <code>object-fit: cover</code> fills the image box by cropping edges when necessary. Your old <code>overflow: hidden</code> still applies to cards, clipping images to the rounded corners. The inward link outline keeps keyboard focus visible inside those clipped cards. <code>:focus-within</code> matches a card when its link has focus.</p>
+<p><strong>Try it:</strong> change <code>18rem</code> to <code>22rem</code>. Predict whether you’ll get more or fewer columns before you reload. Restore whichever size you prefer.</p>
+<p><strong>Checkpoint:</strong> Projects should move from several columns to one as you narrow the window. Some project images contain diagrams: check that the cropping is acceptable. If you need the whole diagram visible, change <code>object-fit: cover</code> to <code>contain</code>; this can leave unused space around it. CSS won’t fix an image that fails to download.</p>
+<h2 id="lesson-8">8. Make the finishing adjustments for phones</h2>
+<p>A <strong>media query</strong> applies rules only when a condition matches. Append:</p>
+<pre><code class="language-css">@media (max-width: 40rem) {
+    body {
+        padding: 1.5rem 1rem 3rem;
+    }
+
+    #header {
+        margin-bottom: 2rem;
+    }
+
+    .lefttext {
+        min-width: 0;
+        flex-basis: 100%;
+    }
+
+    .rightdemo {
+        min-width: 0;
+        flex-basis: 100%;
+    }
+}
+</code></pre>
+<p>Below 40rem, the outer spacing gets smaller. Your existing <code>.textanddemo</code> uses a wrapping flex layout. <code>flex-basis: 100%</code> makes its text and demo children each request a full row on small screens. Removing the existing 300px text minimum lets the text fit even when the available space is smaller.</p>
+<p><strong>Checkpoint:</strong> check the homepage and Projects at 375px in your browser’s responsive mode. Also inspect an interactive article such as <code>rlhf.html</code>. Widgets and inline styles may need their own adjustments; a shared stylesheet can’t guarantee every embedded demo fits.</p>
+<h2 id="lesson-9">9. Finish, verify, and make it yours</h2>
+<p>Compare your initial screenshot with the current homepage. You’ve changed page composition, reading rhythm, visual hierarchy, navigation, and the project layout using CSS alone, plus the mobile viewport metadata.</p>
+<p>Before calling it finished:</p>
+<ul>
+<li>Check Home, Blog, Projects, Books, and CV at desktop and phone widths.</li>
+<li>Tab through links and confirm focus stays visible, especially on project cards.</li>
+<li>Zoom to 200% and check that navigation and content remain usable.</li>
+<li>Check a long technical article with code, tables, math, and images. Wide tables or fixed-size widgets may need a separate improvement.</li>
+<li>Add the viewport metadata to the remaining full pages using <code>styles.css</code>.</li>
+</ul>
+<p><strong>Final exercise:</strong> choose one change: a different link color, a slightly narrower page, or larger card spacing. Find the declaration responsible, predict its effect, then edit and reload. Change one variable at a time so you learn what it controls.</p>
+<p>You can keep the appended rules while learning. Once comfortable, move each final declaration into its original matching rule and remove superseded declarations. Keep the specialized math, table, and demo rules. Repeat your visual checks after this cleanup: rearranging selectors can change which rule wins.</p>
+<p>To undo the tutorial changes, restore your backup of <code>styles.css</code> and remove the viewport lines you added. The tutorial itself doesn’t change your live pages; you make each improvement as you learn it.</p>
+
+    </main>
+</body>
+</html>

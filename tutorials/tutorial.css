@@ -1,0 +1,111 @@
+/* Presentation for the tutorial page only; lesson exercises live in styles.css. */
+.css-tutorial .ctl-ai-notice {
+    color: #b12c2c;
+    border: 3px solid #b12c2c;
+    border-radius: 6px;
+    padding: 12px;
+    text-align: center;
+    font: bold 1.5rem sans-serif;
+}
+
+@media (max-width: 650px) {
+    .css-tutorial .ctl-ai-notice {
+        font-size: 1.1rem;
+    }
+}
+
+.css-tutorial {
+    box-sizing: border-box;
+    max-width: 76rem;
+    margin: 0 auto;
+    padding: 2rem 1rem 4rem;
+    font-family: system-ui, sans-serif;
+    line-height: 1.7;
+    color: #26332f;
+    background: #f8f7f3;
+}
+
+.css-tutorial main {
+    max-width: 70ch;
+    margin: 2rem auto 0;
+    overflow-wrap: anywhere;
+}
+
+.css-tutorial main h1 {
+    font-family: inherit;
+    font-size: clamp(1.8rem, 5vw, 2.75rem);
+    line-height: 1.15;
+    color: #183d35;
+}
+
+.css-tutorial main h2 {
+    margin-top: 3rem;
+    line-height: 1.3;
+    scroll-margin-top: 1rem;
+    color: #183d35;
+}
+
+.css-tutorial a {
+    color: #146653;
+    text-underline-offset: 0.2em;
+}
+
+.css-tutorial a:focus-visible {
+    outline: 3px solid #146653;
+    outline-offset: 3px;
+}
+
+.css-tutorial .tutorial-contents {
+    padding: 1rem 1.25rem;
+    border: 1px solid #d7ded7;
+    border-radius: 0.5rem;
+    background: white;
+}
+
+.css-tutorial .tutorial-contents h2 {
+    margin-top: 0;
+    font-size: 1.2rem;
+}
+
+.css-tutorial .tutorial-contents ol {
+    list-style: none;
+    padding: 0;
+}
+
+.css-tutorial li {
+    margin: 0.5rem 0;
+}
+
+.css-tutorial pre {
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow-x: auto;
+    white-space: pre;
+    overflow-wrap: normal;
+    word-wrap: normal;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    border-color: #d7ded7;
+}
+
+.css-tutorial :not(pre) > code {
+    background: #e9ede7;
+    padding: 0.1em 0.25em;
+    border-radius: 3px;
+}
+
+.css-tutorial .tutorial-table {
+    overflow-x: auto;
+}
+
+.css-tutorial table {
+    width: 100%;
+    background: white;
+    border-color: #d7ded7;
+}
+
+.css-tutorial th,
+.css-tutorial td {
+    border-color: #d7ded7;
+    text-align: left;
+}
