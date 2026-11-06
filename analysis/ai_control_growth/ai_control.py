@@ -11,6 +11,7 @@ import argparse
 import concurrent.futures
 import copy
 import datetime
+import hashlib
 import re
 import sys
 import unittest
@@ -36,7 +37,11 @@ def save_section(section, value):
     archive = json.loads(DATA_FILE.read_text())
     archive[section] = value
     temporary = DATA_FILE.with_suffix(".json.tmp")
-    temporary.write_text(json.dumps(archive, indent=2) + "\n")
+    serialized = json.dumps(archive, indent=2)
+    # Keep generated posterior vectors compact; preserve readable evidence rows.
+    serialized = re.sub(r'("(?:alpha_draws|slope_draws)": )\[\s*([-+0-9.eE,\s]+?)\s*\]',
+                        lambda m: m[1] + "[" + re.sub(r"\s+", "", m[2]) + "]", serialized)
+    temporary.write_text(serialized + "\n")
     temporary.replace(DATA_FILE)
 
 
@@ -97,6 +102,10 @@ def model_observations(data):
             o["logit_sd"] = math.hypot(o["logit_sd"], 1.5)
         observations.append(o)
     return observations
+
+
+def evidence_digest(data):
+    return hashlib.sha256(json.dumps(model_observations(data), sort_keys=True, separators=(',', ':')).encode()).hexdigest()
 
 
 def build_design(data, transport_sd, progress_sd, gap_sd=1.0, slope_sd=0.35, drift_sd=0.5):
@@ -563,6 +572,17 @@ class Expansion:
     successes,n=map(int,re.findall(r'\d+',value))
     self.add(p,ids[idx],labels[idx],'Table 3','Claude Opus 5',monitor,(n-successes+.5)/(n+1),condition=attack,metric='blocked_episode',sd=.8,context=attack,notes=f'{successes}/{n} attacks succeeded; Jeffreys-smoothed prevention rate.')
   self.add(p,'auto-mode','Auto Mode','Appendix C, Figure 13','Claude Opus 5','Claude Opus 4.8',.33,condition='Pooled model-swap ablation',metric='blocked_episode',sd=.7,notes='67% mean attack success printed in Figure 13; the already represented outer bars are not duplicated.')
+  # Figure 9: rows are MONITORS, columns are ATTACKERS. Retain both
+  # architectures, including zero-success cells; do not transpose the grid.
+  models=['Claude Sonnet 4.5','Claude Sonnet 4.6','Claude Sonnet 5','Claude Opus 4.5','Claude Opus 4.7','Claude Opus 4.8','Claude Opus 5']
+  plain=[[0,6,4,0,4,42,90],[0,4,6,0,2,14,92],[0,2,0,0,4,22,88],[0,2,0,0,4,18,94],[0,0,0,0,2,4,70],[0,0,0,0,0,16,92],[0,0,2,0,0,8,56]]
+  hardened=[[0,0,0,0,0,0,6]]+[[0]*7 for _ in range(6)]
+  for protocol,label,grid in [('auto-mode','Auto Mode',plain),('auto-mode-plus-plus','Auto Mode++',hardened)]:
+   for mon,row in zip(models,grid):
+    for att,success in zip(models,row):
+     self.add(p,protocol,label,'Figure 9',att,mon,1-success/100,condition='Model grid: arena injection',metric='blocked_episode',sd=.8,context='model-grid',notes='Printed attack-success percentage complemented to prevention. Shared grid context; Figure 3 is a separate pooled evaluation.')
+  for protocol,label,success in [('auto-early-monitor','Earlier Auto Mode',.445),('auto-brute-force','Earlier Auto Mode: brute-force retry',.614),('auto-block-memory','Earlier Auto Mode with block memory',.33)]:
+   self.add(p,protocol,label,'Appendix A.3, Figures 10–11','Claude Sonnet 4.6','Claude Opus 4.7',1-success,condition='20-block budget',metric='blocked_episode',sd=.8,context='early-retry',notes='Published attack-success rate complemented to prevention; earlier classifier on 11 SHADE-Arena environments. The repeated Figure 11 endpoint is not counted twice.')
   for id,label,loc,notes in [
    ('auto-framing-escaping','Rendering: framing and escaping','Figures 5 and 9','Injection-rendering mitigation and full attacker–monitor grid.'),
    ('auto-monitor-tool-results','Monitor tool results','Section 4.7','Expanded context for multi-context attacks.'),
@@ -642,6 +662,13 @@ class Expansion:
   self.qualitative(p,'bootstrapped-rollout-length','Rollout-length ablation','Section 4.3, Figure 5','Length-stratified catch and false-positive diagnostics.',kind='stratified analysis')
  def expand_monitoringbench(self):
   p='2605.09684'
+  # Re-extract full-trajectory cells as well as stepwise cells, so both use
+  # the same canonical model identities and capability lookup.
+  self.drop(p,'Replaced original macro averages with canonical full-trajectory and stepwise Tables 5–6.')
+  for row in self.rows(p,'A6.T5')[3:]:
+   if len(row)!=17:continue
+   mon=row[0];vals=[num(c)/100 for c in row[1:]]
+   for k,stage in enumerate(['Baseline','Human strategies','Recon','Refined']):self.add(p,'static-full-trajectory','Full-trajectory trusted monitoring','Table 5','Claude Opus 4.6',mon,sum(vals[4*k:4*k+4])/4,condition=stage,metric='recall',fpr=.01,context=stage,sd=.7,notes='Equal task-weighted macro average of four published catch rates. Replaces the original summary, not additional evidence for the same cells.')
   for row in self.rows(p,'A6.T6')[3:]:
    if len(row)!=17:continue
    mon=row[0];vals=[num(c)/100 for c in row[1:]]
@@ -680,7 +707,14 @@ class Expansion:
    for name,h3 in [('Generic denial',generic),('Denial with reason',reason)]:self.add(p,'evasion-'+slug(name),name,'Figure 9',a,'gpt-oss-120b',upper=1-h3/3,condition='Best of three',metric='blocked_episode',sd=1.2,notes='Union-bound conversion H3/3; attempts are not assumed independent.')
   for a,aware,myopic in [('DeepSeek V4 Flash',.275,.85),('Muse Spark 1.3',.375,.675),('GPT-5.6 Luna',.325,.60),('GPT-5.6 Sol',.125,.175),('Claude Sonnet 5',.051,.065),('Claude Opus 5',.025,.077)]:
    for name,h in [('History-aware monitor',aware),('Myopic monitor',myopic)]:self.add(p,'evasion-'+slug(name),name,'Figure 10',a,'gpt-oss-120b',upper=1-h,condition='40-task subset',metric='blocked_episode',sd=1.2,notes='Refusal/downgrade caveats retained for Sonnet and Opus.')
-  for id,label,loc,notes in [('effort','Reasoning effort: low / medium / high / xhigh / max','Figure 3','Four agent families across five effort levels; full curve indexed, not assigned fabricated scalar outcomes.'),('forged-denial','Forged-denial / denial-of-service diagnostics','Figure 7 and Table 9','Task abandonment and compliance diagnostic, not harmful-side-task prevention.'),('context-routes','Monitor context and interception routes','Tables 7–8, Appendix G','Control and interception diagnostics.')]:self.qualitative(p,'evasion-'+id,label,loc,notes,kind='ablation')
+  # Figure 3 vector coordinates, converted using its 0 and 80% y ticks
+  # (7.72 and 131.3). Preserve readout uncertainty instead of claiming counts.
+  effort_y={'GPT-5.6 Luna':[62.89,95.99,118.06,129.09,118.06], 'GPT-5.6 Sol':[71.64,87.62,98.27,87.62,103.60], 'GPT-5.6 Terra':[102.78,96.84,102.78,96.84,114.66], 'GPT-6 Sol':[7.72,38.62,38.62,54.06,48.91]}
+  for att,ys in effort_y.items():
+   for effort,y in zip(['low','medium','high','xhigh','max'],ys):
+    success=(y-7.72)/(131.3-7.72)*.8
+    self.add(p,'evasion-effort','Reasoning-effort ablation','Figure 3',att,'gpt-oss-120b',upper=min(.9999,1-success+.001),condition=effort,metric='blocked_episode',sd=1.2,context='reasoning-effort',notes='SVG-coordinate readout (0.1 percentage-point allowance). One minus task evasion bounds prevention; effort varies attacker compute, not defender protocol.')
+  for id,label,loc,notes in [('forged-denial','Forged-denial / denial-of-service diagnostics','Figure 7 and Table 9','Task abandonment and compliance diagnostic, not harmful-side-task prevention.'),('context-routes','Monitor context and interception routes','Tables 7–8, Appendix G','Control and interception diagnostics.')]:self.qualitative(p,'evasion-'+id,label,loc,notes,kind='ablation')
  def expand_remaining(self):
   p='2605.26047'
   self.drop(p,'Replaced headline resampling summaries with operating-point and aggregation variants.')
@@ -740,6 +774,11 @@ class Expansion:
   for id,label in [('synchronous','Fully synchronous monitoring'),('semi-synchronous','Semi-synchronous monitoring'),('asynchronous','Asynchronous monitoring')]:self.qualitative('2512.22154','practical-'+id,label,'Monitoring taxonomy and case studies','Conceptual latency, parallelism and recovery analysis; no fabricated historical safety datapoint.',kind='conceptual protocol')
   for id,label in [('mafia','Mafia auditing'),('backdoor-code','Backdoor-code auditing'),('debate','Adversarial debate'),('wargames','Wargame containment'),('nested','Nested scalable oversight')]:self.qualitative('2504.18530','scaling-'+id,label,'Game-specific scaling and nested oversight analysis','Domain-specific game outcomes and analytical scaling constraints do not directly measure deployment control safety.',kind='structural evidence')
  def finish(self):
+  # Canonicalize retained base rows too; aliases must not keep stale or
+  # placeholder capability covariates while newly extracted rows use METR.
+  for o in self.obs:
+   for role in ['attacker','monitor']:
+    canonical,cap,_=self.capability(o[role]);o[role]=canonical;o['ln_'+role]=cap
   # Register existing rows as well, preserving selected evidence from other papers.
   for o in self.obs:
    pid=o['study'];id=o.get('protocol_variant',o['protocol'])
@@ -749,7 +788,7 @@ class Expansion:
    label=o.get('protocol_label',{'bootstrapped-monitoring':'Bootstrapped monitoring','bootstrap-direct-monitor':'Direct monitoring (bootstrapping study)'}.get(id,id))
    v=self.register(pid,id,label,o.get('source_location','Original ledger'),notes='')
    if o['id'] not in v['observation_ids']:v['observation_ids'].append(o['id'])
-  attack_only={'linux-no-scratchpad','adaptive-zero-shot-injection','adaptive-zero-shot-clean'}
+  attack_only={'linux-no-scratchpad','adaptive-zero-shot-injection','adaptive-zero-shot-clean','evasion-effort','auto-brute-force'}
   for o in self.obs:
    if o['protocol'].startswith('linux-thinking-') or o['protocol'] in attack_only:o['leader_eligible']=False
   for v in self.variants.values():
@@ -757,6 +796,25 @@ class Expansion:
     v['leader_eligible']=False;v['notes']+=' Attacker-context ablation: numerical evidence retained, not a distinct defender candidate.'
   for v in self.variants.values():v['status']='quantitative' if v['observation_ids'] else 'indexed; no scalar extracted'
   self.data['variants']=list(self.variants.values());self.data['observations']=self.obs
+  pairs={}
+  for o in self.obs:
+   if o.get('extra_attack'):continue # humans are not the placeholder model
+   key=(o['study'],o['attacker'],o['monitor'])
+   entry=pairs.setdefault(key,dict(study=key[0],attacker=key[1],monitor=key[2],locations=[],observation_ids=[],notes='Numerical evidence in fit.'))
+   if o.get('source_location','Original ledger') not in entry['locations']:entry['locations'].append(o.get('source_location','Original ledger'))
+   entry['observation_ids'].append(o['id'])
+  # This model-transfer test supplies score distributions, not thresholded
+  # catch rates. Expose the tested pairs without inventing likelihood terms.
+  for mon in ['Claude Opus 4.5','GPT-5','GPT-5 Nano']:
+   key=('2605.09684','Claude Opus 4.7',mon)
+   pairs[key]=dict(study=key[0],attacker=key[1],monitor=key[2],locations=['Appendix I, Figure 12'],observation_ids=[],notes='Diagnostic only: original/refined suspiciousness distributions on 30 password-leak trajectories; no calibrated catch rate reported.')
+  self.qualitative('2605.09684','monitoringbench-transfer','Opus 4.7 refinement transfer','Appendix I, Figure 12','Three monitor score distributions; tested pairs recorded separately, no fabricated safety or recall.',kind='diagnostic')
+  self.qualitative('2504.10374','ctrlz-attack-selection','Attack selection with true or simulated monitor scores','Appendix G, Figures 8–9','GPT-4o mini predicts trusted-monitor scores for attack selection; it is not the deployed monitor. Earlier task/monitor setup, overfit thresholds and no validated selected operating point.',kind='attack-policy ablation')
+  for v in self.variants.values():
+   if 'status' not in v:v['status']='indexed; no scalar extracted'
+  self.data['variants']=list(self.variants.values())
+  self.data['tested_pairs']=sorted(pairs.values(),key=lambda p:(p['study'],p['attacker'],p['monitor']))
+  self.data['pair_audit']={'scope':'All linked empirical papers: model rosters, model-swap grids, tables and model-transfer ablations. Repeated operating points do not constitute new model pairs. Score-only diagnostics are listed separately from fit observations.', 'sources_reviewed':[s['id'] for s in self.data['sources'] if s['id']!='metr'], 'exclusions':['Human attacks have no model capability.','Attack optimizers, offline selectors, judges and untrusted helpers are not relabeled as trusted monitors.','Conceptual papers and unmonitored capability controls do not supply attacker–monitor pairs.']}
   self.data['variant_scope']='Distinct control mechanisms, named ablations and material operating-point variants found in all linked papers. Figure-only and conceptual variants are indexed explicitly, not fabricated into numerical results.'
   save_section('evidence', self.data)
   print(len(self.obs),'observations;',len(self.variants),'indexed variants;',sum(v['status']=='quantitative' for v in self.variants.values()),'with quantitative evidence')
@@ -796,6 +854,35 @@ def refresh_main():
 from scipy.stats import truncnorm
 
 class InferenceChecks(unittest.TestCase):
+    def test_tested_pair_coverage(self):
+        data = load_section('evidence')
+        obs = data['observations']
+        models = {'Claude Sonnet 4.5','Claude Sonnet 4.6','Claude Sonnet 5','Claude Opus 4.5','Claude Opus 4.7','Claude Opus 4.8','Claude Opus 5'}
+        for protocol in ['auto-mode','auto-mode-plus-plus']:
+            grid = [o for o in obs if o['study']=='2609.19587v2' and o['protocol']==protocol and o['source_location']=='Figure 9']
+            self.assertEqual(len(grid), 49)
+            self.assertEqual({(o['attacker'],o['monitor']) for o in grid}, {(a,m) for a in models for m in models})
+        grid = [o for o in obs if o['study']=='2609.19587v2' and o['protocol']=='auto-mode' and o['source_location']=='Figure 9']
+        self.assertAlmostEqual(next(o['reported_value'] for o in grid if o['attacker']=='Claude Opus 5' and o['monitor']=='Claude Sonnet 4.5'), .10)
+        self.assertAlmostEqual(next(o['reported_value'] for o in grid if o['attacker']=='Claude Sonnet 4.5' and o['monitor']=='Claude Opus 5'), 1.)
+        effort = [o for o in obs if o['protocol']=='evasion-effort']
+        self.assertEqual(len(effort), 20)
+        self.assertTrue(all(not o['leader_eligible'] for o in effort))
+        self.assertEqual(len([o for o in effort if o['attacker']=='GPT-5.6 Terra']),5)
+        for o in obs:
+            self.assertEqual(o['attacker'], ALIASES.get(o['attacker'],o['attacker']))
+            self.assertEqual(o['monitor'], ALIASES.get(o['monitor'],o['monitor']))
+        for protocol,location,count in [('static-full-trajectory','Table 5',13),('monitoringbench-stepwise','Table 6',7)]:
+            rows = [o for o in obs if o['study']=='2605.09684' and o['protocol']==protocol and o.get('source_location')==location]
+            self.assertEqual(len(rows),4*count)
+            self.assertEqual(len({o['monitor'] for o in rows}),count)
+        pairs={(p['study'],p['attacker'],p['monitor']):p for p in data['tested_pairs']}
+        for o in obs:
+            if not o.get('extra_attack'):self.assertIn(o['id'],pairs[o['study'],o['attacker'],o['monitor']]['observation_ids'])
+        diagnostic = [p for p in pairs.values() if p['study']=='2605.09684' and p['attacker']=='Claude Opus 4.7']
+        self.assertEqual(len(diagnostic),3)
+        self.assertTrue(all(not p['observation_ids'] for p in diagnostic))
+
     def test_helper_identity_has_no_effect_on_fit_or_candidates(self):
         data = load_section("evidence")
         changed = copy.deepcopy(data)
