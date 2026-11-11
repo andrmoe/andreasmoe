@@ -192,10 +192,11 @@ can overlap, and we lack effort and publication-lag data. No average obstacle
 retirement time, failure rate or hazard of new obstacles is estimated.
 
 The audit comparison is the clearest short fixed-task progress observation in
-this review. It is still insufficient for a trend fit: two reported methods,
-unequal development costs, a changing tool family, and no subsequent matched
-trajectory. None of the four histories supplies a fixed safety criterion measured
-across successive capability frontiers with a complete cost account.
+this review. A [positive-evidence follow-up](audit-progress.md) adds a provisional
+later result and examines protocol comparability. Unequal development costs,
+unresolved version dating and incomplete transfer evidence still prevent a trend
+fit. None of the four histories supplies a fixed safety criterion measured across
+successive capability frontiers with a complete cost account.
 
 The broad original ambitions consequently cannot be assigned a percentage
 complete. Saying that none of these histories establishes broad retirement is

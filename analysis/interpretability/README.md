@@ -1,4 +1,18 @@
-# Internal activation monitoring: evidence and optimistic screen
+# Interpretability safety research
+
+The current page focuses on [obstacle histories](obstacle-history.md) and the
+[positive-evidence auditing follow-up](audit-progress.md). The earlier monitoring
+dashboard and scenario are retained in this repository as research artifacts;
+they are no longer presented on the page.
+
+The auditing follow-up has a separate ledger and CSV. Missing publication dates
+remain missing; provisional extractions are labeled explicitly.
+
+```sh
+python3 analysis/interpretability/build_audit_progress.py --check-sources
+```
+
+## Earlier monitoring analysis
 
 This is a curated evidence review, not a systematic review or a fitted historical
 growth model. Cutoff: 2026-11-10. `evidence.json` is the canonical source for the

@@ -4,157 +4,95 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="page" content="projects">
-<meta name="description" content="An evidence-based, optimistic feasibility screen for internal activation monitoring as an AI safety measure. Public results, historical context and an interactive cost model.">
-<title>Can Internal Monitors Become Decisive? — Andreas Moe</title>
+<meta name="description" content="Is interpretability progressing fast enough to prevent catastrophe? Historical obstacles, auditing results, and a verifiable test of progress against increasingly capable models.">
+<title>Is Interpretability Progressing Fast Enough? — Andreas Moe</title>
 <link rel="stylesheet" href="styles.css">
 <link rel="stylesheet" href="interpretability.css">
 <link rel="icon" href="favicon.png">
 <script src="header.js"></script>
-<script defer src="interpretability_data.js"></script>
-<script defer src="interpretability_model.js"></script>
-<script defer src="interpretability_report.js"></script>
 </head>
 <body>
 <div id="header"></div>
 <main class="interp">
 <div class="notice">Everything on this page is AI generated</div>
-<p class="eyebrow">Interpretability &amp; AI safety · Evidence through 10 November 2026</p>
-<h1>Can internal monitors become decisive?</h1>
-<p class="lede">Read a model’s internal activations, detect a dangerous action, and stop it before it takes effect. This route may need a few reliable signals rather than a complete explanation of the model.</p>
-<div class="verdict"><b>My screening judgment: investigate further.</b> Published results demonstrate useful signals and potentially cheap readouts. They do not establish robust prevention. The optimistic scenario survives; the central uncertainty is whether errors persist across genuinely different opportunities to intervene.</div>
-<p class="note">This is an assessment of runtime activation monitoring, including probes and representation readouts. These are useful internal-access tools, but successful classification alone is not evidence of mechanistic understanding. A failure of this route would not rule out interpretability-guided training, editing, architecture design or verification.</p>
-<p class="note"><b>Historical stress test:</b> <a href="#obstacles">Do old obstacles stay solved?</a> A follow-up review finds local repairs alongside recurring coverage, faithfulness and robustness problems. It does not establish a pace sufficient for catastrophe prevention.</p>
-<nav class="contents" aria-label="Page sections"><a href="#evidence">Measured results</a><a href="#history">Since 2019</a><a href="#scenario">Optimistic cost model</a><a href="#scale">Model scale</a><a href="#obstacles">Do obstacles stay solved?</a><a href="#falsification">Try to falsify it</a><a href="#audit">Verify the evidence</a></nav>
-
-<section aria-labelledby="metric-heading">
-<h2 id="metric-heading">The metric</h2>
-<div class="formula">Miss fraction = 1 − recall, at a stated false-positive rate</div>
-<p>Measure the share of dangerous examples missed by an internal monitor at a disclosed false-alarm threshold, alongside monitoring cost and a behavioral baseline on the same examples. An optimistic scenario then asks how many <em>new, informative checkpoints before harm</em> could reduce the missed fraction to a chosen target. Keep the task, target model, negative examples and attacker access attached to every result.</p>
-<p>“Decisive” is a decision threshold to explore here, not a benchmark label: for example, reducing the chance of an attempted harmful episode escaping intervention by 1,000× within an affordable monitoring budget. The available studies mostly measure classifications, not that episode-level outcome.</p>
-</section>
-
-<section id="evidence" aria-labelledby="evidence-heading">
-<h2 id="evidence-heading">What has actually been measured?</h2>
-<p>There is useful signal, but the difficult cases matter. Select a family below; scores from different families are not pooled.</p>
-<div class="controls"><label>Evidence family<select id="evidence-family"><option value="operational">Operational proxies · nominal 1% FPR</option><option value="hidden-goal">Hidden-goal stress test · nominal 2% FPR</option><option value="auroc">Ranking quality · AUROC, not detection coverage</option></select></label></div>
-<p id="evidence-note" class="status" aria-live="polite"></p>
-<div id="evidence-chart" class="chart" tabindex="0" aria-label="Scrollable measured-results chart"></div>
-<div class="legend"><span class="purple">● Internal readout</span><span class="blue">● Behavioral baseline</span><span class="amber">● Activation oracle</span></div>
-<p class="note">Values are author-reported or calculated from reported counts. Approximate numbers are marked ≈. Bars are not confidence intervals; unavailable uncertainty is not replaced by an invented interval. AUROC measures ranking across thresholds and cannot be converted into recall at 1% FPR.</p>
-<details><summary>Exact values and source locations for this chart</summary><div class="table-scroll" id="evidence-table"></div></details>
-<div class="finding"><b>Why the impressive numbers do not settle the question.</b> The 2025 deception result calibrates false alarms on unrelated dialogue, and its main-text and appendix recall disagree. High-stakes detection is a triage task. The 2026 sabotage headline is a rounded, author-reported best result. The hidden-goal table preserves all eight conditions, including failures. <a href="analysis/interpretability/README.md">Extraction notes</a>.</div>
-</section>
-
-<section id="history" aria-labelledby="history-heading">
-<h2 id="history-heading">The evidence trail, 2019–2026</h2>
-<p>Earlier backdoor and latent-knowledge work supplies context. Later studies test increasingly relevant tasks. This is a chronology of evidence, <b>not a comparable annual performance series</b>. There is no fitted doubling time.</p>
-<div id="history-chart" class="chart" tabindex="0" aria-label="Scrollable evidence chronology"></div>
-<p class="note">Dots mark publication years; gray entries are precursors and red entries test evasion. The obfuscation paper was first submitted in 2024; the cited numerical discussion uses its February 2025 revision. No selected comparable observation in a year means missing evidence, not zero ability.</p>
-<details><summary>Chronology and inclusion decisions</summary><div id="history-list"></div></details>
-</section>
-
-<section id="scenario" aria-labelledby="scenario-heading">
-<h2 id="scenario-heading">An optimistic cost-to-coverage model</h2>
-<p class="scenario-label">Scenario, not a fit or a forecast</p>
-<p>Start with a measured single-check detection rate. Optimistically assume it transfers, flagged actions can be blocked, and a harmful episode supplies several informative checkpoints. A detection result on a completed tool call would need to become a pre-execution check to support this assumption.</p>
-<div class="controls scenario-controls">
-<label>Single-check anchor<select id="anchor"></select></label>
-<label>Target escaped fraction<select id="target"><option value="0.01">1% · 100× reduction</option><option value="0.001" selected>0.1% · 1,000× reduction</option><option value="0.0001">0.01% · 10,000× reduction</option></select></label>
-<label>Single-check recall retained <output id="transfer-value">100%</output><input id="transfer" type="range" min="0" max="100" step="1" value="100"></label>
-<label>Persistent share of single-check misses <output id="persistent-value">0%</output><input id="persistent" type="range" min="0" max="100" step="1" value="0"></label>
-<label>Maximum available checkpoints<input id="max-checks" type="number" min="1" max="100" step="1" value="20"></label>
-<label>Budget (% of one reference monitor pass)<input id="budget" type="number" min="0" max="10000" step="any" value="10"></label>
-</div>
-<div class="presets"><button id="optimistic" type="button">Optimistic defaults</button><button id="small-blindspot" type="button">Try 1% persistent misses</button><button id="one-chance" type="button">Only one chance to stop harm</button></div>
-<details open><summary>Cost assumptions · editable, not measurements of the selected monitor</summary>
-<p class="note">A reference pass is one full text-monitor evaluation of a comparable interaction. Defaults illustrate inexpensive checks; they are not a dollar-cost estimate. Alarm handling, follow-up inference and setup can dominate the small classifier head.</p>
-<div class="controls">
-<label>One checkpoint (% of reference pass)<input id="checkpoint-cost" type="number" min="0.000001" max="10000" step="any" value="0.1"></label>
-<label>Handling one false alarm (reference passes)<input id="review-cost" type="number" min="0" max="100000" step="any" value="1"></label>
-<label>Setup (reference passes)<input id="setup-cost" type="number" min="0" max="1000000000000" step="any" value="0"></label>
-<label>Uses over which setup is shared<input id="volume" type="number" min="1" max="1000000000000" step="1" value="1000000"></label>
-</div>
-</details>
-<p id="anchor-note" class="note"></p>
-<div id="scenario-status" class="status" aria-live="polite"></div>
-<div id="scenario-chart" class="chart" tabindex="0" aria-label="Scrollable scenario cost and escape curve"></div>
-<div class="legend"><span class="purple">━ Selected persistence</span><span class="blue">┄ Independent misses</span><span class="red">┄ Target escaped fraction</span><span>Gray line: cost budget</span></div>
-<div id="scenario-table" class="table-scroll"></div>
-<p class="note"><b>Repeated scoring of the same deterministic activations provides no extra chances.</b> The independent curve requires new information and equal detection quality at each checkpoint. Fully persistent errors never improve. The model does not estimate catastrophic risk, the number of harmful behaviors in existence, or the combined failure of a safety stack.</p>
-<details><summary>Equations and what would falsify the optimistic assumptions</summary>
-<div class="formula">m = 1 − r·t &nbsp; b = z·m<br>E(k) = b + (1 − b) [(m − b)/(1 − b)]<sup>k</sup><br>C(k) = A/N + k(c + αh)</div>
-<p>r is measured recall, t the assumed retained fraction, z the persistent share of misses, and k the effective checkpoints. The first check always has miss fraction m. The irreducible floor is b. For b = 1, E(k) = 1. A/N amortizes setup, c prices a check and αh prices expected false alarms on benign traffic. All k checks are charged; true-positive handling is omitted for an optimistic rare-event screen. The smallest feasible k defines this protocol’s modeled cost to reach the target, not a global minimum across possible methods.</p>
-<p>Evidence that an attacker can reliably occupy the blind spot, that the first dangerous action is irreversible, or that the monitor sees its signal only after harm would invalidate the favorable scenario. A larger model producing more tokens does not automatically supply more useful checkpoints. A retained-recall factor is a sensitivity assumption, not a measured law of transfer.</p>
-<p>With 73% single-check recall, independent misses give 0.27<sup>6</sup> ≈ 0.039% after six checks. If just 1% of the original misses are permanently invisible, the floor is 0.27%: a 0.1% target becomes unreachable even with unlimited checks. Neither dependence assumption is established by the single-check measurement.</p>
-</details>
-</section>
-
-<section id="scale" aria-labelledby="scale-heading">
-<h2 id="scale-heading">Larger models: cost and detection can move differently</h2>
-<p>The FIBS study reports better ranking quality on larger Qwen models: the four probes span 0.585–0.781 AUROC on 2B, versus 0.963–0.986 across models from 27B upward. Those are ranges across methods/models, not confidence intervals or fixed-FPR recall. Parameter count is not a general capability score. <a href="https://arxiv.org/html/2610.12445v1#S5.SS1">§5.1</a>.</p>
-<p>An existing activation can be cheap to classify even when the model that produced it is large. The 2025 high-stakes paper explicitly assumes those activations are already available. Its cost model gives an attention-probe head 16,384·S operations, versus 1.6×10<sup>10</sup>·S + 262,144·S² for a separate 8B reference pass. <a href="https://arxiv.org/html/2506.10805v2#A1.SS3">Tables 5–6</a>.</p>
-<p id="cost-example" class="status"></p>
-<p class="note">This is inference arithmetic under the paper’s accounting, not measured latency. It excludes activation transport, model instrumentation, probe training and human validation. Follow-up questions can require extra model computation; their cost must be included. The cheaper-head example is not a measurement of FIBS.</p>
-<p>A cascade in the same high-stakes study matched a standalone 8B classifier’s aggregate AUROC while invoking it on 40% of cases. That is a useful cost precedent, not a demonstrated cost for 99.9% detection. <a href="https://arxiv.org/html/2506.10805v2#S3">Figure 6</a>.</p>
-</section>
-
-<section aria-labelledby="decision-heading">
-<h2 id="decision-heading">What deserves the next research dollar?</h2>
-<p><b>Measure errors across whole adversarial episodes, before irreversible actions.</b> Compare an internal monitor, a strong behavioral monitor and their combination on the same trajectories. Record joint misses, false alarms, actor task performance and actual compute/latency. This would test the assumptions that dominate the optimistic calculation.</p>
-<p>Obfuscation attacks can defeat strong-looking detectors; Neural Chameleons demonstrate transfer of an evasive skill to previously unseen safety probes. These are concrete reasons to test adaptive adversaries, rather than extrapolate ordinary classification accuracy. They do not prove that every possible internal monitor fails. <a href="https://arxiv.org/html/2412.09565v2#S3.SS3">Obfuscated Activations</a> · <a href="https://arxiv.org/html/2512.11949v1#S4">Neural Chameleons</a>.</p>
-<p>My preference for this route is a prioritization judgment: it has a limited target, reusable internal signals, a plausible connection to interruption, and quantitative evidence. It does not yet have a demonstrated preventive guarantee. Favorable outcomes justify deeper investigation; failure under one attack model or scenario only rejects that configuration.</p>
-</section>
+<p class="eyebrow">Interpretability &amp; AI safety · Evidence reviewed 11 November 2026</p>
+<h1>Is interpretability progressing fast enough?</h1>
+<p class="lede">Are we overcoming the obstacles to catastrophe prevention—and do comparable obstacles return as models become more capable?</p>
+<div class="verdict"><b>Current judgment: useful progress, uncertain convergence.</b> Internal tools are getting better at some fixed tasks. Evidence that these gains survive new concealment methods, stronger targets and a complete cost comparison remains limited. The record supports further investigation; it does not establish timely readiness or inevitable failure.</div>
+<p>The original safety ambitions included systematic audits, feedback on internal processes, deliberate model design and scientific discovery. A decisive warning might require one consequential finding; broad assurance requires much more. There is no single technical threshold that every route must reach.</p>
+<nav class="contents" aria-label="Page sections"><a href="#obstacles">Obstacle histories</a><a href="#progress">Strongest positive evidence</a><a href="#metric">Measuring the pace</a><a href="#decision">What changes priorities?</a><a href="#verify">Verify the evidence</a></nav>
 
 <section id="obstacles" aria-labelledby="obstacles-heading">
 <h2 id="obstacles-heading">Do old obstacles stay solved?</h2>
 <p class="scenario-label">Historical falsification test · 11 November 2026</p>
 <p><b>Finding: local progress with recurring safety-validation obstacles.</b> Four selected histories trace original ambitions, advances, challenges and repairs. They test whether progress is accumulating toward dependable prevention. This is a purposive review, not a representative failure rate for the field.</p>
-<div class="table-scroll"><table>
+<div class="table-scroll" tabindex="0" role="region" aria-label="Historical obstacle comparisons"><table>
 <caption>What survived scrutiny, and what remains unresolved</caption>
 <thead><tr><th scope="col">Obstacle</th><th scope="col">Progress that survives</th><th scope="col">Remaining difficulty</th></tr></thead>
 <tbody>
 <tr><th scope="row">Recover useful features</th><td>Dictionary learning reaches larger models; Matryoshka methods reduce feature absorption in tested settings.</td><td>Clear features and good reconstruction do not bound missing safety-relevant concepts. <a href="https://arxiv.org/html/2503.17547v1">Repair</a> · <a href="https://arxiv.org/html/2503.09532v1">Evaluation</a></td></tr>
-<tr><th scope="row">Audit hidden behavior</th><td>Introspection adapters improve reported AuditBench success from 53% to 59%.</td><td>A weight-access attack defeats a published adapter on seven different fine-tunes. It does not erase the AuditBench gain. <a href="https://arxiv.org/html/2604.16812v1#S3.SS1">Advance</a> · <a href="https://arxiv.org/html/2605.27836v1">Challenge</a></td></tr>
+<tr><th scope="row">Audit hidden behavior</th><td>Introspection adapters improve reported AuditBench success from 53% to 59%; see the follow-up below for newer evidence.</td><td>A weight-access attack defeats a published adapter on seven different fine-tunes. It does not erase the AuditBench gain. <a href="https://arxiv.org/html/2604.16812v1#S3.SS1">Advance</a> · <a href="https://arxiv.org/html/2605.27836v1">Challenge</a></td></tr>
 <tr><th scope="row">Train on internal signals</th><td>Updating probes improves tested behavior while preserving detectability.</td><td>Frozen objectives and some representation defenses are exploitable; stronger optimization remains open. <a href="https://arxiv.org/html/2609.38645v3#S5">Repair and limits</a></td></tr>
 <tr><th scope="row">Build interpretable models</th><td>Sparse models' smaller-circuit advantage has partial replication and newer weight-level validation.</td><td>Extracted circuits can differ from the model's computation; capability and cost constraints remain. The critique changes the pruning method. <a href="https://www.lesswrong.com/posts/sHpZZnRDLg7ccX9aF/weight-sparse-circuits-may-be-interpretable-yet-unfaithful">Replication and challenge</a> · <a href="https://arxiv.org/abs/2607.02964v1">Later evaluation</a></td></tr>
 </tbody></table></div>
-<p>The audit gain is six percentage points, or about 12.8% fewer reported misses. It is a same-protocol comparison, not an equal-cost progress curve. Across different tests, the symmetry attack reduces detection from 100% to 0–20%; the attacker controls model weights, so this does not show failure under controlled model provenance.</p>
+<p>The symmetry attack reduces detection from 100% to 0–20% in a separate experiment where the attacker controls model weights. It does not erase the AuditBench improvement or demonstrate failure under controlled model provenance.</p>
 <p>Selected paper intervals are short: 51 days from AuditBench to the IA paper, 39 days from IA to the symmetry attack, and 46 days from circuit breakers to an embedding-attack critique. These are publication intervals, not research durations or evidence that attacks advance faster than defenses. There is no fitted rate of obstacle retirement.</p>
 <div class="finding"><b>Implication for timing:</b> the record weakens extrapolation from impressive demonstrations to robust prevention. It does not establish that interpretability is too slow, or on schedule. A comparable series holding safety requirements, attacker access and total cost fixed across increasingly capable models is still needed.</div>
 <p><a href="analysis/interpretability/obstacle-history.md">Read the full historical test and conclusions</a> · <a href="analysis/interpretability/obstacles.json" download>Event ledger JSON</a> · <a href="analysis/interpretability/obstacles.csv" download>Chronological CSV</a> · <a href="analysis/interpretability/build_obstacles.py">Reproduce checks</a>.</p>
 </section>
 
-<section id="falsification" aria-labelledby="falsification-heading">
-<h2 id="falsification-heading">Trying to falsify catastrophe prevention</h2>
-<p class="scenario-label">Adversarial review · 11 November 2026</p>
-<p>The original safety case was broader than monitoring: systematic audits, feedback on internal processes, deliberate design, and extracting knowledge without deploying agents. Research has produced substantial scientific and technical progress, but useful internal signals do not establish the stronger ambition of detecting hidden danger that survives behavioral tests. <a href="analysis/interpretability/original-case.md">Historical assessment: original justifications, progress, required thresholds, changing goals and new safety ideas</a>.</p>
-<p><b>The strongest challenge is marginal value against an adaptive adversary.</b> An internal monitor might miss exactly the dangerous episodes that a strong behavioral monitor misses. An attacker may repeatedly select those blind spots. High average recall and cheap classification do not resolve either problem.</p>
-<div class="formula">Incremental reduction = baseline episode escape rate / internally assisted episode escape rate</div>
-<p>Compare stacks at equal total defense cost and useful task performance, optimizing attacks separately against each under the same declared attack budget. Report absolute escape rates and uncertainty alongside the ratio. A paired evaluation on shared trajectories reveals overlapping failures; separate attack searches test adaptation. Neither is supplied by the single-check scenario above.</p>
-<details><summary>Other routes need different falsification tests</summary>
-<ul>
-<li><b>Deployment audits:</b> can an internal tool change a correct deployment decision beyond an equally resourced behavioral audit? Introspection adapters improve AuditBench investigator success from the previous best 53% to 59%, but a separate test surfaces symptoms without revealing the underlying reward-seeking objective. One credible symptom might still justify stopping deployment. <a href="https://alignment.anthropic.com/2026/introspection-adapters/">Results and scoring protocol</a>.</li>
-<li><b>Training and editing:</b> does safety persist under new tasks and further optimization, or does only the measured signal disappear? Frozen probes can be exploited, while continuously updated probes improve tested behavior and preserve detectability. This is evidence against declaring the training route doomed. <a href="https://arxiv.org/html/2609.38645v3#S5">Probe-guided fine-tuning</a>.</li>
-<li><b>Construction and verification:</b> can guarantees scale at an affordable capability and proof cost? Existing sparse-model and small-transformer proof results leave a substantial gap; a gap is not an impossibility result. Narrow safety-critical components remain a possible use. <a href="https://arxiv.org/abs/2511.13653">Sparse transformers</a> · <a href="https://arxiv.org/abs/2406.11779">Compact proofs</a>.</li>
-<li><b>Scientific discovery:</b> does a finding enable a timely safety decision that comparable behavioral investigation would miss? A few consequential discoveries could matter without comprehensive coverage.</li>
-</ul>
-</details>
-<p>Coverage of the threat matters too. If an intervention reaches fraction q of baseline catastrophic risk and reduces that portion by factor R, simple accounting gives residual risk (1 − q) + q/R, assuming other risks stay fixed and no new harm is induced. Even perfect monitoring cannot eliminate risk outside its channel. Neither q nor R is estimated here.</p>
-<div class="finding"><b>Updated judgment:</b> current evidence does not establish a decisive safety barrier. It also does not falsify a decisive future contribution. Prioritize experiments measuring additional prevention and consequential audit decisions. Failure of one monitoring configuration does not reject the other routes.</div>
-<p><a href="analysis/interpretability/falsification.md">Full falsification review: evidence, counterevidence, assumptions and a proposed experiment</a>. The numerical archive above retains its 10 November cutoff.</p>
+<section id="progress" aria-labelledby="progress-heading">
+<h2 id="progress-heading">The strongest positive case: auditing improves</h2>
+<p>To challenge the pessimistic interpretation, look for improvements on a fixed task. AuditBench supplies a useful starting point. The scores below measure discovery of planted behaviors, not coverage of all possible dangerous behavior.</p>
+<div class="table-scroll" tabindex="0" role="region" aria-label="Full AuditBench results"><table>
+<caption>Reported full-benchmark investigation success · method comparison, not a dated trend</caption>
+<thead><tr><th scope="col">Method</th><th scope="col">Success</th><th scope="col">Source and status</th></tr></thead>
+<tbody>
+<tr><th scope="row">Scaffolded text completion</th><td>53%</td><td>Prior best reported by the <a href="https://arxiv.org/html/2604.16812v1#S3.SS1">IA paper</a>.</td></tr>
+<tr><th scope="row">Introspection adapters</th><td>59%</td><td>Author-reported, 18 April 2026.</td></tr>
+<tr><th scope="row">LoRAcles</th><td>71%</td><td><b>Provisional extraction.</b> <a href="https://openreview.net/pdf/5bfdac6526a2c1d8cf83e4fbb9e11a1a7a923540.pdf">Primary PDF, §3.1</a>; exact version date unresolved.</td></tr>
+</tbody></table></div>
+<p>The last comparison implies <b>29.3% fewer missed investigations</b>, calculated from rounded reported scores. That is evidence against stagnation, not a catastrophe-risk reduction estimate. The LoRAcles number was checked through indexed primary-paper passages; direct PDF retrieval was blocked. It is not independently replicated.</p>
+<p>The <a href="https://github.com/ceselder/loracles/blob/be71fa947a037f90d3d179a16cbd2ebc5d273a66/auditbench_paper_replication/README.md">pinned author implementation</a> preserves the investigator token allowance and prediction count while adding a tool that generates extra answers. Comparable investigator budgets do not establish equal total cost.</p>
+<p>Behavioral auditing also improves, but newer results can use different targets and scoring. A <a href="https://arxiv.org/html/2608.25460v1#A7">six-target RL evaluation</a> cannot be pooled with the full benchmark. Improvements depend on the interaction mode; the <a href="analysis/interpretability/audit-progress.md">follow-up analysis</a> records the paired comparison.</p>
+<div class="finding"><b>What remains unresolved:</b> whether the difficult residual cases shrink, whether gains survive fresh hazard constructions, and whether the internal tool beats the best behavioral alternative at equal cost and false-alarm tolerance.</div>
 </section>
 
-<section id="audit" aria-labelledby="audit-heading">
-<h2 id="audit-heading">Verify the evidence</h2>
-<p id="archive-summary"></p>
-<p><a href="analysis/interpretability/evidence.json" download>Evidence JSON</a> · <a href="analysis/interpretability/observations.csv" download>Observations CSV</a> · <a href="analysis/interpretability/README.md">Methods and extraction issues</a> · <a href="interpretability_model.js">Scenario equations in code</a> · <a href="analysis/interpretability/check_sources.py">Source-check script</a></p>
-<pre>python3 analysis/interpretability/build.py
-node --test analysis/interpretability/model.test.js
-python3 analysis/interpretability/check_sources.py</pre>
-<p class="note">These checks verify transcription and calculations, not independent experimental replication. Primary links use fixed paper versions where available. Live-page results are marked by retrieval date. No benchmark scores are interpolated into missing years; no cost observations are invented.</p>
-<ol id="source-list" class="sources"></ol>
+<section id="metric" aria-labelledby="metric-heading">
+<h2 id="metric-heading">Measure progress and the moving target separately</h2>
+<p><b>The proposed metric:</b> at a fixed total audit cost and false-alarm allowance, measure the fraction of concealed hazards caught by the best internally assisted audit and the best audit without internal access. Evaluate successive method vintages on both frozen targets and fresh, more capable targets. Report absolute detection rates and the fraction of baseline misses removed.</p>
+<div class="formula">Fraction of baseline misses removed = (internal-assisted detection − baseline detection) / (1 − baseline detection)</div>
+<p class="note">This proposed measurement is not yet supplied by the results above. It is undefined when the baseline misses nothing, and can be negative. Always show the absolute rates and uncertainty; a large relative gain on a small denominator can mislead.</p>
+<div class="table-scroll" tabindex="0" role="region" aria-label="Comparisons needed to measure progress"><table>
+<caption>Cross method vintages with target cohorts</caption>
+<thead><tr><th scope="col">Comparison</th><th scope="col">What it tests</th></tr></thead>
+<tbody>
+<tr><th scope="row">New versus old methods on frozen targets</th><td>Are we overcoming observed obstacles?</td></tr>
+<tr><th scope="row">Frozen methods on fresh targets</th><td>How much new difficulty appears?</td></tr>
+<tr><th scope="row">New methods on fresh targets</th><td>Is achieved coverage keeping up at the specified budget?</td></tr>
+</tbody></table></div>
+<p>Measure target capability relevant to the threat, such as strategic concealment or autonomous task completion. Parameter count alone is unsuitable. Separate increases in capability from changes in hazard construction and attacker access. Repeated runs on the same targets do not supply independent evidence about new hazard families.</p>
+<p>Publish benign controls, predictions, adjudications, target provenance, method versions, training and tool costs. Keep the claim allowance fixed. Then test whether findings enable correct interventions before harm. This would measure progress toward a useful safety decision rather than explanation quality alone.</p>
 </section>
-<noscript><p class="status">JavaScript is required for interactive charts. The conclusions and methodology above remain readable; <a href="analysis/interpretability/observations.csv">download the numerical evidence</a> to inspect it.</p></noscript>
+
+<section id="decision" aria-labelledby="decision-heading">
+<h2 id="decision-heading">What would change the safety priority?</h2>
+<ul>
+<li><b>Deprioritize the auditing route</b> if several preregistered target cohorts show no material internal-access advantage at equal cost, or gains consistently disappear on held-out concealment processes—even under favorable assumptions.</li>
+<li><b>Invest further</b> if gains persist on fresh targets and stronger attacks, costs remain tolerable, and acting on the findings prevents failures in held-out end-to-end tasks.</li>
+<li><b>Remain undecided</b> when fixed-benchmark scores rise but transfer, false alarms or full costs are unmeasured. That is the present evidence state.</li>
+</ul>
+<p>“Fast enough” needs a deadline and a route-specific safety threshold. Neither can be inferred from these scores. Evaluate plausible scenarios explicitly; the current evidence does not justify an arrival-date forecast. Failure of the auditing route would still leave training, construction, early warning and unforeseen discoveries to assess.</p>
+</section>
+
+<section id="verify" aria-labelledby="verify-heading">
+<h2 id="verify-heading">Verify the evidence</h2>
+<p>This is a purposive public-source review, not a systematic meta-analysis. The historical ledger covers 24 selected events; the audit comparison keeps incompatible protocols separate. Missing publication dates remain missing. No experiments were rerun.</p>
+<p><a href="analysis/interpretability/audit-progress.md">Auditing follow-up</a> · <a href="analysis/interpretability/audit-progress.json" download>Audit data JSON</a> · <a href="analysis/interpretability/audit-progress.csv" download>Audit data CSV</a> · <a href="analysis/interpretability/build_audit_progress.py">Audit source checks</a></p>
+<pre>python3 analysis/interpretability/build_obstacles.py --check-sources
+python3 analysis/interpretability/build_audit_progress.py --check-sources</pre>
+<p class="note">Checks verify selected transcriptions and calculations, not experimental correctness. The script explicitly leaves the provisional LoRAcles headline pending manual PDF verification.</p>
+</section>
 <p class="note">Related analysis: <a href="ai_control.html">AI control</a> · <a href="pre_deployment_testing.html">Pre-deployment testing</a>.</p>
 </main>
 </body>
