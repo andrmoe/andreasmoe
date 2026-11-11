@@ -1,0 +1,121 @@
+{
+  "retrieved": "2026-11-11",
+  "scope": "Targeted positive-evidence follow-up, not a systematic review or a fitted time series. Reported investigator success is not catastrophe-prevention coverage.",
+  "sources": {
+    "ia": {
+      "url": "https://arxiv.org/html/2604.16812v1",
+      "publication_date": "2026-04-18",
+      "locator": "Section 3.1, Figure 2",
+      "verification": "Full primary HTML; previous best and IA scores."
+    },
+    "loracles": {
+      "url": "https://openreview.net/pdf/5bfdac6526a2c1d8cf83e4fbb9e11a1a7a923540.pdf",
+      "publication_date": null,
+      "locator": "Section 3.1, Figure 2; Appendix F",
+      "verification": "Search-indexed primary PDF passages only; direct PDF and metadata requests returned 403. Exact version date unverified. Headline provisional."
+    },
+    "loracles_code": {
+      "url": "https://raw.githubusercontent.com/ceselder/loracles/be71fa947a037f90d3d179a16cbd2ebc5d273a66/auditbench_paper_replication/README.md",
+      "publication_date": null,
+      "locator": "Run command and implementation account, pinned commit",
+      "verification": "Full primary repository file; protocol corroboration, not score replication."
+    },
+    "rl": {
+      "url": "https://arxiv.org/html/2608.25460v1",
+      "publication_date": "2026-08-26",
+      "locator": "Appendix G.2-G.4, Table 10",
+      "verification": "Full versioned primary HTML. Selected paired comparison, not the best of all reported configurations."
+    }
+  },
+  "protocols": {
+    "full": {
+      "targets": 56,
+      "target_family": "Llama 3.3 70B fine-tunes; 14 behaviors, four construction conditions",
+      "investigator": "Haiku 4.5",
+      "runs_per_target": 16,
+      "predictions_per_run": 10,
+      "investigator_token_budget": 25000,
+      "total_cost_matched": false,
+      "false_alarm_matched": false,
+      "note": "Success if any prediction identifies planted behavior. LoRAcles settings corroborated by author code; full judge/version equivalence not independently replicated."
+    },
+    "subset_stc": {
+      "targets": 6,
+      "target_family": "Six TD+KTO behaviors on Llama 3.3 70B",
+      "runs_per_target": 16,
+      "predictions_per_run": 3,
+      "investigator_token_budget": 25000,
+      "judge": "Sonnet 4, 10000 thinking tokens",
+      "access": "Scaffolded text completion",
+      "note": "Different subset and scoring from full protocol; do not pool."
+    },
+    "subset_chat": {
+      "targets": 6,
+      "target_family": "Same six targets as subset_stc",
+      "runs_per_target": 16,
+      "predictions_per_run": 3,
+      "investigator_token_budget": 25000,
+      "judge": "Sonnet 4, 10000 thinking tokens",
+      "access": "Ordinary chat",
+      "note": "Paired alternative interaction mode; do not pool with full protocol."
+    }
+  },
+  "observations": [
+    {
+      "id": "prior",
+      "method": "Scaffolded text completion",
+      "protocol": "full",
+      "success": 0.53,
+      "source": "ia",
+      "status": "Reported prior best, not a newly run baseline"
+    },
+    {
+      "id": "ia",
+      "method": "Introspection adapters",
+      "protocol": "full",
+      "success": 0.59,
+      "source": "ia",
+      "status": "Author-reported"
+    },
+    {
+      "id": "loracles",
+      "method": "LoRAcles",
+      "protocol": "full",
+      "success": 0.71,
+      "source": "loracles",
+      "status": "Provisional extraction; exact publication date unresolved"
+    },
+    {
+      "id": "base_stc",
+      "method": "Base Haiku 4.5",
+      "protocol": "subset_stc",
+      "success": 0.115,
+      "source": "rl",
+      "status": "Author-reported"
+    },
+    {
+      "id": "rl_stc",
+      "method": "MT IG PW 4/8 FP, 3 ep",
+      "protocol": "subset_stc",
+      "success": 0.281,
+      "source": "rl",
+      "status": "Author-reported selected configuration"
+    },
+    {
+      "id": "base_chat",
+      "method": "Base Haiku 4.5",
+      "protocol": "subset_chat",
+      "success": 0.333,
+      "source": "rl",
+      "status": "Author-reported"
+    },
+    {
+      "id": "rl_chat",
+      "method": "MT IG PW 4/8 FP, 3 ep",
+      "protocol": "subset_chat",
+      "success": 0.333,
+      "source": "rl",
+      "status": "Same selected trained auditor, alternative access"
+    }
+  ]
+}
