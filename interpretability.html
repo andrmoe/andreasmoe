@@ -15,6 +15,7 @@
 <div id="header"></div>
 <main class="interp">
 <div class="notice">Everything on this page is AI generated</div>
+<nav class="contents" aria-label="Interpretability research paths"><a href="interpretability.html" aria-current="page">Overview &amp; auditing</a><a href="interpretability_training.html">Training safer models</a></nav>
 <p class="eyebrow">Interpretability &amp; AI safety · Evidence reviewed 11 November 2026</p>
 <h1>Is interpretability progressing fast enough?</h1>
 <p class="lede">Are we overcoming the obstacles to catastrophe prevention—and do comparable obstacles return as models become more capable?</p>
@@ -32,7 +33,7 @@
 <tbody>
 <tr><th scope="row">Recover useful features</th><td>Dictionary learning reaches larger models; Matryoshka methods reduce feature absorption in tested settings.</td><td>Clear features and good reconstruction do not bound missing safety-relevant concepts. <a href="https://arxiv.org/html/2503.17547v1">Repair</a> · <a href="https://arxiv.org/html/2503.09532v1">Evaluation</a></td></tr>
 <tr><th scope="row">Audit hidden behavior</th><td>Introspection adapters improve reported AuditBench success from 53% to 59%; see the follow-up below for newer evidence.</td><td>A weight-access attack defeats a published adapter on seven different fine-tunes. It does not erase the AuditBench gain. <a href="https://arxiv.org/html/2604.16812v1#S3.SS1">Advance</a> · <a href="https://arxiv.org/html/2605.27836v1">Challenge</a></td></tr>
-<tr><th scope="row">Train on internal signals</th><td>Updating probes improves tested behavior while preserving detectability.</td><td>Frozen objectives and some representation defenses are exploitable; stronger optimization remains open. <a href="https://arxiv.org/html/2609.38645v3#S5">Repair and limits</a></td></tr>
+<tr><th scope="row">Train on internal signals</th><td>Updating probes improves tested behavior while preserving detectability.</td><td>Further benign fine-tuning removes the safety of tested checkpoints. A separate review examines durability, repairs and favorable scaling evidence. <a href="interpretability_training.html">Training route</a></td></tr>
 <tr><th scope="row">Build interpretable models</th><td>Sparse models' smaller-circuit advantage has partial replication and newer weight-level validation.</td><td>Extracted circuits can differ from the model's computation; capability and cost constraints remain. The critique changes the pruning method. <a href="https://www.lesswrong.com/posts/sHpZZnRDLg7ccX9aF/weight-sparse-circuits-may-be-interpretable-yet-unfaithful">Replication and challenge</a> · <a href="https://arxiv.org/abs/2607.02964v1">Later evaluation</a></td></tr>
 </tbody></table></div>
 <p>The symmetry attack reduces detection from 100% to 0–20% in a separate experiment where the attacker controls model weights. It does not erase the AuditBench improvement or demonstrate failure under controlled model provenance.</p>
