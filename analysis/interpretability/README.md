@@ -1,7 +1,13 @@
 # Interpretability safety research
 
-The current page focuses on [obstacle histories](obstacle-history.md) and the
-[positive-evidence auditing follow-up](audit-progress.md). The earlier monitoring
+The [overview and auditing page](../../interpretability.html) covers
+[obstacle histories](obstacle-history.md) and the
+[positive-evidence auditing follow-up](audit-progress.md). The separate
+[training page](../../interpretability_training.html) tests whether internal
+signals produce durable safety improvements; its [research note](training-progress.md)
+sets out the route, selection rule and next falsification experiment.
+Future routes can have separate pages when their outcome measures and arguments
+differ. The earlier monitoring
 dashboard and scenario are retained in this repository as research artifacts;
 they are no longer presented on the page.
 
@@ -10,7 +16,14 @@ remain missing; provisional extractions are labeled explicitly.
 
 ```sh
 python3 analysis/interpretability/build_audit_progress.py --check-sources
+python3 analysis/interpretability/build_training_progress.py --check-sources
 ```
+
+The training ledger contains all rows of the selected probe paper's Tables 1 and
+9, plus explicitly reported scaling and spontaneous-deception endpoints. Its
+script exports a CSV, renders the page's two numerical tables and optionally
+checks source transcriptions. These are four distinct protocols, not a fitted
+historical series. No models were trained or evaluated for this review.
 
 ## Earlier monitoring analysis
 

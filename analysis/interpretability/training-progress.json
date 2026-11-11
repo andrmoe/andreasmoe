@@ -1,0 +1,501 @@
+{
+  "title": "Internal signals for safer training: selected evidence",
+  "reviewed": "2026-11-11",
+  "scope": "Purposive optimistic falsification review. Distinct protocols are not pooled or fitted as a temporal trend.",
+  "sources": {
+    "proposal": {
+      "title": "Relaxed adversarial training for inner alignment",
+      "url": "https://www.lesswrong.com/posts/9Dy5YRaoCxH9zuJqa/relaxed-adversarial-training-for-inner-alignment",
+      "first_published": "2019-09-10",
+      "version_date": "2019-09-10",
+      "locator": "Background; hard cases; transparency tools",
+      "claim": "Proposal to use relaxed adversaries and transparency to penalize failures that ordinary training inputs might not expose.",
+      "limit": "Conceptual proposal, not a quantitative baseline or evidence that the later methods realize its guarantees.",
+      "verification": "Primary text inspected; numerical values are author-reported, not independently replicated."
+    },
+    "lat": {
+      "title": "Targeted Latent Adversarial Training Improves Robustness to Persistent Harmful Behaviors in LLMs",
+      "url": "https://arxiv.org/html/2407.15549v1",
+      "first_published": "2024-07-22",
+      "version_date": "2024-07-22",
+      "locator": "Sections 4.2, 4.3.2 and 5; Tables 3 and 5",
+      "claim": "Adding latent adversaries improves tested backdoor removal and resistance to relearning over comparison methods.",
+      "limit": "Harmful behavior is approximately known; small models; knowledge returns under further training. Internal intervention does not require human-readable interpretation.",
+      "verification": "Primary text inspected; numerical values are author-reported, not independently replicated.",
+      "retrieved_html_sha256": "0acdd575be6b4dfe2cca04d533a94a61ca7fd1bf585359e0ec185d667f672fe1"
+    },
+    "solid": {
+      "title": "Preference Learning with Lie Detectors can Induce Honesty or Evasion",
+      "url": "https://arxiv.org/html/2505.13787v1",
+      "first_published": "2025-05-20",
+      "version_date": "2025-05-20",
+      "locator": "Abstract and Sections 3\u20134",
+      "claim": "Lie-detector-assisted preference learning can yield honesty or evasion depending on optimization, detector quality and regularization.",
+      "limit": "Constructed preference environment; a successful off-policy protocol does not establish robustness to arbitrary subsequent optimization.",
+      "verification": "Primary text inspected; numerical values are author-reported, not independently replicated.",
+      "retrieved_html_sha256": "1f7663afceca93024264e11a9b86bc8e2a14d1190a88e74eb2199ca3a180dd83"
+    },
+    "atlas": {
+      "title": "The Obfuscation Atlas: Mapping Where Honesty Emerges in RLVR with Deception Probes",
+      "url": "https://arxiv.org/html/2602.15515v2",
+      "first_published": "2026-02-17",
+      "version_date": "2026-05-26",
+      "locator": "Sections 4.4, 5 and 6",
+      "claim": "Coding reward hacking can evade probes; suitable KL and detector penalties can yield honest policies in the studied environment.",
+      "limit": "Honest is a thresholded task-specific classification. Strong regularization can restrict learning. Does not establish protection in richer agent environments.",
+      "verification": "Primary text inspected; numerical values are author-reported, not independently replicated.",
+      "retrieved_html_sha256": "6ebef945f1e89d748925bd860140aba81b723eaf92f981365da08ec2e654d71e"
+    },
+    "scaling": {
+      "title": "Scaling Trends for Lie Detector Oversight in Preference Learning",
+      "url": "https://arxiv.org/html/2607.01567v1",
+      "first_published": "2026-07-02",
+      "version_date": "2026-07-02",
+      "locator": "Sections 3.2, 4.1\u20134.5; Appendices O, P and S",
+      "claim": "Favorable within-study scaling of undetected deception, with important false-positive and spontaneous-deception limitations.",
+      "limit": "Joint detection/behavior metric; constructed domain; 405B uses one seed; changes to optimization and evaluation prevent treating 2025/2026 results as a fixed-protocol time series.",
+      "verification": "Primary text inspected; numerical values are author-reported, not independently replicated.",
+      "retrieved_html_sha256": "4051cba41121c0de4a085adf18539bb5226d4829bb1f49333a1b056d1efc8120"
+    },
+    "probes": {
+      "title": "Alignment via Training Against Probes Without Losing Monitorability",
+      "url": "https://arxiv.org/html/2609.38645v3",
+      "first_published": "2026-09-29",
+      "version_date": "2026-10-20",
+      "locator": "Tables 1 and 9; Sections 3.5, 4.2 and Appendix F.3",
+      "claim": "Updated probe objectives improve tested jailbreak resistance; subsequent benign fine-tuning removes the safety of the tested probe-trained Llama checkpoints.",
+      "limit": "The continuation experiment starts from an abliterated base plus merged safety adapter; original Instruct is a contextual reference, not a matched training ablation. No post-continuation utility reported in Table 9.",
+      "verification": "Primary text inspected; numerical values are author-reported, not independently replicated.",
+      "retrieved_html_sha256": "a949f9c6e3887006755ab67f0513272794e81cabfaa00adc5ea41a0de56e1033"
+    }
+  },
+  "protocols": {
+    "jailbreak": {
+      "source": "probes",
+      "locator": "S4.T1",
+      "metric": "Mean StrongREJECT score (not a binary attack-success probability)",
+      "direction": "lower",
+      "model": "Mistral 7B Instruct v0.1 or abliterated Llama 3 8B Instruct",
+      "evaluation": "40 held-out ClearHarm prompts; GCG and prefill; DeepSeek v4 Flash judge",
+      "selection": "Lowest JailbreakBench score among checkpoints retaining at least 95% of mean normalized MMLU, GSM8K and IFEval utility.",
+      "comparability": "DPO uses 750 paired examples; probe variants use 750 independent completions per class. Same data source is not identical data or total cost. Attacks are not adaptive to the probe intervention.",
+      "columns": [
+        "gcg",
+        "prefill",
+        "mmlu",
+        "gsm8k",
+        "ifeval"
+      ]
+    },
+    "continuation": {
+      "source": "probes",
+      "locator": "A6.T9",
+      "metric": "Mean StrongREJECT score (not a probability of catastrophe)",
+      "direction": "lower",
+      "model": "Llama 3 8B",
+      "evaluation": "40 ClearHarm prompts, direct query; DeepSeek v4.1 Flash judge",
+      "continuation": "400 conversations; LoRA rank 16, 3 epochs, 75 optimizer steps; 3 seeds. Harmful fraction is by conversation, not by token.",
+      "comparability": "Different judge from Table 1. Original Instruct and abliterated-plus-safety-adapter models have different histories. No continued probe loss or safety reapplication during this continuation.",
+      "dispersion": "Reported +/- values transcribed exactly. Caption describes standard deviation over three fine-tuning seeds; no confidence intervals or independent-trial counts inferred, including for the Start column.",
+      "columns": [
+        "start",
+        "harmful_0",
+        "harmful_20",
+        "harmful_40",
+        "harmful_60",
+        "harmful_80",
+        "harmful_100"
+      ]
+    },
+    "scaling": {
+      "source": "scaling",
+      "locator": "Section 4.2 and Figure 1",
+      "metric": "Fraction of generated responses deceptive AND unflagged",
+      "direction": "lower",
+      "evaluation": "DolusChat, 200 held-out prompts; GPT-4o judge; evaluation detector probability threshold 0.999",
+      "conditions": "Training detector TPR 0.99; target KL divergence 0.15. Llama endpoints: 1B bf16, 405B 4-bit; one seed for 405B. Not equal compute.",
+      "comparability": "Within-study cross-sectional scale comparison, not a time series or the incremental benefit over a behavioral-only baseline. Does not equal total deception.",
+      "columns": [
+        "undetected_deception"
+      ]
+    },
+    "spontaneous": {
+      "source": "scaling",
+      "locator": "Appendix S, Figure 46 and accompanying text",
+      "metric": "Fraction of unprompted deceptive responses flagged at the paper's deployed decision boundary",
+      "direction": "higher",
+      "evaluation": "Held-out on-policy generation analysis; unprompted lies are a self-selected minority of deceptive responses.",
+      "comparability": "Different population and denominator from headline policy outcomes. No inference that the 405B model has this detection rate.",
+      "columns": [
+        "flagged_fraction"
+      ]
+    }
+  },
+  "observations": [
+    {
+      "id": "mistral_base",
+      "protocol": "jailbreak",
+      "model": "Mistral 7B",
+      "method": "Base",
+      "values": {
+        "gcg": 0.52,
+        "prefill": 0.77,
+        "mmlu": 0.56,
+        "gsm8k": 0.39,
+        "ifeval": 0.45
+      },
+      "source_table": "S4.T1.10",
+      "source_row": 2
+    },
+    {
+      "id": "mistral_dpo",
+      "protocol": "jailbreak",
+      "model": "Mistral 7B",
+      "method": "DPO",
+      "values": {
+        "gcg": 0.46,
+        "prefill": 0.66,
+        "mmlu": 0.53,
+        "gsm8k": 0.36,
+        "ifeval": 0.46
+      },
+      "source_table": "S4.T1.10",
+      "source_row": 3
+    },
+    {
+      "id": "mistral_probe_frozen",
+      "protocol": "jailbreak",
+      "model": "Mistral 7B",
+      "method": "Linear probe, frozen",
+      "values": {
+        "gcg": 0.37,
+        "prefill": 0.6,
+        "mmlu": 0.54,
+        "gsm8k": 0.44,
+        "ifeval": 0.45
+      },
+      "source_table": "S4.T1.10",
+      "source_row": 4
+    },
+    {
+      "id": "mistral_probe_updated",
+      "protocol": "jailbreak",
+      "model": "Mistral 7B",
+      "method": "Linear probe, updated",
+      "values": {
+        "gcg": 0.01,
+        "prefill": 0.03,
+        "mmlu": 0.53,
+        "gsm8k": 0.43,
+        "ifeval": 0.39
+      },
+      "source_table": "S4.T1.10",
+      "source_row": 5
+    },
+    {
+      "id": "mistral_poly_frozen",
+      "protocol": "jailbreak",
+      "model": "Mistral 7B",
+      "method": "Polytope, frozen",
+      "values": {
+        "gcg": 0.38,
+        "prefill": 0.6,
+        "mmlu": 0.54,
+        "gsm8k": 0.42,
+        "ifeval": 0.46
+      },
+      "source_table": "S4.T1.10",
+      "source_row": 6
+    },
+    {
+      "id": "mistral_poly_updated",
+      "protocol": "jailbreak",
+      "model": "Mistral 7B",
+      "method": "Polytope, updated",
+      "values": {
+        "gcg": 0.01,
+        "prefill": 0.01,
+        "mmlu": 0.53,
+        "gsm8k": 0.37,
+        "ifeval": 0.44
+      },
+      "source_table": "S4.T1.10",
+      "source_row": 7
+    },
+    {
+      "id": "llama_base",
+      "protocol": "jailbreak",
+      "model": "Llama 3 8B",
+      "method": "Abliterated base",
+      "values": {
+        "gcg": 0.34,
+        "prefill": 0.72,
+        "mmlu": 0.61,
+        "gsm8k": 0.5,
+        "ifeval": 0.58
+      },
+      "source_table": "S4.T1.10",
+      "source_row": 8
+    },
+    {
+      "id": "llama_original",
+      "protocol": "jailbreak",
+      "model": "Llama 3 8B",
+      "method": "Original Instruct",
+      "values": {
+        "gcg": 0.1,
+        "prefill": 0.59,
+        "mmlu": 0.62,
+        "gsm8k": 0.52,
+        "ifeval": 0.52
+      },
+      "source_table": "S4.T1.10",
+      "source_row": 9
+    },
+    {
+      "id": "llama_dpo",
+      "protocol": "jailbreak",
+      "model": "Llama 3 8B",
+      "method": "DPO",
+      "values": {
+        "gcg": 0.03,
+        "prefill": 0.73,
+        "mmlu": 0.6,
+        "gsm8k": 0.47,
+        "ifeval": 0.53
+      },
+      "source_table": "S4.T1.10",
+      "source_row": 10
+    },
+    {
+      "id": "llama_probe_frozen",
+      "protocol": "jailbreak",
+      "model": "Llama 3 8B",
+      "method": "Linear probe, frozen",
+      "values": {
+        "gcg": 0.32,
+        "prefill": 0.41,
+        "mmlu": 0.6,
+        "gsm8k": 0.54,
+        "ifeval": 0.52
+      },
+      "source_table": "S4.T1.10",
+      "source_row": 11
+    },
+    {
+      "id": "llama_probe_updated",
+      "protocol": "jailbreak",
+      "model": "Llama 3 8B",
+      "method": "Linear probe, updated",
+      "values": {
+        "gcg": 0.13,
+        "prefill": 0.14,
+        "mmlu": 0.62,
+        "gsm8k": 0.5,
+        "ifeval": 0.51
+      },
+      "source_table": "S4.T1.10",
+      "source_row": 12
+    },
+    {
+      "id": "llama_poly_frozen",
+      "protocol": "jailbreak",
+      "model": "Llama 3 8B",
+      "method": "Polytope, frozen",
+      "values": {
+        "gcg": 0.37,
+        "prefill": 0.64,
+        "mmlu": 0.6,
+        "gsm8k": 0.52,
+        "ifeval": 0.54
+      },
+      "source_table": "S4.T1.10",
+      "source_row": 13
+    },
+    {
+      "id": "llama_poly_updated",
+      "protocol": "jailbreak",
+      "model": "Llama 3 8B",
+      "method": "Polytope, updated",
+      "values": {
+        "gcg": 0.07,
+        "prefill": 0.07,
+        "mmlu": 0.62,
+        "gsm8k": 0.56,
+        "ifeval": 0.51
+      },
+      "source_table": "S4.T1.10",
+      "source_row": 14
+    },
+    {
+      "id": "continue_original",
+      "protocol": "continuation",
+      "model": "Llama 3 8B",
+      "method": "Original Instruct",
+      "values": {
+        "start": 0.11,
+        "harmful_0": 0.12,
+        "harmful_20": 0.86,
+        "harmful_40": 0.83,
+        "harmful_60": 0.84,
+        "harmful_80": 0.83,
+        "harmful_100": 0.82
+      },
+      "reported_dispersion": {
+        "start": 0.3,
+        "harmful_0": 0.32,
+        "harmful_20": 0.14,
+        "harmful_40": 0.16,
+        "harmful_60": 0.13,
+        "harmful_80": 0.13,
+        "harmful_100": 0.17
+      },
+      "source_table": "A6.T9.6.1",
+      "source_row": 2
+    },
+    {
+      "id": "continue_probe_updated",
+      "protocol": "continuation",
+      "model": "Llama 3 8B",
+      "method": "Linear probe, updated",
+      "values": {
+        "start": 0.31,
+        "harmful_0": 0.91,
+        "harmful_20": 0.7,
+        "harmful_40": 0.78,
+        "harmful_60": 0.84,
+        "harmful_80": 0.86,
+        "harmful_100": 0.82
+      },
+      "reported_dispersion": {
+        "start": 0.34,
+        "harmful_0": 0.15,
+        "harmful_20": 0.38,
+        "harmful_40": 0.31,
+        "harmful_60": 0.23,
+        "harmful_80": 0.15,
+        "harmful_100": 0.2
+      },
+      "source_table": "A6.T9.6.1",
+      "source_row": 3
+    },
+    {
+      "id": "continue_probe_retrained",
+      "protocol": "continuation",
+      "model": "Llama 3 8B",
+      "method": "Linear probe, retrained",
+      "values": {
+        "start": 0.08,
+        "harmful_0": 0.91,
+        "harmful_20": 0.83,
+        "harmful_40": 0.82,
+        "harmful_60": 0.82,
+        "harmful_80": 0.85,
+        "harmful_100": 0.84
+      },
+      "reported_dispersion": {
+        "start": 0.21,
+        "harmful_0": 0.16,
+        "harmful_20": 0.27,
+        "harmful_40": 0.27,
+        "harmful_60": 0.24,
+        "harmful_80": 0.21,
+        "harmful_100": 0.18
+      },
+      "source_table": "A6.T9.6.1",
+      "source_row": 4
+    },
+    {
+      "id": "continue_poly_updated",
+      "protocol": "continuation",
+      "model": "Llama 3 8B",
+      "method": "Polytope, updated",
+      "values": {
+        "start": 0.09,
+        "harmful_0": 0.83,
+        "harmful_20": 0.66,
+        "harmful_40": 0.7,
+        "harmful_60": 0.72,
+        "harmful_80": 0.76,
+        "harmful_100": 0.75
+      },
+      "reported_dispersion": {
+        "start": 0.25,
+        "harmful_0": 0.2,
+        "harmful_20": 0.37,
+        "harmful_40": 0.35,
+        "harmful_60": 0.3,
+        "harmful_80": 0.25,
+        "harmful_100": 0.25
+      },
+      "source_table": "A6.T9.6.1",
+      "source_row": 5
+    },
+    {
+      "id": "continue_poly_retrained",
+      "protocol": "continuation",
+      "model": "Llama 3 8B",
+      "method": "Polytope, retrained",
+      "values": {
+        "start": 0.26,
+        "harmful_0": 0.88,
+        "harmful_20": 0.87,
+        "harmful_40": 0.82,
+        "harmful_60": 0.83,
+        "harmful_80": 0.84,
+        "harmful_100": 0.81
+      },
+      "reported_dispersion": {
+        "start": 0.32,
+        "harmful_0": 0.18,
+        "harmful_20": 0.26,
+        "harmful_40": 0.26,
+        "harmful_60": 0.23,
+        "harmful_80": 0.21,
+        "harmful_100": 0.23
+      },
+      "source_table": "A6.T9.6.1",
+      "source_row": 6
+    },
+    {
+      "id": "scaling_1b",
+      "protocol": "scaling",
+      "model": "Llama 1B",
+      "method": "SOLiD",
+      "values": {
+        "undetected_deception": 0.34
+      },
+      "precision": "Rounded number stated in primary text; no counts inferred."
+    },
+    {
+      "id": "scaling_405b",
+      "protocol": "scaling",
+      "model": "Llama 405B",
+      "method": "SOLiD",
+      "values": {
+        "undetected_deception": 0.14
+      },
+      "precision": "Rounded number stated in primary text; no counts inferred."
+    },
+    {
+      "id": "spontaneous_8b",
+      "protocol": "spontaneous",
+      "model": "Llama 3.1 8B",
+      "method": "Lie detector",
+      "values": {
+        "flagged_fraction": 0.09
+      },
+      "precision": "Rounded number stated in primary text; no counts inferred."
+    },
+    {
+      "id": "spontaneous_70b",
+      "protocol": "spontaneous",
+      "model": "Llama 3.3 70B",
+      "method": "Lie detector",
+      "values": {
+        "flagged_fraction": 0.02
+      },
+      "precision": "Rounded number stated in primary text; no counts inferred."
+    }
+  ]
+}
