@@ -13,6 +13,13 @@ python3 analysis/interpretability/check_sources.py
 The last command uses the network to check selected numerical extractions against
 versioned primary-source HTML. It does not rerun the authors' experiments.
 
+The separate [falsification review](falsification.md), dated 2026-11-11, stress-tests
+the catastrophe-prevention claim across monitoring, auditing, training, verification
+and scientific discovery. Its additional sources are linked inline; they are not
+pooled into the monitoring dataset or fitted as a historical series.
+The [historical assessment](original-case.md) compares progress with the original
+safety arguments and distinguishes new techniques from changed success criteria.
+
 ## Inclusion rule
 
 Include internal-state monitors with public safety-relevant detection results.
