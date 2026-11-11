@@ -1,2 +1,3 @@
 analysis/ai_control_growth/baseline_draws.npz
 analysis/ai_control_growth/__pycache__/
+analysis/interpretability/__pycache__/

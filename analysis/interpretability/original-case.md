@@ -5,6 +5,9 @@ research tradition, not every motivation or researcher in interpretability.
 Statements about adequacy and priorities below are judgments, not measured
 percentages of progress. See the [falsification review](falsification.md) for
 route-specific evidence and proposed experiments.
+The subsequent [historical obstacle test](obstacle-history.md) follows concrete
+advances through later scrutiny and repairs, rather than inferring speed from
+the number of promising results.
 
 ## The original wager
 
