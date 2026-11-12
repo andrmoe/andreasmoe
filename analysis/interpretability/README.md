@@ -6,6 +6,13 @@ The [overview and auditing page](../../interpretability.html) covers
 [training page](../../interpretability_training.html) tests whether internal
 signals produce durable safety improvements; its [research note](training-progress.md)
 sets out the route, selection rule and next falsification experiment.
+The [understood-construction page](../../interpretability_construction.html)
+tests a different metric: the capability of the strongest complete system whose
+alignment is substantiated by understanding its construction. Its
+[candidate ledger and research note](construction-frontier.md) distinguish
+bounded certificates, partial results, conditional designs and external control.
+No qualifying general-purpose capability observation or growth rate is inferred
+from the selected evidence. Missing observations remain null, not zero.
 Future routes can have separate pages when their outcome measures and arguments
 differ. The earlier monitoring
 dashboard and scenario are retained in this repository as research artifacts;
@@ -17,6 +24,7 @@ remain missing; provisional extractions are labeled explicitly.
 ```sh
 python3 analysis/interpretability/build_audit_progress.py --check-sources
 python3 analysis/interpretability/build_training_progress.py --check-sources
+python3 analysis/interpretability/build_construction_frontier.py --check --check-sources
 ```
 
 The training ledger contains all rows of the selected probe paper's Tables 1 and
