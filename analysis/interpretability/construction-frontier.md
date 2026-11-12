@@ -93,15 +93,25 @@ Control 2019 verified controller”, “2026 certified neural controllers dimens
 and “2025 2026 alignment by construction safety”. Search results were used to find
 primary sources, not as evidence for their strongest claims.
 
-The ledger includes 14 candidates. Original publication and reviewed-version
+The ledger includes 15 candidates. Original publication and reviewed-version
 dates are separate. Findings in a later version are dated to that version.
 Judgments incorporate later criticism and are explicitly as of this review;
 they are not reconstructed historical expert beliefs. No observations were
-selected for 2020–2022. That gap is not a claim about research activity.
+selected for 2021–2022. That gap is not a claim about research activity.
 
 ## Strongest challenges to the conclusion
 
 ### Explicit incentive construction already reaches agents
+
+The historical baseline is not limited to robot controllers. Holtman's
+[2020 utility-update construction](https://arxiv.org/html/2007.05411v1) derives
+conditional properties of an explicitly optimized objective and illustrates
+behavior in small simulated factory worlds. It builds on
+[2019 corrigibility work](https://arxiv.org/abs/1908.01695v1).
+The 2020 paper also discusses residual manipulation incentives and prediction,
+reward-grounding and physical-integrity problems when implementing the model.
+A property proved inside an MDP is not thereby established for every physical
+learning agent. This is an early scoped construction success, not an AGI system.
 
 [AssistanceZero](https://arxiv.org/html/2504.07091v2) is a stronger agent-level
 near-match than a low-level controller. It uses a known assistance-game structure
@@ -127,6 +137,23 @@ They still do not supply the missing general-purpose construction guarantee.
 Their usefulness is partly a judgment about implemented approximations, not
 merely a question of increasing model size. Corrigibility also leaves the
 ability to identify and perform the needed corrections as remaining work.
+
+### Is the inclusion rule too demanding?
+
+The review does not require an already superhuman system, a fully explained
+network, or a formal proof of all human values. It does require a link from
+the actual system to the particular alignment claim. Under an easier rule that
+counts any known objective plus favorable behavior, the utility-update agents,
+AssistanceZero and the gridworld corrigibility examples would be strong scoped
+candidates. That alternative is recorded here rather than discarded. It still
+does not establish a cross-domain capability scale or justify assigning the
+full capabilities of prompted LLMs to the formal goal construction.
+
+This exposes a limitation of the proposed metric: it is a stringent endpoint
+indicator and can be uninformative about pace before complete qualifying systems
+exist. An empty general-purpose series should prompt study of implementation
+fidelity and scope expansion, not automatic rejection of the route. We must not
+repair the empty series by changing the measured property without saying so.
 
 ### Bounded guarantees are already real
 

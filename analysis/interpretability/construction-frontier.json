@@ -33,6 +33,28 @@
       "source_check_tokens": ["Lyapunov", "falsifier", "stability"]
     },
     {
+      "id": "utility-updates-2020",
+      "title": "AGI Agent Safety by Iteratively Improving the Utility Function",
+      "first_publication": "2020-07-10",
+      "source_date": "2020-07-10",
+      "source_version": "arXiv v1",
+      "system": "Explicit utility-maximizing policies with an update-compensation term",
+      "capability": "Optimal-policy simulation in small factory worlds with opportunities to manipulate utility updates.",
+      "property": "Conditional safety properties of the update mechanism, derived from the constructed objective and illustrated in toy worlds.",
+      "category": "bounded_certificate",
+      "general_alignment_qualified": false,
+      "general_capability_score": null,
+      "judgment": "A bounded agent-incentive construction, not just a classifier or controller. The paper explicitly analyzes incomplete suppression and model-to-reality gaps.",
+      "remaining_work": "Validate prediction, physical integrity and reward grounding in a capable implementation. Accepting utility updates does not supply correct updates or close every loophole.",
+      "effort": "Small-world policy simulations are reported; no implemented general-agent cost established.",
+      "validation": "Toy-world construction, theorem statements and implementation-gap discussion inspected; simulations and proofs not rerun.",
+      "source_url": "https://arxiv.org/html/2007.05411v1",
+      "source_locator": "Sections 4–6, 13–14 and Appendix A",
+      "related_source_url": "https://arxiv.org/abs/1908.01695v1",
+      "measurements": [],
+      "source_check_tokens": ["First Toy World", "Second Toy World", "Prediction Failures"]
+    },
+    {
       "id": "nlc-2023",
       "title": "Neural Lyapunov Control for Discrete-Time Systems",
       "first_publication": "2023-05-11",
