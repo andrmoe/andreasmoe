@@ -17,7 +17,7 @@ from pathlib import Path
 from urllib.request import Request, urlopen
 
 HERE = Path(__file__).resolve().parent
-PAGE = HERE.parent.parent / "interpretability_construction.html"
+PAGE = HERE.parent.parent / "interpretability.html"
 LABELS = {
     "bounded_certificate": "Bounded construction certificate",
     "partial_result": "Partial result",

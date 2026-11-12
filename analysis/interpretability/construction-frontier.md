@@ -1,6 +1,6 @@
 # Capability frontier for alignment through understood construction
 
-Review date: 12 November 2026. [Public page](../../interpretability_construction.html).
+Review date: 12 November 2026. [Public page](../../interpretability.html).
 [Canonical ledger](construction-frontier.json). [CSV](construction-frontier.csv).
 
 ## Question and result

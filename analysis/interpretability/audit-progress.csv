@@ -1,8 +1,0 @@
-id,method,protocol,success,source,status
-prior,Scaffolded text completion,full,0.53,ia,"Reported prior best, not a newly run baseline"
-ia,Introspection adapters,full,0.59,ia,Author-reported
-loracles,LoRAcles,full,0.71,loracles,Provisional extraction; exact publication date unresolved
-base_stc,Base Haiku 4.5,subset_stc,0.115,rl,Author-reported
-rl_stc,"MT IG PW 4/8 FP, 3 ep",subset_stc,0.281,rl,Author-reported selected configuration
-base_chat,Base Haiku 4.5,subset_chat,0.333,rl,Author-reported
-rl_chat,"MT IG PW 4/8 FP, 3 ep",subset_chat,0.333,rl,"Same selected trained auditor, alternative access"
