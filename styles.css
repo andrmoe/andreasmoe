@@ -1,33 +1,43 @@
+:root {
+    --site-paper: #ffffff;
+    --site-ink: #000000;
+    --site-accent: #000093;
+    --site-line: #d7ded7;
+    --site-focused: #0b4437;
+    --site-border: #000000;
+    --site-space: 1.25rem;
+}
+
 .booktitle {
-    color: black;
+    color: var(--site-ink);
     font-size: 1.2em;
 }
 
 .bookauthor {
-    color: black;
+    color: var(--site-ink);
     font-style: italic;
     font-size: 1em;
 }
 
 a {
-    color: darkblue;
+    color: var(--site-accent);
     text-underline-offset: 0.2em;
     text-decoration-thickness: 0.08em;
 }
 
 a:hover {
-    color: #0b4437;
+    color: var(--site-focused);
 }
 
 a:focus-visible {
-    outline: 3px solid #146653;
+    outline: 3px solid var(--site-focused);
     outline-offset: 4px;
     border-radius:  2px;
 }
 
 pre {
     background: white;
-    color: black;
+    color: var(--site-ink);
     padding: 1em;
     border: 1px solid #ddd;
     border-radius: 4px;
@@ -81,12 +91,12 @@ pre {
 
 table {
   border-collapse: collapse;
-  border: 2px solid black;
+  border: 2px solid var(--site-border);
 }
 
 th,
 td {
-  border: 1px solid black;
+  border: 1px solid var(--site-border);
   padding: 8px 10px;
   text-align: center;
 }
@@ -103,8 +113,8 @@ mfrac > * {
 }
 
 body {
-    background: #ffffff;
-    color: #000000;
+    background: var(--site-paper);
+    color: var(--site-ink);
     font-family: system-ui, sans-serif;
     font-size: 1.0625rem;
     line-height: 1.7;
@@ -131,7 +141,7 @@ img {
 }
 
 h1, h2, h3, h4 {
-    color: black;
+    color: var(--site-ink);
     font-family: Trebuchet, serif;
     line-height: 1.2;;
 }
@@ -172,7 +182,7 @@ p {
 }
 
 .project-item {
-    border: 1px solid #000000;
+    border: 1px solid var(--site-border);
     border-radius: 0.75rem;
     overflow: hidden;
     margin-bottom: 0;
@@ -208,8 +218,8 @@ p {
 
 .project-link:focus-visible {
     outline-offset: -4px;
-    outline: 3px solid #146653;
+    outline: 3px solid var(--site-focused);
     outline-offset: 0;
     border-radius: 3px;
-    border: 3px solid #146653;
+    border: 3px solid var(--site-focused);
 }
